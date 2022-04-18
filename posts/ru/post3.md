@@ -1,6 +1,7 @@
 Посты
-[часть 1](http://joyreactor.cc/post/5156500)
-[часть 2](http://joyreactor.cc/post/5159286)
+
+- [часть 1](http://joyreactor.cc/post/5156500)
+- [часть 2](http://joyreactor.cc/post/5159286)
 
 ## Обсидиановая пыль
 

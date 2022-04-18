@@ -26,9 +26,9 @@
 (математиками, которые смогли использовать магию) в формате специальных
 посохов, к котором подводят ёмкости с пылью, (картинки прилагаются).
 
-[opensea, img1](https://lh3.googleusercontent.com/qNfT7TXVYayPe2P0aDS7mfoaiul9YMDlglKHNPfy-xk6rs3C0bT__FazIy7OgolhVexKcB1mC0nGuefdVITRc4CUpbsRAsf5jgbj2Q=s0)
-[opensea, img2](https://lh3.googleusercontent.com/PLFMO6sGWC8GK0WdOmA9vBBlhGzPiqzy98k0P-5C9EwKCYWTw26In49lii1cZTDBH_pUNtkYRYNJGNmFJwlL0uCs5E6skT7PQn62RQ=w600)
-[opensea, img3](https://lh3.googleusercontent.com/8qeNnrIERbWJ6xI1OP59Dc7EpNsG77-y1SpvhSdpW9GgBKo8VUokT8CWArkCQ4F5Xuf4gKvcG5DaWlGAwQCkEFFtd3-GYqnzRW8Wnw=s0)
+![opensea, img1](https://lh3.googleusercontent.com/qNfT7TXVYayPe2P0aDS7mfoaiul9YMDlglKHNPfy-xk6rs3C0bT__FazIy7OgolhVexKcB1mC0nGuefdVITRc4CUpbsRAsf5jgbj2Q=s0)
+![opensea, img2](https://lh3.googleusercontent.com/PLFMO6sGWC8GK0WdOmA9vBBlhGzPiqzy98k0P-5C9EwKCYWTw26In49lii1cZTDBH_pUNtkYRYNJGNmFJwlL0uCs5E6skT7PQn62RQ=w600)
+![opensea, img3](https://lh3.googleusercontent.com/8qeNnrIERbWJ6xI1OP59Dc7EpNsG77-y1SpvhSdpW9GgBKo8VUokT8CWArkCQ4F5Xuf4gKvcG5DaWlGAwQCkEFFtd3-GYqnzRW8Wnw=s0)
 
 Таким образом, обсидиановая пыль используется как ресурс для математической
 магии для взаимодействия с ноосферой. Ноосферу же можно представить в виде
@@ -40,8 +40,8 @@
 распостраненная религия использует александрит, который есть практически во
 всех посохах на навершии.
 
-[opensea, img4](https://lh3.googleusercontent.com/iekb7_9Yl2wNGGzInkzZyx3eHc0C9p8JuJt4giRgS7_PO3Q6RIbpNOHGtLhm_ngmw6v4mzvCF95Jd1M9DwoKTeKGYoUdW-JU83iK5g=s0)
-[opensea, img5](https://lh3.googleusercontent.com/PBGpWWBAAD0oiP9zcCqk6hDmkZrv3Kn84LOZrFu65hoPQ5JLltoxHuHkI6a22wgJ7aEqxN8SKimftHWxPSSx15-G-cPboCEkQ2IZRQ=s0)
+![opensea, img4](https://lh3.googleusercontent.com/iekb7_9Yl2wNGGzInkzZyx3eHc0C9p8JuJt4giRgS7_PO3Q6RIbpNOHGtLhm_ngmw6v4mzvCF95Jd1M9DwoKTeKGYoUdW-JU83iK5g=s0)
+![opensea, img5](https://lh3.googleusercontent.com/PBGpWWBAAD0oiP9zcCqk6hDmkZrv3Kn84LOZrFu65hoPQ5JLltoxHuHkI6a22wgJ7aEqxN8SKimftHWxPSSx15-G-cPboCEkQ2IZRQ=s0)
 
 ## Другая вселенная за порталом
 
@@ -72,7 +72,7 @@
 обмен полезными веществами. Из-за чего они по своей сути постоянно поглощают
 небольшое количество ноосферы.
 
-(opensea, img6)[https://lh3.googleusercontent.com/de1UEmxbkQHvgwAMcEy5PzW1poKD5W-1s8A6wG3Y3Y7_bZ59RkfeJNpPfA8QLTwqNW4DTckA-ptVuTApi_iKEJ98tw9pkbKUZ-6S=s0]
+![opensea, img6](https://lh3.googleusercontent.com/de1UEmxbkQHvgwAMcEy5PzW1poKD5W-1s8A6wG3Y3Y7_bZ59RkfeJNpPfA8QLTwqNW4DTckA-ptVuTApi_iKEJ98tw9pkbKUZ-6S=s0)
 
 Мотивация для инсектоидов попасть в земной мир больше скорее познавательная.
 Им интересен этот мир как минимум тем, что тут есть камни-катализаторы

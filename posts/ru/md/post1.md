@@ -16,4 +16,4 @@
 
 Пост будет еще дополнятся в следующих сериях, но очень хотелось бы услышать ваше мнение и предложения по развитию идеи матпанковского сеттинга.
 
-[first image text](http://img2.joyreactor.cc/pics/post/geek-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0%D1%83%D0%BA%D0%B0-%D0%BC%D0%B0%D1%82%D0%BF%D0%B0%D0%BD%D0%BA-7310361.jpeg)
+![first image text](http://img2.joyreactor.cc/pics/post/geek-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0%D1%83%D0%BA%D0%B0-%D0%BC%D0%B0%D1%82%D0%BF%D0%B0%D0%BD%D0%BA-7310361.jpeg)

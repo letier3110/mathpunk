@@ -4,8 +4,8 @@ Is a fictional setting for a world, where magic have a methematical origin
 
 ### Inner lore navigation
 
-- [en version](en/readme.md)
-- [ru version](ru/readme.md)
+- [en version](posts/en/readme.md)
+- [ru version](posts/ru/readme.md)
 
 ### Useful links
 

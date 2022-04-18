@@ -2,6 +2,11 @@
 
 Is a fictional setting for a world, where magic have a methematical origin
 
+### Inner lore navigation
+
+(en version)[en/readme.md]
+(ru version)[ru/readme.md]
+
 ### Useful links
 
 [AI-artist](https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb)

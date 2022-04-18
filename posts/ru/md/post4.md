@@ -22,14 +22,14 @@
 
 ### Media
 
-!(noocracy mountains)[https://openseauserdata.com/files/c6ae6ad60221f9858e17f2e148f60161.mp4]
+![noocracy mountains](https://openseauserdata.com/files/c6ae6ad60221f9858e17f2e148f60161.mp4)
 
-!(mathpunk world map)[https://lh3.googleusercontent.com/2JkwqRDUfHh6iUCkN12swaM_6qh1Cifb3oUklVVzF9enck28zmY3p562s4EHhgeiDZAd3xjsCzjo3Hmwh3DXGqWupMz7P-c5yzZcxAg=s0]
+![mathpunk world map](https://lh3.googleusercontent.com/2JkwqRDUfHh6iUCkN12swaM_6qh1Cifb3oUklVVzF9enck28zmY3p562s4EHhgeiDZAd3xjsCzjo3Hmwh3DXGqWupMz7P-c5yzZcxAg=s0)
 
-!(math chapel #1)[https://lh3.googleusercontent.com/D4h4WNVSDt86F2Hj9Iu7BDaUcHv3A_GvSTa6X96XfCYFMv5PPPdpd9ftPgez8290Ve9hvc-BWeYGQziaw87Tv26BvH64wELn3hX-u4Y=s0]
-!(math chapel #2)[https://lh3.googleusercontent.com/0lSUs8yfj5FvaKAhvJYl5-63uXOLDZT8-ZWaHfOmceKkn_bxkNsnp7o44TYvcwgWAuEh-BQSgRJ620EJxHDAtuRx0QGMxHFgRqmIRw=s0]
-!(math chapel #3)[https://lh3.googleusercontent.com/vZN5x5CujIBOtQq6eWmNlEsOhcE2RMlPEC48yDNieA_O5CvflN08GrYmzesvk3SasSedfse0wmoW7Qy9OlJjdErC9t1Gw45LYaZVj4c=s0]
-!(math chapel #4)[https://lh3.googleusercontent.com/oGECAOgpB80qcf6StZiAwrXWeGJtbYAM9wuJuNzKLfD10bG-6bl_G_EiK1dMYog4gDlemHtAlzYfOfSDWKuFsL_gyEHB8z0p04Wz=s0]
-!(math chapel #5)[https://lh3.googleusercontent.com/5kbBIedMjfvGI1ZCyuuFW_Avp1Gefg8_BehVXopK9ycXjToBdyRmcpzakcJ2WQwb0XeufEQ-knKZYQGwRGFIUe8XssKhBPfpXq-6wg=s0]
-!(math chapel #6)[https://lh3.googleusercontent.com/KxbeSB_CFgUe4IWiSTZoPmNk5NZka9jIubLPUJCLp7E381x53a4SLuFpQG0Ggo9D-Yts-fGCUycEHU9aQFfw3GW1fPmUTd_m22Yzktg=s0]
-!(math chapel #7)[https://lh3.googleusercontent.com/mIb8cGHKv-FosR2z4gdby_0Ts0byQku76xbGrJBHXScr0vaIb31QNZvGgtU3b5YadgnqGkYjn3ZcvGsn_Nma9faSp-cYMEwn0nj0eg=s0]
+![math chapel #1](https://lh3.googleusercontent.com/D4h4WNVSDt86F2Hj9Iu7BDaUcHv3A_GvSTa6X96XfCYFMv5PPPdpd9ftPgez8290Ve9hvc-BWeYGQziaw87Tv26BvH64wELn3hX-u4Y=s0)
+![math chapel #2](https://lh3.googleusercontent.com/0lSUs8yfj5FvaKAhvJYl5-63uXOLDZT8-ZWaHfOmceKkn_bxkNsnp7o44TYvcwgWAuEh-BQSgRJ620EJxHDAtuRx0QGMxHFgRqmIRw=s0)
+![math chapel #3](https://lh3.googleusercontent.com/vZN5x5CujIBOtQq6eWmNlEsOhcE2RMlPEC48yDNieA_O5CvflN08GrYmzesvk3SasSedfse0wmoW7Qy9OlJjdErC9t1Gw45LYaZVj4c=s0)
+![math chapel #4](https://lh3.googleusercontent.com/oGECAOgpB80qcf6StZiAwrXWeGJtbYAM9wuJuNzKLfD10bG-6bl_G_EiK1dMYog4gDlemHtAlzYfOfSDWKuFsL_gyEHB8z0p04Wz=s0)
+![math chapel #5](https://lh3.googleusercontent.com/5kbBIedMjfvGI1ZCyuuFW_Avp1Gefg8_BehVXopK9ycXjToBdyRmcpzakcJ2WQwb0XeufEQ-knKZYQGwRGFIUe8XssKhBPfpXq-6wg=s0)
+![math chapel #6](https://lh3.googleusercontent.com/KxbeSB_CFgUe4IWiSTZoPmNk5NZka9jIubLPUJCLp7E381x53a4SLuFpQG0Ggo9D-Yts-fGCUycEHU9aQFfw3GW1fPmUTd_m22Yzktg=s0)
+![math chapel #7](https://lh3.googleusercontent.com/mIb8cGHKv-FosR2z4gdby_0Ts0byQku76xbGrJBHXScr0vaIb31QNZvGgtU3b5YadgnqGkYjn3ZcvGsn_Nma9faSp-cYMEwn0nj0eg=s0)

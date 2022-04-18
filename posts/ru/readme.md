@@ -9,5 +9,8 @@
 - часть 3
   - [html](html/post3.html)
   - [md](md/post3.md)
+- часть 4
+  - [html](html/post4.html)
+  - [md](md/post4.md)
 
 <!-- [часть 4, html](html/post4.html), [часть 4, md](md/post4.md) -->

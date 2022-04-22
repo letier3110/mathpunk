@@ -12,5 +12,6 @@
 - часть 4
   - [html](html/post4.html)
   - [md](md/post4.md)
-
-<!-- [часть 4, html](html/post4.html), [часть 4, md](md/post4.md) -->
+- часть 5
+  - [html](html/post5.html)
+  - [md](md/post5.md)

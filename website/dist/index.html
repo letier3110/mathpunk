@@ -1,0 +1,147 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathpunk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+        font-family: "Open Sans", sans-serif;
+      }
+      body {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      h1 {
+        font-size: 3.5rem;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      ol {
+        padding-bottom: 2em;
+        list-style: none;
+        margin: 0;
+      }
+      li {
+        padding: 1em;
+      }
+      a {
+        color: inherit;
+        color: #78b;
+      }
+      a:visited {
+        text-decoration: none;
+      }
+      .main {
+        padding-top: 8em;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .timeline {
+        min-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="main">
+        <h1>Mathpunk universe</h1>
+        <h2>текущий прогресс / current progress</h2>
+        <div id="timeline" class="timeline"></div>
+      </section>
+    </main>
+  </body>
+  <script>
+    const data = [
+      {
+        links: [
+          {
+            name: "Joyreactor",
+            link: "http://joyreactor.cc/post/5156500",
+          },
+          {
+            name: "GitHub",
+            link: "https://github.com/letier3110/mathpunk/blob/master/posts/ru/md/post1.md",
+          },
+        ],
+      },
+      {
+        links: [
+          {
+            name: "Joyreactor",
+            link: "http://joyreactor.cc/post/5159286",
+          },
+          {
+            name: "GitHub",
+            link: "https://github.com/letier3110/mathpunk/blob/master/posts/ru/md/post2.md",
+          },
+        ],
+      },
+      {
+        links: [
+          {
+            name: "Joyreactor",
+            link: "http://joyreactor.cc/post/5166195",
+          },
+          {
+            name: "GitHub",
+            link: "https://github.com/letier3110/mathpunk/blob/master/posts/ru/md/post3.md",
+          },
+        ],
+      },
+      {
+        links: [
+          {
+            name: "Joyreactor",
+            link: "http://joyreactor.cc/post/5168911",
+          },
+          {
+            name: "GitHub",
+            link: "https://github.com/letier3110/mathpunk/blob/master/posts/ru/md/post4.md",
+          },
+        ],
+      },
+    ];
+    document.addEventListener("DOMContentLoaded", function () {
+      const timeline = document.getElementById("timeline");
+      const ul = document.createElement("ul");
+      data.forEach((linksArray, i) => {
+        const ol = document.createElement("ol");
+        const index = i + 1;
+        linksArray.links.forEach((link) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          const text = `${link.name}`;
+          a.href = link.link;
+          a.target = "_blank";
+          const linkText = document.createTextNode(text);
+          a.appendChild(linkText);
+          li.appendChild(a);
+          ol.appendChild(li);
+        });
+        const liText = `часть ${index} / part ${index}:`;
+        const liTextElem = document.createTextNode(liText);
+        ul.append(liTextElem);
+        ul.appendChild(ol);
+      });
+      timeline.appendChild(ul);
+    });
+  </script>
+</html>

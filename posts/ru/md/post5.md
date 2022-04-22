@@ -22,3 +22,9 @@
 Совершенно отличная от экономики Ноократии, варвары не чеканят свои монеты. Они используют монеты других завоеваных стран, которые были захвачены или награблены в ходе войны. Для населения, все монеты имеют одинаковую ценность, равно как и золото с серебром. В последствии, варварский устрой будет обновлен до более продвинутого строя и будет своя чеканка, но до событий портального катаклизма, это устройство экономики не менялось.
 
 Разумные существа, (насколько можно верить записям путешественников) которые проникли из портала в этот мир, соглашались на обмен, считая ценностью разного рода минералы и камни.
+
+И немного артов варварских королевств раннего времени.
+
+![mathpunk barbarian kingdoms](https://lh3.googleusercontent.com/gEx0BJylofd70bt8NncNnDgocLLBuA6X6-ifhqQGiS2KkcN-PwCS9mRRQo9De6a6NhiObySKvQewXvuVwklNMPTH57F5ukFS5p1UAw=s0)
+![mathpunk barbarian kingdoms #2](https://lh3.googleusercontent.com/NoUrsGen4ygl-FUHze9u_Lh_JBzvd7NzWhx9z_YAv5ILmoygiSNGZOKdxAGBErF1OvI_3KAwPMAzXsTZ_YXhQwPS_-EqAPqHhLThKw=s0)
+![mathpunk barbarian kingdoms #3](https://lh3.googleusercontent.com/t9x46HuQqoIDDxSe_xVD8vlgU79litYkUQwXzyjmp8CIOl07Jt4XIC-Y-N566wSuCJL4hJVw2CYd1aQcUPSAmqiDV-foaKTJVFwm1A=s0)

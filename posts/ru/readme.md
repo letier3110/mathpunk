@@ -15,3 +15,6 @@
 - часть 5
   - [html](html/post5.html)
   - [md](md/post5.md)
+- часть 6
+  - [html](html/post6.html)
+  - [md](md/post6.md)

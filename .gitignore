@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/spire_mvp/node_modules
+/spire_mvp/.pnp
+/spire_mvp/.pnp.js
+
+# testing
+/spire_mvp/coverage
+
+# production
+/spire_mvp/build
+
+# misc
+/spire_mvp/.DS_Store
+/spire_mvp/.env.local
+/spire_mvp/.env.development.local
+/spire_mvp/.env.test.local
+/spire_mvp/.env.production.local
+
+/spire_mvp/npm-debug.log*
+/spire_mvp/yarn-debug.log*
+/spire_mvp/yarn-error.log*

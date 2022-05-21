@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.temp {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.2;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+}
+
+.logo {
+  font-size: 6rem;
+  padding-top: 30vmin;
+  pointer-events: none;
+}
+
+.mainButtons {
+  position: absolute;
+  bottom: 80px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mainButton {
+  width: 300px;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  padding: 10px 40px;
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mainButton:hover {
+  box-shadow: 0 2px 2px 0 rgba(168, 96, 1, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  text-shadow: 1px 1px 2px rgba(168, 96, 1, 0.16),
+    0 0 25px rgba(168, 96, 1, 0.16), 0 0 5px rgba(168, 96, 1, 0.16);
+}
+
+.returnButton {
+  position: absolute;
+  bottom: 80px;
+  left: 40px;
+
+  width: 300px;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  padding: 10px 40px;
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.returnButton:hover {
+  box-shadow: 0 2px 2px 0 rgba(168, 96, 1, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  text-shadow: 1px 1px 2px rgba(168, 96, 1, 0.16),
+    0 0 25px rgba(168, 96, 1, 0.16), 0 0 5px rgba(168, 96, 1, 0.16);
+}

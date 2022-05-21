@@ -7,4 +7,5 @@ export const NavigatorScreensMap: Record<NavigatorScreens, string> = {
   [NavigatorScreens.Compedium]: "/compedium",
   [NavigatorScreens.GameModeSelect]: "/gamemode",
   [NavigatorScreens.Statistics]: "/statistics",
+  [NavigatorScreens.StandardRun]: "/standard-run",
 };

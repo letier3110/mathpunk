@@ -8,34 +8,33 @@ import { emptyFn } from "../utils/empty-fn";
 
 const items: Array<MenuCardItemInterface> = [
   {
-    title: "Card Library",
-    description: "View all of the cards you have encountered in the game.",
+    title: "Character Stats",
+    description:
+      "The progress and statistics for each character can be seen here.",
     callback: emptyFn,
   },
   {
-    title: "Relic Collection",
-    description:
-      "Examin the various trinkets and artifacts obtained in the game.",
+    title: "Leaderboards",
+    description: "View and compare your score with friends and other players.",
     callback: emptyFn,
   },
   {
-    title: "Potion Lab",
-    description:
-      "Observe the numerous potions found while exploring the Spire.",
+    title: "Run History",
+    description: "Revisit your past attempts at conquering th Spire.",
     callback: emptyFn,
   },
 ];
 
-function Compedium() {
+const StandardRun: React.FC = () => {
   return (
     <div>
-      <Mock screen={NavigatorScreens.Compedium} />
+      <Mock screen={NavigatorScreens.StandardRun} />
       <div>
-        <MenuCardList item1={items[0]} item2={items[1]} item3={items[2]} />
+        {/* <MenuCardList item1={items[0]} item2={items[1]} item3={items[2]} /> */}
         <ReturnButton>Return</ReturnButton>
       </div>
     </div>
   );
-}
+};
 
-export default Compedium;
+export default StandardRun;

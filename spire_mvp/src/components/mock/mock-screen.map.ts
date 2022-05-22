@@ -15,5 +15,8 @@ export const MockScreenMap: Record<NavigatorScreens, string> = {
   [NavigatorScreens.Compedium]: compediumIcon,
   [NavigatorScreens.GameModeSelect]: gameModeSelectIcon,
   [NavigatorScreens.Statistics]: statisticsIcon,
+  [NavigatorScreens.Run]: standardRunIcon,
   [NavigatorScreens.StandardRun]: standardRunIcon,
+  [NavigatorScreens.DailyRun]: standardRunIcon,
+  [NavigatorScreens.CustomRun]: standardRunIcon,
 };

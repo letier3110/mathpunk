@@ -12,6 +12,7 @@ const MenuCard: React.FC<MenuCardItemInterface> = ({
   disabled = false,
 }) => {
   const handleClick = () => {
+    if (disabled) return void 0;
     callback();
   };
   return (

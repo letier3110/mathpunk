@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface ReturnButtonProps {
+interface ContinueButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
 }
 
-const ReturnButton: FC<ReturnButtonProps> = ({
+const ContinueButton: FC<ContinueButtonProps> = ({
   children,
   onClick = () => {},
 }) => {
@@ -18,10 +18,10 @@ const ReturnButton: FC<ReturnButtonProps> = ({
   };
 
   return (
-    <div onClick={handleClick} className="returnButton">
+    <div onClick={handleClick} className="continueButton">
       {children}
     </div>
   );
 };
 
-export default ReturnButton;
+export default ContinueButton;

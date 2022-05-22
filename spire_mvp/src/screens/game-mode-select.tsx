@@ -6,28 +6,43 @@ import { MenuCardItemInterface } from "../components/menu-card/menu-card.types";
 import Mock from "../components/mock/mock";
 import { NavigatorScreens } from "../components/navigator/navigator.enum";
 import { NavigatorScreensMap } from "../components/navigator/navigator.map";
-import { emptyFn } from "../utils/empty-fn";
+import { useSelectGameMode } from "../context/game-state/game-state";
+import { GameModeType } from "../context/types";
 
 function GameModeSelect() {
   const navigate = useNavigate();
+  const gameModeSelect = useSelectGameMode();
 
   const items: Array<MenuCardItemInterface> = [
     {
       title: "Standard",
       description: "Embark on a quest to conquer the spire!",
-      callback: () =>
-        navigate(NavigatorScreensMap[NavigatorScreens.StandardRun]),
+      callback: () => {
+        gameModeSelect(GameModeType.Standard);
+        navigate(NavigatorScreensMap[NavigatorScreens.Run]);
+        return void 0;
+      },
     },
     {
       title: "Daily Run",
-      description:
-        "A new challenge is available once a day.\n\nCompete with other players to conquer the spire!",
-      callback: emptyFn,
+      description: "Play a Standard Run to unlock this gamemode.",
+      // description:
+      //   "A new challenge is available once a day.\n\nCompete with other players to conquer the spire!",
+      callback: () => {
+        gameModeSelect(GameModeType.Daily);
+        navigate(NavigatorScreensMap[NavigatorScreens.Run]);
+        return void 0;
+      },
+      disabled: true,
     },
     {
       title: "Custom",
       description: "Play a Daily Run to unlock this gamemode.",
-      callback: emptyFn,
+      callback: () => {
+        gameModeSelect(GameModeType.Custom);
+        navigate(NavigatorScreensMap[NavigatorScreens.Run]);
+        return void 0;
+      },
       disabled: true,
     },
   ];

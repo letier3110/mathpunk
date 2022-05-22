@@ -6,7 +6,7 @@ import GameModeSelect from "../../screens/game-mode-select";
 import MainMenu from "../../screens/main-menu";
 import PatchNotes from "../../screens/patch-notes";
 import Settings from "../../screens/settings";
-import StandardRun from "../../screens/standard-run";
+import Run from "../../screens/run";
 import Statistics from "../../screens/statistics";
 import { NavigatorScreensMap } from "./navigator.map";
 
@@ -22,7 +22,7 @@ function Navigator() {
       />
       <Route path={NavigatorScreensMap.Compedium} element={<Compedium />} />
       <Route path={NavigatorScreensMap.Statistics} element={<Statistics />} />
-      <Route path={NavigatorScreensMap.StandardRun} element={<StandardRun />} />
+      <Route path={NavigatorScreensMap.Run} element={<Run />} />
       {/* <Route path="expenses" element={<MainMenu />} />
       <Route path="invoices" element={<MainMenu />} /> */}
     </Routes>

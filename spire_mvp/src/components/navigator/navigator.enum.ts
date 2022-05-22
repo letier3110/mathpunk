@@ -5,5 +5,8 @@ export enum NavigatorScreens {
   Compedium = "Compedium",
   GameModeSelect = "GameModeSelect",
   Statistics = "Statistics",
+  Run = "Run",
   StandardRun = "StandardRun",
+  DailyRun = "DailyRun",
+  CustomRun = "CustomRun",
 }

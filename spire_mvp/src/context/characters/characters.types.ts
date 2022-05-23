@@ -1,10 +1,21 @@
-import { CharacterType } from "../types";
+import {
+  CharacterType,
+  CollectibleItem,
+  DisposableItem,
+  PlayableCard,
+} from "../types";
 
 export interface CharacterMetadata {
   name: string;
   description: string;
   locked: boolean;
   hidden: boolean;
+  maxHitpoints: number;
+  hitpoints: number;
+  gold: number;
+  items: Array<DisposableItem>;
+  relics: Array<CollectibleItem>;
+  deck: Array<PlayableCard>;
 }
 
 export type CharacterMetadataList = Record<CharacterType, CharacterMetadata>;

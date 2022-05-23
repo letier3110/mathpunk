@@ -19,3 +19,16 @@ export interface GameMode {
   gameMode: SelectableGameMode;
   character: PlayableCharacter;
 }
+
+export interface CollectibleItem {
+  name: string;
+}
+
+export interface DisposableItem {
+  name: string;
+  count: number;
+}
+
+export interface PlayableCard {
+  name: string;
+}

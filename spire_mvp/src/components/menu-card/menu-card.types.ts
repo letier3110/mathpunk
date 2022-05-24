@@ -6,4 +6,5 @@ export interface MenuCardItemInterface {
   callback: EmptyFn;
   imgSrc?: string;
   disabled?: boolean;
+  saved?: boolean;
 }

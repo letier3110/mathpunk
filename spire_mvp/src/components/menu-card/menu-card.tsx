@@ -9,7 +9,8 @@ const MenuCard: React.FC<MenuCardItemInterface> = ({
   description,
   callback = emptyFn,
   imgSrc,
-  disabled = false
+  disabled = false,
+  saved = false
 }) => {
   const handleClick = () => {
     if (disabled) return void 0;
@@ -21,6 +22,7 @@ const MenuCard: React.FC<MenuCardItemInterface> = ({
       <div className={s.title}>{title}</div>
       <div className={s.img}>{imgSrc !== undefined ? <img src={imgSrc} alt={imgSrc} /> : ''}</div>
       <div className={s.description}>{description}</div>
+      {saved === true && <div className={s.description}>Continue</div>}
     </div>
   );
 };

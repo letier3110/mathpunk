@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { SelectableCharacter } from '../../interfaces/character.interface';
+import { CharacterType, SelectableCharacter } from '../../interfaces/character.interface';
 import { selectCharacterAction, selectGamemodeAction } from '../../store/game-state/game-state.actions';
 import ContinueButton from '../button/continue-button';
 import ReturnButton from '../button/return-button';
 import CharacterCardList from '../character-card/character-card-list';
+import Mock from '../mock/mock';
+import { NavigatorScreens } from '../navigator/navigator.enum';
 
 const CharacterSelectStandard: React.FC = () => {
   const [character, setCharacter] = useState<SelectableCharacter>(null);
@@ -29,6 +31,7 @@ const CharacterSelectStandard: React.FC = () => {
 
   return (
     <div>
+      {character === CharacterType.Warrior && <Mock screen={NavigatorScreens.Run} />}
       <CharacterCardList temporarySelected={character} submit={handleSubmit} />
       <ReturnButton onClick={handleClickReturn}>Return</ReturnButton>
       {character && <ContinueButton onClick={handleClickContinue}>Continue</ContinueButton>}

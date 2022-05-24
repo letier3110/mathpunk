@@ -25,9 +25,9 @@ function GameModeSelect() {
       description: 'Embark on a quest to conquer the spire!',
       callback: () => {
         const currentGameMode = GameModeType.Standard;
-        if (character && gameMode !== currentGameMode) {
-          dispatch(selectCharacterAction(null));
-        }
+        // if (character && gameMode !== currentGameMode) {
+        dispatch(selectCharacterAction(null));
+        // }
         dispatch(selectGamemodeAction(currentGameMode));
         navigate(NavigatorScreensMap[NavigatorScreens.Run]);
 

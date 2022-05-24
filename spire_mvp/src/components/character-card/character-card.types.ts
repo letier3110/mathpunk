@@ -1,4 +1,4 @@
-import { EmptyFn } from "../../utils/empty-fn";
+import { EmptyFn } from '../../utils/empty-fn';
 
 export interface CharacterCardItemInterface {
   title: string;

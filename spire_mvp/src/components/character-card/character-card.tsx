@@ -1,8 +1,8 @@
-import React from "react";
-import { emptyFn } from "../../utils/empty-fn";
-import { CharacterCardItemInterface } from "./character-card.types";
+import React from 'react';
 
-import s from "./character-card.module.css";
+import { emptyFn } from '../../utils/empty-fn';
+import s from './character-card.module.css';
+import { CharacterCardItemInterface } from './character-card.types';
 
 interface CharacterCardProps extends CharacterCardItemInterface {
   selected?: boolean;
@@ -14,21 +14,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   callback = emptyFn,
   // imgSrc,
   disabled = false,
-  selected = false,
+  selected = false
 }) => {
   const handleClick = () => {
     if (disabled) return void 0;
     callback();
   };
+
   return (
-    <div
-      className={[
-        s.item,
-        disabled && s.itemDisabled,
-        selected && s.itemSelected,
-      ].join(" ")}
-      onClick={handleClick}
-    >
+    <div className={[s.item, disabled && s.itemDisabled, selected && s.itemSelected].join(' ')} onClick={handleClick}>
       <div className={s.title}>{title.substring(0, 1)}</div>
     </div>
   );

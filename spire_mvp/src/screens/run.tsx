@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { useCharacter, useGameMode } from "../context/game-state/game-state";
-import { GameModeType } from "../context/types";
-
-import Mock from "../components/mock/mock";
-import { NavigatorScreens } from "../components/navigator/navigator.enum";
-import CharacterSelectStandard from "../components/character-select-standard/character-select-standard";
+import CharacterSelectStandard from '../components/character-select-standard/character-select-standard';
+import Mock from '../components/mock/mock';
+import { NavigatorScreens } from '../components/navigator/navigator.enum';
+import { GameModeType } from '../interfaces/character.interface';
+import { useCharacter, useGameMode } from '../store/game-state/game-state.selectors';
 
 const Run: React.FC = () => {
   const gameMode = useGameMode();
@@ -13,18 +12,10 @@ const Run: React.FC = () => {
 
   return (
     <div>
-      {gameMode === GameModeType.Standard && (
-        <Mock screen={NavigatorScreens.StandardRun} />
-      )}
-      {gameMode === GameModeType.Daily && (
-        <Mock screen={NavigatorScreens.DailyRun} />
-      )}
-      {gameMode === GameModeType.Custom && (
-        <Mock screen={NavigatorScreens.CustomRun} />
-      )}
-      {gameMode === GameModeType.Standard && !savedCharacter && (
-        <CharacterSelectStandard />
-      )}
+      {gameMode === GameModeType.Standard && <Mock screen={NavigatorScreens.StandardRun} />}
+      {gameMode === GameModeType.Daily && <Mock screen={NavigatorScreens.DailyRun} />}
+      {gameMode === GameModeType.Custom && <Mock screen={NavigatorScreens.CustomRun} />}
+      {gameMode === GameModeType.Standard && !savedCharacter && <CharacterSelectStandard />}
     </div>
   );
 };

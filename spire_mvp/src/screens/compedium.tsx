@@ -1,29 +1,28 @@
-import React from "react";
-import ReturnButton from "../components/button/return-button";
-import MenuCardList from "../components/menu-card/menu-card-list";
-import { MenuCardItemInterface } from "../components/menu-card/menu-card.types";
-import Mock from "../components/mock/mock";
-import { NavigatorScreens } from "../components/navigator/navigator.enum";
-import { emptyFn } from "../utils/empty-fn";
+import React from 'react';
+
+import ReturnButton from '../components/button/return-button';
+import MenuCardList from '../components/menu-card/menu-card-list';
+import { MenuCardItemInterface } from '../components/menu-card/menu-card.types';
+import Mock from '../components/mock/mock';
+import { NavigatorScreens } from '../components/navigator/navigator.enum';
+import { emptyFn } from '../utils/empty-fn';
 
 const items: Array<MenuCardItemInterface> = [
   {
-    title: "Card Library",
-    description: "View all of the cards you have encountered in the game.",
-    callback: emptyFn,
+    title: 'Card Library',
+    description: 'View all of the cards you have encountered in the game.',
+    callback: emptyFn
   },
   {
-    title: "Relic Collection",
-    description:
-      "Examin the various trinkets and artifacts obtained in the game.",
-    callback: emptyFn,
+    title: 'Relic Collection',
+    description: 'Examin the various trinkets and artifacts obtained in the game.',
+    callback: emptyFn
   },
   {
-    title: "Potion Lab",
-    description:
-      "Observe the numerous potions found while exploring the Spire.",
-    callback: emptyFn,
-  },
+    title: 'Potion Lab',
+    description: 'Observe the numerous potions found while exploring the Spire.',
+    callback: emptyFn
+  }
 ];
 
 function Compedium() {

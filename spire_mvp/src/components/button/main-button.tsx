@@ -1,7 +1,9 @@
-import React, { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { NavigatorScreens } from "../navigator/navigator.enum";
-import { NavigatorScreensMap } from "../navigator/navigator.map";
+import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { emptyFn } from '../../utils/empty-fn';
+import { NavigatorScreens } from '../navigator/navigator.enum';
+import { NavigatorScreensMap } from '../navigator/navigator.map';
 
 interface MainButtonProps {
   children?: React.ReactNode;
@@ -9,11 +11,7 @@ interface MainButtonProps {
   onClick?: () => void;
 }
 
-const MainButton: FC<MainButtonProps> = ({
-  children,
-  onClick = () => {},
-  link,
-}) => {
+const MainButton: FC<MainButtonProps> = ({ children, onClick = emptyFn, link }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

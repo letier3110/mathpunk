@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import {
-  useSelectCharacter,
-  useSelectGameMode,
-} from "../../context/game-state/game-state";
-
-import { SelectableCharacter } from "../../context/types";
-import ContinueButton from "../button/continue-button";
-import ReturnButton from "../button/return-button";
-import CharacterCardList from "../character-card/character-card-list";
+import { SelectableCharacter } from '../../interfaces/character.interface';
+import { selectCharacterAction, selectGamemodeAction } from '../../store/game-state/game-state.actions';
+import ContinueButton from '../button/continue-button';
+import ReturnButton from '../button/return-button';
+import CharacterCardList from '../character-card/character-card-list';
 
 const CharacterSelectStandard: React.FC = () => {
-  const discardGameMode = useSelectGameMode();
   const [character, setCharacter] = useState<SelectableCharacter>(null);
-  const selectCharacter = useSelectCharacter();
+  const dispatch = useDispatch();
 
   const handleClickReturn = () => {
-    discardGameMode(null);
+    dispatch(selectGamemodeAction(null));
   };
 
   const handleSubmit = (submitCharacter: SelectableCharacter) => {
@@ -28,16 +24,14 @@ const CharacterSelectStandard: React.FC = () => {
   };
 
   const handleClickContinue = () => {
-    selectCharacter(character);
+    dispatch(selectCharacterAction(character));
   };
 
   return (
     <div>
       <CharacterCardList temporarySelected={character} submit={handleSubmit} />
       <ReturnButton onClick={handleClickReturn}>Return</ReturnButton>
-      {character && (
-        <ContinueButton onClick={handleClickContinue}>Continue</ContinueButton>
-      )}
+      {character && <ContinueButton onClick={handleClickContinue}>Continue</ContinueButton>}
     </div>
   );
 };

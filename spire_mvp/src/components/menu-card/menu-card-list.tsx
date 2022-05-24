@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { MenuCardItemInterface } from "./menu-card.types";
-import MenuCard from "./menu-card";
-
-import s from "./menu-card.module.css";
+import MenuCard from './menu-card';
+import s from './menu-card.module.css';
+import { MenuCardItemInterface } from './menu-card.types';
 
 interface MenuCardListProps {
   item1: MenuCardItemInterface;

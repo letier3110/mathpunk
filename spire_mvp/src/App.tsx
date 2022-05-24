@@ -1,27 +1,21 @@
-import React from "react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { GameStateProvider } from "./context/game-state/game-state";
-import { CharactersProvider } from "./context/characters/characters";
+import Navigator from './components/navigator/navigator';
+import { store, persistor } from './store/store';
 
-import Navigator from "./components/navigator/navigator";
-
-import "./App.css";
-import { GameMode, GameModeType } from "./context/types";
-
-const mockGameState: GameMode = {
-  gameMode: GameModeType.Standard,
-  character: null,
-};
+import './App.css';
 
 function App() {
   return (
-    <GameStateProvider initialState={mockGameState}>
-      <CharactersProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
         <div className="App">
           <Navigator />
         </div>
-      </CharactersProvider>
-    </GameStateProvider>
+      </PersistGate>
+    </Provider>
   );
 }
 

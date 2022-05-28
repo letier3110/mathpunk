@@ -10,3 +10,5 @@ export const lockCharacterAction = createAction<CharacterType>('gamestate/LOCK_C
 export const unlockCharacterAction = createAction<CharacterType>('gamestate/UNLOCK_CHARACTER');
 export const hideCharacterAction = createAction<CharacterType>('gamestate/HIDE_CHARACTER');
 export const unhideCharacterAction = createAction<CharacterType>('gamestate/UNHIDE_CHARACTER');
+
+export const restoreState = createAction<void>('gamestate/DEBUG_RESTORE_STATE');

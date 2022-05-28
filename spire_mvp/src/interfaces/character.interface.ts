@@ -1,3 +1,7 @@
+import { CardMetadata } from './cards.interface';
+import { ItemMetadata } from './items.interface';
+import { RelicMetadata } from './relics.interface';
+
 export enum GameModeType {
   Standard = 'Standard',
   Daily = 'Daily',
@@ -42,9 +46,9 @@ export interface CharacterMetadata {
   hitpoints: number;
   gold: number;
   charactedType: CharacterType;
-  items: Array<DisposableItem>;
-  relics: Array<CollectibleItem>;
-  deck: Array<PlayableCard>;
+  items: Array<ItemMetadata>;
+  relics: Array<RelicMetadata>;
+  deck: Array<CardMetadata>;
   mana: number;
   maxMana: number;
 }

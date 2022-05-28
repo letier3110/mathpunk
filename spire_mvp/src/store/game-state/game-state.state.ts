@@ -50,7 +50,7 @@ const ITEMS_METADATA: ItemsMetadataList = {
 
 const RELICS_METADATA: RelicsMetadataList = {
   [RelicType.BurningBlood]: {
-    name: 'Regen after match',
+    name: 'Burning Blood',
     description: 'Regen after match',
     effect: EffectType.RegenAfterMatch
   }

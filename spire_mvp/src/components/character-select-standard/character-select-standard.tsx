@@ -32,6 +32,10 @@ const CharacterSelectStandard: React.FC = () => {
     dispatch(selectCharacterAction(character));
   };
 
+  if (character) {
+    console.log(characterList[character].relics);
+  }
+
   return (
     <div>
       {character === CharacterType.Warrior && <Mock screen={NavigatorScreens.Run} />}
@@ -49,6 +53,30 @@ const CharacterSelectStandard: React.FC = () => {
               <div>Gold:</div>
               <div>{characterList[character].gold}</div>
             </div>
+          </div>
+          <h2>{characterList[character].description}</h2>
+          <div>
+            Relics:
+            {characterList[character].relics.map(relic => {
+              return (
+                <div key={relic.name}>
+                  <div>{relic.name}</div>
+                  <div>{relic.description}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            Deck:
+            {characterList[character].deck.map((card, index) => {
+              return (
+                <div key={card.name + index}>
+                  <div>{card.name}</div>
+                  <div>{card.description}</div>
+                  <div>Mana cost: {card.manaCost}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

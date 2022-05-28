@@ -1,0 +1,94 @@
+.container {
+  position: relative;
+}
+
+.item {
+  width: 340px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.preview {
+  position: absolute;
+  left: 200px;
+  top: -20px;
+  z-index: 10;
+}
+
+.small {
+  zoom: 0.3;
+}
+
+.large {
+  zoom: 1.1;
+}
+
+.itemInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  height: 50%;
+  background-color: #777;
+  color: white;
+}
+
+.mana {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  background-color: #777;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  background-color: #777;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  display: flex;
+  padding: 12px 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+.description {
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Magic {
+  background-color: #5af;
+}
+
+.Nature {
+  background-color: #5a5;
+}
+
+.Physical {
+  background-color: #f55;
+}
+
+.Mythic {
+  background-color: #faa;
+}
+
+.Neutral {
+  background-color: #aaa;
+}

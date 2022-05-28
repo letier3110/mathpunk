@@ -1,4 +1,4 @@
-import { CardElement, CardsMetadataList, CardType } from '../../interfaces/cards.interface';
+import { CardElement, CardsMetadataList, CardSubtype, CardType } from '../../interfaces/cards.interface';
 import {
   CharacterMetadataList,
   CharacterType,
@@ -8,6 +8,7 @@ import {
 import { BaseEffectType, EffectsMetadataList, EffectType } from '../../interfaces/effects.interface';
 import { ItemsMetadataList, ItemType } from '../../interfaces/items.interface';
 import { RelicsMetadataList, RelicType } from '../../interfaces/relics.interface';
+import { RoomMetadata } from '../../interfaces/room.interface';
 
 const EFFECTS_METADATA: EffectsMetadataList = {
   [EffectType.RegenAfterMatch]: {
@@ -58,53 +59,65 @@ const RELICS_METADATA: RelicsMetadataList = {
 
 const CARDS_METADATA: CardsMetadataList = {
   [CardType.Strike]: {
-    name: 'Deal Damage to enemy',
+    name: 'Strike',
+    cardType: CardType.Strike,
     description: 'Deal Damage to enemy',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 1,
+    cardSubtype: CardSubtype.Attack,
     upgradedVersion: CardType.StrikePlus
   },
   [CardType.Defend]: {
-    name: 'Shield you',
+    name: 'Defend',
+    cardType: CardType.Defend,
     description: 'Shield you',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 1,
+    cardSubtype: CardSubtype.Skill,
     upgradedVersion: CardType.DefendPlus
   },
   [CardType.Bash]: {
-    name: 'Bashes enemy',
+    name: 'Bash',
+    cardType: CardType.Bash,
     description: 'Bashes enemy',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 2,
+    cardSubtype: CardSubtype.Attack,
     upgradedVersion: CardType.Bash
   },
   [CardType.StrikePlus]: {
-    name: 'Deal Damage to enemy',
+    name: 'Strike+',
+    cardType: CardType.StrikePlus,
     description: 'Deal Damage to enemy',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 1,
     upgraded: true,
+    cardSubtype: CardSubtype.Attack,
     upgradedVersion: null
   },
   [CardType.DefendPlus]: {
-    name: 'Shield you',
+    name: 'Defend+',
+    cardType: CardType.DefendPlus,
     description: 'Shield you',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 1,
     upgraded: true,
+    cardSubtype: CardSubtype.Skill,
     upgradedVersion: null
   },
   [CardType.BashPlus]: {
-    name: 'Bashes enemy',
+    name: 'Bash+',
+    cardType: CardType.BashPlus,
     description: 'Bashes enemy',
     effect: EffectType.ReceiveDamage,
     cardElement: CardElement.Physical,
     manaCost: 2,
+    cardSubtype: CardSubtype.Attack,
     upgraded: true,
     upgradedVersion: null
   }
@@ -196,6 +209,9 @@ export interface GameStateState {
   relicsList: RelicsMetadataList;
   itemsList: ItemsMetadataList;
   cardsList: CardsMetadataList;
+  currentRoom: number;
+  currentLevel: number;
+  gameMap: Array<Array<RoomMetadata>>;
 }
 
 export const gameStateInitialState: GameStateState = {
@@ -205,7 +221,10 @@ export const gameStateInitialState: GameStateState = {
   effectsList: EFFECTS_METADATA,
   relicsList: RELICS_METADATA,
   itemsList: ITEMS_METADATA,
-  cardsList: CARDS_METADATA
+  cardsList: CARDS_METADATA,
+  currentRoom: 0,
+  currentLevel: 0,
+  gameMap: []
 };
 
 export interface GameStateRootState {

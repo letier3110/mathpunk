@@ -17,12 +17,20 @@ export enum CardElement {
   Neutral = 'Neutral'
 }
 
+export enum CardSubtype {
+  Attack = 'Attack',
+  Skill = 'Skill',
+  Power = 'Power'
+}
+
 export interface CardMetadata {
   name: string;
   description: string;
   effect: EffectType;
   cardElement: CardElement;
+  cardType: CardType;
   upgradedVersion: CardType | null;
+  cardSubtype: CardSubtype;
   upgraded?: boolean;
   manaCost?: number;
 }

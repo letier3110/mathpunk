@@ -12,3 +12,5 @@ export const hideCharacterAction = createAction<CharacterType>('gamestate/HIDE_C
 export const unhideCharacterAction = createAction<CharacterType>('gamestate/UNHIDE_CHARACTER');
 
 export const restoreState = createAction<void>('gamestate/DEBUG_RESTORE_STATE');
+
+// export const startGame = createAction<void>('gamestate/START_GAME');

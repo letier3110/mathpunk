@@ -18,3 +18,12 @@
   flex-direction: row;
   margin-right: 32px;
 }
+
+.deckList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 90%;
+  gap: 20px;
+}

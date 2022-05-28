@@ -7,6 +7,8 @@ import { useCharacterList } from '../../store/game-state/game-state.selectors';
 import ContinueButton from '../button/continue-button';
 import ReturnButton from '../button/return-button';
 import CharacterCardList from '../character-card/character-card-list';
+import DeckCard from '../deck-card/deck-card';
+import { DeckCardSize } from '../deck-card/deck-card.type';
 import Mock from '../mock/mock';
 import { NavigatorScreens } from '../navigator/navigator.enum';
 import s from './character-select-standard.module.css';
@@ -31,10 +33,6 @@ const CharacterSelectStandard: React.FC = () => {
   const handleClickContinue = () => {
     dispatch(selectCharacterAction(character));
   };
-
-  if (character) {
-    console.log(characterList[character].relics);
-  }
 
   return (
     <div>
@@ -68,15 +66,11 @@ const CharacterSelectStandard: React.FC = () => {
           </div>
           <div>
             Deck:
-            {characterList[character].deck.map((card, index) => {
-              return (
-                <div key={card.name + index}>
-                  <div>{card.name}</div>
-                  <div>{card.description}</div>
-                  <div>Mana cost: {card.manaCost}</div>
-                </div>
-              );
-            })}
+            <div className={s.deckList}>
+              {characterList[character].deck.map((card, index) => {
+                return <DeckCard size={DeckCardSize.Small} card={card} key={card.name + index} />;
+              })}
+            </div>
           </div>
         </div>
       )}

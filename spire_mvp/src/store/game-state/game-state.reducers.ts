@@ -11,7 +11,10 @@ import {
 import { gameStateInitialState, GameStateState } from './game-state.state';
 
 export const gameStateReducers = createReducer<GameStateState>(gameStateInitialState, builder => {
-  builder.addCase(selectCharacterAction, (state, { payload: character }) => ({ ...state, character }));
+  builder.addCase(selectCharacterAction, (state, { payload: character }) => ({
+    ...state,
+    character: character ? state.characterList[character] : character
+  }));
   builder.addCase(selectGamemodeAction, (state, { payload: gameMode }) => ({ ...state, gameMode }));
 
   builder.addCase(lockCharacterAction, (state, { payload: character }) => ({

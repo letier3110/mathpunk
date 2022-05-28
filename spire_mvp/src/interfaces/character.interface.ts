@@ -13,7 +13,7 @@ export enum CharacterType {
 
 export type SelectableGameMode = GameModeType | null;
 export type SelectableCharacter = CharacterType | null;
-export type PlayableCharacter = CharacterType | null;
+export type PlayableCharacter = CharacterMetadata | null;
 
 export interface GameMode {
   gameMode: SelectableGameMode;
@@ -41,9 +41,12 @@ export interface CharacterMetadata {
   maxHitpoints: number;
   hitpoints: number;
   gold: number;
+  charactedType: CharacterType;
   items: Array<DisposableItem>;
   relics: Array<CollectibleItem>;
   deck: Array<PlayableCard>;
+  mana: number;
+  maxMana: number;
 }
 
 export type CharacterMetadataList = Record<CharacterType, CharacterMetadata>;

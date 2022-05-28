@@ -8,7 +8,7 @@ import {
 import { BaseEffectType, EffectsMetadataList, EffectType } from '../../interfaces/effects.interface';
 import { ItemsMetadataList, ItemType } from '../../interfaces/items.interface';
 import { RelicsMetadataList, RelicType } from '../../interfaces/relics.interface';
-import { RoomMetadata } from '../../interfaces/room.interface';
+import { RoomMetadata } from '../../interfaces/room/room.interface';
 
 const EFFECTS_METADATA: EffectsMetadataList = {
   [EffectType.RegenAfterMatch]: {

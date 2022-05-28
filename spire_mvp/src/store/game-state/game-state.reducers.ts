@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   hideCharacterAction,
   lockCharacterAction,
-  restoreState,
+  restoreStateAction,
   selectCharacterAction,
   selectGamemodeAction,
   unhideCharacterAction,
@@ -12,7 +12,7 @@ import {
 import { gameStateInitialState, GameStateState } from './game-state.state';
 
 export const gameStateReducers = createReducer<GameStateState>(gameStateInitialState, builder => {
-  builder.addCase(restoreState, () => ({
+  builder.addCase(restoreStateAction, () => ({
     ...gameStateInitialState
   }));
   builder.addCase(selectCharacterAction, (state, { payload: character }) => ({

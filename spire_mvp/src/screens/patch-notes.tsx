@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import ReturnButton from '../components/button/return-button';
-import { restoreState } from '../store/game-state/game-state.actions';
+import { restoreStateAction } from '../store/game-state/game-state.actions';
 
 function PatchNotes() {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(restoreState());
+    dispatch(restoreStateAction());
   };
 
   return (

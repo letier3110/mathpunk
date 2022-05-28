@@ -4,6 +4,7 @@ export enum RoomType {
   Boss = 'Boss',
   Event = 'Event',
   Rest = 'Rest',
+  Chest = 'Chest',
   Trade = 'Trade'
 }
 

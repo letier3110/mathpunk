@@ -21,3 +21,6 @@
 /spire_mvp/npm-debug.log*
 /spire_mvp/yarn-debug.log*
 /spire_mvp/yarn-error.log*
+
+/spire_mvp/src/classes/.vscode
+/spire_mvp/src/classes/tsconfig.json

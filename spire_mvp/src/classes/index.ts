@@ -1,17 +1,19 @@
-// import Enemy from "./enemy";
-
+// singleton
 class Game {
   gameMode: GameMode | null;
 }
 
+// singleton
 class GameMode {
   gameSession: GameSession | null;
 
 }
 
+// singleton
 class GameSession {
   playerInfo: Character | null;
   gameMap: GameMap | null;
+  currentRoom: Room | null;
 }
 
 class GameMap {
@@ -62,26 +64,19 @@ type RoomConstructorProps = {
 
 interface IRoom {
   name: string;
-  player: Player | null;
   enemies: Enemy[];
   rewards: Reward[];
 }
 
 class Room implements IRoom {
   name: string;
-  player: Player | null;
   enemies: Enemy[];
   rewards: Reward[];
 
   constructor({ name }: RoomConstructorProps) {
     this.name = name;
-    this.player = null;
     this.enemies = [];
     this.rewards = [];
-  }
-
-  public attachPlayer({ player }: { player: Player }): void {
-    this.player = player;
   }
 
   public attachEnemies({ enemies }: { enemies: Enemy[] }): void {
@@ -90,10 +85,6 @@ class Room implements IRoom {
 
   public attachRewards({ rewards }: { rewards: Reward[] }): void {
     this.rewards = rewards;
-  }
-
-  public getPlayer(): Player | null {
-    return this.player;
   }
 
   public getEnemies(): Enemy[] {

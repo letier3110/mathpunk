@@ -1,5 +1,43 @@
 // import Enemy from "./enemy";
 
+class Game {
+  gameMode: GameMode | null;
+}
+
+class GameMode {
+  gameSession: GameSession | null;
+
+}
+
+class GameSession {
+  playerInfo: Character | null;
+  gameMap: GameMap | null;
+}
+
+class GameMap {
+  rooms: Room[];
+}
+
+interface Character {
+
+}
+
+class Warrior implements Character {
+
+}
+
+class Mage implements Character {
+
+}
+
+class Rogue implements Character {
+
+}
+
+class Enigma implements Character {
+
+}
+
 class Relic {
 
 }

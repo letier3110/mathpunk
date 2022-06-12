@@ -6,7 +6,6 @@ class Game {
 // singleton
 class GameMode {
   gameSession: GameSession | null;
-
 }
 
 // singleton
@@ -21,46 +20,148 @@ class GameMap {
 }
 
 interface Character {
-
+  health: number;
+  maxHealth: number;
 }
 
-class Warrior implements Character {
+class BaseCharacter implements Character {
+  name: string;
+  health: number;
+  maxHealth: number;
 
+  constructor() {
+    this.health = 10;
+    this.maxHealth = 10;
+    this.name = '';
+  }
 }
 
-class Mage implements Character {
+class PlayerCharacter extends BaseCharacter {
+  deck: Deck;
+  relics: Relic[];
+  items: Item[];
 
+  attachDeck(deck: Deck) {
+    this.deck = deck;
+  }
+
+  getDeck() {
+    return this.deck;
+  }
+
+  attachRelics(relics: Relic[]) {
+    this.relics = relics;
+  }
+
+  addRelic(relic: Relic) {
+    this.relics.concat(relic);
+  }
+
+  removeRelic(relic: Relic) {
+    // TODO
+    // this.relics.filter by id?
+  }
+
+  getRelics() {
+    return this.relics;
+  }
+
+  attachItems(items: Item[]) {
+    this.items = items;
+  }
+
+  addItem(item: Item) {
+    this.items.concat(item);
+  }
+
+  removeItem(item: Item) {
+    // TODO
+    // this.relics.filter by id?
+  }
+
+  getItems() {
+    return this.items;
+  }
 }
 
-class Rogue implements Character {
+class Warrior extends PlayerCharacter {
+  constructor() {
+    super();
+    this.health = 100;
+    this.maxHealth = 100;
+    this.name = 'Warrior';
 
+    this.relics = [new Relic()];
+
+    const cards: Card[] = [new Card()];
+    this.deck = new Deck(cards);
+  }
 }
 
-class Enigma implements Character {
+class Mage extends PlayerCharacter {
+  constructor() {
+    super();
+    this.health = 100;
+    this.maxHealth = 100;
+    this.name = 'Mage';
 
+    this.relics = [new Relic()];
+
+    const cards: Card[] = [new Card()];
+    this.deck = new Deck(cards);
+  }
 }
 
-class Relic {
+class Rogue extends PlayerCharacter {
+  constructor() {
+    super();
+    this.health = 100;
+    this.maxHealth = 100;
+    this.name = 'Rogue';
 
+    this.relics = [new Relic()];
+
+    const cards: Card[] = [new Card()];
+    this.deck = new Deck(cards);
+  }
 }
 
-class Item {
+class Enigma extends PlayerCharacter {
+  constructor() {
+    super();
+    this.health = 100;
+    this.maxHealth = 100;
+    this.name = 'Enigma';
 
+    this.relics = [new Relic()];
+
+    const cards: Card[] = [new Card()];
+    this.deck = new Deck(cards);
+  }
 }
+
+class Relic {}
+
+class Item {}
 
 class Deck {
+  cards: Card[];
+  constructor(cards: Card[]) {
+    this.cards = cards;
+  }
 
+  getCards() {
+    return this.cards;
+  }
 }
 
-class Card {
-
-}
+class Card {}
 
 type Reward = Relic | Item | Card | number;
 
 type RoomConstructorProps = {
   name: string;
-}
+};
 
 interface IRoom {
   name: string;
@@ -98,20 +199,19 @@ class Room implements IRoom {
 
 class Player {
   name: string;
-  constructor({name}: {name:string}) {
-    this.name = name;  
+  constructor({ name }: { name: string }) {
+    this.name = name;
   }
 
   public getName(): string {
     return this.name;
   }
-
 }
 
 class Enemy {
   name: string;
-  constructor({name}: {name:string}) {
-    this.name = name;  
+  constructor({ name }: { name: string }) {
+    this.name = name;
   }
 
   public getName(): string {
@@ -119,8 +219,8 @@ class Enemy {
   }
 }
 
-const enemy = new Enemy({name: 'goblin'});
-const player = new Player({name: 'player'});
-const room = new Room({name: 'room'});
+const enemy = new Enemy({ name: 'goblin' });
+const player = new Player({ name: 'player' });
+const room = new Room({ name: 'room' });
 
-console.log('room')
+console.log('room');

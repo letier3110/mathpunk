@@ -91,7 +91,7 @@ class GameMap {
       new Room({ id: '8' }),
       new Room({ id: '9' }),
       new Room({ id: '10' }),
-      new Room({ id: '11' })
+      new BossRoom({ id: '11', level: 0 })
     ];
   }
 
@@ -238,11 +238,27 @@ class Deck {
 
 class Card {}
 
+class Enemy {
+  name: string;
+  constructor({ name }: { name: string }) {
+    this.name = name;
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+}
+
 type Reward = Relic | Item | Card | number;
 
 type RoomConstructorProps = {
   id: string;
 };
+
+type BossRoomConstructorProps = {
+  id: string;
+  level: number;
+}
 
 interface IRoom {
   _id: string;
@@ -321,10 +337,17 @@ class MiniBossRoom extends Room {
   }
 }
 
+const BOSSES = {
+  [0]: [new Enemy({name: 'Goblin'})],
+  [1]: [new Enemy({name: 'Ork'})],
+  [2]: [new Enemy({name: 'Ogre'})]
+}
+
 class BossRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
+  constructor({ id, level }: BossRoomConstructorProps) {
     super({ id });
-    this.enemies = [new Enemy({ name: 'boss' })];
+    const bossesOnTheLevel = BOSSES[level];
+    this.enemies = [bossesOnTheLevel[Math.floor(Math.random()*bossesOnTheLevel.length)]];
   }
 }
 
@@ -345,17 +368,6 @@ class Player {
 
   getCharacter() {
     return this.character;
-  }
-}
-
-class Enemy {
-  name: string;
-  constructor({ name }: { name: string }) {
-    this.name = name;
-  }
-
-  public getName(): string {
-    return this.name;
   }
 }
 

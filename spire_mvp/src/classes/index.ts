@@ -260,7 +260,6 @@ class Deck {
 }
 
 class EmptyDeck extends Deck {
-  cards: Card[];
   constructor() {
     super([]);
   }

@@ -2,6 +2,10 @@
 class Game {
   gameMode: GameMode | null;
 
+  constructor() {
+    this.gameMode = null
+  }
+
   attachGameMode(gameMode: GameMode) {
     this.gameMode = gameMode;
   }
@@ -14,6 +18,10 @@ class Game {
 // singleton
 class GameMode {
   gameSession: GameSession | null;
+
+  constructor() {
+    this.gameSession = null
+  }
 
   attachGameSession(gameSession: GameSession) {
     this.gameSession = gameSession;
@@ -29,6 +37,12 @@ class GameSession {
   playerInfo: Player | null;
   gameMap: GameMap | null;
   currentRoom: Room | null;
+
+  constructor() {
+    this.playerInfo = null
+    this.gameMap = null
+    this.currentRoom = null
+  }
 
   attachPlayer(player: Player) {
     this.playerInfo = player;
@@ -47,6 +61,7 @@ class GameSession {
   }
 
   getNextAvailableRooms(): Room | null {
+    if(!this.gameMap) return null;
     const rooms = this.gameMap.getRooms();
     if (this.currentRoom === null) return rooms[0];
 
@@ -75,6 +90,7 @@ class GameSession {
 class GameMap {
   rooms: Room[];
   constructor() {
+    this.rooms = [];
     this.generateMap();
   }
 
@@ -122,6 +138,13 @@ class PlayerCharacter extends BaseCharacter {
   relics: Relic[];
   items: Item[];
 
+  constructor() {
+    super();
+    this.deck = new EmptyDeck();
+    this.relics = []
+    this.items = []
+  }
+
   attachDeck(deck: Deck) {
     this.deck = deck;
   }
@@ -138,10 +161,10 @@ class PlayerCharacter extends BaseCharacter {
     this.relics.concat(relic);
   }
 
-  removeRelic(relic: Relic) {
-    // TODO
-    // this.relics.filter by id?
-  }
+  // removeRelic(relic: Relic) {
+  //   // TODO
+  //   // this.relics.filter by id?
+  // }
 
   getRelics() {
     return this.relics;
@@ -155,10 +178,10 @@ class PlayerCharacter extends BaseCharacter {
     this.items.concat(item);
   }
 
-  removeItem(item: Item) {
-    // TODO
-    // this.relics.filter by id?
-  }
+  // removeItem(item: Item) {
+  //   // TODO
+  //   // this.relics.filter by id?
+  // }
 
   getItems() {
     return this.items;
@@ -221,9 +244,9 @@ class Enigma extends PlayerCharacter {
   }
 }
 
-class Relic {}
+class Relic { }
 
-class Item {}
+class Item { }
 
 class Deck {
   cards: Card[];
@@ -236,7 +259,18 @@ class Deck {
   }
 }
 
-class Card {}
+class EmptyDeck extends Deck {
+  cards: Card[];
+  constructor() {
+    super([]);
+  }
+
+  getCards() {
+    return this.cards;
+  }
+}
+
+class Card { }
 
 class Enemy {
   name: string;
@@ -337,17 +371,19 @@ class MiniBossRoom extends Room {
   }
 }
 
-const BOSSES = {
-  [0]: [new Enemy({name: 'Goblin'})],
-  [1]: [new Enemy({name: 'Ork'})],
-  [2]: [new Enemy({name: 'Ogre'})]
+type BossesIndexes = 0 | 1 | 2
+
+const BOSSES: Record<BossesIndexes, Array<Enemy>> = {
+  [0]: [new Enemy({ name: 'Goblin' })],
+  [1]: [new Enemy({ name: 'Ork' })],
+  [2]: [new Enemy({ name: 'Ogre' })]
 }
 
 class BossRoom extends Room {
   constructor({ id, level }: BossRoomConstructorProps) {
     super({ id });
-    const bossesOnTheLevel = BOSSES[level];
-    this.enemies = [bossesOnTheLevel[Math.floor(Math.random()*bossesOnTheLevel.length)]];
+    const bossesOnTheLevel = BOSSES[level as BossesIndexes];
+    this.enemies = [bossesOnTheLevel[Math.floor(Math.random() * bossesOnTheLevel.length)]];
   }
 }
 
@@ -356,6 +392,7 @@ class Player {
   character: PlayerCharacter | null;
   constructor({ name }: { name: string }) {
     this.name = name;
+    this.character = null;
   }
 
   getName(): string {

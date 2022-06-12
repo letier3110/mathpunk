@@ -48,8 +48,8 @@ class GameSession {
 
   getNextAvailableRooms(): Room | null {
     const rooms = this.gameMap.getRooms();
-    if(this.currentRoom === null) return rooms[0];
-    
+    if (this.currentRoom === null) return rooms[0];
+
     // TODO: change search from in array to tree with .nextRoom pointer in current rooms row
     const foundRoom = { index: 0, value: rooms[0] };
     for (const room of rooms) {
@@ -279,6 +279,52 @@ class Room implements IRoom {
 
   public static isEqual(a: Room, b: Room) {
     return a._id === b._id;
+  }
+}
+
+class TreasureRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+  }
+}
+
+
+class EventRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+  }
+}
+
+class RestRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+  }
+}
+
+class TradeRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+  }
+}
+
+class EnemyRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+    this.enemies = [new Enemy({ name: 'enemy' })];
+  }
+}
+
+class MiniBossRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+    this.enemies = [new Enemy({ name: 'miniboss' })];
+  }
+}
+
+class BossRoom extends Room {
+  constructor({ id }: RoomConstructorProps) {
+    super({ id });
+    this.enemies = [new Enemy({ name: 'boss' })];
   }
 }
 

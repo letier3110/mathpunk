@@ -81,16 +81,16 @@ class GameMap {
   // TODO: seed
   generateMap() {
     this.rooms = [
-      new Room({ id: '1' }),
-      new Room({ id: '2' }),
-      new Room({ id: '3' }),
-      new Room({ id: '4' }),
-      new Room({ id: '5' }),
-      new Room({ id: '6' }),
-      new Room({ id: '7' }),
-      new Room({ id: '8' }),
-      new Room({ id: '9' }),
-      new Room({ id: '10' }),
+      new EnemyRoom({ id: '1' }),
+      new EnemyRoom({ id: '2' }),
+      new EnemyRoom({ id: '3' }),
+      new EnemyRoom({ id: '4' }),
+      new MiniBossRoom({ id: '5' }),
+      new EnemyRoom({ id: '6' }),
+      new EnemyRoom({ id: '7' }),
+      new EnemyRoom({ id: '8' }),
+      new EnemyRoom({ id: '9' }),
+      new EnemyRoom({ id: '10' }),
       new BossRoom({ id: '11', level: 0 })
     ];
   }

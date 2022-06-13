@@ -284,8 +284,22 @@ class Enemy {
 
 type Reward = Relic | Item | Card | number;
 
+const EnemyRewardPool: Array<Reward[]> = [
+  [new Relic()]
+]
+
+const MiniBossRewardPool: Array<Reward[]> = [
+  [new Relic()]
+]
+
+const BossRewardPool: Array<Reward[]> = [
+  [new Relic()]
+]
+
 type RoomConstructorProps = {
   id: string;
+  enemies?: Enemy[];
+  rewards?: Reward[];
 };
 
 type BossRoomConstructorProps = {
@@ -304,10 +318,10 @@ class Room implements IRoom {
   enemies: Enemy[];
   rewards: Reward[];
 
-  constructor({ id }: RoomConstructorProps) {
+  constructor({ id, enemies = [], rewards = [] }: RoomConstructorProps) {
     this._id = id;
-    this.enemies = [];
-    this.rewards = [];
+    this.enemies = enemies;
+    this.rewards = rewards;
   }
 
   public attachEnemies({ enemies }: { enemies: Enemy[] }): void {
@@ -332,41 +346,43 @@ class Room implements IRoom {
 }
 
 class TreasureRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
-    super({ id });
+  constructor({ id, enemies, rewards }: RoomConstructorProps) {
+    super({ id, enemies, rewards });
   }
 }
 
 
 class EventRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
-    super({ id });
+  constructor({ id, enemies, rewards }: RoomConstructorProps) {
+    super({ id, enemies, rewards });
   }
 }
 
 class RestRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
-    super({ id });
+  constructor({ id, enemies, rewards }: RoomConstructorProps) {
+    super({ id, enemies, rewards });
   }
 }
 
 class TradeRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
-    super({ id });
+  constructor({ id, enemies, rewards }: RoomConstructorProps) {
+    super({ id, enemies, rewards });
   }
 }
 
 class EnemyRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
+  constructor({ id, enemies = [new Enemy({ name: 'enemy' })], rewards }: RoomConstructorProps) {
     super({ id });
-    this.enemies = [new Enemy({ name: 'enemy' })];
+    this.enemies = enemies;
+    this.rewards = rewards;
   }
 }
 
 class MiniBossRoom extends Room {
-  constructor({ id }: RoomConstructorProps) {
+  constructor({ id, enemies = [new Enemy({ name: 'miniboss' })], rewards }: RoomConstructorProps) {
     super({ id });
-    this.enemies = [new Enemy({ name: 'miniboss' })];
+    this.enemies = enemies;
+    this.rewards = rewards;
   }
 }
 
@@ -424,5 +440,6 @@ gameSession.attachGameMap(map);
 // gameSession.
 
 player.selectCharacter(new Warrior());
+const nextRooms = gameSession.getNextAvailableRooms();
 
-console.log('room');
+console.log(nextRooms);

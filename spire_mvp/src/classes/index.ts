@@ -3,7 +3,7 @@ class Game {
   gameMode: GameMode | null;
 
   constructor() {
-    this.gameMode = null
+    this.gameMode = null;
   }
 
   attachGameMode(gameMode: GameMode) {
@@ -20,7 +20,7 @@ class GameMode {
   gameSession: GameSession | null;
 
   constructor() {
-    this.gameSession = null
+    this.gameSession = null;
   }
 
   attachGameSession(gameSession: GameSession) {
@@ -39,9 +39,9 @@ class GameSession {
   currentRoom: Room | null;
 
   constructor() {
-    this.playerInfo = null
-    this.gameMap = null
-    this.currentRoom = null
+    this.playerInfo = null;
+    this.gameMap = null;
+    this.currentRoom = null;
   }
 
   attachPlayer(player: Player) {
@@ -60,22 +60,25 @@ class GameSession {
     return this.gameMap;
   }
 
-  getNextAvailableRooms(): Room | null {
-    if(!this.gameMap) return null;
+  getNextAvailableRooms(): Room[] {
+    if (!this.gameMap) return [];
     const rooms = this.gameMap.getRooms();
-    if (this.currentRoom === null) return rooms[0];
+    if (this.currentRoom === null) return [rooms[0]];
 
     // TODO: change search from in array to tree with .nextRoom pointer in current rooms row
-    const foundRoom = { index: 0, value: rooms[0] };
+    let index = 0;
+    const foundRoom = { index, value: rooms[0] };
     for (const room of rooms) {
       if (Room.isEqual(room, this.currentRoom)) {
-        foundRoom.index = 0;
+        foundRoom.index = index;
         foundRoom.value = room;
+        break;
       }
+      index++;
     }
     const nextRoomIndex = foundRoom.index + 1;
-    if (rooms.length <= nextRoomIndex) return null;
-    return rooms[nextRoomIndex];
+    if (rooms.length <= nextRoomIndex) return [];
+    return [rooms[nextRoomIndex]];
   }
 
   enterRoom(room: Room) {
@@ -141,8 +144,8 @@ class PlayerCharacter extends BaseCharacter {
   constructor() {
     super();
     this.deck = new EmptyDeck();
-    this.relics = []
-    this.items = []
+    this.relics = [];
+    this.items = [];
   }
 
   attachDeck(deck: Deck) {
@@ -244,9 +247,9 @@ class Enigma extends PlayerCharacter {
   }
 }
 
-class Relic { }
+class Relic {}
 
-class Item { }
+class Item {}
 
 class Deck {
   cards: Card[];
@@ -269,7 +272,7 @@ class EmptyDeck extends Deck {
   }
 }
 
-class Card { }
+class Card {}
 
 class Enemy {
   name: string;
@@ -284,17 +287,11 @@ class Enemy {
 
 type Reward = Relic | Item | Card | number;
 
-const EnemyRewardPool: Array<Reward[]> = [
-  [new Relic()]
-]
+const EnemyRewardPool: Array<Reward[]> = [[new Relic()]];
 
-const MiniBossRewardPool: Array<Reward[]> = [
-  [new Relic()]
-]
+const MiniBossRewardPool: Array<Reward[]> = [[new Relic()]];
 
-const BossRewardPool: Array<Reward[]> = [
-  [new Relic()]
-]
+const BossRewardPool: Array<Reward[]> = [[new Relic()]];
 
 type RoomConstructorProps = {
   id: string;
@@ -305,7 +302,7 @@ type RoomConstructorProps = {
 type BossRoomConstructorProps = {
   id: string;
   level: number;
-}
+};
 
 interface IRoom {
   _id: string;
@@ -351,7 +348,6 @@ class TreasureRoom extends Room {
   }
 }
 
-
 class EventRoom extends Room {
   constructor({ id, enemies, rewards }: RoomConstructorProps) {
     super({ id, enemies, rewards });
@@ -386,13 +382,13 @@ class MiniBossRoom extends Room {
   }
 }
 
-type BossesIndexes = 0 | 1 | 2
+type BossesIndexes = 0 | 1 | 2;
 
 const BOSSES: Record<BossesIndexes, Array<Enemy>> = {
   [0]: [new Enemy({ name: 'Goblin' })],
   [1]: [new Enemy({ name: 'Ork' })],
   [2]: [new Enemy({ name: 'Ogre' })]
-}
+};
 
 class BossRoom extends Room {
   constructor({ id, level }: BossRoomConstructorProps) {
@@ -440,6 +436,11 @@ gameSession.attachGameMap(map);
 // gameSession.
 
 player.selectCharacter(new Warrior());
-const nextRooms = gameSession.getNextAvailableRooms();
+let nextRooms = gameSession.getNextAvailableRooms();
+while (nextRooms.length > 0) {
+  console.log(nextRooms[0]);
+  gameSession.enterRoom(nextRooms[0]);
+  nextRooms = gameSession.getNextAvailableRooms();
+}
 
 console.log(nextRooms);

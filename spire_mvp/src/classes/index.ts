@@ -333,6 +333,7 @@ class Enemy {
   hp: number;
   maxhp: number;
   armor: number;
+  // moveset
 
   constructor({ name, hp = 5, maxhp = 5, armor = 0 }: EnemyContructorProps) {
     this.name = name;

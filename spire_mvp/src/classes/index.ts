@@ -1,3 +1,13 @@
+// ODO SECTION
+// TODO: room need to generate its content depends of Game Mode / Game State / Game Session (enemies, rewards)
+// ODO SECTION
+
+// BACKLOG SECTION
+// TODO: add dialogue tree to end Event Room
+// TODO: add changeability of Event Room to othrer room_type (Enemy Room / Treasure Room)
+// BACKLOG SECTION
+
+
 // singleton
 class Game {
   gameMode: GameMode | null;
@@ -82,7 +92,11 @@ class GameSession {
   }
 
   enterRoom(room: Room) {
-    this.currentRoom = room;
+    if (this.currentRoom.getCanLeaveRoom()) {
+      this.currentRoom = room;
+      return true;
+    }
+    return false;
   }
 
   getCurrentRoom() {
@@ -92,13 +106,13 @@ class GameSession {
 
 class GameMap {
   rooms: Room[];
-  constructor() {
+  constructor(level = 1) {
     this.rooms = [];
-    this.generateMap();
+    this.generateMap(level);
   }
 
   // TODO: seed
-  generateMap() {
+  generateMap(level: number) {
     this.rooms = [
       new EnemyRoom({ id: '1' }),
       new EnemyRoom({ id: '2' }),
@@ -110,7 +124,7 @@ class GameMap {
       new EnemyRoom({ id: '8' }),
       new EnemyRoom({ id: '9' }),
       new EnemyRoom({ id: '10' }),
-      new BossRoom({ id: '11', level: 0 })
+      new BossRoom({ id: '11', level })
     ];
   }
 
@@ -308,6 +322,8 @@ interface IRoom {
   _id: string;
   enemies: Enemy[];
   rewards: Reward[];
+
+  getCanLeaveRoom: () => boolean;
 }
 
 class Room implements IRoom {
@@ -337,14 +353,40 @@ class Room implements IRoom {
     return this.rewards;
   }
 
+  getCanLeaveRoom(): boolean {
+    return true;
+  }
+
   public static isEqual(a: Room, b: Room) {
     return a._id === b._id;
   }
 }
 
 class TreasureRoom extends Room {
+  isTreasureChestOpened: boolean;
+
   constructor({ id, enemies, rewards }: RoomConstructorProps) {
     super({ id, enemies, rewards });
+
+    this.isTreasureChestOpened = false;
+  }
+
+  getShowTreasureChest(): boolean {
+    return true;
+  }
+
+  getIsTreasureChestOpened(): boolean {
+    return this.isTreasureChestOpened;
+  }
+
+  openTreasureChest(): void {
+    if (this.getShowTreasureChest()) {
+      this.isTreasureChestOpened = true;
+    }
+  }
+
+  getCanLeaveRoom(): boolean {
+    return this.getIsTreasureChestOpened();
   }
 }
 
@@ -367,34 +409,97 @@ class TradeRoom extends Room {
 }
 
 class EnemyRoom extends Room {
-  constructor({ id, enemies = [new Enemy({ name: 'enemy' })], rewards }: RoomConstructorProps) {
+  isTreasureChestOpened: boolean;
+
+  constructor({ id, enemies = [new Enemy({ name: 'goblin' })], rewards }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;
+    this.isTreasureChestOpened = false;
+  }
+
+  getShowTreasureChest(): boolean {
+    return this.enemies.length === 0;
+  }
+
+  getIsTreasureChestOpened(): boolean {
+    return this.isTreasureChestOpened;
+  }
+
+  openTreasureChest(): void {
+    if (this.getShowTreasureChest()) {
+      this.isTreasureChestOpened = true;
+    }
+  }
+
+  getCanLeaveRoom(): boolean {
+    return this.getIsTreasureChestOpened();
   }
 }
 
 class MiniBossRoom extends Room {
+  isTreasureChestOpened: boolean;
+
   constructor({ id, enemies = [new Enemy({ name: 'miniboss' })], rewards }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;
+    this.isTreasureChestOpened = false;
+  }
+
+  getShowTreasureChest(): boolean {
+    return this.enemies.length === 0;
+  }
+
+  getIsTreasureChestOpened(): boolean {
+    return this.isTreasureChestOpened;
+  }
+
+  openTreasureChest(): void {
+    if (this.getShowTreasureChest()) {
+      this.isTreasureChestOpened = true;
+    }
+  }
+
+  getCanLeaveRoom(): boolean {
+    return this.getIsTreasureChestOpened();
   }
 }
 
 type BossesIndexes = 0 | 1 | 2;
 
 const BOSSES: Record<BossesIndexes, Array<Enemy>> = {
-  [0]: [new Enemy({ name: 'Goblin' })],
-  [1]: [new Enemy({ name: 'Ork' })],
-  [2]: [new Enemy({ name: 'Ogre' })]
+  [0]: [new Enemy({ name: 'Goblin Lord' })],
+  [1]: [new Enemy({ name: 'Ork Lord' })],
+  [2]: [new Enemy({ name: 'Ogre Lord' })]
 };
 
 class BossRoom extends Room {
+  isTreasureChestOpened: boolean;
+
   constructor({ id, level }: BossRoomConstructorProps) {
     super({ id });
     const bossesOnTheLevel = BOSSES[level as BossesIndexes];
     this.enemies = [bossesOnTheLevel[Math.floor(Math.random() * bossesOnTheLevel.length)]];
+    this.isTreasureChestOpened = false;
+  }
+
+  getShowTreasureChest(): boolean {
+    return this.enemies.length === 0;
+  }
+
+  getIsTreasureChestOpened(): boolean {
+    return this.isTreasureChestOpened;
+  }
+
+  openTreasureChest(): void {
+    if (this.getShowTreasureChest()) {
+      this.isTreasureChestOpened = true;
+    }
+  }
+
+  getCanLeaveRoom(): boolean {
+    return this.getIsTreasureChestOpened();
   }
 }
 
@@ -433,14 +538,13 @@ map.generateMap();
 
 gameSession.attachPlayer(player);
 gameSession.attachGameMap(map);
-// gameSession.
 
 player.selectCharacter(new Warrior());
 let nextRooms = gameSession.getNextAvailableRooms();
-while (nextRooms.length > 0) {
-  console.log(nextRooms[0]);
-  gameSession.enterRoom(nextRooms[0]);
-  nextRooms = gameSession.getNextAvailableRooms();
-}
+// while (nextRooms.length > 0) {
+//   console.log(nextRooms[0]);
+//   gameSession.enterRoom(nextRooms[0]);
+//   nextRooms = gameSession.getNextAvailableRooms();
+// }
 
 console.log(nextRooms);

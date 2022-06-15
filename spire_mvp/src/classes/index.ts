@@ -1,4 +1,7 @@
 // ODO SECTION
+// TODO: implement base enemy EnemyGoblin
+// TODO: implement base miniboss EnemyOrk
+// TODO: implement base boss EnemyGoblinLord
 // TODO: room need to generate its content depends of Game Mode / Game State / Game Session (enemies, rewards)
 // ODO SECTION
 
@@ -6,7 +9,6 @@
 // TODO: add dialogue tree to end Event Room
 // TODO: add changeability of Event Room to othrer room_type (Enemy Room / Treasure Room)
 // BACKLOG SECTION
-
 
 // singleton
 class Game {
@@ -288,14 +290,77 @@ class EmptyDeck extends Deck {
 
 class Card {}
 
+interface EnemyContructorProps {
+  name?: string;
+  hp?: number;
+  maxhp?: number;
+  armor?: number;
+}
+
+enum IntensionType {
+  Offense = 'Offense',
+  Deffence = 'Deffence',
+  Buff = 'Buff',
+  Debuff = 'Debuff',
+  OffenseBuff = 'OffenseBuff',
+  DeffenceBuff = 'DeffenceBuff',
+  OffenseDebuff = 'OffenseDebuff',
+  DeffenceDebuff = 'DeffenceDebuff',
+  DeffenceOffense = 'DeffenceOffense',
+  Special = 'Special'
+}
+
+class Intension {
+  type: IntensionType;
+  constructor({ type = IntensionType.Offense }) {
+    this.type = type;
+    // targets
+    // effect (+hp, +maxhp, -hp, -maxhp, +armor, +status (strength))
+  }
+}
+
+class Moveset {
+  constructor() {
+    // array of moves
+    // get next move
+    // react to player actions
+    // react to stats change
+  }
+}
+
 class Enemy {
   name: string;
-  constructor({ name }: { name: string }) {
+  hp: number;
+  maxhp: number;
+  armor: number;
+
+  constructor({ name, hp = 5, maxhp = 5, armor = 0 }: EnemyContructorProps) {
     this.name = name;
+    this.hp = hp;
+    this.maxhp = maxhp;
+    this.armor = armor;
   }
 
-  public getName(): string {
+  getName(): string {
     return this.name;
+  }
+
+  getHp(): number {
+    return this.hp;
+  }
+
+  getMaxHp(): number {
+    return this.maxhp;
+  }
+
+  getArmor(): number {
+    return this.armor;
+  }
+}
+
+class EnemyGoblin extends Enemy {
+  constructor({ name = 'goblin' }) {
+    super({ name });
   }
 }
 
@@ -411,7 +476,7 @@ class TradeRoom extends Room {
 class EnemyRoom extends Room {
   isTreasureChestOpened: boolean;
 
-  constructor({ id, enemies = [new Enemy({ name: 'goblin' })], rewards }: RoomConstructorProps) {
+  constructor({ id, enemies = [new EnemyGoblin()], rewards }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;

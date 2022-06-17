@@ -477,7 +477,7 @@ class TradeRoom extends Room {
 class EnemyRoom extends Room {
   isTreasureChestOpened: boolean;
 
-  constructor({ id, enemies = [new EnemyGoblin()], rewards }: RoomConstructorProps) {
+  constructor({ id, enemies = [new EnemyGoblin({})], rewards }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;
@@ -600,7 +600,7 @@ gameMode.attachGameSession(gameSession);
 
 const player = new Player({ name: 'player' });
 const map = new GameMap();
-map.generateMap();
+map.generateMap(0);
 
 gameSession.attachPlayer(player);
 gameSession.attachGameMap(map);

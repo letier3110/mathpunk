@@ -111,6 +111,13 @@ class GameSession {
   enterRoom(room: Room) {
     if (this.currentRoom.getCanLeaveRoom()) {
       this.currentRoom = room;
+      if(this.currentRoom instanceof EnemyRoom) {
+        // this.currentRoom.getEnemies().forEach(enemy => {
+        //   enemy.moveset.getNextMove();
+        // }
+        this.player.getCharacter().getDeck().initialLoadDrawPile();
+        // TODO: init battle
+      }
       return true;
     }
     return false;
@@ -273,7 +280,7 @@ class Warrior extends PlayerCharacter {
 
     this.relics = [new Relic()];
 
-    const cards: Card[] = [new Card()];
+    const cards: Card[] = [StrikeCard];
     this.deck = new Deck(cards);
   }
 }
@@ -287,7 +294,7 @@ class Mage extends PlayerCharacter {
 
     this.relics = [new Relic()];
 
-    const cards: Card[] = [new Card()];
+    const cards: Card[] = [StrikeCard];
     this.deck = new Deck(cards);
   }
 }
@@ -301,7 +308,7 @@ class Rogue extends PlayerCharacter {
 
     this.relics = [new Relic()];
 
-    const cards: Card[] = [new Card()];
+    const cards: Card[] = [StrikeCard];
     this.deck = new Deck(cards);
   }
 }
@@ -315,7 +322,7 @@ class Enigma extends PlayerCharacter {
 
     this.relics = [new Relic()];
 
-    const cards: Card[] = [new Card()];
+    const cards: Card[] = [StrikeCard];
     this.deck = new Deck(cards);
   }
 }
@@ -326,13 +333,60 @@ class Item { }
 
 class Deck {
   cards: Card[];
+
+  drawPile: Card[];
+  hand: Card[];
+  discardPile: Card[];
+
   constructor(cards: Card[]) {
     this.cards = cards;
+    this.drawPile = [];
+    this.hand = [];
+    this.discardPile = [];
   }
 
   getCards() {
     return this.cards;
   }
+
+  getDrawPile() { return this.drawPile }
+  getHand() { return this.hand }
+  getDiscardPile() { return this.discardPile }
+
+  initialLoadDrawPile() { this.drawPile = shuffle(this.cards); }
+  refreshDrawPile() { this.drawPile = shuffle(this.discardPile); }
+  draw(n: number) { 
+    const drawNumber = Math.abs(n - this.drawPile.length)
+    
+    this.hand.concat(this.drawPile.splice(0, drawNumber)); 
+    if(n > this.drawPile.length) {
+      this.refreshDrawPile();
+      if(n - drawNumber > this.drawPile.length) {
+        this.hand.concat(this.drawPile.splice(0, this.drawPile.length)); 
+      } else {
+        this.hand.concat(this.drawPile.splice(0, n - drawNumber)); 
+      }
+    }
+  }
+}
+
+const shuffle = (array: any[]) => {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 class EmptyDeck extends Deck {
@@ -345,12 +399,72 @@ class EmptyDeck extends Deck {
   }
 }
 
-class Card { }
+interface ISelectableTarget {
+  target: Enemy;
+}
+
+interface IRandomTarget {
+
+}
+
+interface IAreaDamage {
+  target: Enemy;
+}
+
+enum CardType {
+  Attack = 'Attack',
+  Skill = 'Skill',
+  Power = 'Power'
+}
+
+class Card {
+  name: string;
+  description: string;
+  mana: number;
+  type: string;
+
+  constructor({ name = '', description = '', mana = 0, type = CardType.Skill }) {
+    this.name = name;
+    this.description = description;
+    this.mana = mana;
+    this.type = type;
+  }
+
+  play(targets: Enemy[]) {
+    // TODO: implement card apply effect to enemy
+  }
+}
+
+enum AttackCardType {
+  SingleTarget = 'SingleTarget',
+  AllTargets = 'AllTargets',
+  RandomTarget = 'RandomTarget',
+}
+
+class AttackCard extends Card {
+  damage: number;
+  subtype: string;
+
+  constructor({ name = '', description = '', mana = 0, type = CardType.Attack, damage = 10, subtype = AttackCardType.SingleTarget }) {
+    super({ name, description, mana, type });
+    this.subtype = subtype;
+    this.damage = damage;
+  }
+
+  play(targets: Enemy[]) {
+    for (let target of targets) {
+      target.changeHealth(-this.damage);
+    }
+  }
+}
+
+const StrikeCard = new AttackCard({ name: 'Strike', description: 'Deal 10 damage to target enemy', mana: 1, damage: 10, subtype: AttackCardType.SingleTarget });
+
 
 interface EnemyContructorProps {
   name?: string;
-  hp?: number;
-  maxhp?: number;
+  health?: number;
+  maxHealth?: number;
   armor?: number;
 }
 
@@ -420,18 +534,18 @@ class GoblinMoveset extends Moveset {
   }
 }
 
-class Enemy {
+class Enemy implements Character {
   name: string;
-  hp: number;
-  maxhp: number;
+  health: number;
+  maxHealth: number;
   armor: number;
   moveset: Moveset;
   // moveset
 
-  constructor({ name, hp = 5, maxhp = 5, armor = 0 }: EnemyContructorProps) {
+  constructor({ name, health = 5, maxHealth = 5, armor = 0 }: EnemyContructorProps) {
     this.name = name;
-    this.hp = hp;
-    this.maxhp = maxhp;
+    this.health = health;
+    this.maxHealth = maxHealth;
     this.armor = armor;
     this.moveset = new Moveset(this);
     // this.moveset.getNextMove();
@@ -441,20 +555,24 @@ class Enemy {
     return this.name;
   }
 
-  getHp(): number {
-    return this.hp;
+  getHealth(): number {
+    return this.health;
   }
 
-  getMaxHp(): number {
-    return this.maxhp;
+  getMaxHealth(): number {
+    return this.maxHealth;
   }
+
+  setHealth(health: number) { this.health = health; }
+  changeHealth(health: number) { this.health -= health; }
+  setMaxHealth(maxHealth: number) { this.maxHealth = maxHealth; }
 
   getArmor(): number {
     return this.armor;
   }
 
   makeMove() {
-    if(this.hp > 0) {
+    if (this.health > 0) {
       this.moveset.executeMove();
     }
     this.moveset.getNextMove();

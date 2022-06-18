@@ -1,4 +1,5 @@
 // ODO SECTION
+// TODO: implement GameLoop (players effect and execute enemy intensions by enemy position's order)
 // TODO: implement base enemy EnemyGoblin
 // TODO: implement base miniboss EnemyOrk
 // TODO: implement base boss EnemyGoblinLord
@@ -46,22 +47,34 @@ class GameMode {
 
 // singleton
 class GameSession {
-  playerInfo: Player | null;
+  player: Player | null;
   gameMap: GameMap | null;
   currentRoom: Room | null;
+  static instance: GameSession | null = null;
+
+  static getGameSessionInstance(): GameSession {
+    if (!GameSession.instance) {
+      GameSession.instance = new GameSession();
+    }
+    return GameSession.instance;
+  }
+
+  static setGameSessionInstance(gameSession: GameSession) {
+    GameSession.instance = gameSession;
+  }
 
   constructor() {
-    this.playerInfo = null;
+    this.player = null;
     this.gameMap = null;
     this.currentRoom = null;
   }
 
   attachPlayer(player: Player) {
-    this.playerInfo = player;
+    this.player = player;
   }
 
-  getPlayerInfo() {
-    return this.playerInfo;
+  getPlayer(): Player | null {
+    return this.player;
   }
 
   attachGameMap(gameMap: GameMap) {
@@ -106,6 +119,37 @@ class GameSession {
   }
 }
 
+// class GameLoop {
+//   game: Game;
+//   constructor() {
+//     const game = new Game();
+
+//     const gameMode = new GameMode();
+//     game.attachGameMode(gameMode);
+
+//     const gameSession = new GameSession();
+//     gameMode.attachGameSession(gameSession);
+
+//     const player = new Player({ name: 'player' });
+//     const map = new GameMap();
+//     map.generateMap(0);
+
+//     gameSession.attachPlayer(player);
+//     gameSession.attachGameMap(map);
+
+//     player.selectCharacter(new Warrior());
+//     let nextRooms = gameSession.getNextAvailableRooms();
+//     // while (nextRooms.length > 0) {
+//     //   console.log(nextRooms[0]);
+//     //   gameSession.enterRoom(nextRooms[0]);
+//     //   nextRooms = gameSession.getNextAvailableRooms();
+//     // }
+
+//     console.log(nextRooms);
+
+//   }
+// }
+
 class GameMap {
   rooms: Room[];
   constructor(level = 1) {
@@ -138,6 +182,11 @@ class GameMap {
 interface Character {
   health: number;
   maxHealth: number;
+  getHealth: () => number;
+  getMaxHealth: () => number;
+  setHealth: (health: number) => void;
+  changeHealth: (health: number) => void;
+  setMaxHealth: (health: number) => void;
 }
 
 class BaseCharacter implements Character {
@@ -150,6 +199,12 @@ class BaseCharacter implements Character {
     this.maxHealth = 10;
     this.name = '';
   }
+
+  getHealth() { return this.health; }
+  getMaxHealth() { return this.maxHealth; }
+  setHealth(health: number) { this.health = health; }
+  changeHealth(health: number) { this.health -= health; }
+  setMaxHealth(maxHealth: number) { this.maxHealth = maxHealth; }
 }
 
 class PlayerCharacter extends BaseCharacter {
@@ -263,9 +318,9 @@ class Enigma extends PlayerCharacter {
   }
 }
 
-class Relic {}
+class Relic { }
 
-class Item {}
+class Item { }
 
 class Deck {
   cards: Card[];
@@ -288,7 +343,7 @@ class EmptyDeck extends Deck {
   }
 }
 
-class Card {}
+class Card { }
 
 interface EnemyContructorProps {
   name?: string;
@@ -320,11 +375,32 @@ class Intension {
 }
 
 class Moveset {
-  constructor() {
+  moves: Intension[];
+  currentMove: Intension;
+  parent: Enemy;
+
+  constructor(parent) {
+    this.moves = [new Intension({ type: IntensionType.Offense })];
+    this.parent = parent;
+    this.getNextMove();
     // array of moves
     // get next move
     // react to player actions
     // react to stats change
+  }
+
+  executeMove() {
+    if (this.currentMove && this.currentMove.type === IntensionType.Offense) {
+      const gs = GameSession.getGameSessionInstance()
+      const player = gs.getPlayer();
+      player.getCharacter().changeHealth(10);
+    }
+  }
+
+  getNextMove() {
+    // Rotate array
+    this.currentMove = this.moves.shift();
+    this.moves.push(this.currentMove);
   }
 }
 
@@ -333,6 +409,7 @@ class Enemy {
   hp: number;
   maxhp: number;
   armor: number;
+  moveset: Moveset;
   // moveset
 
   constructor({ name, hp = 5, maxhp = 5, armor = 0 }: EnemyContructorProps) {
@@ -340,6 +417,8 @@ class Enemy {
     this.hp = hp;
     this.maxhp = maxhp;
     this.armor = armor;
+    this.moveset = new Moveset(this);
+    // this.moveset.getNextMove();
   }
 
   getName(): string {
@@ -356,6 +435,13 @@ class Enemy {
 
   getArmor(): number {
     return this.armor;
+  }
+
+  makeMove() {
+    if(this.hp > 0) {
+      this.moveset.executeMove();
+    }
+    this.moveset.getNextMove();
   }
 }
 
@@ -590,6 +676,9 @@ class Player {
   }
 }
 
+// const GL = new GameLoop();
+
+
 const game = new Game();
 
 const gameMode = new GameMode();
@@ -597,6 +686,7 @@ game.attachGameMode(gameMode);
 
 const gameSession = new GameSession();
 gameMode.attachGameSession(gameSession);
+GameSession.setGameSessionInstance(gameSession);
 
 const player = new Player({ name: 'player' });
 const map = new GameMap();

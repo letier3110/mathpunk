@@ -1,4 +1,6 @@
 // ODO SECTION
+// TODO: implement cards
+// TODO: implement deck
 // TODO: implement GameLoop (players effect and execute enemy intensions by enemy position's order)
 // TODO: implement base enemy EnemyGoblin
 // TODO: implement base miniboss EnemyOrk
@@ -367,8 +369,12 @@ enum IntensionType {
 
 class Intension {
   type: IntensionType;
-  constructor({ type = IntensionType.Offense }) {
+  baseDamage: number;
+  count: number;
+  constructor({ type = IntensionType.Offense, baseDamage = 0, count = 1 }) {
     this.type = type;
+    this.baseDamage = baseDamage;
+    this.count = count;
     // targets
     // effect (+hp, +maxhp, -hp, -maxhp, +armor, +status (strength))
   }
@@ -393,7 +399,7 @@ class Moveset {
     if (this.currentMove && this.currentMove.type === IntensionType.Offense) {
       const gs = GameSession.getGameSessionInstance()
       const player = gs.getPlayer();
-      player.getCharacter().changeHealth(10);
+      player.getCharacter().changeHealth(this.currentMove.baseDamage * this.currentMove.count);
     }
   }
 
@@ -401,6 +407,16 @@ class Moveset {
     // Rotate array
     this.currentMove = this.moves.shift();
     this.moves.push(this.currentMove);
+  }
+}
+
+class GoblinMoveset extends Moveset {
+
+  constructor(parent, damage) {
+    super(parent);
+    this.moves = [new Intension({ type: IntensionType.Offense, baseDamage: damage })];
+    this.parent = parent;
+    this.getNextMove();
   }
 }
 
@@ -448,6 +464,7 @@ class Enemy {
 class EnemyGoblin extends Enemy {
   constructor({ name = 'goblin' }) {
     super({ name });
+    this.moveset = new GoblinMoveset(this, 4);
   }
 }
 

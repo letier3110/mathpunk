@@ -1,8 +1,5 @@
 // ODO SECTION
-// TODO: implement cards
-// TODO: implement deck
 // TODO: implement GameLoop (players effect and execute enemy intensions by enemy position's order)
-// TODO: implement base enemy EnemyGoblin
 // TODO: implement base miniboss EnemyOrk
 // TODO: implement base boss EnemyGoblinLord
 // TODO: room need to generate its content depends of Game Mode / Game State / Game Session (enemies, rewards)

@@ -109,13 +109,16 @@ class GameSession {
   }
 
   enterRoom(room: Room) {
-    if (this.currentRoom.getCanLeaveRoom()) {
+    if (this.currentRoom && this.currentRoom.getCanLeaveRoom()) {
       this.currentRoom = room;
-      if(this.currentRoom instanceof EnemyRoom) {
+      if(this.currentRoom instanceof EnemyRoom && this.player) {
+        const char = this.player.getCharacter()
+        if(char) {
+          char.getDeck().initialLoadDrawPile();
+        }
         // this.currentRoom.getEnemies().forEach(enemy => {
         //   enemy.moveset.getNextMove();
         // }
-        this.player.getCharacter().getDeck().initialLoadDrawPile();
         // TODO: init battle
       }
       return true;
@@ -431,6 +434,7 @@ class Card {
   }
 
   play(targets: Enemy[]) {
+    console.log(targets);
     // TODO: implement card apply effect to enemy
   }
 }
@@ -496,12 +500,13 @@ class Intension {
 
 class Moveset {
   moves: Intension[];
-  currentMove: Intension;
+  currentMove: Intension | null;
   parent: Enemy;
 
-  constructor(parent) {
+  constructor(parent: Enemy) {
     this.moves = [new Intension({ type: IntensionType.Offense })];
     this.parent = parent;
+    this.currentMove = null;
     this.getNextMove();
     // array of moves
     // get next move
@@ -513,20 +518,28 @@ class Moveset {
     if (this.currentMove && this.currentMove.type === IntensionType.Offense) {
       const gs = GameSession.getGameSessionInstance()
       const player = gs.getPlayer();
-      player.getCharacter().changeHealth(this.currentMove.baseDamage * this.currentMove.count);
+      if(player) {
+        const character = player.getCharacter();
+        if(character) {
+          character.changeHealth(this.currentMove.baseDamage * this.currentMove.count);
+        }
+      }
     }
   }
 
   getNextMove() {
     // Rotate array
-    this.currentMove = this.moves.shift();
-    this.moves.push(this.currentMove);
+    const move = this.moves.shift();
+    if(move) {
+      this.currentMove = move;
+      this.moves.push(move);
+    }
   }
 }
 
 class GoblinMoveset extends Moveset {
 
-  constructor(parent, damage) {
+  constructor(parent: Enemy, damage: number) {
     super(parent);
     this.moves = [new Intension({ type: IntensionType.Offense, baseDamage: damage })];
     this.parent = parent;
@@ -542,7 +555,7 @@ class Enemy implements Character {
   moveset: Moveset;
   // moveset
 
-  constructor({ name, health = 5, maxHealth = 5, armor = 0 }: EnemyContructorProps) {
+  constructor({ name = '', health = 5, maxHealth = 5, armor = 0 }: EnemyContructorProps) {
     this.name = name;
     this.health = health;
     this.maxHealth = maxHealth;
@@ -698,7 +711,7 @@ class TradeRoom extends Room {
 class EnemyRoom extends Room {
   isTreasureChestOpened: boolean;
 
-  constructor({ id, enemies = [new EnemyGoblin({})], rewards }: RoomConstructorProps) {
+  constructor({ id, enemies = [new EnemyGoblin({})], rewards = [] }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;
@@ -727,7 +740,7 @@ class EnemyRoom extends Room {
 class MiniBossRoom extends Room {
   isTreasureChestOpened: boolean;
 
-  constructor({ id, enemies = [new Enemy({ name: 'miniboss' })], rewards }: RoomConstructorProps) {
+  constructor({ id, enemies = [new Enemy({ name: 'miniboss' })], rewards = [] }: RoomConstructorProps) {
     super({ id });
     this.enemies = enemies;
     this.rewards = rewards;

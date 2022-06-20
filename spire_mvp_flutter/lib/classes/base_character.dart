@@ -1,22 +1,4 @@
-class ICharacter {
-  late int health;
-  late int maxHealth;
-  int getHealth() {
-    return 0;
-  }
-
-  int getMaxHealth() {
-    return 0;
-  }
-
-  setHealth(int health) {}
-  changeHealth(int health) {}
-  setMaxHealth(int health) {}
-  ICharacter() {
-    health = 0;
-    maxHealth = 0;
-  }
-}
+import '../interfaces/character.dart';
 
 class BaseCharacter implements ICharacter {
   late String name;
@@ -25,7 +7,7 @@ class BaseCharacter implements ICharacter {
   @override
   late int maxHealth;
 
-  BaseCharacter() {
+  BaseCharacter() : super() {
     health = 10;
     maxHealth = 10;
     name = '';

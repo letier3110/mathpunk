@@ -1,4 +1,4 @@
-import '../interfaces/character.dart';
+import '../interfaces/character.interface.dart';
 
 class BaseCharacter implements ICharacter {
   late String name;

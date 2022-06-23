@@ -1,3 +1,5 @@
+import '../../card/cards_implementation.dart';
+import '../../deck.dart';
 import '../../relic.dart';
 import 'player_character.dart';
 
@@ -9,7 +11,7 @@ class Rogue extends PlayerCharacter {
 
     relics = [Relic()];
 
-    // const cards: Card[] = [StrikeCard];
-    // this.deck = new Deck(cards);
+    final cards = [strikeCard];
+    deck = Deck(cards);
   }
 }

@@ -1,5 +1,5 @@
-import 'package:spire_mvp_flutter/interfaces/chest_room.interface.dart';
-
+import '../../interfaces/chest_room.interface.dart';
+import '../enemy/enemy_goblin.dart';
 import '../enemy/enemy.dart';
 import '../reward.dart';
 import 'room.dart';
@@ -12,7 +12,7 @@ class EnemyRoom extends Room implements IChestRoom {
       List<Enemy>? roomEnemies,
       List<Reward>? roomRewards})
       : super(
-            roomEnemies: roomEnemies ?? [Enemy()],
+            roomEnemies: roomEnemies ?? [EnemyGoblin()],
             roomRewards: roomRewards ?? [Reward()],
             roomId: roomId) {
     isTreasureChestOpened = false;

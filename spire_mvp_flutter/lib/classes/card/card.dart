@@ -1,6 +1,6 @@
-import 'base_character.dart';
+import '../base_character.dart';
 
-import '../enums/card_type.dart';
+import '../../enums/card_type.dart';
 
 class Card {
   late String name;

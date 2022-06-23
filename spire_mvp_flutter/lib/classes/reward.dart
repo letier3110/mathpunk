@@ -1,6 +1,6 @@
 import 'relic.dart';
 import 'item.dart';
-import 'card.dart';
+import 'card/card.dart';
 
 // type Reward = Relic | Item | Card | number;
 

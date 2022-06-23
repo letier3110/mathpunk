@@ -1,4 +1,6 @@
-import 'card.dart';
+import 'dart:math';
+import 'dart:core';
+import 'card/card.dart';
 
 class Deck {
   late List<Card> cards;
@@ -30,21 +32,35 @@ class Deck {
     return discardPile;
   }
 
-  // initialLoadDrawPile() { drawPile = shuffle(cards); }
-  // refreshDrawPile() { drawPile = shuffle(discardPile); }
-  // draw(n: number) {
-  //   const drawNumber = Math.abs(n - drawPile.length);
+  initialLoadDrawPile() {
+    drawPile = shuffle(cards);
+  }
 
-  //   hand.concat(drawPile.splice(0, drawNumber));
-  //   if(n > drawPile.length) {
-  //     refreshDrawPile();
-  //     if(n - drawNumber > drawPile.length) {
-  //       hand.concat(drawPile.splice(0, drawPile.length));
-  //     } else {
-  //       hand.concat(drawPile.splice(0, n - drawNumber));
-  //     }
-  //   }
-  // }
+  refreshDrawPile() {
+    drawPile = shuffle(discardPile);
+  }
+
+  draw(int n) {
+    var drawNumber = (n - drawPile.length).abs();
+
+    drawPile = drawPile.sublist(0, drawNumber);
+    hand = hand + drawPile;
+    if (n > drawPile.length) {
+      refreshDrawPile();
+      if (n - drawNumber > drawPile.length) {
+        drawPile = drawPile.sublist(0, drawPile.length);
+        hand = hand + drawPile;
+      } else {
+        drawPile = drawPile.sublist(0, n - drawNumber);
+        hand = hand + drawPile;
+      }
+    }
+  }
+}
+
+// TODO: implement shuffle as in ts
+shuffle(List<Card> cards) {
+  return cards;
 }
 
 // const shuffle = (List array) => {

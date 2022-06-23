@@ -1,7 +1,5 @@
-import '../classes/enemy.dart';
+import '../classes/enemy/enemy.dart';
 import '../classes/reward.dart';
-
-typedef GetCanLeaveRoom = bool Function();
 
 class IRoom {
   late String id;

@@ -1,8 +1,8 @@
-import 'deck.dart';
-import 'relic.dart';
-import 'item.dart';
+import '../../deck.dart';
+import '../../relic.dart';
+import '../../item.dart';
 
-import 'base_character.dart';
+import '../../base_character.dart';
 
 class PlayerCharacter extends BaseCharacter {
   late Deck deck;

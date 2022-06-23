@@ -1,4 +1,4 @@
-import 'player_character.dart';
+import 'player_character/player_character.dart';
 
 class Player {
   late String name;

@@ -5,18 +5,31 @@ digraph "" {
   "/lib/classes/base_character.dart" [label="base_character"];
   "/lib/classes/card.dart" [label="card"];
   "/lib/classes/deck.dart" [label="deck"];
-  "/lib/classes/enemy.dart" [label="enemy"];
+  "/lib/classes/enemy/enemy.dart" [label="enemy"];
+  "/lib/classes/enemy/enemy_goblin.dart" [label="enemy_goblin"];
+  "/lib/classes/enemy/enemy_ork.dart" [label="enemy_ork"];
+  "/lib/classes/enemy/enemy_slime.dart" [label="enemy_slime"];
   "/lib/classes/intension.dart" [label="intension"];
   "/lib/classes/item.dart" [label="item"];
   "/lib/classes/moveset.dart" [label="moveset"];
-  "/lib/classes/player.dart" [label="player"];
-  "/lib/classes/player_character.dart" [label="player_character"];
+  "/lib/classes/player/player.dart" [label="player"];
+  "/lib/classes/player/player_character/enigma_character.dart" [label="enigma_character"];
+  "/lib/classes/player/player_character/mage_character.dart" [label="mage_character"];
+  "/lib/classes/player/player_character/player_character.dart" [label="player_character"];
+  "/lib/classes/player/player_character/rogue_character.dart" [label="rogue_character"];
+  "/lib/classes/player/player_character/warrior_character.dart" [label="warrior_character"];
   "/lib/classes/relic.dart" [label="relic"];
   "/lib/classes/reward.dart" [label="reward"];
-  "/lib/classes/room.dart" [label="room"];
+  "/lib/classes/room/enemy_room.dart" [label="enemy_room"];
+  "/lib/classes/room/event_room.dart" [label="event_room"];
+  "/lib/classes/room/rest_room.dart" [label="rest_room"];
+  "/lib/classes/room/room.dart" [label="room"];
+  "/lib/classes/room/trade_room.dart" [label="trade_room"];
+  "/lib/classes/room/treasure_room.dart" [label="treasure_room"];
   "/lib/enums/card_type.dart" [label="card_type"];
   "/lib/enums/intension_type.dart" [label="intension_type"];
   "/lib/interfaces/character.interface.dart" [label="character.interface"];
+  "/lib/interfaces/chest_room.interface.dart" [label="chest_room.interface"];
   "/lib/interfaces/room.interface.dart" [label="room.interface"];
   "/lib/main.dart" [label="main"];
   "/test/widget_test.dart" [label="widget_test"];
@@ -30,15 +43,39 @@ digraph "" {
         "/lib/classes/base_character.dart";
         "/lib/classes/card.dart";
         "/lib/classes/deck.dart";
-        "/lib/classes/enemy.dart";
         "/lib/classes/intension.dart";
         "/lib/classes/item.dart";
         "/lib/classes/moveset.dart";
-        "/lib/classes/player.dart";
-        "/lib/classes/player_character.dart";
         "/lib/classes/relic.dart";
         "/lib/classes/reward.dart";
-        "/lib/classes/room.dart";
+        subgraph "cluster~/lib/classes/enemy" {
+          label="enemy";
+          "/lib/classes/enemy/enemy.dart";
+          "/lib/classes/enemy/enemy_goblin.dart";
+          "/lib/classes/enemy/enemy_ork.dart";
+          "/lib/classes/enemy/enemy_slime.dart";
+        }
+        subgraph "cluster~/lib/classes/player" {
+          label="player";
+          "/lib/classes/player/player.dart";
+          subgraph "cluster~/lib/classes/player/player_character" {
+            label="player_character";
+            "/lib/classes/player/player_character/enigma_character.dart";
+            "/lib/classes/player/player_character/mage_character.dart";
+            "/lib/classes/player/player_character/player_character.dart";
+            "/lib/classes/player/player_character/rogue_character.dart";
+            "/lib/classes/player/player_character/warrior_character.dart";
+          }
+        }
+        subgraph "cluster~/lib/classes/room" {
+          label="room";
+          "/lib/classes/room/enemy_room.dart";
+          "/lib/classes/room/event_room.dart";
+          "/lib/classes/room/rest_room.dart";
+          "/lib/classes/room/room.dart";
+          "/lib/classes/room/trade_room.dart";
+          "/lib/classes/room/treasure_room.dart";
+        }
       }
       subgraph "cluster~/lib/enums" {
         label="enums";
@@ -48,6 +85,7 @@ digraph "" {
       subgraph "cluster~/lib/interfaces" {
         label="interfaces";
         "/lib/interfaces/character.interface.dart";
+        "/lib/interfaces/chest_room.interface.dart";
         "/lib/interfaces/room.interface.dart";
       }
     }
@@ -60,24 +98,52 @@ digraph "" {
   "/lib/classes/card.dart" -> "/lib/classes/base_character.dart";
   "/lib/classes/card.dart" -> "/lib/enums/card_type.dart";
   "/lib/classes/deck.dart" -> "/lib/classes/card.dart";
-  "/lib/classes/enemy.dart" -> "/lib/classes/base_character.dart";
-  "/lib/classes/enemy.dart" -> "/lib/classes/moveset.dart";
+  "/lib/classes/enemy/enemy.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/enemy/enemy.dart" -> "/lib/classes/moveset.dart";
+  "/lib/classes/enemy/enemy_goblin.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/enemy/enemy_ork.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/enemy/enemy_slime.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/intension.dart" -> "/lib/enums/intension_type.dart";
   "/lib/classes/moveset.dart" -> "/lib/enums/intension_type.dart";
   "/lib/classes/moveset.dart" -> "/lib/classes/intension.dart";
-  "/lib/classes/moveset.dart" -> "/lib/classes/player.dart";
-  "/lib/classes/player.dart" -> "/lib/classes/player_character.dart";
-  "/lib/classes/player_character.dart" -> "/lib/classes/deck.dart";
-  "/lib/classes/player_character.dart" -> "/lib/classes/relic.dart";
-  "/lib/classes/player_character.dart" -> "/lib/classes/item.dart";
-  "/lib/classes/player_character.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/moveset.dart" -> "/lib/classes/player/player.dart";
+  "/lib/classes/player/player.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/classes/player/player_character/enigma_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player/player_character/enigma_character.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/classes/player/player_character/mage_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player/player_character/mage_character.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/classes/player/player_character/player_character.dart" -> "/lib/classes/deck.dart";
+  "/lib/classes/player/player_character/player_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player/player_character/player_character.dart" -> "/lib/classes/item.dart";
+  "/lib/classes/player/player_character/player_character.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/player/player_character/rogue_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player/player_character/rogue_character.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/classes/player/player_character/warrior_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player/player_character/warrior_character.dart" -> "/lib/classes/player/player_character/player_character.dart";
   "/lib/classes/reward.dart" -> "/lib/classes/relic.dart";
   "/lib/classes/reward.dart" -> "/lib/classes/item.dart";
   "/lib/classes/reward.dart" -> "/lib/classes/card.dart";
-  "/lib/classes/room.dart" -> "/lib/interfaces/room.interface.dart";
-  "/lib/classes/room.dart" -> "/lib/classes/enemy.dart";
-  "/lib/classes/room.dart" -> "/lib/classes/reward.dart";
-  "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy.dart";
+  "/lib/classes/room/enemy_room.dart" -> "/lib/interfaces/chest_room.interface.dart";
+  "/lib/classes/room/enemy_room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/enemy_room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/enemy_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/classes/room/event_room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/event_room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/event_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/classes/room/rest_room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/rest_room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/rest_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/classes/room/room.dart" -> "/lib/interfaces/room.interface.dart";
+  "/lib/classes/room/room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/trade_room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/trade_room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/trade_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/classes/room/treasure_room.dart" -> "/lib/interfaces/chest_room.interface.dart";
+  "/lib/classes/room/treasure_room.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/classes/room/treasure_room.dart" -> "/lib/classes/reward.dart";
+  "/lib/classes/room/treasure_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/reward.dart";
   "/test/widget_test.dart" -> "/lib/main.dart";
 }

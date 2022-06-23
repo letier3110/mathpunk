@@ -1,5 +1,5 @@
-import 'base_character.dart';
-import 'moveset.dart';
+import '../base_character.dart';
+import '../moveset.dart';
 
 class Enemy implements BaseCharacter {
   @override

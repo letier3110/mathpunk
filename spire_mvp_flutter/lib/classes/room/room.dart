@@ -1,6 +1,6 @@
-import '../interfaces/room.interface.dart';
-import 'enemy.dart';
-import 'reward.dart';
+import '../../interfaces/room.interface.dart';
+import '../enemy/enemy.dart';
+import '../reward.dart';
 
 class Room implements IRoom {
   @override

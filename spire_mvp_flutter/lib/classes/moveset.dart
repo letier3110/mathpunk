@@ -1,6 +1,6 @@
 import '../enums/intension_type.dart';
 import 'intension.dart';
-import 'player.dart';
+import 'player/player.dart';
 
 class Moveset {
   late List<Intension> moves;

@@ -1,0 +1,83 @@
+digraph "" {
+  graph [style=rounded fontname="Arial Black" fontsize=13 penwidth=2.6];
+  node [shape=rect style="filled,rounded" fontname=Arial fontsize=15 fillcolor=Lavender penwidth=1.3];
+  edge [penwidth=1.3];
+  "/lib/classes/base_character.dart" [label="base_character"];
+  "/lib/classes/card.dart" [label="card"];
+  "/lib/classes/deck.dart" [label="deck"];
+  "/lib/classes/enemy.dart" [label="enemy"];
+  "/lib/classes/intension.dart" [label="intension"];
+  "/lib/classes/item.dart" [label="item"];
+  "/lib/classes/moveset.dart" [label="moveset"];
+  "/lib/classes/player.dart" [label="player"];
+  "/lib/classes/player_character.dart" [label="player_character"];
+  "/lib/classes/relic.dart" [label="relic"];
+  "/lib/classes/reward.dart" [label="reward"];
+  "/lib/classes/room.dart" [label="room"];
+  "/lib/enums/card_type.dart" [label="card_type"];
+  "/lib/enums/intension_type.dart" [label="intension_type"];
+  "/lib/interfaces/character.interface.dart" [label="character.interface"];
+  "/lib/interfaces/room.interface.dart" [label="room.interface"];
+  "/lib/main.dart" [label="main"];
+  "/test/widget_test.dart" [label="widget_test"];
+  subgraph "cluster~" {
+    label="spire_mvp_flutter";
+    subgraph "cluster~/lib" {
+      label="lib";
+      "/lib/main.dart";
+      subgraph "cluster~/lib/classes" {
+        label="classes";
+        "/lib/classes/base_character.dart";
+        "/lib/classes/card.dart";
+        "/lib/classes/deck.dart";
+        "/lib/classes/enemy.dart";
+        "/lib/classes/intension.dart";
+        "/lib/classes/item.dart";
+        "/lib/classes/moveset.dart";
+        "/lib/classes/player.dart";
+        "/lib/classes/player_character.dart";
+        "/lib/classes/relic.dart";
+        "/lib/classes/reward.dart";
+        "/lib/classes/room.dart";
+      }
+      subgraph "cluster~/lib/enums" {
+        label="enums";
+        "/lib/enums/card_type.dart";
+        "/lib/enums/intension_type.dart";
+      }
+      subgraph "cluster~/lib/interfaces" {
+        label="interfaces";
+        "/lib/interfaces/character.interface.dart";
+        "/lib/interfaces/room.interface.dart";
+      }
+    }
+    subgraph "cluster~/test" {
+      label="test";
+      "/test/widget_test.dart";
+    }
+  }
+  "/lib/classes/base_character.dart" -> "/lib/interfaces/character.interface.dart";
+  "/lib/classes/card.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/card.dart" -> "/lib/enums/card_type.dart";
+  "/lib/classes/deck.dart" -> "/lib/classes/card.dart";
+  "/lib/classes/enemy.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/enemy.dart" -> "/lib/classes/moveset.dart";
+  "/lib/classes/intension.dart" -> "/lib/enums/intension_type.dart";
+  "/lib/classes/moveset.dart" -> "/lib/enums/intension_type.dart";
+  "/lib/classes/moveset.dart" -> "/lib/classes/intension.dart";
+  "/lib/classes/moveset.dart" -> "/lib/classes/player.dart";
+  "/lib/classes/player.dart" -> "/lib/classes/player_character.dart";
+  "/lib/classes/player_character.dart" -> "/lib/classes/deck.dart";
+  "/lib/classes/player_character.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/player_character.dart" -> "/lib/classes/item.dart";
+  "/lib/classes/player_character.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/reward.dart" -> "/lib/classes/relic.dart";
+  "/lib/classes/reward.dart" -> "/lib/classes/item.dart";
+  "/lib/classes/reward.dart" -> "/lib/classes/card.dart";
+  "/lib/classes/room.dart" -> "/lib/interfaces/room.interface.dart";
+  "/lib/classes/room.dart" -> "/lib/classes/enemy.dart";
+  "/lib/classes/room.dart" -> "/lib/classes/reward.dart";
+  "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy.dart";
+  "/lib/interfaces/room.interface.dart" -> "/lib/classes/reward.dart";
+  "/test/widget_test.dart" -> "/lib/main.dart";
+}

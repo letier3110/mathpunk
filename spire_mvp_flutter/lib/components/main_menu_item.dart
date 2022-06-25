@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
@@ -30,7 +32,12 @@ class MainMenuItemState extends State<MainMenuItem> {
           children: [
             GestureDetector(
                 onTap: () {
-                  navigation.changeScreen(widget.screen ?? ScreenEnum.mainMenu);
+                  if (widget.screen == ScreenEnum.quit) {
+                    exit(0);
+                  } else {
+                    navigation
+                        .changeScreen(widget.screen ?? ScreenEnum.mainMenu);
+                  }
                 },
                 child: Container(
                   width: 300,

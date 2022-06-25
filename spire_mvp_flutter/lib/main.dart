@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
 import './screens/main_menu.screen.dart';
@@ -52,6 +53,9 @@ List<Page> getPages(context) {
     case ScreenEnum.mainMenu:
       pageList.add(const MaterialPage(
           child: const MainMenuScreen(title: 'Mathpunk spire')));
+      break;
+    case ScreenEnum.modeSelect:
+      pageList.add(const MaterialPage(child: const ModeSelectScreen()));
       break;
     default:
       pageList.add(const MaterialPage(

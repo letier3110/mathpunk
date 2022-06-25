@@ -29,13 +29,17 @@ digraph "" {
   "/lib/classes/room/room.dart" [label="room"];
   "/lib/classes/room/trade_room.dart" [label="trade_room"];
   "/lib/classes/room/treasure_room.dart" [label="treasure_room"];
+  "/lib/components/main_menu_item.dart" [label="main_menu_item"];
+  "/lib/controllers/navigation.controller.dart" [label="navigation.controller"];
   "/lib/enums/card_type.dart" [label="card_type"];
   "/lib/enums/intension_type.dart" [label="intension_type"];
+  "/lib/enums/screens.enum.dart" [label="screens.enum"];
   "/lib/interfaces/character.interface.dart" [label="character.interface"];
   "/lib/interfaces/chest_room.interface.dart" [label="chest_room.interface"];
   "/lib/interfaces/room.interface.dart" [label="room.interface"];
+  "/lib/interfaces/screen.interface.dart" [label="screen.interface"];
   "/lib/main.dart" [label="main"];
-  "/test/widget_test.dart" [label="widget_test"];
+  "/lib/screens/main_menu.screen.dart" [label="main_menu.screen"];
   subgraph "cluster~" {
     label="spire_mvp_flutter";
     subgraph "cluster~/lib" {
@@ -86,21 +90,31 @@ digraph "" {
           "/lib/classes/room/treasure_room.dart";
         }
       }
+      subgraph "cluster~/lib/components" {
+        label="components";
+        "/lib/components/main_menu_item.dart";
+      }
+      subgraph "cluster~/lib/controllers" {
+        label="controllers";
+        "/lib/controllers/navigation.controller.dart";
+      }
       subgraph "cluster~/lib/enums" {
         label="enums";
         "/lib/enums/card_type.dart";
         "/lib/enums/intension_type.dart";
+        "/lib/enums/screens.enum.dart";
       }
       subgraph "cluster~/lib/interfaces" {
         label="interfaces";
         "/lib/interfaces/character.interface.dart";
         "/lib/interfaces/chest_room.interface.dart";
         "/lib/interfaces/room.interface.dart";
+        "/lib/interfaces/screen.interface.dart";
       }
-    }
-    subgraph "cluster~/test" {
-      label="test";
-      "/test/widget_test.dart";
+      subgraph "cluster~/lib/screens" {
+        label="screens";
+        "/lib/screens/main_menu.screen.dart";
+      }
     }
   }
   "/lib/classes/base_character.dart" -> "/lib/interfaces/character.interface.dart";
@@ -167,7 +181,13 @@ digraph "" {
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/reward.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/components/main_menu_item.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/controllers/navigation.controller.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/reward.dart";
-  "/test/widget_test.dart" -> "/lib/main.dart";
+  "/lib/main.dart" -> "/lib/screens/main_menu.screen.dart";
+  "/lib/main.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/main.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/main_menu.screen.dart" -> "/lib/components/main_menu_item.dart";
+  "/lib/screens/main_menu.screen.dart" -> "/lib/enums/screens.enum.dart";
 }

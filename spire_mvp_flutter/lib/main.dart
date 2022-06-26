@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/screens/character_select.screen.dart';
 import 'package:spire_mvp_flutter/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
@@ -13,6 +15,9 @@ void main() {
     providers: [
       ListenableProvider<NavigationController>(
         create: (_) => NavigationController(),
+      ),
+      ListenableProvider<GamestateController>(
+        create: (_) => GamestateController(),
       )
     ],
     child: const MyApp(),
@@ -56,6 +61,9 @@ List<Page> getPages(context) {
       break;
     case ScreenEnum.modeSelect:
       pageList.add(const MaterialPage(child: const ModeSelectScreen()));
+      break;
+    case ScreenEnum.characterSelect:
+      pageList.add(const MaterialPage(child: const CharacterSelect()));
       break;
     default:
       pageList.add(const MaterialPage(

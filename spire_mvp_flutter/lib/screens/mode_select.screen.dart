@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/components/navigation_card/mode_select_navigation_card.dart';
+import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 
-import '../components/main_menu_item.dart';
+import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';
 
 class ModeSelectScreen extends StatefulWidget {
@@ -20,37 +22,50 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
             color: Colors.white,
           ),
           Center(
-              child: Container(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
-            child: Text(
-              "Mode Select",
-              style: Theme.of(context).textTheme.headline4,
+            // color: Colors.blue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Spacer(
+                  flex: 3,
+                ),
+                ModeSelectNavigationCard(
+                  heading: 'Standard',
+                  description:
+                      "Standard mode is the default mode. It is the most common mode for players.",
+                  screen: ScreenEnum.characterSelect,
+                  gameType: GameTypeEnum.standard,
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                ModeSelectNavigationCard(
+                  heading: 'Daily Climb',
+                  description:
+                      "Daily Climb mode is a mode for players who want to climb more often.",
+                  screen: ScreenEnum.characterSelect,
+                  gameType: GameTypeEnum.daily,
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                ModeSelectNavigationCard(
+                  heading: 'Custom',
+                  description:
+                      "Custom mode is a mode for players who want to create their own climb.",
+                  screen: ScreenEnum.characterSelect,
+                  gameType: GameTypeEnum.custom,
+                  disabled: true,
+                ),
+                Spacer(
+                  flex: 3,
+                ),
+              ],
             ),
-          )),
-          Positioned(
-            bottom: 0,
-            child: Container(
-                margin: const EdgeInsets.all(8.0),
-                height: 500,
-                alignment: Alignment.bottomLeft,
-                width: 300,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0)),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 120,
-                      child: Column(children: const [
-                        MainMenuItem(
-                          text: 'Back',
-                          screen: ScreenEnum.mainMenu,
-                        ),
-                      ]),
-                    ),
-                  ],
-                )),
-          )
+          ),
+          MenuBackButton(
+            backScreen: ScreenEnum.mainMenu,
+          ),
         ],
       ),
     );

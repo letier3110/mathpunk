@@ -29,9 +29,18 @@ digraph "" {
   "/lib/classes/room/room.dart" [label="room"];
   "/lib/classes/room/trade_room.dart" [label="trade_room"];
   "/lib/classes/room/treasure_room.dart" [label="treasure_room"];
+  "/lib/components/character_card.dart" [label="character_card"];
   "/lib/components/main_menu_item.dart" [label="main_menu_item"];
+  "/lib/components/menu_back_button.dart" [label="menu_back_button"];
+  "/lib/components/menu_embark_button.dart" [label="menu_embark_button"];
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" [label="mode_select_navigation_card"];
+  "/lib/components/navigation_card/navigation_card.dart" [label="navigation_card"];
+  "/lib/components/navigation_card/navigation_card.interface.dart" [label="navigation_card.interface"];
+  "/lib/components/navigation_card/navigation_card.view.dart" [label="navigation_card.view"];
+  "/lib/controllers/gamestate.controller.dart" [label="gamestate.controller"];
   "/lib/controllers/navigation.controller.dart" [label="navigation.controller"];
   "/lib/enums/card_type.dart" [label="card_type"];
+  "/lib/enums/game_type.enum.dart" [label="game_type.enum"];
   "/lib/enums/intension_type.dart" [label="intension_type"];
   "/lib/enums/screens.enum.dart" [label="screens.enum"];
   "/lib/interfaces/character.interface.dart" [label="character.interface"];
@@ -39,7 +48,9 @@ digraph "" {
   "/lib/interfaces/room.interface.dart" [label="room.interface"];
   "/lib/interfaces/screen.interface.dart" [label="screen.interface"];
   "/lib/main.dart" [label="main"];
+  "/lib/screens/character_select.screen.dart" [label="character_select.screen"];
   "/lib/screens/main_menu.screen.dart" [label="main_menu.screen"];
+  "/lib/screens/mode_select.screen.dart" [label="mode_select.screen"];
   subgraph "cluster~" {
     label="spire_mvp_flutter";
     subgraph "cluster~/lib" {
@@ -92,15 +103,27 @@ digraph "" {
       }
       subgraph "cluster~/lib/components" {
         label="components";
+        "/lib/components/character_card.dart";
         "/lib/components/main_menu_item.dart";
+        "/lib/components/menu_back_button.dart";
+        "/lib/components/menu_embark_button.dart";
+        subgraph "cluster~/lib/components/navigation_card" {
+          label="navigation_card";
+          "/lib/components/navigation_card/mode_select_navigation_card.dart";
+          "/lib/components/navigation_card/navigation_card.dart";
+          "/lib/components/navigation_card/navigation_card.interface.dart";
+          "/lib/components/navigation_card/navigation_card.view.dart";
+        }
       }
       subgraph "cluster~/lib/controllers" {
         label="controllers";
+        "/lib/controllers/gamestate.controller.dart";
         "/lib/controllers/navigation.controller.dart";
       }
       subgraph "cluster~/lib/enums" {
         label="enums";
         "/lib/enums/card_type.dart";
+        "/lib/enums/game_type.enum.dart";
         "/lib/enums/intension_type.dart";
         "/lib/enums/screens.enum.dart";
       }
@@ -113,7 +136,9 @@ digraph "" {
       }
       subgraph "cluster~/lib/screens" {
         label="screens";
+        "/lib/screens/character_select.screen.dart";
         "/lib/screens/main_menu.screen.dart";
+        "/lib/screens/mode_select.screen.dart";
       }
     }
   }
@@ -181,13 +206,53 @@ digraph "" {
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/reward.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/room/room.dart";
+  "/lib/components/character_card.dart" -> "/lib/components/navigation_card/navigation_card.view.dart";
+  "/lib/components/character_card.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/components/character_card.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/main_menu_item.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/components/main_menu_item.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/menu_back_button.dart" -> "/lib/components/main_menu_item.dart";
+  "/lib/components/menu_back_button.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/menu_embark_button.dart" -> "/lib/components/main_menu_item.dart";
+  "/lib/components/menu_embark_button.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/components/navigation_card/navigation_card.interface.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/components/navigation_card/navigation_card.view.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/enums/game_type.enum.dart";
+  "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/navigation_card/navigation_card.dart" -> "/lib/components/navigation_card/navigation_card.interface.dart";
+  "/lib/components/navigation_card/navigation_card.dart" -> "/lib/components/navigation_card/navigation_card.view.dart";
+  "/lib/components/navigation_card/navigation_card.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/components/navigation_card/navigation_card.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/navigation_card/navigation_card.interface.dart" -> "/lib/components/navigation_card/navigation_card.view.dart";
+  "/lib/components/navigation_card/navigation_card.interface.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/components/navigation_card/navigation_card.interface.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/navigation_card/navigation_card.view.dart" -> "/lib/components/navigation_card/navigation_card.interface.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/enigma_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/mage_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/rogue_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/warrior_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/enums/game_type.enum.dart";
   "/lib/controllers/navigation.controller.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/reward.dart";
+  "/lib/main.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/main.dart" -> "/lib/screens/character_select.screen.dart";
+  "/lib/main.dart" -> "/lib/screens/mode_select.screen.dart";
   "/lib/main.dart" -> "/lib/screens/main_menu.screen.dart";
   "/lib/main.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/main.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/components/character_card.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/components/menu_embark_button.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/components/menu_back_button.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/screens/main_menu.screen.dart" -> "/lib/components/main_menu_item.dart";
   "/lib/screens/main_menu.screen.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/mode_select.screen.dart" -> "/lib/components/navigation_card/mode_select_navigation_card.dart";
+  "/lib/screens/mode_select.screen.dart" -> "/lib/enums/game_type.enum.dart";
+  "/lib/screens/mode_select.screen.dart" -> "/lib/components/menu_back_button.dart";
+  "/lib/screens/mode_select.screen.dart" -> "/lib/enums/screens.enum.dart";
 }

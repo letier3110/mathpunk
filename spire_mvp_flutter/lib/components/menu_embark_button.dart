@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
 
-class MenuBackButton extends StatefulWidget {
+class MenuEmbarkButton extends StatefulWidget {
   final ScreenEnum? backScreen;
 
-  const MenuBackButton({this.backScreen, Key? key}) : super(key: key);
+  const MenuEmbarkButton({this.backScreen, Key? key}) : super(key: key);
 
   @override
-  State<MenuBackButton> createState() => _MenuBackButtonState();
+  State<MenuEmbarkButton> createState() => _MenuEmbarkButtonState();
 }
 
-class _MenuBackButtonState extends State<MenuBackButton> {
+class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
   @override
   Widget build(BuildContext context) {
     return Positioned(

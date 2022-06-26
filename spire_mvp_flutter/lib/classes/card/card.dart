@@ -6,7 +6,7 @@ class Card {
   late String name;
   late String description;
   late int mana;
-  late String type;
+  late CardType type;
 
   Card(
       {cardName = '',

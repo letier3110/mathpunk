@@ -63,7 +63,7 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
               ],
             ),
           ),
-          MenuBackButton(
+          const MenuBackButton(
             backScreen: ScreenEnum.mainMenu,
           ),
         ],

@@ -7,8 +7,8 @@ import 'package:spire_mvp_flutter/classes/player/player_character/warrior_charac
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 
 class GamestateController extends ChangeNotifier {
-  late GameTypeEnum? gameMode;
-  late PlayerCharacter? playerCharacter;
+  GameTypeEnum? gameMode;
+  PlayerCharacter? playerCharacter;
   final List<PlayerCharacter> playableCharacters = [
     Warrior(),
     Mage(),

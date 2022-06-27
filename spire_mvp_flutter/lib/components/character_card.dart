@@ -28,10 +28,11 @@ class CharacterCardView extends State<CharacterCard> {
 
     return GestureDetector(
         onTap: () => {gameState.selectPlayerCharacter(widget.character)},
-        child: Card(
-          child: Container(
-            width: 120,
-            height: 120,
+        child: Container(
+          width: 120,
+          height: 120,
+          margin: const EdgeInsets.all(8),
+          child: Card(
             color: widget.disabled ? Colors.red : Colors.amber,
             child: Center(
               child: Text(

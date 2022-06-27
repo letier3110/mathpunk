@@ -4,9 +4,7 @@ import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
 
 class MenuEmbarkButton extends StatefulWidget {
-  final ScreenEnum? backScreen;
-
-  const MenuEmbarkButton({this.backScreen, Key? key}) : super(key: key);
+  const MenuEmbarkButton({Key? key}) : super(key: key);
 
   @override
   State<MenuEmbarkButton> createState() => _MenuEmbarkButtonState();
@@ -17,6 +15,7 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
   Widget build(BuildContext context) {
     return Positioned(
       bottom: 0,
+      right: 20,
       child: Container(
           margin: const EdgeInsets.all(8.0),
           height: 200,
@@ -28,10 +27,10 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
             children: [
               Positioned(
                 top: 120,
-                child: Column(children: [
+                child: Column(children: const [
                   MainMenuItem(
-                    text: 'Back',
-                    screen: widget.backScreen ?? ScreenEnum.mainMenu,
+                    text: 'Embark',
+                    screen: ScreenEnum.game,
                   ),
                 ]),
               ),

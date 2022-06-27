@@ -23,6 +23,63 @@ class _CharacterSelectState extends State<CharacterSelect> {
           Container(
             color: Colors.white,
           ),
+          Consumer<GamestateController>(
+              builder: (gameStateContext, gameStateState, child) {
+            if (gameStateState.playerCharacter == null) {
+              return Container();
+            }
+            return Container(
+                color: Colors.red,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/ironclad.jpg'),
+                      fit: BoxFit.cover),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      child: Column(children: [
+                        Column(
+                          children: [
+                            Text(
+                              gameStateState.playerCharacter!.name,
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .headline2
+                                      ?.fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow),
+                            ),
+                            Text(
+                              gameStateState.playerCharacter!.name,
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .headline2
+                                      ?.fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow),
+                            ),
+                            Text(
+                              gameStateState.playerCharacter!.name,
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .headline2
+                                      ?.fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow),
+                            ),
+                          ],
+                        ),
+                        Spacer(flex: 1),
+                      ]),
+                    )
+                  ],
+                ));
+          }),
           Column(
             // color: Colors.blue,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,17 +96,14 @@ class _CharacterSelectState extends State<CharacterSelect> {
               }),
               const Spacer(flex: 1),
               Container(
-                padding: EdgeInsets.fromLTRB(300, 0, 300, 40),
+                padding: const EdgeInsets.fromLTRB(600, 0, 600, 40),
                 child: Consumer<GamestateController>(
                     builder: (gameStateContext, gameStateState, child) {
                   return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: gameStateState.playableCharacters
                           .map((e) => CharacterCard(
-                                heading: 'Standard',
-                                img: '${e.name}.png',
-                                description:
-                                    "Standard mode is the default mode. It is the most common mode for players.",
+                                character: e,
                               ))
                           .toList());
                 }),
@@ -59,9 +113,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
           const MenuBackButton(
             backScreen: ScreenEnum.modeSelect,
           ),
-          // const MenuEmbarkButton(
-          //   backScreen: ScreenEnum.game,
-          // ),
+          const MenuEmbarkButton(),
         ],
       ),
     );

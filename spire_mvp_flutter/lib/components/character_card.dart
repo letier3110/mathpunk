@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/components/navigation_card/navigation_card.view.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
-import 'package:spire_mvp_flutter/enums/screens.enum.dart';
+
+import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
 class CharacterCard extends StatefulWidget {
-  final String heading;
-  final String description;
-  final String img;
+  final PlayerCharacter character;
   final bool disabled;
+  final bool visible;
 
   const CharacterCard(
-      {required this.heading,
-      required this.description,
-      required this.img,
+      {required this.character,
       this.disabled = false,
+      this.visible = true,
       Key? key})
       : super(key: key);
-
-  navigate(BuildContext context, ScreenEnum screen) {
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
-    if (!disabled) {
-      navigation.changeScreen(screen);
-    }
-  }
 
   @override
   State<CharacterCard> createState() => CharacterCardView();
@@ -33,21 +23,24 @@ class CharacterCard extends StatefulWidget {
 class CharacterCardView extends State<CharacterCard> {
   @override
   Widget build(BuildContext context) {
+    GamestateController gameState =
+        Provider.of<GamestateController>(context, listen: false);
+
     return GestureDetector(
-        // onTap: () => widget.navigate(context, widget.screen),
+        onTap: () => {gameState.selectPlayerCharacter(widget.character)},
         child: Card(
-      child: Container(
-        width: 120,
-        height: 120,
-        color: widget.disabled ? Colors.red : Colors.amber,
-        child: Center(
-          child: Text(
-            widget.img,
-            style: Theme.of(context).textTheme.bodyLarge,
-            // color: Colors.amber
+          child: Container(
+            width: 120,
+            height: 120,
+            color: widget.disabled ? Colors.red : Colors.amber,
+            child: Center(
+              child: Text(
+                '${widget.character.name}.png',
+                style: Theme.of(context).textTheme.bodyLarge,
+                // color: Colors.amber
+              ),
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }

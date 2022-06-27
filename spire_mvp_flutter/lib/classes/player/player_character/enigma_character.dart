@@ -5,8 +5,8 @@ import 'player_character.dart';
 
 class Enigma extends PlayerCharacter {
   Enigma() : super() {
-    health = 100;
-    maxHealth = 100;
+    health = 70;
+    maxHealth = 70;
     name = 'Enigma';
 
     relics = [Relic()];

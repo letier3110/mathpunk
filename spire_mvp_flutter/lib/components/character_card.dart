@@ -23,8 +23,10 @@ class CharacterCard extends StatefulWidget {
 class CharacterCardView extends State<CharacterCard> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    GamestateController gameState = Provider.of<GamestateController>(context);
+
+    var isPcEqualsWidgetPc =
+        gameState.playerCharacter?.name == widget.character.name;
 
     return GestureDetector(
         onTap: () => {gameState.selectPlayerCharacter(widget.character)},
@@ -32,6 +34,17 @@ class CharacterCardView extends State<CharacterCard> {
           width: 120,
           height: 120,
           margin: const EdgeInsets.all(8),
+          decoration: isPcEqualsWidgetPc
+              ? const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.green,
+                      blurRadius: 20.0, // soften the shadow
+                      spreadRadius: 0.0,
+                    )
+                  ],
+                )
+              : const BoxDecoration(),
           child: Card(
             color: widget.disabled ? Colors.red : Colors.amber,
             child: Center(

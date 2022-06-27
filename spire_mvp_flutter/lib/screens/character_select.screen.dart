@@ -31,55 +31,61 @@ class _CharacterSelectState extends State<CharacterSelect> {
             } else {
               var assetName =
                   getCharacterAssetByName(gameStateState.playerCharacter);
-              return Container(
+              return Stack(children: [
+                Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(assetName), fit: BoxFit.cover),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        color: Colors.white,
-                        child: Column(children: [
-                          Column(
-                            children: [
-                              Text(
-                                gameStateState.playerCharacter!.name,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline2
-                                        ?.fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.yellow),
-                              ),
-                              Text(
-                                gameStateState.playerCharacter!.name,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline2
-                                        ?.fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.yellow),
-                              ),
-                              Text(
-                                gameStateState.playerCharacter!.name,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline2
-                                        ?.fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.yellow),
-                              ),
-                            ],
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(150, 250, 0, 0),
+                  child: Row(children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          gameStateState.playerCharacter!.name,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .headline3
+                                  ?.fontSize,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellow),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Text(
+                            'HP: ${gameStateState.playerCharacter!.maxHealth} / ${gameStateState.playerCharacter!.health}',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .headline5
+                                    ?.fontSize,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red),
                           ),
-                          const Spacer(flex: 1),
-                        ]),
-                      )
-                    ],
-                  ));
+                        ),
+                        Text(
+                          // gameStateState.playerCharacter!.description,
+                          'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.fontSize,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ],
+                    )
+                  ]),
+                )
+              ]);
             }
           }),
           Column(

@@ -5,8 +5,8 @@ import 'player_character.dart';
 
 class Warrior extends PlayerCharacter {
   Warrior() : super() {
-    health = 100;
-    maxHealth = 100;
+    health = 200;
+    maxHealth = 200;
     name = 'Warrior';
 
     relics = [Relic()];

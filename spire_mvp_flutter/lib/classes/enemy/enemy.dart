@@ -1,14 +1,7 @@
 import '../base_character.dart';
 import '../moveset.dart';
 
-class Enemy implements BaseCharacter {
-  @override
-  late String name;
-  @override
-  late int health;
-  @override
-  late int maxHealth;
-  late int armor;
+class Enemy extends BaseCharacter {
   late Moveset moveset;
 
   Enemy(
@@ -20,38 +13,9 @@ class Enemy implements BaseCharacter {
     name = enemyName;
     health = enemyHealth;
     maxHealth = enemyMaxHealth;
-    armor = enemyArmor;
+    block = enemyArmor;
     moveset = Moveset();
     // this.moveset.getNextMove();
-  }
-
-  @override
-  getHealth() {
-    return health;
-  }
-
-  @override
-  getMaxHealth() {
-    return maxHealth;
-  }
-
-  @override
-  setHealth(int health) {
-    this.health = health;
-  }
-
-  @override
-  changeHealth(int health) {
-    this.health -= health;
-  }
-
-  @override
-  setMaxHealth(int maxHealth) {
-    this.maxHealth = maxHealth;
-  }
-
-  getArmor() {
-    return armor;
   }
 
   makeMove() {

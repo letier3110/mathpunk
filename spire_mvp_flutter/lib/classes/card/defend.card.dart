@@ -6,7 +6,7 @@ import '../../enums/card_type.dart';
 import 'card.dart';
 
 class DefendCard extends Card {
-  int block = 0;
+  int block = 5;
 
   DefendCard(
       {cardName = 'Defend',

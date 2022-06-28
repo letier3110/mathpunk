@@ -11,7 +11,6 @@ class PlayerCharacter extends BaseCharacter {
   late int mana = 3;
   late int maxMana = 3;
   late int drawPower = 3;
-  late int block = 0;
 
   PlayerCharacter() : super() {
     deck = Deck([]);
@@ -50,10 +49,6 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(Item item) {
     items.add(item);
-  }
-
-  addBlock(int block) {
-    this.block += block;
   }
 
   // removeItem(item: Item) {

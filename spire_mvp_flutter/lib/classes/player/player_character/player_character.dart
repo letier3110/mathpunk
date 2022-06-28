@@ -8,6 +8,10 @@ class PlayerCharacter extends BaseCharacter {
   late Deck deck;
   late List<Relic> relics;
   late List<Item> items;
+  late int mana = 3;
+  late int maxMana = 3;
+  late int drawPower = 3;
+  late int block = 0;
 
   PlayerCharacter() : super() {
     deck = Deck([]);
@@ -46,6 +50,10 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(Item item) {
     items.add(item);
+  }
+
+  addBlock(int block) {
+    this.block += block;
   }
 
   // removeItem(item: Item) {

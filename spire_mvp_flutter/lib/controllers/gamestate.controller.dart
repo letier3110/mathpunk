@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/mage_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/rogue_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/warrior_character.dart';
+import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
   PlayerCharacter? playerCharacter;
+  Player? player;
+  List<Room> gameMap = [];
+  Room? currentRoom;
+
   final List<PlayerCharacter> playableCharacters = [
     Warrior(),
     Mage(),
@@ -34,5 +41,54 @@ class GamestateController extends ChangeNotifier {
   void selectPlayerCharacter(PlayerCharacter character) {
     playerCharacter = character;
     notifyListeners();
+  }
+
+  void startGame() {
+    generateMap();
+  }
+
+  void generateMap() {}
+
+  List<Room> getNextAvailableRooms() {
+    if (gameMap.isEmpty) return [];
+    var rooms = gameMap;
+    if (currentRoom == null) return [rooms[0]];
+
+    var index = 0;
+    var foundIndex = index;
+    for (var room in rooms) {
+      if (Room.isEqual(room, currentRoom!)) {
+        foundIndex = index;
+        break;
+      }
+      index++;
+    }
+    var nextRoomIndex = foundIndex + 1;
+    if (rooms.length <= nextRoomIndex) return [];
+    return [rooms[nextRoomIndex]];
+  }
+
+  void enterRoom(Room room) {
+    if (playerCharacter == null) {
+      return;
+    }
+    if (currentRoom == null) {
+      currentRoom = room;
+      return;
+    }
+    if (currentRoom!.getCanLeaveRoom()) {
+      currentRoom = room;
+      if (currentRoom.runtimeType == EnemyRoom) {
+        playerCharacter!.getDeck().initialLoadDrawPile();
+        // this.currentRoom.getEnemies().forEach(enemy => {
+        //   enemy.moveset.getNextMove();
+        // }
+        // TODO: init battle
+      }
+    }
+  }
+
+  getCurrentRoom() {
+    return this.currentRoom;
   }
 }

@@ -1,4 +1,4 @@
-enum AttackCardType {
+enum TargetEnum {
   singleTarget,
   allTargets,
   randomTarget,

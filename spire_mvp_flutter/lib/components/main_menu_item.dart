@@ -34,7 +34,7 @@ class MainMenuItemState extends State<MainMenuItem> {
                 onTap: () {
                   if (widget.screen == ScreenEnum.quit) {
                     exit(0);
-                  } else {
+                  } else if (widget.screen != null) {
                     navigation
                         .changeScreen(widget.screen ?? ScreenEnum.mainMenu);
                   }

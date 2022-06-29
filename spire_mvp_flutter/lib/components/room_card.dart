@@ -24,15 +24,16 @@ class RoomCardView extends State<RoomCard> {
     GamestateController gameState =
         Provider.of<GamestateController>(context, listen: false);
 
-    var isAvailable = gameState.getNextAvailableRooms().contains(widget.room) &&
-        gameState.currentRoom?.getCanLeaveRoom() == true &&
-        gameState.currentRoom?.id != widget.room.id;
+    var isAvailable =
+        (gameState.getNextAvailableRooms().contains(widget.room) &&
+                gameState.currentRoom != null &&
+                gameState.currentRoom?.getCanLeaveRoom() == true &&
+                gameState.currentRoom?.id != widget.room.id) ||
+            gameState.getNextAvailableRooms().contains(widget.room);
 
     return GestureDetector(
         onTap: () => {gameState.enterRoom(widget.room)},
         child: Container(
-          width: 120,
-          height: 120,
           margin: const EdgeInsets.all(8),
           decoration: isAvailable
               ? const BoxDecoration(
@@ -40,13 +41,13 @@ class RoomCardView extends State<RoomCard> {
                     BoxShadow(
                       color: Colors.green,
                       blurRadius: 20.0,
-                      spreadRadius: 0.0,
+                      spreadRadius: 8.0,
                     )
                   ],
                 )
               : const BoxDecoration(),
           child: Card(
-            color: isAvailable ? Colors.grey : Colors.amber,
+            color: isAvailable ? Colors.amber : Colors.grey,
             child: Center(
               child: Text(
                 getRoomName(widget.room),
@@ -60,9 +61,10 @@ class RoomCardView extends State<RoomCard> {
 }
 
 String getRoomName(Room room) {
+  var id = room.id;
   switch (room.runtimeType) {
     case EnemyRoom:
-      return 'EnemyRoom';
+      return 'EnemyRoom $id';
     case TreasureRoom:
       return 'TreasureRoom';
     case TradeRoom:

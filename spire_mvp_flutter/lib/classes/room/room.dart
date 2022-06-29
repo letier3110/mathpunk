@@ -17,7 +17,7 @@ class Room implements IRoom {
       : super() {
     id = roomId;
     enemies = roomEnemies;
-    rewards = rewards;
+    rewards = roomRewards;
   }
 
   attachEnemies(List<Enemy> newEnemies) {

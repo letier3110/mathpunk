@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
@@ -13,6 +16,12 @@ class MenuEmbarkButton extends StatefulWidget {
 class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
   @override
   Widget build(BuildContext context) {
+    GamestateController gameState =
+        Provider.of<GamestateController>(context, listen: false);
+
+    NavigationController navigation =
+        Provider.of<NavigationController>(context, listen: false);
+
     return Positioned(
       bottom: 0,
       right: 20,
@@ -26,14 +35,18 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
           child: Stack(
             children: [
               Positioned(
-                top: 120,
-                child: Column(children: const [
-                  MainMenuItem(
-                    text: 'Embark',
-                    screen: ScreenEnum.game,
-                  ),
-                ]),
-              ),
+                  top: 120,
+                  child: GestureDetector(
+                    onTap: () => {
+                      gameState.startGame(),
+                      navigation.changeScreen(ScreenEnum.game)
+                    },
+                    child: Column(children: const [
+                      MainMenuItem(
+                        text: 'Embark',
+                      ),
+                    ]),
+                  )),
             ],
           )),
     );

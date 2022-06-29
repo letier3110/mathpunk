@@ -53,6 +53,7 @@ class GamestateController extends ChangeNotifier {
     for (var i = 0; i < count; i++) {
       gameMap.add(EnemyRoom(roomId: '$i'));
     }
+
     notifyListeners();
   }
 

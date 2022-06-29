@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/screens/character_select.screen.dart';
+import 'package:spire_mvp_flutter/screens/game.screen.dart';
 import 'package:spire_mvp_flutter/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
@@ -56,18 +57,21 @@ List<Page> getPages(context) {
 
   switch (navigation.screen) {
     case ScreenEnum.mainMenu:
-      pageList.add(const MaterialPage(
-          child: const MainMenuScreen(title: 'Mathpunk spire')));
+      pageList.add(
+          const MaterialPage(child: MainMenuScreen(title: 'Mathpunk spire')));
       break;
     case ScreenEnum.modeSelect:
-      pageList.add(const MaterialPage(child: const ModeSelectScreen()));
+      pageList.add(const MaterialPage(child: ModeSelectScreen()));
       break;
     case ScreenEnum.characterSelect:
-      pageList.add(const MaterialPage(child: const CharacterSelect()));
+      pageList.add(const MaterialPage(child: CharacterSelect()));
+      break;
+    case ScreenEnum.game:
+      pageList.add(const MaterialPage(child: GameScreen()));
       break;
     default:
-      pageList.add(const MaterialPage(
-          child: const MainMenuScreen(title: 'Mathpunk spire')));
+      pageList.add(
+          const MaterialPage(child: MainMenuScreen(title: 'Mathpunk spire')));
       break;
   }
   return pageList;

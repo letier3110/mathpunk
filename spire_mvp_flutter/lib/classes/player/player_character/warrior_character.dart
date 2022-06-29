@@ -11,7 +11,18 @@ class Warrior extends PlayerCharacter {
 
     relics = [Relic()];
 
-    final cards = [strikeCard];
+    final cards = [
+      strikeCard,
+      strikeCard,
+      strikeCard,
+      strikeCard,
+      bashCard,
+      defendCard,
+      defendCard,
+      defendCard,
+      defendCard
+    ];
+
     deck = Deck(cards);
   }
 }

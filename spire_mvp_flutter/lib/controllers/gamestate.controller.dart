@@ -47,7 +47,12 @@ class GamestateController extends ChangeNotifier {
     generateMap();
   }
 
-  void generateMap() {}
+  void generateMap() {
+    const count = 10;
+    for (var i = 0; i < count; i++) {
+      gameMap.add(EnemyRoom(roomId: '$i'));
+    }
+  }
 
   List<Room> getNextAvailableRooms() {
     if (gameMap.isEmpty) return [];

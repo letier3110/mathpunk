@@ -11,6 +11,7 @@ import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
+  bool inMap = false;
   PlayerCharacter? playerCharacter;
   Player? player;
   List<Room> gameMap = [];
@@ -52,6 +53,17 @@ class GamestateController extends ChangeNotifier {
     for (var i = 0; i < count; i++) {
       gameMap.add(EnemyRoom(roomId: '$i'));
     }
+    notifyListeners();
+  }
+
+  void enterMap() {
+    inMap = true;
+    notifyListeners();
+  }
+
+  void exitMap() {
+    inMap = false;
+    notifyListeners();
   }
 
   List<Room> getNextAvailableRooms() {
@@ -79,9 +91,11 @@ class GamestateController extends ChangeNotifier {
     }
     if (currentRoom == null) {
       currentRoom = room;
+      notifyListeners();
       return;
     }
-    if (currentRoom!.getCanLeaveRoom()) {
+    if (currentRoom!.getCanLeaveRoom() &&
+        getNextAvailableRooms().contains(currentRoom)) {
       currentRoom = room;
       if (currentRoom.runtimeType == EnemyRoom) {
         playerCharacter!.getDeck().initialLoadDrawPile();
@@ -91,9 +105,10 @@ class GamestateController extends ChangeNotifier {
         // TODO: init battle
       }
     }
+    notifyListeners();
   }
 
   getCurrentRoom() {
-    return this.currentRoom;
+    return currentRoom;
   }
 }

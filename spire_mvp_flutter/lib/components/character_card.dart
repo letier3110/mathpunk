@@ -39,7 +39,7 @@ class CharacterCardView extends State<CharacterCard> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.green,
-                      blurRadius: 20.0, // soften the shadow
+                      blurRadius: 20.0,
                       spreadRadius: 0.0,
                     )
                   ],

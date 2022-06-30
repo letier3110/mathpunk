@@ -16,15 +16,10 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Container(
-          color: Colors.white,
-          child: const Text('Map Screen'),
-        ),
         Consumer<GamestateController>(
             builder: (gameStateContext, gameStateState, child) {
           return Container(
               color: Colors.red,
-              margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/screens/enemy_room.screen.dart';
 // import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
 import 'package:spire_mvp_flutter/screens/map.screen.dart';
 
@@ -24,8 +25,18 @@ class _GameScreenState extends State<GameScreen> {
       body: Stack(children: [
         Container(
           color: Colors.white,
-          child: const Text('Game Screen'),
+          child: const Text('Enemy room'),
         ),
+        if (gameState.inMap == true || gameState.currentRoom == null)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+            child: const MapScreen(),
+          ),
+        if (gameState.inMap == false && gameState.currentRoom != null)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+            child: const EnemyRoomScreen(),
+          ),
       ]),
     );
   }

@@ -19,6 +19,7 @@ class HeaderMapView extends State<HeaderMap> {
       right: 220,
       child: GestureDetector(
         onTap: () => {
+          gameState.exitPause(),
           gameState.enterMap(),
         },
         child: Container(

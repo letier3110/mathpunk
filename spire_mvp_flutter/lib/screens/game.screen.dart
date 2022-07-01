@@ -4,6 +4,7 @@ import 'package:spire_mvp_flutter/components/game_header/game_header.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/screens/enemy_room.screen.dart';
 import 'package:spire_mvp_flutter/screens/map.screen.dart';
+import 'package:spire_mvp_flutter/screens/pause.screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -29,6 +30,11 @@ class _GameScreenState extends State<GameScreen> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 80, 0, 0),
             child: const EnemyRoomScreen(),
+          ),
+        if (gameState.inPause)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: const PauseScreen(),
           ),
       ]),
     );

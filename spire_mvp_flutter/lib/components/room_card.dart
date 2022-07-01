@@ -31,6 +31,7 @@ class RoomCardView extends State<RoomCard> {
                 gameState.currentRoom?.id != widget.room.id) ||
             gameState.getNextAvailableRooms().contains(widget.room);
 
+    var inRoom = gameState.currentRoom?.id == widget.room.id;
     return GestureDetector(
         onTap: () => {gameState.enterRoom(widget.room)},
         child: Container(
@@ -47,7 +48,11 @@ class RoomCardView extends State<RoomCard> {
                 )
               : const BoxDecoration(),
           child: Card(
-            color: isAvailable ? Colors.amber : Colors.grey,
+            color: inRoom
+                ? Colors.green
+                : isAvailable
+                    ? Colors.amber
+                    : Colors.grey,
             child: Center(
               child: Text(
                 getRoomName(widget.room),

@@ -10,7 +10,8 @@ class Player {
     return instance ?? Player();
   }
 
-  constructor({newName = ''}) {
+  // TODO: add player name in profile before main menu and preserve it
+  constructor({newName = 'Test player'}) {
     name = newName;
     character = null;
     instance = this;

@@ -20,7 +20,6 @@ class _MapScreenState extends State<MapScreen> {
             builder: (gameStateContext, gameStateState, child) {
           return Container(
               color: Colors.red,
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemCount: gameStateState.gameMap.length,

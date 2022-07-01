@@ -27,20 +27,20 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
       right: 20,
       child: Container(
           margin: const EdgeInsets.all(8.0),
-          height: 200,
+          height: 80,
           alignment: Alignment.bottomLeft,
           width: 100,
           // decoration: BoxDecoration(
           //     color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
           child: Stack(
             children: [
-              Positioned(
-                  top: 120,
-                  child: GestureDetector(
-                    onTap: () => {
-                      gameState.startGame(),
-                      navigation.changeScreen(ScreenEnum.game)
-                    },
+              GestureDetector(
+                  onTap: () => {
+                        gameState.startGame(),
+                        navigation.changeScreen(ScreenEnum.game)
+                      },
+                  child: Positioned(
+                    top: 120,
                     child: Column(children: const [
                       MainMenuItem(
                         text: 'Embark',

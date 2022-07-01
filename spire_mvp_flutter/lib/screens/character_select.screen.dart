@@ -4,6 +4,7 @@ import 'package:spire_mvp_flutter/classes/player/player_character/player_charact
 import 'package:spire_mvp_flutter/components/character_card.dart';
 import 'package:spire_mvp_flutter/components/menu_embark_button.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/character.util.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';
@@ -130,20 +131,5 @@ class _CharacterSelectState extends State<CharacterSelect> {
         ],
       ),
     );
-  }
-}
-
-String getCharacterAssetByName(PlayerCharacter? pc) {
-  switch (pc?.name) {
-    case 'Warrior':
-      return 'assets/ironclad.jpg';
-    case 'Mage':
-      return 'assets/defect.jpg';
-    case 'Rogue':
-      return 'assets/rogue.jpg';
-    case 'Enigma':
-      return 'assets/enigma.jpg';
-    default:
-      return 'assets/ironclad.jpg';
   }
 }

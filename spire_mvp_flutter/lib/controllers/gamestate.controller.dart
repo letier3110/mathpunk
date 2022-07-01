@@ -12,6 +12,7 @@ import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
   bool inMap = false;
+  bool inPause = false;
   PlayerCharacter? playerCharacter;
   Player? player;
   List<Room> gameMap = [];
@@ -54,6 +55,16 @@ class GamestateController extends ChangeNotifier {
       gameMap.add(EnemyRoom(roomId: '$i'));
     }
 
+    notifyListeners();
+  }
+
+  void enterPause() {
+    inPause = true;
+    notifyListeners();
+  }
+
+  void exitPause() {
+    inPause = false;
     notifyListeners();
   }
 

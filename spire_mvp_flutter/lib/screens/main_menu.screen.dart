@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
@@ -43,28 +45,37 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   children: [
                     Positioned(
                       top: 120,
-                      child: Column(children: const [
-                        MainMenuItem(
-                          text: 'Play',
-                          screen: ScreenEnum.modeSelect,
-                        ),
-                        MainMenuItem(
+                      child: Column(children: [
+                        Consumer<GamestateController>(
+                            builder: (gameStateContext, gameStateState, child) {
+                          if (gameStateState.playerCharacter != null) {
+                            return const MainMenuItem(
+                              text: 'Continue Run',
+                              screen: ScreenEnum.game,
+                            );
+                          }
+                          return const MainMenuItem(
+                            text: 'Play',
+                            screen: ScreenEnum.modeSelect,
+                          );
+                        }),
+                        const MainMenuItem(
                           text: 'Compedium',
                           screen: ScreenEnum.compedium,
                         ),
-                        MainMenuItem(
+                        const MainMenuItem(
                           text: 'Statistics',
                           screen: ScreenEnum.statistics,
                         ),
-                        MainMenuItem(
+                        const MainMenuItem(
                           text: 'Settings',
                           screen: ScreenEnum.settings,
                         ),
-                        MainMenuItem(
+                        const MainMenuItem(
                           text: 'Patch Notes',
                           screen: ScreenEnum.patchNotes,
                         ),
-                        MainMenuItem(
+                        const MainMenuItem(
                           text: 'Quit',
                           screen: ScreenEnum.quit,
                         ),

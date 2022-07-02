@@ -13,15 +13,22 @@ class HeaderMapView extends State<HeaderMap> {
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
+
+    void onTapHandler() {
+      gameState.exitPause();
+      if (gameState.inMap == true) {
+        gameState.exitMap();
+      } else {
+        gameState.enterMap();
+      }
+    }
+
     return Positioned(
       top: 0,
       bottom: 0,
       right: 220,
       child: GestureDetector(
-        onTap: () => {
-          gameState.exitPause(),
-          gameState.enterMap(),
-        },
+        onTap: onTapHandler,
         child: Container(
           width: 100,
           padding: const EdgeInsets.all(8),

@@ -37,6 +37,10 @@ class GamestateController extends ChangeNotifier {
 
   void stopPlaying() {
     playerCharacter = null;
+    currentRoom = null;
+    gameMap = [];
+    inPause = false;
+    inMap = false;
     notifyListeners();
   }
 

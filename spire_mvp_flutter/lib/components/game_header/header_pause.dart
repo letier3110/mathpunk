@@ -24,20 +24,18 @@ class HeaderPauseView extends State<HeaderPause> {
         },
         child: Container(
           padding: const EdgeInsets.all(8),
+          width: 80,
           color: Colors.black,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Pause',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600),
-                ),
-              ]),
+          child: const Center(
+            child: Text(
+              'Pause',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
         ),
       ),
     );

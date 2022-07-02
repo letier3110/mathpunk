@@ -26,11 +26,11 @@ class HeaderMapView extends State<HeaderMap> {
     return Positioned(
       top: 0,
       bottom: 0,
-      right: 220,
+      right: 200,
       child: GestureDetector(
         onTap: onTapHandler,
         child: Container(
-          width: 100,
+          width: 80,
           padding: const EdgeInsets.all(8),
           color: Colors.black,
           child: Column(

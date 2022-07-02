@@ -18,9 +18,9 @@ class GameHeaderView extends State<GameHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 96,
       width: double.infinity,
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(8),
       color: Colors.grey,
       child: Stack(
         children: const [

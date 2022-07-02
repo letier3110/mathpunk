@@ -33,12 +33,11 @@ class RoomCardView extends State<RoomCard> {
     var inRoom = gameState.currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
-      gameState.enterRoom(widget.room);
-      // if (inRoom) {
-      //   gameState.exitMap();
-      // } else {
-      //   gameState.enterRoom(widget.room);
-      // }
+      if (inRoom) {
+        gameState.exitMap();
+      } else {
+        gameState.enterRoom(widget.room);
+      }
     }
 
     return GestureDetector(

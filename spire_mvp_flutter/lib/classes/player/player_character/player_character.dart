@@ -24,7 +24,7 @@ class PlayerCharacter extends BaseCharacter {
     this.deck = deck;
   }
 
-  getDeck() {
+  Deck getDeck() {
     return deck;
   }
 

@@ -21,8 +21,7 @@ class RoomCard extends StatefulWidget {
 class RoomCardView extends State<RoomCard> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    GamestateController gameState = Provider.of<GamestateController>(context);
 
     var isAvailable =
         (gameState.getNextAvailableRooms().contains(widget.room) &&
@@ -34,11 +33,12 @@ class RoomCardView extends State<RoomCard> {
     var inRoom = gameState.currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
-      if (inRoom) {
-        gameState.exitMap();
-      } else {
-        gameState.enterRoom(widget.room);
-      }
+      gameState.enterRoom(widget.room);
+      // if (inRoom) {
+      //   gameState.exitMap();
+      // } else {
+      //   gameState.enterRoom(widget.room);
+      // }
     }
 
     return GestureDetector(
@@ -86,7 +86,7 @@ String getRoomName(Room room) {
     case RestRoom:
       return 'RestRoom';
     case EventRoom:
-      return 'EVentRoom';
+      return 'EventRoom';
     default:
       return 'DefaultRoom';
   }

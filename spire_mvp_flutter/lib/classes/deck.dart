@@ -1,13 +1,12 @@
-import 'dart:math';
 import 'dart:core';
 import 'card/card.dart';
 
 class Deck {
-  late List<Card> cards;
+  List<Card> cards = [];
 
-  late List<Card> drawPile;
-  late List<Card> hand;
-  late List<Card> discardPile;
+  List<Card> drawPile = [];
+  List<Card> hand = [];
+  List<Card> discardPile = [];
 
   Deck(List<Card> newCards) {
     cards = newCards;
@@ -32,7 +31,7 @@ class Deck {
     return discardPile;
   }
 
-  initialLoadDrawPile() {
+  void initialLoadDrawPile() {
     drawPile = shuffle(cards);
   }
 
@@ -60,5 +59,6 @@ class Deck {
 
 shuffle(List<Card> cards) {
   var newArrayOfCards = cards.toList();
-  return newArrayOfCards.shuffle();
+  newArrayOfCards.shuffle();
+  return newArrayOfCards;
 }

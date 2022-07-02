@@ -107,19 +107,19 @@ class GamestateController extends ChangeNotifier {
     }
     if (currentRoom == null) {
       currentRoom = room;
-      notifyListeners();
-      return;
-    }
-    if (currentRoom!.getCanLeaveRoom() &&
-        getNextAvailableRooms().contains(currentRoom)) {
+    } else if ((currentRoom != null &&
+        currentRoom!.getCanLeaveRoom() &&
+        getNextAvailableRooms().contains(currentRoom))) {
       currentRoom = room;
-      if (currentRoom.runtimeType == EnemyRoom) {
-        playerCharacter!.getDeck().initialLoadDrawPile();
-        // this.currentRoom.getEnemies().forEach(enemy => {
-        //   enemy.moveset.getNextMove();
-        // }
-        // TODO: init battle
-      }
+    }
+
+    if (currentRoom.runtimeType == EnemyRoom) {
+      var deck = playerCharacter!.getDeck();
+      deck.initialLoadDrawPile();
+      // this.currentRoom.getEnemies().forEach(enemy => {
+      //   enemy.moveset.getNextMove();
+      // }
+      // TODO: init battle
     }
     notifyListeners();
   }

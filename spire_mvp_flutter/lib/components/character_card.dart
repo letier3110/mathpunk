@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/classes/player/player.dart';
 
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
@@ -28,8 +29,17 @@ class CharacterCardView extends State<CharacterCard> {
     var isPcEqualsWidgetPc =
         gameState.playerCharacter?.name == widget.character.name;
 
+    void onTapHandler() {
+      if (widget.disabled) {
+        return;
+      }
+      gameState.selectPlayerCharacter(widget.character);
+      var player = Player();
+      player.selectCharacter(widget.character);
+    }
+
     return GestureDetector(
-        onTap: () => {gameState.selectPlayerCharacter(widget.character)},
+        onTap: onTapHandler,
         child: Container(
           width: 120,
           height: 120,

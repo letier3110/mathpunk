@@ -7,11 +7,14 @@ class Player {
   static Player? instance;
 
   static Player getPlayerInstance() {
+    if (instance == null) {
+      Player();
+    }
     return instance ?? Player();
   }
 
   // TODO: add player name in profile before main menu and preserve it
-  constructor({newName = 'Test player'}) {
+  Player({newName = 'Test player'}) {
     name = newName;
     character = null;
     instance = this;

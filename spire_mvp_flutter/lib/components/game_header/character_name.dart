@@ -23,7 +23,7 @@ class CharacterNameView extends State<CharacterName> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              gameState.player?.name ?? 'no name',
+              gameState.player.name,
               textAlign: TextAlign.left,
               style: const TextStyle(
                   color: Colors.white,

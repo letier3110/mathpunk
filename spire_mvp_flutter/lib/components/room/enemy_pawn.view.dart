@@ -59,7 +59,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: 16,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w600),
                   ),

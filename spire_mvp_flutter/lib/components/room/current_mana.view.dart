@@ -3,18 +3,19 @@ import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
-class EndturnView extends StatefulWidget {
-  const EndturnView({Key? key}) : super(key: key);
+class CurrentManaView extends StatefulWidget {
+  const CurrentManaView({Key? key}) : super(key: key);
 
   @override
-  State<EndturnView> createState() => EndturnViewView();
+  State<CurrentManaView> createState() => CurrentManaViewView();
 }
 
-class EndturnViewView extends State<EndturnView> {
+class CurrentManaViewView extends State<CurrentManaView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    GamestateController gameState = Provider.of<GamestateController>(context);
+
+    var mana = gameState.playerCharacter?.mana ?? '0';
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler
@@ -22,23 +23,24 @@ class EndturnViewView extends State<EndturnView> {
 
     return Positioned(
       bottom: 120,
-      right: 20,
+      left: 20,
       child: GestureDetector(
         onTap: onTapHandler,
         child: Stack(children: [
           Container(
             padding: const EdgeInsets.all(8),
             height: 80,
+            width: 80,
             decoration: BoxDecoration(
               color: Colors.blueAccent,
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(color: Colors.white, width: 2)
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                'End Turn',
+                mana.toString(),
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w600),

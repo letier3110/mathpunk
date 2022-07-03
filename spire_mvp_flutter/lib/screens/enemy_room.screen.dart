@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/player/player.dart';
 // import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/components/room/current_mana.view.dart';
 import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
 import 'package:spire_mvp_flutter/components/room/drawpile.view.dart';
 import 'package:spire_mvp_flutter/components/room/endturn.view.dart';
@@ -13,6 +15,12 @@ class EnemyRoomScreen extends StatefulWidget {
   final EnemyRoom room;
 
   const EnemyRoomScreen({required this.room, Key? key}) : super(key: key);
+
+  endTurn() {
+    var character = Player.getPlayerInstance().getCharacter();
+    var deck = character.deck;
+    deck.draw(character.drawPower);
+  }
 
   @override
   State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
@@ -42,6 +50,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
           }),
           const PlayerPawnView(),
           const EndturnView(),
+          const CurrentManaView(),
           const DrawPileView(),
           const HandView(),
           const DiscardPileView(),

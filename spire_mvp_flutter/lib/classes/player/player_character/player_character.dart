@@ -8,7 +8,8 @@ class PlayerCharacter extends BaseCharacter {
   late Deck deck;
   late List<Relic> relics;
   late List<Item> items;
-  late int mana = 3;
+  late int mana = 0;
+  late int manaPower = 3;
   late int maxMana = 3;
   late int drawPower = 3;
   late int gold = 100;
@@ -43,6 +44,11 @@ class PlayerCharacter extends BaseCharacter {
 
   getRelics() {
     return relics;
+  }
+
+  startTurn() {
+    deck.draw(drawPower);
+    mana = manaPower;
   }
 
   attachItems(List<Item> newItems) {

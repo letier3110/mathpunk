@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/classes/moveset.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/intension.util.dart';
 
 class EnemyPawnView extends StatefulWidget {
   final Enemy enemy;
@@ -44,6 +46,25 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               ),
             ),
           ),
+          Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                height: 50,
+                child: Center(
+                  child: Text(
+                    getIntensionType(widget.enemy.moveset.currentMove!),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              )),
           Positioned(
               bottom: 0,
               left: 0,

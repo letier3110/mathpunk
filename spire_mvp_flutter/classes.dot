@@ -4,14 +4,17 @@ digraph "" {
   edge [penwidth=1.3];
   "/lib/classes/base_character.dart" [label="base_character"];
   "/lib/classes/card/attack_card.dart" [label="attack_card"];
-  "/lib/classes/card/attack_card_type.dart" [label="attack_card_type"];
+  "/lib/classes/card/bash.card.dart" [label="bash.card"];
   "/lib/classes/card/card.dart" [label="card"];
   "/lib/classes/card/cards_implementation.dart" [label="cards_implementation"];
+  "/lib/classes/card/defend.card.dart" [label="defend.card"];
+  "/lib/classes/card/strike.card.dart" [label="strike.card"];
   "/lib/classes/deck.dart" [label="deck"];
   "/lib/classes/enemy/enemy.dart" [label="enemy"];
   "/lib/classes/enemy/enemy_goblin.dart" [label="enemy_goblin"];
   "/lib/classes/enemy/enemy_ork.dart" [label="enemy_ork"];
   "/lib/classes/enemy/enemy_slime.dart" [label="enemy_slime"];
+  "/lib/classes/game_map.dart" [label="game_map"];
   "/lib/classes/intension.dart" [label="intension"];
   "/lib/classes/item.dart" [label="item"];
   "/lib/classes/moveset.dart" [label="moveset"];
@@ -30,6 +33,13 @@ digraph "" {
   "/lib/classes/room/trade_room.dart" [label="trade_room"];
   "/lib/classes/room/treasure_room.dart" [label="treasure_room"];
   "/lib/components/character_card.dart" [label="character_card"];
+  "/lib/components/game_header/character_deck.dart" [label="character_deck"];
+  "/lib/components/game_header/character_gold.dart" [label="character_gold"];
+  "/lib/components/game_header/character_hitpoints.dart" [label="character_hitpoints"];
+  "/lib/components/game_header/character_name.dart" [label="character_name"];
+  "/lib/components/game_header/game_header.dart" [label="game_header"];
+  "/lib/components/game_header/header_map.dart" [label="header_map"];
+  "/lib/components/game_header/header_pause.dart" [label="header_pause"];
   "/lib/components/main_menu_item.dart" [label="main_menu_item"];
   "/lib/components/menu_back_button.dart" [label="menu_back_button"];
   "/lib/components/menu_embark_button.dart" [label="menu_embark_button"];
@@ -37,20 +47,33 @@ digraph "" {
   "/lib/components/navigation_card/navigation_card.dart" [label="navigation_card"];
   "/lib/components/navigation_card/navigation_card.interface.dart" [label="navigation_card.interface"];
   "/lib/components/navigation_card/navigation_card.view.dart" [label="navigation_card.view"];
+  "/lib/components/room/discardpile.view.dart" [label="discardpile.view"];
+  "/lib/components/room/drawpile.view.dart" [label="drawpile.view"];
+  "/lib/components/room/endturn.view.dart" [label="endturn.view"];
+  "/lib/components/room/enemy_pawn.view.dart" [label="enemy_pawn.view"];
+  "/lib/components/room/hand.view.dart" [label="hand.view"];
+  "/lib/components/room/player_pawn.view.dart" [label="player_pawn.view"];
+  "/lib/components/room_card.dart" [label="room_card"];
   "/lib/controllers/gamestate.controller.dart" [label="gamestate.controller"];
   "/lib/controllers/navigation.controller.dart" [label="navigation.controller"];
   "/lib/enums/card_type.dart" [label="card_type"];
   "/lib/enums/game_type.enum.dart" [label="game_type.enum"];
   "/lib/enums/intension_type.dart" [label="intension_type"];
   "/lib/enums/screens.enum.dart" [label="screens.enum"];
+  "/lib/enums/target.enum.dart" [label="target.enum"];
   "/lib/interfaces/character.interface.dart" [label="character.interface"];
   "/lib/interfaces/chest_room.interface.dart" [label="chest_room.interface"];
   "/lib/interfaces/room.interface.dart" [label="room.interface"];
   "/lib/interfaces/screen.interface.dart" [label="screen.interface"];
   "/lib/main.dart" [label="main"];
   "/lib/screens/character_select.screen.dart" [label="character_select.screen"];
+  "/lib/screens/enemy_room.screen.dart" [label="enemy_room.screen"];
+  "/lib/screens/game.screen.dart" [label="game.screen"];
   "/lib/screens/main_menu.screen.dart" [label="main_menu.screen"];
+  "/lib/screens/map.screen.dart" [label="map.screen"];
   "/lib/screens/mode_select.screen.dart" [label="mode_select.screen"];
+  "/lib/screens/pause.screen.dart" [label="pause.screen"];
+  "/lib/utils/character.util.dart" [label="character.util"];
   subgraph "cluster~" {
     label="spire_mvp_flutter";
     subgraph "cluster~/lib" {
@@ -60,6 +83,7 @@ digraph "" {
         label="classes";
         "/lib/classes/base_character.dart";
         "/lib/classes/deck.dart";
+        "/lib/classes/game_map.dart";
         "/lib/classes/intension.dart";
         "/lib/classes/item.dart";
         "/lib/classes/moveset.dart";
@@ -68,9 +92,11 @@ digraph "" {
         subgraph "cluster~/lib/classes/card" {
           label="card";
           "/lib/classes/card/attack_card.dart";
-          "/lib/classes/card/attack_card_type.dart";
+          "/lib/classes/card/bash.card.dart";
           "/lib/classes/card/card.dart";
           "/lib/classes/card/cards_implementation.dart";
+          "/lib/classes/card/defend.card.dart";
+          "/lib/classes/card/strike.card.dart";
         }
         subgraph "cluster~/lib/classes/enemy" {
           label="enemy";
@@ -107,12 +133,32 @@ digraph "" {
         "/lib/components/main_menu_item.dart";
         "/lib/components/menu_back_button.dart";
         "/lib/components/menu_embark_button.dart";
+        "/lib/components/room_card.dart";
+        subgraph "cluster~/lib/components/game_header" {
+          label="game_header";
+          "/lib/components/game_header/character_deck.dart";
+          "/lib/components/game_header/character_gold.dart";
+          "/lib/components/game_header/character_hitpoints.dart";
+          "/lib/components/game_header/character_name.dart";
+          "/lib/components/game_header/game_header.dart";
+          "/lib/components/game_header/header_map.dart";
+          "/lib/components/game_header/header_pause.dart";
+        }
         subgraph "cluster~/lib/components/navigation_card" {
           label="navigation_card";
           "/lib/components/navigation_card/mode_select_navigation_card.dart";
           "/lib/components/navigation_card/navigation_card.dart";
           "/lib/components/navigation_card/navigation_card.interface.dart";
           "/lib/components/navigation_card/navigation_card.view.dart";
+        }
+        subgraph "cluster~/lib/components/room" {
+          label="room";
+          "/lib/components/room/discardpile.view.dart";
+          "/lib/components/room/drawpile.view.dart";
+          "/lib/components/room/endturn.view.dart";
+          "/lib/components/room/enemy_pawn.view.dart";
+          "/lib/components/room/hand.view.dart";
+          "/lib/components/room/player_pawn.view.dart";
         }
       }
       subgraph "cluster~/lib/controllers" {
@@ -126,6 +172,7 @@ digraph "" {
         "/lib/enums/game_type.enum.dart";
         "/lib/enums/intension_type.dart";
         "/lib/enums/screens.enum.dart";
+        "/lib/enums/target.enum.dart";
       }
       subgraph "cluster~/lib/interfaces" {
         label="interfaces";
@@ -137,23 +184,46 @@ digraph "" {
       subgraph "cluster~/lib/screens" {
         label="screens";
         "/lib/screens/character_select.screen.dart";
+        "/lib/screens/enemy_room.screen.dart";
+        "/lib/screens/game.screen.dart";
         "/lib/screens/main_menu.screen.dart";
+        "/lib/screens/map.screen.dart";
         "/lib/screens/mode_select.screen.dart";
+        "/lib/screens/pause.screen.dart";
+      }
+      subgraph "cluster~/lib/utils" {
+        label="utils";
+        "/lib/utils/character.util.dart";
       }
     }
   }
   "/lib/classes/base_character.dart" -> "/lib/interfaces/character.interface.dart";
-  "/lib/classes/card/attack_card.dart" -> "/lib/classes/card/attack_card_type.dart";
+  "/lib/classes/card/attack_card.dart" -> "/lib/enums/target.enum.dart";
   "/lib/classes/card/attack_card.dart" -> "/lib/classes/base_character.dart";
   "/lib/classes/card/attack_card.dart" -> "/lib/enums/card_type.dart";
   "/lib/classes/card/attack_card.dart" -> "/lib/classes/card/card.dart";
+  "/lib/classes/card/bash.card.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/card/bash.card.dart" -> "/lib/enums/card_type.dart";
+  "/lib/classes/card/bash.card.dart" -> "/lib/classes/card/card.dart";
+  "/lib/classes/card/card.dart" -> "/lib/enums/target.enum.dart";
   "/lib/classes/card/card.dart" -> "/lib/classes/base_character.dart";
   "/lib/classes/card/card.dart" -> "/lib/enums/card_type.dart";
-  "/lib/classes/card/cards_implementation.dart" -> "/lib/classes/card/attack_card.dart";
-  "/lib/classes/card/cards_implementation.dart" -> "/lib/classes/card/attack_card_type.dart";
+  "/lib/classes/card/cards_implementation.dart" -> "/lib/classes/card/bash.card.dart";
+  "/lib/classes/card/cards_implementation.dart" -> "/lib/classes/card/defend.card.dart";
+  "/lib/classes/card/cards_implementation.dart" -> "/lib/classes/card/strike.card.dart";
+  "/lib/classes/card/defend.card.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/classes/card/defend.card.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/card/defend.card.dart" -> "/lib/enums/card_type.dart";
+  "/lib/classes/card/defend.card.dart" -> "/lib/classes/card/card.dart";
+  "/lib/classes/card/strike.card.dart" -> "/lib/classes/base_character.dart";
+  "/lib/classes/card/strike.card.dart" -> "/lib/enums/card_type.dart";
+  "/lib/classes/card/strike.card.dart" -> "/lib/classes/card/card.dart";
   "/lib/classes/deck.dart" -> "/lib/classes/card/card.dart";
   "/lib/classes/enemy/enemy.dart" -> "/lib/classes/base_character.dart";
   "/lib/classes/enemy/enemy.dart" -> "/lib/classes/moveset.dart";
+  "/lib/classes/enemy/enemy_goblin.dart" -> "/lib/classes/intension.dart";
+  "/lib/classes/enemy/enemy_goblin.dart" -> "/lib/classes/moveset.dart";
+  "/lib/classes/enemy/enemy_goblin.dart" -> "/lib/enums/intension_type.dart";
   "/lib/classes/enemy/enemy_goblin.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/enemy/enemy_ork.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/enemy/enemy_slime.dart" -> "/lib/classes/enemy/enemy.dart";
@@ -206,13 +276,27 @@ digraph "" {
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/reward.dart";
   "/lib/classes/room/treasure_room.dart" -> "/lib/classes/room/room.dart";
-  "/lib/components/character_card.dart" -> "/lib/components/navigation_card/navigation_card.view.dart";
-  "/lib/components/character_card.dart" -> "/lib/controllers/navigation.controller.dart";
-  "/lib/components/character_card.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/character_card.dart" -> "/lib/classes/player/player_character/player_character.dart";
+  "/lib/components/character_card.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/character_deck.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/character_gold.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/character_hitpoints.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/character_name.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/character_deck.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/character_gold.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/character_hitpoints.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/character_name.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/header_map.dart";
+  "/lib/components/game_header/game_header.dart" -> "/lib/components/game_header/header_pause.dart";
+  "/lib/components/game_header/header_map.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/header_pause.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/game_header/header_pause.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/components/main_menu_item.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/components/main_menu_item.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/components/menu_back_button.dart" -> "/lib/components/main_menu_item.dart";
   "/lib/components/menu_back_button.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/components/menu_embark_button.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/menu_embark_button.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/components/menu_embark_button.dart" -> "/lib/components/main_menu_item.dart";
   "/lib/components/menu_embark_button.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/components/navigation_card/mode_select_navigation_card.dart" -> "/lib/components/navigation_card/navigation_card.interface.dart";
@@ -229,30 +313,70 @@ digraph "" {
   "/lib/components/navigation_card/navigation_card.interface.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/components/navigation_card/navigation_card.interface.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/components/navigation_card/navigation_card.view.dart" -> "/lib/components/navigation_card/navigation_card.interface.dart";
+  "/lib/components/room/discardpile.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room/drawpile.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room/endturn.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room/enemy_pawn.view.dart" -> "/lib/classes/enemy/enemy.dart";
+  "/lib/components/room/enemy_pawn.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room/hand.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room/player_pawn.view.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/enemy_room.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/event_room.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/rest_room.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/room.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/trade_room.dart";
+  "/lib/components/room_card.dart" -> "/lib/classes/room/treasure_room.dart";
+  "/lib/components/room_card.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/enigma_character.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/mage_character.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/player_character.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/rogue_character.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/player/player_character/warrior_character.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/room/enemy_room.dart";
+  "/lib/controllers/gamestate.controller.dart" -> "/lib/classes/room/room.dart";
   "/lib/controllers/gamestate.controller.dart" -> "/lib/enums/game_type.enum.dart";
   "/lib/controllers/navigation.controller.dart" -> "/lib/enums/screens.enum.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/enemy/enemy.dart";
   "/lib/interfaces/room.interface.dart" -> "/lib/classes/reward.dart";
   "/lib/main.dart" -> "/lib/controllers/gamestate.controller.dart";
   "/lib/main.dart" -> "/lib/screens/character_select.screen.dart";
+  "/lib/main.dart" -> "/lib/screens/game.screen.dart";
   "/lib/main.dart" -> "/lib/screens/mode_select.screen.dart";
   "/lib/main.dart" -> "/lib/screens/main_menu.screen.dart";
   "/lib/main.dart" -> "/lib/controllers/navigation.controller.dart";
   "/lib/main.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/classes/player/player_character/player_character.dart";
   "/lib/screens/character_select.screen.dart" -> "/lib/components/character_card.dart";
   "/lib/screens/character_select.screen.dart" -> "/lib/components/menu_embark_button.dart";
   "/lib/screens/character_select.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/screens/character_select.screen.dart" -> "/lib/utils/character.util.dart";
   "/lib/screens/character_select.screen.dart" -> "/lib/components/menu_back_button.dart";
   "/lib/screens/character_select.screen.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/discardpile.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/drawpile.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/endturn.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/enemy_pawn.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/hand.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/components/room/player_pawn.view.dart";
+  "/lib/screens/enemy_room.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/screens/game.screen.dart" -> "/lib/components/game_header/game_header.dart";
+  "/lib/screens/game.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/screens/game.screen.dart" -> "/lib/screens/enemy_room.screen.dart";
+  "/lib/screens/game.screen.dart" -> "/lib/screens/map.screen.dart";
+  "/lib/screens/game.screen.dart" -> "/lib/screens/pause.screen.dart";
+  "/lib/screens/main_menu.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
   "/lib/screens/main_menu.screen.dart" -> "/lib/components/main_menu_item.dart";
   "/lib/screens/main_menu.screen.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/map.screen.dart" -> "/lib/classes/room/room.dart";
+  "/lib/screens/map.screen.dart" -> "/lib/components/room_card.dart";
+  "/lib/screens/map.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
   "/lib/screens/mode_select.screen.dart" -> "/lib/components/navigation_card/mode_select_navigation_card.dart";
   "/lib/screens/mode_select.screen.dart" -> "/lib/enums/game_type.enum.dart";
   "/lib/screens/mode_select.screen.dart" -> "/lib/components/menu_back_button.dart";
   "/lib/screens/mode_select.screen.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/screens/pause.screen.dart" -> "/lib/controllers/gamestate.controller.dart";
+  "/lib/screens/pause.screen.dart" -> "/lib/controllers/navigation.controller.dart";
+  "/lib/screens/pause.screen.dart" -> "/lib/enums/screens.enum.dart";
+  "/lib/utils/character.util.dart" -> "/lib/classes/player/player_character/player_character.dart";
 }

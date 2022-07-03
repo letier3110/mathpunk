@@ -37,22 +37,38 @@ class Deck {
 
   refreshDrawPile() {
     drawPile = shuffle(discardPile);
+    discardPile = [];
+  }
+
+  playCard(Card card) {
+    hand.remove(card);
+    discardPile.add(card);
   }
 
   draw(int n) {
-    var drawNumber = (n - drawPile.length).abs();
-
-    drawPile = drawPile.sublist(0, drawNumber);
-    hand = hand + drawPile;
     if (n > drawPile.length) {
+      int drawNumber = n - drawPile.length;
+      List<Card> remItems = drawPile.toList();
+      hand = hand + remItems;
       refreshDrawPile();
       if (n - drawNumber > drawPile.length) {
-        drawPile = drawPile.sublist(0, drawPile.length);
-        hand = hand + drawPile;
+        List<Card> remItems = drawPile.toList();
+        drawPile = [];
+        hand = hand + remItems;
       } else {
-        drawPile = drawPile.sublist(0, n - drawNumber);
-        hand = hand + drawPile;
+        List<Card> remItems = shuffle(drawPile).sublist(0, n - drawNumber);
+        for (var card in remItems) {
+          drawPile.remove(card);
+        }
+        hand = hand + remItems;
       }
+    } else {
+      List<Card> remItems = shuffle(drawPile).sublist(0, n);
+
+      for (var card in remItems) {
+        drawPile.remove(card);
+      }
+      hand = hand + remItems;
     }
   }
 }

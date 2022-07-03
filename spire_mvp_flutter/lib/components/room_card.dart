@@ -38,7 +38,6 @@ class RoomCardView extends State<RoomCard> {
         gameState.exitMap();
       } else {
         gameState.enterRoom(widget.room);
-        gameState.playerCharacter!.startTurn();
       }
     }
 

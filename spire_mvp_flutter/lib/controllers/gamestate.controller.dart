@@ -116,6 +116,7 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom.runtimeType == EnemyRoom) {
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
+      playerCharacter!.startTurn();
       // this.currentRoom.getEnemies().forEach(enemy => {
       //   enemy.moveset.getNextMove();
       // }

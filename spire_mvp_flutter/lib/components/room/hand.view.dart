@@ -15,7 +15,7 @@ class HandViewView extends State<HandView> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
-    var drawPileLength = (gameState.playerCharacter?.deck.hand ?? []).length;
+    var handLength = (gameState.playerCharacter?.deck.hand ?? []).length;
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler
@@ -51,7 +51,7 @@ class HandViewView extends State<HandView> {
                 height: 50,
                 child: Center(
                   child: Text(
-                    drawPileLength.toString(),
+                    handLength.toString(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.white,

@@ -8,6 +8,7 @@ import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
 import 'package:spire_mvp_flutter/classes/room/treasure_room.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/room.util.dart';
 
 class RoomCard extends StatefulWidget {
   final Room room;
@@ -70,23 +71,5 @@ class RoomCardView extends State<RoomCard> {
             ),
           ),
         ));
-  }
-}
-
-String getRoomName(Room room) {
-  var id = room.id;
-  switch (room.runtimeType) {
-    case EnemyRoom:
-      return 'EnemyRoom $id';
-    case TreasureRoom:
-      return 'TreasureRoom';
-    case TradeRoom:
-      return 'TradeRoom';
-    case RestRoom:
-      return 'RestRoom';
-    case EventRoom:
-      return 'EventRoom';
-    default:
-      return 'DefaultRoom';
   }
 }

@@ -41,10 +41,17 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
                       },
                   child: Positioned(
                     top: 120,
-                    child: Column(children: const [
-                      MainMenuItem(
-                        text: 'Embark',
-                      ),
+                    child: Column(children: [
+                      Container(
+                          width: 300,
+                          height: 50,
+                          color: Colors.white,
+                          child: const Center(
+                            child: Text(
+                              'Embark',
+                              style: TextStyle(fontSize: 24.0),
+                            ),
+                          )),
                     ]),
                   )),
             ],

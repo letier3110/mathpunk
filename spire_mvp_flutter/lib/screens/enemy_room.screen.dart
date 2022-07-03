@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
 import 'package:spire_mvp_flutter/components/room/drawpile.view.dart';
+import 'package:spire_mvp_flutter/components/room/endturn.view.dart';
+import 'package:spire_mvp_flutter/components/room/enemy_pawn.view.dart';
+import 'package:spire_mvp_flutter/components/room/hand.view.dart';
+import 'package:spire_mvp_flutter/components/room/player_pawn.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
 class EnemyRoomScreen extends StatefulWidget {
@@ -21,14 +25,22 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
         width: double.infinity,
         height: double.infinity,
         child: Stack(children: [
-          Container(
-              color: Colors.red,
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Container(
-                color: Colors.white,
-                child: const Text('Enemy room'),
-              )),
+          // Container(
+          //     color: Colors.red,
+          //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          //     child: Container(
+          //       color: Colors.white,
+          //       child: const Text('Enemy room'),
+          //     )),
+          ...gameState.currentRoom!.enemies.map((enemy) {
+            return EnemyPawnView(
+              enemy: enemy,
+            );
+          }),
+          const PlayerPawnView(),
+          const EndturnView(),
           const DrawPileView(),
+          const HandView(),
           const DiscardPileView(),
         ]));
   }

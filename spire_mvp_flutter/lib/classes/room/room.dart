@@ -28,7 +28,7 @@ class Room implements IRoom {
     rewards = newRewards;
   }
 
-  getEnemies() {
+  List<Enemy> getEnemies() {
     return enemies;
   }
 

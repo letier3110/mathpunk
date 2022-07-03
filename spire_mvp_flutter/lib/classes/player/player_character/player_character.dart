@@ -1,3 +1,6 @@
+import 'package:spire_mvp_flutter/classes/card/card.dart';
+import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+
 import '../../deck.dart';
 import '../../relic.dart';
 import '../../item.dart';
@@ -57,6 +60,18 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(Item item) {
     items.add(item);
+  }
+
+  playCard(Card card, List<Enemy> targets) {
+    card.play(targets);
+    card.disposeToDiscard(deck.hand, deck.discardPile);
+  }
+
+  endTurn() {
+    for (var card in deck.hand) {
+      card.disposeToDiscard(deck.hand, deck.discardPile);
+    }
+    startTurn();
   }
 
   // removeItem(item: Item) {

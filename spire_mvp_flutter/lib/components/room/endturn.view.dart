@@ -17,7 +17,7 @@ class EndturnViewView extends State<EndturnView> {
         Provider.of<GamestateController>(context, listen: false);
 
     void onTapHandler() {
-      // TODO: implement drawpile tap handler
+      gameState.nextTurn();
     }
 
     return Positioned(

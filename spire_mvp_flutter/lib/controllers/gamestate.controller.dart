@@ -125,6 +125,20 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void nextTurn() {
+    if (playerCharacter == null) {
+      return;
+    }
+    if (currentRoom == null) {
+      return;
+    }
+    for (var enemy in currentRoom!.getEnemies()) {
+      enemy.makeMove();
+    }
+
+    playerCharacter!.endTurn();
+  }
+
   getCurrentRoom() {
     return currentRoom;
   }

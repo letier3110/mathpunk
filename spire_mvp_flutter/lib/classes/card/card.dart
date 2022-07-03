@@ -32,6 +32,11 @@ class Card {
     return description;
   }
 
+  disposeToDiscard(List<Card> hand, List<Card> discardPile) {
+    discardPile.add(this);
+    hand.remove(this);
+  }
+
   play(List<BaseCharacter> target) {
     // console.log(targets);
     // TODO: implement card apply effect to enemy

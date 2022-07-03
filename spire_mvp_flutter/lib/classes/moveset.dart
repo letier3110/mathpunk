@@ -3,7 +3,7 @@ import 'intension.dart';
 import 'player/player.dart';
 
 class Moveset {
-  late List<Intension> moves;
+  List<Intension> moves = [];
   Intension? currentMove;
   // Enemy parent;
 
@@ -17,6 +17,10 @@ class Moveset {
     // get next move
     // react to player actions
     // react to stats change
+  }
+
+  setMoves(List<Intension> newMoves) {
+    moves = newMoves;
   }
 
   executeMove() {

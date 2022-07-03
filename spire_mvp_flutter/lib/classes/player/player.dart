@@ -25,7 +25,7 @@ class Player {
     character = newCharacter;
   }
 
-  getCharacter() {
-    return character;
+  PlayerCharacter getCharacter() {
+    return character ?? PlayerCharacter();
   }
 }

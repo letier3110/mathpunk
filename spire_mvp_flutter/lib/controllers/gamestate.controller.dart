@@ -14,7 +14,7 @@ class GamestateController extends ChangeNotifier {
   bool inMap = false;
   bool inPause = false;
   PlayerCharacter? playerCharacter;
-  Player? player;
+  final Player player = Player();
   List<Room> gameMap = [];
   Room? currentRoom;
 

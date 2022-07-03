@@ -27,7 +27,9 @@ class Moveset {
     if (currentMove?.type == IntensionType.offense) {
       var player = Player.getPlayerInstance();
       var character = player.getCharacter();
-      character.changeHealth(currentMove!.baseDamage * currentMove!.count);
+      for (var i = 0; i < currentMove!.count; i++) {
+        character.recieveDamage(currentMove!.baseDamage);
+      }
     }
   }
 

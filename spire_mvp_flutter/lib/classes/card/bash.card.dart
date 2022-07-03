@@ -1,9 +1,9 @@
 import '../base_character.dart';
 
 import '../../enums/card_type.dart';
-import 'card.dart';
+import 'playable_card.dart';
 
-class BashCard extends Card {
+class BashCard extends PlayableCard {
   int damage = 8;
   int vulnerable = 2;
 

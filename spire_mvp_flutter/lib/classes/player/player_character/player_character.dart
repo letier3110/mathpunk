@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/card/card.dart';
+import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 
 import '../../deck.dart';
@@ -62,7 +62,7 @@ class PlayerCharacter extends BaseCharacter {
     items.add(item);
   }
 
-  playCard(Card card, List<Enemy> targets) {
+  playCard(PlayableCard card, List<Enemy> targets) {
     card.play(targets);
     card.disposeToDiscard(deck.hand, deck.discardPile);
   }

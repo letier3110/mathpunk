@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
+import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
@@ -15,7 +17,8 @@ class HandViewView extends State<HandView> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
-    var handLength = (gameState.playerCharacter?.deck.hand ?? []).length;
+    List<PlayableCard> hand = gameState.playerCharacter!.deck.hand;
+    var handLength = hand.length;
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler
@@ -29,20 +32,24 @@ class HandViewView extends State<HandView> {
         onTap: onTapHandler,
         child: Stack(children: [
           Container(
-            padding: const EdgeInsets.all(8),
-            height: 80,
-            color: Colors.black,
-            child: const Center(
-              child: Text(
-                'Hand',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600),
+              padding: const EdgeInsets.all(8),
+              height: 80,
+              color: Colors.black,
+              child: Row(
+                children:
+                    hand.map((e) => PlayableCardComponent(card: e)).toList(),
+              )
+              // const Center(
+              //   child: Text(
+              //     'Hand',
+              //     textAlign: TextAlign.left,
+              //     style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 22,
+              //         fontWeight: FontWeight.w600),
+              //   ),
+              // ),
               ),
-            ),
-          ),
           Positioned(
               bottom: -12,
               right: -12,

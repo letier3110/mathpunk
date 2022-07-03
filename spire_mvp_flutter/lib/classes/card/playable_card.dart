@@ -4,14 +4,14 @@ import '../base_character.dart';
 
 import '../../enums/card_type.dart';
 
-class Card {
+class PlayableCard {
   late String name;
   late String description;
   late int mana;
   late CardType type;
   late TargetEnum targetType = TargetEnum.singleTarget;
 
-  Card(
+  PlayableCard(
       {cardName = '',
       cardDescription = '',
       cardMana = 0,
@@ -32,7 +32,7 @@ class Card {
     return description;
   }
 
-  disposeToDiscard(List<Card> hand, List<Card> discardPile) {
+  disposeToDiscard(List<PlayableCard> hand, List<PlayableCard> discardPile) {
     discardPile.add(this);
     hand.remove(this);
   }

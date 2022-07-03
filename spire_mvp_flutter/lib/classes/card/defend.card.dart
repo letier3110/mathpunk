@@ -3,9 +3,9 @@ import 'package:spire_mvp_flutter/classes/player/player_character/player_charact
 import '../base_character.dart';
 
 import '../../enums/card_type.dart';
-import 'card.dart';
+import 'playable_card.dart';
 
-class DefendCard extends Card {
+class DefendCard extends PlayableCard {
   int block = 5;
 
   DefendCard(

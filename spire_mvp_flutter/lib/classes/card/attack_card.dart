@@ -3,9 +3,9 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.dart';
-import 'card.dart';
+import 'playable_card.dart';
 
-class AttackCard extends Card {
+class AttackCard extends PlayableCard {
   late int damage;
 
   AttackCard(

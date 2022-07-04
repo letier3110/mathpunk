@@ -25,7 +25,7 @@ class HandViewView extends State<HandView> {
     }
 
     return Positioned(
-      bottom: 20,
+      bottom: -160,
       left: 220,
       right: 220,
       child: GestureDetector(
@@ -33,40 +33,30 @@ class HandViewView extends State<HandView> {
         child: Stack(children: [
           Container(
               padding: const EdgeInsets.all(8),
-              height: 80,
-              color: Colors.black,
+              height: 400,
+              // color: Colors.black,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children:
                     hand.map((e) => PlayableCardComponent(card: e)).toList(),
-              )
-              // const Center(
-              //   child: Text(
-              //     'Hand',
-              //     textAlign: TextAlign.left,
-              //     style: TextStyle(
-              //         color: Colors.white,
-              //         fontSize: 22,
-              //         fontWeight: FontWeight.w600),
-              //   ),
-              // ),
-              ),
-          Positioned(
-              bottom: -12,
-              right: -12,
-              child: SizedBox(
-                width: 40,
-                height: 50,
-                child: Center(
-                  child: Text(
-                    handLength.toString(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ))
+              )),
+          // Positioned(
+          //     bottom: -12,
+          //     right: -12,
+          //     child: SizedBox(
+          //       width: 40,
+          //       height: 50,
+          //       child: Center(
+          //         child: Text(
+          //           handLength.toString(),
+          //           textAlign: TextAlign.center,
+          //           style: const TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 22,
+          //               fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //     ))
         ]),
       ),
     );

@@ -29,7 +29,9 @@ class CharacterHitpointsView extends State<CharacterHitpoints> {
               'HP: $hp / $maxhp',
               textAlign: TextAlign.left,
               style: const TextStyle(
-                  color: Colors.red, fontSize: 22, fontWeight: FontWeight.w600),
+                  color: Colors.redAccent,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600),
             ),
           ]),
     );

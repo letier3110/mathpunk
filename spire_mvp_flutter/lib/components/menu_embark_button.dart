@@ -30,8 +30,6 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
           height: 80,
           alignment: Alignment.bottomLeft,
           width: 100,
-          // decoration: BoxDecoration(
-          //     color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
           child: Stack(
             children: [
               GestureDetector(

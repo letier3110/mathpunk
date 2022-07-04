@@ -36,13 +36,6 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
         width: double.infinity,
         height: double.infinity,
         child: Stack(children: [
-          // Container(
-          //     color: Colors.red,
-          //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          //     child: Container(
-          //       color: Colors.white,
-          //       child: const Text('Enemy room'),
-          //     )),
           ...widget.room.enemies.map((enemy) {
             return EnemyPawnView(
               enemy: enemy,

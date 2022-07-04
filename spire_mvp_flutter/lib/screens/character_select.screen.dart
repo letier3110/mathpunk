@@ -67,7 +67,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                     .headline5
                                     ?.fontSize,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.red),
+                                color: Colors.redAccent),
                           ),
                         ),
                         Text(

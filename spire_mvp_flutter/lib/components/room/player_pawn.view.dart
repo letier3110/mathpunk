@@ -52,7 +52,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                 padding: const EdgeInsets.all(8),
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(50),
                   // border: Border.all(color: Colors.white, width: 2)
                 ),

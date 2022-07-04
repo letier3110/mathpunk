@@ -10,7 +10,7 @@ class NavigationCardView extends State<INavigationCard> {
           child: Container(
             width: 350,
             height: 600,
-            color: widget.disabled ? Colors.red : Colors.amber,
+            color: widget.disabled ? Colors.redAccent : Colors.amber,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

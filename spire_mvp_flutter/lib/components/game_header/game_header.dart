@@ -33,34 +33,5 @@ class GameHeaderView extends State<GameHeader> {
         ],
       ),
     );
-
-    // GestureDetector(
-    //     onTap: () => {gameState.selectPlayerCharacter(widget.character)},
-    //     child: Container(
-    //       width: 120,
-    //       height: 120,
-    //       margin: const EdgeInsets.all(8),
-    //       decoration: isPcEqualsWidgetPc
-    //           ? const BoxDecoration(
-    //               boxShadow: [
-    //                 BoxShadow(
-    //                   color: Colors.green,
-    //                   blurRadius: 20.0,
-    //                   spreadRadius: 0.0,
-    //                 )
-    //               ],
-    //             )
-    //           : const BoxDecoration(),
-    //       child: Card(
-    //         color: widget.disabled ? Colors.red : Colors.amber,
-    //         child: Center(
-    //           child: Text(
-    //             '${widget.character.name}.png',
-    //             style: Theme.of(context).textTheme.bodyLarge,
-    //             // color: Colors.amber
-    //           ),
-    //         ),
-    //       ),
-    //     ));
   }
 }

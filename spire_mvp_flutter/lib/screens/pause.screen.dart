@@ -40,7 +40,7 @@ class _PauseScreenState extends State<PauseScreen> {
                         onTap: () => {gameState.exitPause()},
                         child: Container(
                           width: 580,
-                          color: Colors.red,
+                          color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
                           child: const Center(
                             child: Text('Return',
@@ -56,7 +56,7 @@ class _PauseScreenState extends State<PauseScreen> {
                         },
                         child: Container(
                           width: 580,
-                          color: Colors.red,
+                          color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
                           child: const Center(
                             child: Text('Abandon Run',
@@ -74,7 +74,7 @@ class _PauseScreenState extends State<PauseScreen> {
                         },
                         child: Container(
                           width: 580,
-                          color: Colors.red,
+                          color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
                           child: const Center(
                             child: Text('Save & quit',

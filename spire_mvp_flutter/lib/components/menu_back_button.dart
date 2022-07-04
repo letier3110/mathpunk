@@ -22,8 +22,6 @@ class _MenuBackButtonState extends State<MenuBackButton> {
           height: 200,
           alignment: Alignment.bottomLeft,
           width: 100,
-          // decoration: BoxDecoration(
-          //     color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
           child: Stack(
             children: [
               Positioned(

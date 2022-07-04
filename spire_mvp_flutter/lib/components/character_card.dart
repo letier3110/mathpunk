@@ -56,7 +56,7 @@ class CharacterCardView extends State<CharacterCard> {
                 )
               : const BoxDecoration(),
           child: Card(
-            color: widget.disabled ? Colors.red : Colors.amber,
+            color: widget.disabled ? Colors.redAccent : Colors.amber,
             child: Center(
               child: Text(
                 '${widget.character.name}.png',

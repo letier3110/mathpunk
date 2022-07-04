@@ -19,7 +19,7 @@ class _MapScreenState extends State<MapScreen> {
         Consumer<GamestateController>(
             builder: (gameStateContext, gameStateState, child) {
           return Container(
-              color: Colors.red,
+              color: Colors.redAccent,
               child: ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemCount: gameStateState.gameMap.length,

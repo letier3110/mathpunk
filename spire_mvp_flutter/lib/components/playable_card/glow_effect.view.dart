@@ -36,17 +36,6 @@ class GlowEffectView extends State<GlowEffect>
 
   @override
   Widget build(BuildContext context) {
-    // return AnimatedContainer(
-    //   padding: const EdgeInsets.all(8),
-    //   margin: const EdgeInsets.all(4),
-    //   duration: const Duration(seconds: 1),
-    //   curve: Curves.easeIn,
-    //   decoration: BoxDecoration(
-    //     color: Colors.blueAccent,
-    //     borderRadius: BorderRadius.circular(20),
-    //   ),
-    //   child: widget.child,
-    // );
     var values = [
       animation.value,
       (((animation.value + 2.6) % maxAnimationValue) + minAnimationValue),

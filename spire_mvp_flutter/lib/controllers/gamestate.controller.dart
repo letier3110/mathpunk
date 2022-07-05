@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
+import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/mage_character.dart';
@@ -17,6 +19,8 @@ class GamestateController extends ChangeNotifier {
   final Player player = Player();
   List<Room> gameMap = [];
   Room? currentRoom;
+  bool selectingTarget = false;
+  Enemy? selectedTarget;
 
   final List<PlayerCharacter> playableCharacters = [
     Warrior(),
@@ -46,6 +50,28 @@ class GamestateController extends ChangeNotifier {
 
   void selectPlayerCharacter(PlayerCharacter character) {
     playerCharacter = character;
+    notifyListeners();
+  }
+
+  void startSelecting() {
+    selectingTarget = true;
+    notifyListeners();
+  }
+
+  void selectTarget(Enemy target, Function callback) {
+    selectingTarget = false;
+    callback(target);
+    notifyListeners();
+  }
+
+  void playTheCard(PlayableCard card, List<Enemy> targets) {
+    if (playerCharacter == null) return;
+    if (playerCharacter!.mana < card.mana) return;
+    playerCharacter!.mana -= card.mana;
+    card.play(targets);
+    card.disposeToDiscard(
+        playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+
     notifyListeners();
   }
 
@@ -137,6 +163,7 @@ class GamestateController extends ChangeNotifier {
     }
 
     playerCharacter!.endTurn();
+    notifyListeners();
   }
 
   getCurrentRoom() {

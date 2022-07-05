@@ -23,7 +23,7 @@ class GlowEffectView extends State<GlowEffect>
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 1200), vsync: this);
+        duration: const Duration(milliseconds: 1600), vsync: this);
     animation = Tween<double>(begin: minAnimationValue, end: maxAnimationValue)
         .animate(controller)
       ..addListener(() {

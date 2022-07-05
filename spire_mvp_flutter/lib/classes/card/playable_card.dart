@@ -32,9 +32,11 @@ class PlayableCard {
     return description;
   }
 
-  disposeToDiscard(List<PlayableCard> hand, List<PlayableCard> discardPile) {
+  bool disposeToDiscard(
+      List<PlayableCard> hand, List<PlayableCard> discardPile) {
     discardPile.add(this);
     hand.remove(this);
+    return true;
   }
 
   play(List<BaseCharacter> target) {

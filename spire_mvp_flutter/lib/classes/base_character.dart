@@ -31,7 +31,7 @@ class BaseCharacter implements ICharacter {
   }
 
   recieveDamage(int damage) {
-    double localDamage = damage as double;
+    double localDamage = damage.toDouble();
     if (vulnerable > 1) {
       localDamage = damage * 1.5;
     }

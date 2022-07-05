@@ -16,12 +16,6 @@ class EnemyRoomScreen extends StatefulWidget {
 
   const EnemyRoomScreen({required this.room, Key? key}) : super(key: key);
 
-  endTurn() {
-    var character = Player.getPlayerInstance().getCharacter();
-    var deck = character.deck;
-    deck.draw(character.drawPower);
-  }
-
   @override
   State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
 }

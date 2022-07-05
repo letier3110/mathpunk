@@ -68,8 +68,13 @@ class PlayerCharacter extends BaseCharacter {
   }
 
   endTurn() {
-    for (var card in deck.hand) {
-      card.disposeToDiscard(deck.hand, deck.discardPile);
+    var hand = deck.hand;
+    var i = 0;
+    while (i < hand.length) {
+      var b = hand[i].disposeToDiscard(deck.hand, deck.discardPile);
+      if (!b) {
+        i += 1;
+      }
     }
     startTurn();
   }

@@ -25,7 +25,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
     }
 
     return Positioned(
-      bottom: 220,
+      top: 200,
       right: 220,
       child: GestureDetector(
         onTap: onTapHandler,

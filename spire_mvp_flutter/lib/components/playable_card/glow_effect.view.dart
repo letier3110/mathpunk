@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 
 class GlowEffect extends StatefulWidget {
   final Widget child;
@@ -9,6 +8,12 @@ class GlowEffect extends StatefulWidget {
   State<GlowEffect> createState() => GlowEffectView();
 }
 
+const double minAnimationValue = 1;
+const double maxAnimationValue = 8;
+const double divider = 1;
+
+const wavecolor = Color.fromARGB(119, 13, 190, 235);
+
 class GlowEffectView extends State<GlowEffect>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
@@ -17,15 +22,16 @@ class GlowEffectView extends State<GlowEffect>
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 2, end: 4).animate(controller)
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 1200), vsync: this);
+    animation = Tween<double>(begin: minAnimationValue, end: maxAnimationValue)
+        .animate(controller)
       ..addListener(() {
         setState(() {
           // The state that has changed here is the animation object’s value.
         });
       });
-    controller.repeat(reverse: true);
+    controller.repeat();
   }
 
   @override
@@ -41,12 +47,32 @@ class GlowEffectView extends State<GlowEffect>
     //   ),
     //   child: widget.child,
     // );
+    var values = [
+      animation.value,
+      (((animation.value + 2.6) % maxAnimationValue) + minAnimationValue),
+      (((animation.value + 5.3) % maxAnimationValue) + minAnimationValue),
+    ];
+
     return Container(
-      margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        // color: Colors.blueAccent,
-        border: Border.all(color: Colors.white, width: animation.value),
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: wavecolor,
+            blurRadius: 1,
+            spreadRadius: values[0] / divider,
+          ),
+          BoxShadow(
+            color: wavecolor,
+            blurRadius: 1,
+            spreadRadius: values[1] / divider,
+          ),
+          BoxShadow(
+            color: wavecolor,
+            blurRadius: 1,
+            spreadRadius: values[2] / divider,
+          ),
+        ],
       ),
       child: widget.child,
     );

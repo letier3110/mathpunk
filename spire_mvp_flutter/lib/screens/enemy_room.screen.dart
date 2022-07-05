@@ -32,7 +32,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
     // GamestateController gameState = Provider.of<GamestateController>(context);
 
     return Container(
-        color: Colors.grey,
+        color: Colors.black87,
         width: double.infinity,
         height: double.infinity,
         child: Stack(children: [

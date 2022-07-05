@@ -21,7 +21,7 @@ class GameHeaderView extends State<GameHeader> {
       height: 96,
       width: double.infinity,
       padding: const EdgeInsets.all(8),
-      color: Colors.grey,
+      color: Colors.black87,
       child: Stack(
         children: const [
           CharacterName(),

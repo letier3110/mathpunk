@@ -23,7 +23,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
     }
 
     return Positioned(
-      bottom: 220,
+      top: 200,
       left: 220,
       child: GestureDetector(
         onTap: onTapHandler,

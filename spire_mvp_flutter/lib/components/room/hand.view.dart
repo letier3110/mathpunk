@@ -25,7 +25,7 @@ class HandViewView extends State<HandView> {
     }
 
     return Positioned(
-      bottom: -160,
+      bottom: -260,
       left: 220,
       right: 220,
       child: GestureDetector(
@@ -33,30 +33,13 @@ class HandViewView extends State<HandView> {
         child: Stack(children: [
           Container(
               padding: const EdgeInsets.all(8),
-              height: 400,
+              height: 600,
               // color: Colors.black,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:
                     hand.map((e) => PlayableCardComponent(card: e)).toList(),
               )),
-          // Positioned(
-          //     bottom: -12,
-          //     right: -12,
-          //     child: SizedBox(
-          //       width: 40,
-          //       height: 50,
-          //       child: Center(
-          //         child: Text(
-          //           handLength.toString(),
-          //           textAlign: TextAlign.center,
-          //           style: const TextStyle(
-          //               color: Colors.white,
-          //               fontSize: 22,
-          //               fontWeight: FontWeight.w600),
-          //         ),
-          //       ),
-          //     ))
         ]),
       ),
     );

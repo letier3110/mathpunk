@@ -5,7 +5,7 @@ import 'player_character.dart';
 
 class Warrior extends PlayerCharacter {
   Warrior() : super() {
-    health = 200;
+    health = 4;
     maxHealth = 200;
     name = 'Warrior';
 

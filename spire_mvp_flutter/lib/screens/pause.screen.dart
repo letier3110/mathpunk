@@ -16,9 +16,10 @@ class PauseScreen extends StatefulWidget {
 class _PauseScreenState extends State<PauseScreen> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    GamestateController gameState =
+        Provider.of<GamestateController>(context, listen: false);
     NavigationController navigation =
-        Provider.of<NavigationController>(context);
+        Provider.of<NavigationController>(context, listen: false);
 
     return Stack(children: [
       Container(

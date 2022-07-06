@@ -17,6 +17,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
 
     var hp = gameState.playerCharacter?.health ?? '0';
     var maxhp = gameState.playerCharacter?.maxHealth ?? '0';
+    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler
@@ -44,29 +45,30 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
               ),
             ),
           ),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(50),
-                  // border: Border.all(color: Colors.white, width: 2)
-                ),
-                child: Center(
-                  child: Text(
-                    '$hp / $maxhp',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
+          if (isPlayerAlive)
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(50),
+                    // border: Border.all(color: Colors.white, width: 2)
                   ),
-                ),
-              ))
+                  child: Center(
+                    child: Text(
+                      '$hp / $maxhp',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ))
         ]),
       ),
     );

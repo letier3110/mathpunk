@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/mage_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/rogue_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/warrior_character.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
@@ -21,13 +17,6 @@ class GamestateController extends ChangeNotifier {
   Room? currentRoom;
   bool selectingTarget = false;
   Enemy? selectedTarget;
-
-  final List<PlayerCharacter> playableCharacters = [
-    Warrior(),
-    Mage(),
-    Rogue(),
-    Enigma()
-  ];
 
   void exitGameMode() {
     gameMode = null;

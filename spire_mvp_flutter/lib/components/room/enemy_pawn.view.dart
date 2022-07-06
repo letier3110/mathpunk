@@ -17,8 +17,12 @@ class EnemyPawnView extends StatefulWidget {
 class EnemyPawnViewView extends State<EnemyPawnView> {
   @override
   Widget build(BuildContext context) {
+    GamestateController gameState = Provider.of<GamestateController>(context);
+
     var hp = widget.enemy.getHealth();
     var maxhp = widget.enemy.getMaxHealth();
+
+    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler
@@ -46,48 +50,50 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               ),
             ),
           ),
-          Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                height: 50,
-                child: Center(
-                  child: Text(
-                    getIntensionType(widget.enemy.moveset.currentMove!),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w600),
+          if (isPlayerAlive)
+            Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      getIntensionType(widget.enemy.moveset.currentMove!),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-              )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(50),
-                  // border: Border.all(color: Colors.white, width: 2)
-                ),
-                child: Center(
-                  child: Text(
-                    '$hp / $maxhp',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
+                )),
+          if (isPlayerAlive)
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(50),
+                    // border: Border.all(color: Colors.white, width: 2)
                   ),
-                ),
-              ))
+                  child: Center(
+                    child: Text(
+                      '$hp / $maxhp',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ))
         ]),
       ),
     );

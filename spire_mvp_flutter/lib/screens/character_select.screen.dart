@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/mage_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/rogue_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/warrior_character.dart';
 import 'package:spire_mvp_flutter/components/character_card.dart';
 import 'package:spire_mvp_flutter/components/menu_embark_button.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
@@ -59,7 +62,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                           child: Text(
-                            'HP: ${gameStateState.playerCharacter!.maxHealth} / ${gameStateState.playerCharacter!.health}',
+                            'HP: ${gameStateState.playerCharacter!.health} / ${gameStateState.playerCharacter!.maxHealth}',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontSize: Theme.of(context)
@@ -113,7 +116,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                           builder: (gameStateContext, gameStateState, child) {
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: gameStateState.playableCharacters
+                            children: [Warrior(), Mage(), Rogue(), Enigma()]
                                 .map((e) => CharacterCard(
                                       character: e,
                                     ))

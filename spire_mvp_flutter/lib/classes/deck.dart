@@ -51,13 +51,12 @@ class Deck {
       List<PlayableCard> remItems = drawPile.toList();
       hand = hand + remItems;
       refreshDrawPile();
-      if (n - drawNumber > drawPile.length) {
+      if (drawNumber > drawPile.length) {
         List<PlayableCard> remItems = drawPile.toList();
         drawPile = [];
         hand = hand + remItems;
       } else {
-        List<PlayableCard> remItems =
-            shuffle(drawPile).sublist(0, n - drawNumber);
+        List<PlayableCard> remItems = shuffle(drawPile).sublist(0, drawNumber);
         for (var card in remItems) {
           drawPile.remove(card);
         }

@@ -54,7 +54,11 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
 
     void onTapHandler() {
       if (widget.card.targetType == TargetEnum.singleTarget) {
-        gameState.startSelecting();
+        gameState.startSelecting(widget.card);
+        return;
+      } else if (widget.card.targetType == TargetEnum.playerTarget) {
+        // TODO: implement some random fuzzy logic to select a target
+        gameState.playTheCardOnPlayer(widget.card);
         return;
       } else if (widget.card.targetType == TargetEnum.randomTarget) {
         // TODO: implement some random fuzzy logic to select a target
@@ -74,7 +78,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         child: Container(
           height: 308,
           width: 208,
-          margin: EdgeInsets.fromLTRB(4, 4, 4, animation.value),
+          margin: EdgeInsets.fromLTRB(4, 4, 4,
+              gameState.selectingTarget == widget.card ? 244 : animation.value),
           child: Center(
             child: Stack(children: [
               Container(

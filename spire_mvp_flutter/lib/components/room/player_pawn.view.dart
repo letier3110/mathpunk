@@ -18,6 +18,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
+    var block = gameState.playerCharacter?.block ?? 0;
     var hp = gameState.playerCharacter?.health ?? 0;
     var maxhp = gameState.playerCharacter?.maxHealth ?? 0;
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
@@ -70,7 +71,8 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                             padding: const EdgeInsets.all(2),
                             height: hpBarHeight,
                             decoration: BoxDecoration(
-                              color: Colors.redAccent,
+                              color:
+                                  block > 0 ? Colors.purple : Colors.redAccent,
                               borderRadius: BorderRadius.circular(hpBarHeight),
                               // border: Border.all(color: Colors.white, width: 2)
                             ),
@@ -90,6 +92,28 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                         )
                       ],
                     ),
+                    if (block > 0)
+                      Positioned(
+                        left: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          height: hpBarHeight,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(hpBarHeight),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '$block',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: getFontSize(16),
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ),
                     Container(
                       padding: const EdgeInsets.all(2),
                       height: hpBarHeight,

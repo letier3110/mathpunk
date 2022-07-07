@@ -76,6 +76,7 @@ class PlayerCharacter extends BaseCharacter {
         i += 1;
       }
     }
+    block = 0;
     startTurn();
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/base_character.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
@@ -15,7 +16,7 @@ class GamestateController extends ChangeNotifier {
   final Player player = Player();
   List<Room> gameMap = [];
   Room? currentRoom;
-  bool selectingTarget = false;
+  PlayableCard? selectingTarget;
   Enemy? selectedTarget;
 
   void exitGameMode() {
@@ -42,24 +43,51 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void startSelecting() {
-    selectingTarget = true;
+  void startSelecting(PlayableCard card) {
+    selectingTarget = card;
     notifyListeners();
   }
 
-  void selectTarget(Enemy target, Function callback) {
-    selectingTarget = false;
-    callback(target);
+  void selectTarget(Enemy target) {
+    if (selectingTarget == null) return;
+    playTheCard(selectingTarget!, [target]);
+    selectingTarget = null;
+    notifyListeners();
+  }
+
+  void playTheCardOnPlayer(PlayableCard card) {
+    if (playerCharacter == null) return;
+    if (currentRoom == null) return;
+    if (playerCharacter!.mana < card.mana) return;
+    playerCharacter!.mana -= card.mana;
+    card.play([playerCharacter!] as List<BaseCharacter>);
+    card.disposeToDiscard(
+        playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
     notifyListeners();
   }
 
   void playTheCard(PlayableCard card, List<Enemy> targets) {
     if (playerCharacter == null) return;
+    if (currentRoom == null) return;
     if (playerCharacter!.mana < card.mana) return;
     playerCharacter!.mana -= card.mana;
     card.play(targets);
     card.disposeToDiscard(
         playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+
+    var i = 0;
+    while (i < targets.length) {
+      if (targets[i].health <= 0) {
+        currentRoom!.enemies.remove(targets[i]);
+      }
+      i++;
+    }
+
+    // if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
+    if (currentRoom!.enemies.isEmpty) {
+      enterMap();
+      // currentRoom.getRewards();
+    }
 
     notifyListeners();
   }

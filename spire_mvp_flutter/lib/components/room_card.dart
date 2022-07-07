@@ -34,6 +34,13 @@ class RoomCardView extends State<RoomCard> {
     var inRoom = gameState.currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
+      if (inRoom &&
+          gameState.currentRoom != null &&
+          gameState.currentRoom!.enemies.isEmpty &&
+          gameState.currentRoom!.id != widget.room.id) {
+        gameState.enterRoom(widget.room);
+        return;
+      }
       if (inRoom) {
         gameState.exitMap();
       } else {

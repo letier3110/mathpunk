@@ -27,7 +27,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
 
     void onTapHandler() {
-      // TODO: implement drawpile tap handler
+      gameState.selectTarget(widget.enemy);
     }
 
     return Positioned(

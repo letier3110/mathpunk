@@ -1,4 +1,5 @@
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
@@ -17,7 +18,8 @@ class DefendCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.skill) {
+            cardType: CardType.skill,
+            cardTargetType: TargetEnum.playerTarget) {
     block = cardBlock;
   }
 

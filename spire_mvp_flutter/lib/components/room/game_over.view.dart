@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
 import 'package:spire_mvp_flutter/enums/screens.enum.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class GameOver extends StatefulWidget {
   const GameOver({Key? key}) : super(key: key);
@@ -35,13 +36,13 @@ class GameOverView extends State<GameOver> {
           padding: const EdgeInsets.all(8),
           height: 100,
           margin: EdgeInsets.fromLTRB(0, 0, 0, 400),
-          child: const Center(
+          child: Center(
             child: Text(
               'Death...',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: getFontSize(22),
                   fontWeight: FontWeight.w600),
             ),
           ),
@@ -58,12 +59,12 @@ class GameOverView extends State<GameOver> {
                       borderRadius: BorderRadius.circular(50),
                       // border: Border.all(color: Colors.white, width: 2)
                     ),
-                    child: const Text(
+                    child: Text(
                       'Continue',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
+                          fontSize: getFontSize(22),
                           fontWeight: FontWeight.w600),
                     ),
                   ),

@@ -8,6 +8,7 @@ import 'package:spire_mvp_flutter/components/character_card.dart';
 import 'package:spire_mvp_flutter/components/menu_embark_button.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/utils/character.util.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';
@@ -52,10 +53,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                           gameStateState.playerCharacter!.name,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .headline3
-                                  ?.fontSize,
+                              fontSize: getFontSize(48),
                               fontWeight: FontWeight.bold,
                               color: Colors.yellow),
                         ),
@@ -65,10 +63,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                             'HP: ${gameStateState.playerCharacter!.health} / ${gameStateState.playerCharacter!.maxHealth}',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .headline5
-                                    ?.fontSize,
+                                fontSize: getFontSize(22),
                                 fontWeight: FontWeight.bold,
                                 color: Colors.redAccent),
                           ),
@@ -78,10 +73,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                           'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.fontSize,
+                              fontSize: getFontSize(16),
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -100,8 +92,8 @@ class _CharacterSelectState extends State<CharacterSelect> {
                   builder: (gameStateContext, gameStateState, child) {
                 return Text(
                   'Game mode ${gameStateState.gameMode.toString()}',
-                  style: const TextStyle(
-                    fontSize: 30,
+                  style: TextStyle(
+                    fontSize: getFontSize(30),
                     fontWeight: FontWeight.bold,
                   ),
                 );

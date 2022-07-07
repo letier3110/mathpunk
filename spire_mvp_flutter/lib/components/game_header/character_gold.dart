@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class CharacterGold extends StatefulWidget {
   const CharacterGold({Key? key}) : super(key: key);
@@ -27,9 +28,9 @@ class CharacterGoldView extends State<CharacterGold> {
             Text(
               'Gold: $gold',
               textAlign: TextAlign.left,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.yellow,
-                  fontSize: 22,
+                  fontSize: getFontSize(22),
                   fontWeight: FontWeight.w600),
             ),
           ]),

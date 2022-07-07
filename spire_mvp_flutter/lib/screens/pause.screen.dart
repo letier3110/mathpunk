@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
 import 'package:spire_mvp_flutter/enums/screens.enum.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class PauseScreen extends StatefulWidget {
   const PauseScreen({Key? key}) : super(key: key);
@@ -43,10 +44,11 @@ class _PauseScreenState extends State<PauseScreen> {
                           width: 580,
                           color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
-                          child: const Center(
+                          child: Center(
                             child: Text('Return',
                                 style: TextStyle(
-                                    fontSize: 40, color: Colors.white)),
+                                    fontSize: getFontSize(40),
+                                    color: Colors.white)),
                           ),
                         ),
                       ),
@@ -59,10 +61,11 @@ class _PauseScreenState extends State<PauseScreen> {
                           width: 580,
                           color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
-                          child: const Center(
+                          child: Center(
                             child: Text('Abandon Run',
                                 style: TextStyle(
-                                    fontSize: 40, color: Colors.white)),
+                                    fontSize: getFontSize(40),
+                                    color: Colors.white)),
                           ),
                         ),
                       ),
@@ -77,10 +80,11 @@ class _PauseScreenState extends State<PauseScreen> {
                           width: 580,
                           color: Colors.redAccent,
                           padding: const EdgeInsets.all(8),
-                          child: const Center(
+                          child: Center(
                             child: Text('Save & quit',
                                 style: TextStyle(
-                                    fontSize: 40, color: Colors.white)),
+                                    fontSize: getFontSize(40),
+                                    color: Colors.white)),
                           ),
                         ),
                       )

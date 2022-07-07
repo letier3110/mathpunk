@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class PlayerPawnView extends StatefulWidget {
   const PlayerPawnView({Key? key}) : super(key: key);
@@ -34,13 +35,13 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
             height: 300,
             width: 300,
             color: Colors.black,
-            child: const Center(
+            child: Center(
               child: Text(
                 'Player',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -62,9 +63,9 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                     child: Text(
                       '$hp / $maxhp',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
+                          fontSize: getFontSize(22),
                           fontWeight: FontWeight.w600),
                     ),
                   ),

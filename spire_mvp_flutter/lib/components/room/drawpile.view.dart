@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class DrawPileView extends StatefulWidget {
   const DrawPileView({Key? key}) : super(key: key);
@@ -33,13 +34,13 @@ class DrawPileViewView extends State<DrawPileView> {
             width: 80,
             height: 80,
             color: Colors.black,
-            child: const Center(
+            child: Center(
               child: Text(
                 'Draw',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -54,9 +55,9 @@ class DrawPileViewView extends State<DrawPileView> {
                   child: Text(
                     drawPileLength.toString(),
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: getFontSize(22),
                         fontWeight: FontWeight.w600),
                   ),
                 ),

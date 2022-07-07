@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class DiscardPileView extends StatefulWidget {
   const DiscardPileView({Key? key}) : super(key: key);
@@ -33,13 +34,13 @@ class DiscardPileViewView extends State<DiscardPileView> {
             width: 100,
             height: 80,
             color: Colors.black,
-            child: const Center(
+            child: Center(
               child: Text(
                 'Discard',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -54,9 +55,9 @@ class DiscardPileViewView extends State<DiscardPileView> {
                   child: Text(
                     discardPileLength.toString(),
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: getFontSize(22),
                         fontWeight: FontWeight.w600),
                   ),
                 ),

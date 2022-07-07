@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class CurrentManaView extends StatefulWidget {
   const CurrentManaView({Key? key}) : super(key: key);
@@ -40,9 +41,9 @@ class CurrentManaViewView extends State<CurrentManaView> {
               child: Text(
                 mana.toString(),
                 textAlign: TextAlign.left,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),

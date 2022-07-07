@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
@@ -44,10 +45,10 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
                           width: 300,
                           height: 50,
                           color: Colors.white,
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               'Embark',
-                              style: TextStyle(fontSize: 24.0),
+                              style: TextStyle(fontSize: getFontSize(22)),
                             ),
                           )),
                     ]),

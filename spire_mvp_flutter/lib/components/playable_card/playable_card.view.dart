@@ -5,6 +5,7 @@ import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class PlayableCardComponent extends StatefulWidget {
   final PlayableCard card;
@@ -112,8 +113,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
                               child: Text(
                                 widget.card.name,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: getFontSize(22)),
                               ),
                             ),
                             SizedBox(
@@ -122,8 +124,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                 children: [
                                   Text(
                                     widget.card.description,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 16),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: getFontSize(16)),
                                   ),
                                 ],
                               ),
@@ -145,8 +148,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                           child: Center(
                             child: Text(
                               widget.card.mana.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 22),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: getFontSize(22)),
                             ),
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class CharacterName extends StatefulWidget {
   const CharacterName({Key? key}) : super(key: key);
@@ -25,9 +26,9 @@ class CharacterNameView extends State<CharacterName> {
             Text(
               gameState.player.name,
               textAlign: TextAlign.left,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: getFontSize(22),
                   fontWeight: FontWeight.w600),
             ),
             Container(

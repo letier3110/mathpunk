@@ -4,6 +4,7 @@ import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/moveset.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 import 'package:spire_mvp_flutter/utils/intension.util.dart';
 
 class EnemyPawnView extends StatefulWidget {
@@ -43,9 +44,9 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               child: Text(
                 widget.enemy.name,
                 textAlign: TextAlign.left,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -62,9 +63,9 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                     child: Text(
                       getIntensionType(widget.enemy.moveset.currentMove!),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: getFontSize(16),
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w600),
                     ),
@@ -87,9 +88,9 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                     child: Text(
                       '$hp / $maxhp',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
+                          fontSize: getFontSize(22),
                           fontWeight: FontWeight.w600),
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class CharacterDeck extends StatefulWidget {
   const CharacterDeck({Key? key}) : super(key: key);
@@ -26,13 +27,13 @@ class CharacterDeckView extends State<CharacterDeck> {
           padding: const EdgeInsets.all(8),
           width: 80,
           color: Colors.black,
-          child: const Center(
+          child: Center(
             child: Text(
               'Deck',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: getFontSize(22),
                   fontWeight: FontWeight.w600),
             ),
           ),
@@ -47,9 +48,9 @@ class CharacterDeckView extends State<CharacterDeck> {
                 child: Text(
                   deckLength.toString(),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: getFontSize(22),
                       fontWeight: FontWeight.w600),
                 ),
               ),

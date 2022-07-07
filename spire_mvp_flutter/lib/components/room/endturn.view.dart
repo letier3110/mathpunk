@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class EndturnView extends StatefulWidget {
   const EndturnView({Key? key}) : super(key: key);
@@ -34,13 +35,13 @@ class EndturnViewView extends State<EndturnView> {
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(color: Colors.white, width: 2)
             ),
-            child: const Center(
+            child: Center(
               child: Text(
                 'End Turn',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: getFontSize(22),
                     fontWeight: FontWeight.w600),
               ),
             ),

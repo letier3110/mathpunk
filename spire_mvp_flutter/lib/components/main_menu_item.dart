@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 import '../enums/screens.enum.dart';
 
@@ -43,10 +44,10 @@ class MainMenuItemState extends State<MainMenuItem> {
                   width: 300,
                   height: 50.0,
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Text(
                     widget.text,
-                    style: TextStyle(fontSize: 24.0),
+                    style: TextStyle(fontSize: getFontSize(22)),
                   ),
                 ))
           ],

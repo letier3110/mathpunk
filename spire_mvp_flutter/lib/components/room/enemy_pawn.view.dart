@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/moveset.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 import 'package:spire_mvp_flutter/utils/intension.util.dart';
+
+const double hpBarHeight = 20;
 
 class EnemyPawnView extends StatefulWidget {
   final Enemy enemy;
@@ -39,7 +40,6 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
             padding: const EdgeInsets.all(8),
             height: 300,
             width: 300,
-            color: Colors.black,
             child: Center(
               child: Text(
                 widget.enemy.name,
@@ -76,24 +76,59 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(50),
-                    // border: Border.all(color: Colors.white, width: 2)
-                  ),
-                  child: Center(
-                    child: Text(
-                      '$hp / $maxhp',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: getFontSize(22),
-                          fontWeight: FontWeight.w600),
+                child: Stack(
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.all(2),
+                        height: hpBarHeight,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(hpBarHeight),
+                          // border: Border.all(color: Colors.white, width: 2)
+                        )),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: ((hp / maxhp) * 100).toInt(),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            height: hpBarHeight,
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(hpBarHeight),
+                              // border: Border.all(color: Colors.white, width: 2)
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: (((maxhp - hp) / maxhp) * 100).toInt(),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            height: hpBarHeight,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(hpBarHeight),
+                              // border: Border.all(color: Colors.white, width: 2)
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
+                    Container(
+                      padding: const EdgeInsets.all(2),
+                      height: hpBarHeight,
+                      child: Center(
+                        child: Text(
+                          '$hp / $maxhp',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: getFontSize(16),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ],
                 ))
         ]),
       ),

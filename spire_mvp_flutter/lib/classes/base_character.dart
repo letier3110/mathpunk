@@ -71,4 +71,22 @@ class BaseCharacter implements ICharacter {
   setMaxHealth(int maxHealth) {
     this.maxHealth = maxHealth;
   }
+
+  factory BaseCharacter.fromJson(dynamic json) {
+    BaseCharacter character = BaseCharacter();
+    character.setHealth(json['health'] as int);
+    character.setMaxHealth(json['maxHealth'] as int);
+    character.addBlock(json['block'] as int);
+    character.addVulnerable(json['vulnerable'] as int);
+
+    return character;
+  }
+
+  Map toJson() => {
+        'name': name,
+        'health': health,
+        'maxHealth': maxHealth,
+        'block': block,
+        'vulnerable': vulnerable
+      };
 }

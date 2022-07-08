@@ -7,6 +7,7 @@ import 'package:spire_mvp_flutter/classes/player/player_character/player_charact
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
+import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
@@ -185,5 +186,27 @@ class GamestateController extends ChangeNotifier {
 
   getCurrentRoom() {
     return currentRoom;
+  }
+
+  void fromJson(List<int> array) {
+    GameStateInterface savedInfo = GameStateInterface.fromJson(array);
+    gameMode = savedInfo.gameMode;
+    inMap = savedInfo.inMap;
+    inPause = savedInfo.inPause;
+    playerCharacter = savedInfo.playerCharacter;
+    gameMap = savedInfo.gameMap;
+    currentRoom = savedInfo.currentRoom;
+    notifyListeners();
+  }
+
+  Map toJson() {
+    return GameStateInterface(
+            gameMode: gameMode,
+            inMap: inMap,
+            inPause: inPause,
+            playerCharacter: playerCharacter,
+            gameMap: gameMap,
+            currentRoom: currentRoom)
+        .toJson();
   }
 }

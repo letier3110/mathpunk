@@ -56,7 +56,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       child: Column(children: [
                         Consumer<GamestateController>(
                             builder: (gameStateContext, gameStateState, child) {
-                          if (gameStateState.playerCharacter != null) {
+                          if (gameStateState.gameMap.isNotEmpty) {
                             return const MainMenuItem(
                               text: 'Continue Run',
                               screen: ScreenEnum.game,

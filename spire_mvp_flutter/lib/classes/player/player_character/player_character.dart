@@ -13,7 +13,6 @@ class PlayerCharacter extends BaseCharacter {
   late List<Item> items;
   late int mana = 0;
   late int manaPower = 3;
-  late int maxMana = 3;
   late int drawPower = 3;
   late int gold = 100;
 
@@ -88,4 +87,47 @@ class PlayerCharacter extends BaseCharacter {
   getItems() {
     return items;
   }
+
+  setMana(int mana) {
+    this.mana = mana;
+  }
+
+  setManaPower(int manaPower) {
+    this.manaPower = manaPower;
+  }
+
+  setDrawPower(int drawPower) {
+    this.drawPower = drawPower;
+  }
+
+  setGold(int gold) {
+    this.gold = gold;
+  }
+
+  factory PlayerCharacter.fromJson(dynamic json) {
+    PlayerCharacter character =
+        (BaseCharacter.fromJson(json)) as PlayerCharacter;
+    character.setMana(json['mana'] as int);
+    character.setManaPower(json['manaPower'] as int);
+    character.setDrawPower(json['drawPower'] as int);
+    character.setGold(json['gold'] as int);
+    // character.setGold(json['deck'] as int);
+    // character.setGold(json['relics'] as int);
+    // character.setGold(json['items'] as int);
+    // character
+
+    return character;
+  }
+
+  @override
+  Map toJson() => {
+        ...super.toJson(),
+        'deck': deck,
+        'relics': relics,
+        'items': items,
+        'mana': mana,
+        'manaPower': manaPower,
+        'drawPower': drawPower,
+        'gold': gold,
+      };
 }

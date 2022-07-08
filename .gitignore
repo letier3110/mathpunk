@@ -24,3 +24,5 @@
 
 /spire_mvp/src/classes/.vscode
 /spire_mvp/src/classes/tsconfig.json
+
+.DS_Store

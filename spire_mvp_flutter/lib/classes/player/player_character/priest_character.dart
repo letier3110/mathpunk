@@ -3,11 +3,11 @@ import '../../deck.dart';
 import '../../relic.dart';
 import 'player_character.dart';
 
-class Mage extends PlayerCharacter {
-  Mage() : super() {
-    health = 100;
-    maxHealth = 100;
-    name = 'Mage';
+class Priest extends PlayerCharacter {
+  Priest() : super() {
+    health = 75;
+    maxHealth = 75;
+    name = 'Priest';
 
     relics = [Relic()];
 

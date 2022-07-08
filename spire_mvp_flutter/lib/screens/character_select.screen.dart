@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/mage_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/rogue_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/warrior_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/irrationalist_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/barbarian_character.dart';
 import 'package:spire_mvp_flutter/components/character_card.dart';
 import 'package:spire_mvp_flutter/components/menu_embark_button.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
@@ -40,7 +40,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(assetName), fit: BoxFit.cover),
+                        image: AssetImage(assetName), fit: BoxFit.fill),
                   ),
                 ),
                 Container(
@@ -108,7 +108,12 @@ class _CharacterSelectState extends State<CharacterSelect> {
                           builder: (gameStateContext, gameStateState, child) {
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [Warrior(), Mage(), Rogue(), Enigma()]
+                            children: [
+                              Barbarian(),
+                              Irrationalist(),
+                              Priest(),
+                              Enigma()
+                            ]
                                 .map((e) => CharacterCard(
                                       character: e,
                                     ))

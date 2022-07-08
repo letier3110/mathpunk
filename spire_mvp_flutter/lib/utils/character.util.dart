@@ -2,15 +2,15 @@ import 'package:spire_mvp_flutter/classes/player/player_character/player_charact
 
 String getCharacterAssetByName(PlayerCharacter? pc) {
   switch (pc?.name) {
-    case 'Warrior':
-      return 'assets/ironclad.jpg';
-    case 'Mage':
-      return 'assets/defect.jpg';
-    case 'Rogue':
-      return 'assets/rogue.jpg';
+    case 'Barbarian':
+      return 'assets/barbarian.png';
+    case 'Priest':
+      return 'assets/priest.png';
+    case 'Irrationalist':
+      return 'assets/irrationalist.png';
     case 'Enigma':
-      return 'assets/enigma.jpg';
+      return 'assets/enigma.png';
     default:
-      return 'assets/ironclad.jpg';
+      return 'assets/barbarian.png';
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/components/navigation_card/navigation_card.interface.dart';
 
+import '../../utils/font.util.dart';
+
 class NavigationCardView extends State<INavigationCard> {
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,12 @@ class NavigationCardView extends State<INavigationCard> {
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text(
                     widget.heading,
-                    style: Theme.of(context).textTheme.headline4,
+                    style: TextStyle(fontSize: getFontSize(34)),
                   ),
                 ),
                 Text(
                   "img.png",
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: TextStyle(fontSize: getFontSize(16)),
                   // color: Colors.amber
                 ),
                 const Spacer(flex: 1),
@@ -31,7 +33,7 @@ class NavigationCardView extends State<INavigationCard> {
                   padding: EdgeInsets.all(8),
                   child: Text(
                     widget.description,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: TextStyle(fontSize: getFontSize(20)),
                     textAlign: TextAlign.center,
                     // color: Colors.amber
                   ),

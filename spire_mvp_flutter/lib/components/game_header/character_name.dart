@@ -24,7 +24,7 @@ class CharacterNameView extends State<CharacterName> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              gameState.player.name,
+              gameState.playerName ?? 'autosaved',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,

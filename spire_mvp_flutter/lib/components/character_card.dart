@@ -5,6 +5,8 @@ import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
+import '../utils/font.util.dart';
+
 class CharacterCard extends StatefulWidget {
   final PlayerCharacter character;
   final bool disabled;
@@ -60,7 +62,7 @@ class CharacterCardView extends State<CharacterCard> {
             child: Center(
               child: Text(
                 '${widget.character.name}.png',
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: TextStyle(fontSize: getFontSize(16)),
                 // color: Colors.amber
               ),
             ),

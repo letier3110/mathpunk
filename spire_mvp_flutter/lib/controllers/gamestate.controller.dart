@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/base_character.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
@@ -16,11 +15,16 @@ class GamestateController extends ChangeNotifier {
   bool inMap = false;
   bool inPause = false;
   PlayerCharacter? playerCharacter;
-  final Player player = Player();
   List<Room> gameMap = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
   Enemy? selectedTarget;
+  String? playerName;
+
+  void setPlayerName(String playerName) {
+    this.playerName = playerName;
+    notifyListeners();
+  }
 
   void exitGameMode() {
     gameMode = null;
@@ -195,8 +199,7 @@ class GamestateController extends ChangeNotifier {
     return currentRoom;
   }
 
-  void fromJson(List<int> array) {
-    GameStateInterface savedInfo = GameStateInterface.fromJson(array);
+  void fromJson(GameStateInterface savedInfo) {
     gameMode = savedInfo.gameMode;
     inMap = savedInfo.inMap;
     inPause = savedInfo.inPause;
@@ -213,7 +216,8 @@ class GamestateController extends ChangeNotifier {
             inPause: inPause,
             playerCharacter: playerCharacter,
             gameMap: gameMap,
-            currentRoom: currentRoom)
+            currentRoom: currentRoom,
+            playerName: playerName ?? 'autosave')
         .toJson();
   }
 }

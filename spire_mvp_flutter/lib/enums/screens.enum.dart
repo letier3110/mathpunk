@@ -1,6 +1,7 @@
 enum ScreenEnum {
   quit,
   mainMenu,
+  mainLoading,
   modeSelect,
   characterSelect,
   game,

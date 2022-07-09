@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
 import 'package:spire_mvp_flutter/screens/character_select.screen.dart';
 import 'package:spire_mvp_flutter/screens/game.screen.dart';
+import 'package:spire_mvp_flutter/screens/main_loading.screen.dart';
 import 'package:spire_mvp_flutter/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
@@ -16,6 +18,9 @@ void main() {
     providers: [
       ListenableProvider<NavigationController>(
         create: (_) => NavigationController(),
+      ),
+      ListenableProvider<SavesController>(
+        create: (_) => SavesController(),
       ),
       ListenableProvider<GamestateController>(
         create: (_) => GamestateController(),
@@ -57,8 +62,10 @@ List<Page> getPages(context) {
 
   switch (navigation.screen) {
     case ScreenEnum.mainMenu:
-      pageList.add(
-          const MaterialPage(child: MainMenuScreen(title: 'Mathpunk spire')));
+      pageList.add(const MaterialPage(child: MainMenuScreen()));
+      break;
+    case ScreenEnum.mainLoading:
+      pageList.add(const MaterialPage(child: MainLoadingScreen()));
       break;
     case ScreenEnum.modeSelect:
       pageList.add(const MaterialPage(child: ModeSelectScreen()));
@@ -70,8 +77,7 @@ List<Page> getPages(context) {
       pageList.add(const MaterialPage(child: GameScreen()));
       break;
     default:
-      pageList.add(
-          const MaterialPage(child: MainMenuScreen(title: 'Mathpunk spire')));
+      pageList.add(const MaterialPage(child: MainMenuScreen()));
       break;
   }
   return pageList;

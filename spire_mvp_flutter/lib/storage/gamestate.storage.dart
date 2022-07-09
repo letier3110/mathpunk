@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -10,11 +11,6 @@ class GameStateStorage {
 
     return directory.path;
   }
-
-  // Future<File> get _profileFile async {
-  //   final path = await _localPath;
-  //   return File('$path/mathpunk/profiles.bin');
-  // }
 
   Future<File> getFile(String fileName) async {
     final path = await _localPath;
@@ -33,13 +29,12 @@ class GameStateStorage {
       final saveFile = await getFile(profileSaveName);
 
       // Read the file
-      final contents = await saveFile.readAsBytes();
+      final contents = await saveFile.readAsString();
 
-      gameState.parseFromUInt8Array(contents);
+      gameState.fromJson(jsonDecode(contents));
 
       return 1;
     } catch (e) {
-      // If encountering an error, return 0
       return 0;
     }
   }
@@ -51,34 +46,35 @@ class GameStateStorage {
       final save2 = await getFile('save2');
       final save3 = await getFile('save3');
 
-      final contents1 = await save1.readAsBytes();
-      final contents2 = await save2.readAsBytes();
-      final contents3 = await save3.readAsBytes();
+      final contents1 = await save1.readAsString();
+      final contents2 = await save2.readAsString();
+      final contents3 = await save3.readAsString();
 
       GameStateInterface savedData1 =
-          GameStateInterface.parseFromUInt8Array(contents1);
+          GameStateInterface.fromJson(jsonDecode(contents1));
       GameStateInterface savedData2 =
-          GameStateInterface.parseFromUInt8Array(contents2);
+          GameStateInterface.fromJson(jsonDecode(contents2));
       GameStateInterface savedData3 =
-          GameStateInterface.parseFromUInt8Array(contents3);
+          GameStateInterface.fromJson(jsonDecode(contents3));
 
-      // gameState.parse(contents1);
       return [
-        savedData1.player.name,
-        savedData2.player.name,
-        savedData3.player.name
+        savedData1.playerName,
+        savedData2.playerName,
+        savedData3.playerName
       ];
     } catch (e) {
-      // If encountering an error, return 0
       return [];
     }
   }
 
-  Future<File> writeState(
-      GamestateController gameState, String saveName) async {
+  Future<int> writeState(GamestateController gameState, String saveName) async {
     final save = await getFile(saveName);
 
-    // Write the file
-    return save.writeAsBytes(gameState.toUInt8Array());
+    try {
+      save.writeAsString(jsonEncode(gameState.toJson()));
+      return 1;
+    } catch (e) {
+      return 0;
+    }
   }
 }

@@ -15,6 +15,7 @@ class GameStateInterface {
   Room? currentRoom;
   PlayableCard? selectingTarget;
   Enemy? selectedTarget;
+  String playerName;
 
   GameStateInterface(
       {required this.gameMode,
@@ -22,7 +23,8 @@ class GameStateInterface {
       required this.inPause,
       required this.playerCharacter,
       required this.gameMap,
-      required this.currentRoom});
+      required this.currentRoom,
+      required this.playerName});
 
   factory GameStateInterface.fromJson(dynamic json) {
     GameTypeEnum parsedGameMode = decodeGameTypeFromJson(json['gameMode']);
@@ -51,15 +53,17 @@ class GameStateInterface {
         inPause: json['inPause'] as bool,
         playerCharacter: PlayerCharacter.fromJson(json['playerCharacter']),
         gameMap: jsonRooms,
-        currentRoom: jsonCurrentRoom);
+        currentRoom: jsonCurrentRoom,
+        playerName: json['playerName'] as String);
   }
 
   Map toJson() => {
         'gameMode': gameMode.toString(),
         'inMap': inMap,
         'inPause': inPause,
-        'playerCharacter': playerCharacter,
-        'gameMap': gameMap,
-        'currentRoom': currentRoom,
+        'playerCharacter': playerCharacter?.toJson(),
+        'gameMap': gameMap.map((e) => e.toJson()).toList(),
+        'currentRoom': currentRoom?.toJson(),
+        'playerName': playerName
       };
 }

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
-import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
+// import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
+// import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
+import '../utils/font.util.dart';
 
 class MainMenuScreen extends StatefulWidget {
-  const MainMenuScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MainMenuScreen({Key? key}) : super(key: key);
 
   @override
   State<MainMenuScreen> createState() => _MainMenuScreenState();
@@ -29,8 +28,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
               child: Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
             child: Text(
-              widget.title,
-              style: Theme.of(context).textTheme.headline4,
+              'Mathpunk spire',
+              style: TextStyle(fontSize: getFontSize(34)),
             ),
           )),
           // Positioned(

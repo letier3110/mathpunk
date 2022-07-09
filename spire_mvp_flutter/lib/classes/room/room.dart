@@ -44,4 +44,22 @@ class Room implements IRoom {
   bool getCanLeaveRoom() {
     return true;
   }
+
+  factory Room.fromJson(dynamic json) {
+    String jsonId = json['id'] as String;
+    List<Enemy> jsonEnemies =
+        (json['enemies'] as List).map((e) => Enemy.fromJson(e)).toList();
+    List<Reward> jsonRewards =
+        (json['rewards'] as List).map((e) => Reward.fromJson(e)).toList();
+    Room jsonRoom = Room(
+        roomId: jsonId, roomEnemies: jsonEnemies, roomRewards: jsonRewards);
+
+    return jsonRoom;
+  }
+
+  Map toJson() => {
+        'enemies': enemies,
+        'rewards': rewards,
+        'id': id,
+      };
 }

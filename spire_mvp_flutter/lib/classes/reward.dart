@@ -26,4 +26,26 @@ class Reward {
   getValue() {
     return relic ?? item ?? card ?? gold;
   }
+
+  factory Reward.fromJson(dynamic json) {
+    Relic? jsonRelic = Relic(); // TODO: to optional relic
+    Item? jsonItem = Item(); // TODOL to optional card
+    PlayableCard? jsonCard = PlayableCard.fromJson(json['card']);
+    int? jsonGold = json['gold'] as int?;
+
+    Reward jsonReward = Reward(
+        rewardRelic: jsonRelic,
+        rewardItem: jsonItem,
+        rewardCard: jsonCard,
+        rewardGold: jsonGold);
+
+    return jsonReward;
+  }
+
+  Map toJson() => {
+        'relic': relic,
+        'item': item,
+        'card': card,
+        'gold': gold,
+      };
 }

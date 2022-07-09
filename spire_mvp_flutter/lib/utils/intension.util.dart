@@ -1,5 +1,5 @@
 import 'package:spire_mvp_flutter/classes/intension.dart';
-import 'package:spire_mvp_flutter/enums/intension_type.dart';
+import 'package:spire_mvp_flutter/enums/intension_type.enum.dart';
 
 String getIntensionType(Intension intension) {
   switch (intension.type) {

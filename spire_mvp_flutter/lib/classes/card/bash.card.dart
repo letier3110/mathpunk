@@ -1,26 +1,21 @@
 import '../base_character.dart';
 
-import '../../enums/card_type.dart';
+import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-class BashCard extends PlayableCard {
-  int damage = 8;
-  int vulnerable = 2;
+int damage = 8;
+int vulnerable = 2;
 
-  BashCard(
-      {cardName = 'Bash',
-      cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',
-      cardMana = 2,
-      cardVulnerable = 2,
-      cardDamage = 8})
-      : super(
+class BashCard extends PlayableCard {
+  BashCard({
+    cardName = 'Bash',
+    cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',
+    cardMana = 2,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack) {
-    damage = cardDamage;
-    vulnerable = cardVulnerable;
-  }
+            cardType: CardType.attack);
 
   @override
   String getCardDescription() {

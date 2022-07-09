@@ -2,25 +2,22 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
-import '../../enums/card_type.dart';
+import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-class AttackCard extends PlayableCard {
-  late int damage;
+int damage = 10;
 
-  AttackCard(
-      {required cardName,
-      required cardDescription,
-      cardMana = 0,
-      cardDamage = 10})
-      : super(
+class AttackCard extends PlayableCard {
+  AttackCard({
+    required cardName,
+    required cardDescription,
+    cardMana = 0,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardTargetType: TargetEnum.singleTarget) {
-    damage = cardDamage;
-  }
+            cardTargetType: TargetEnum.singleTarget);
 
   @override
   play(List<BaseCharacter> target) {

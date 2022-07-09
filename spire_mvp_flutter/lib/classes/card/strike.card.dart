@@ -1,11 +1,11 @@
 import '../base_character.dart';
 
-import '../../enums/card_type.dart';
+import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-class StrikeCard extends PlayableCard {
-  int damage = 8;
+int damage = 8;
 
+class StrikeCard extends PlayableCard {
   StrikeCard(
       {cardName = 'Strike',
       cardDescription = 'Deal 6 damage.',
@@ -15,9 +15,7 @@ class StrikeCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack) {
-    damage = cardDamage;
-  }
+            cardType: CardType.attack);
 
   @override
   String getCardDescription() {

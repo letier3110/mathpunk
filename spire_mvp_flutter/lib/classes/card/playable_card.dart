@@ -2,7 +2,7 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
-import '../../enums/card_type.dart';
+import '../../enums/card_type.enum.dart';
 
 class PlayableCard {
   late String name;
@@ -43,4 +43,21 @@ class PlayableCard {
     // console.log(targets);
     // TODO: implement card apply effect to enemy
   }
+
+  factory PlayableCard.fromJson(dynamic json) {
+    return PlayableCard(
+        cardName: json['name'] as String,
+        cardDescription: json['description'] as String,
+        cardMana: json['mana'] as int,
+        cardType: decodeCardTypeFromJson(json['type']),
+        cardTargetType: decodeTargetEnumFromJson(json['targetType']));
+  }
+
+  Map toJson() => {
+        'name': name,
+        'description': description,
+        'mana': mana,
+        'type': type.toString(),
+        'targetType': targetType.toString(),
+      };
 }

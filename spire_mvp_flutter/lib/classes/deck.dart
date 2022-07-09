@@ -71,6 +71,44 @@ class Deck {
       hand = hand + remItems;
     }
   }
+
+  void setDrawPile(List<PlayableCard> drawPile) {
+    this.drawPile = drawPile;
+  }
+
+  void setHand(List<PlayableCard> hand) {
+    this.hand = hand;
+  }
+
+  void setDiscardPile(List<PlayableCard> discardPile) {
+    this.discardPile = discardPile;
+  }
+
+  factory Deck.fromJson(dynamic json) {
+    List<PlayableCard> playCards =
+        (json['cards'] as List).map((e) => PlayableCard.fromJson(e)).toList();
+    List<PlayableCard> drawCards = (json['drawPile'] as List)
+        .map((e) => PlayableCard.fromJson(e))
+        .toList();
+    List<PlayableCard> handCards =
+        (json['hand'] as List).map((e) => PlayableCard.fromJson(e)).toList();
+    List<PlayableCard> discardCards = (json['discardPile'] as List)
+        .map((e) => PlayableCard.fromJson(e))
+        .toList();
+    Deck deck = Deck(playCards);
+    deck.setDrawPile(drawCards);
+    deck.setHand(handCards);
+    deck.setDiscardPile(discardCards);
+
+    return deck;
+  }
+
+  Map toJson() => {
+        'drawPile': drawPile,
+        'hand': hand,
+        'discardPile': discardPile,
+        'cards': cards,
+      };
 }
 
 shuffle(List<PlayableCard> cards) {

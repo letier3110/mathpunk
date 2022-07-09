@@ -3,25 +3,22 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
-import '../../enums/card_type.dart';
+import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-class DefendCard extends PlayableCard {
-  int block = 5;
+int block = 5;
 
-  DefendCard(
-      {cardName = 'Defend',
-      cardDescription = 'Gain 5 Block.',
-      cardMana = 1,
-      cardBlock = 5})
-      : super(
+class DefendCard extends PlayableCard {
+  DefendCard({
+    cardName = 'Defend',
+    cardDescription = 'Gain 5 Block.',
+    cardMana = 1,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.skill,
-            cardTargetType: TargetEnum.playerTarget) {
-    block = cardBlock;
-  }
+            cardTargetType: TargetEnum.playerTarget);
 
   @override
   String getCardDescription() {

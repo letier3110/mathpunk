@@ -15,7 +15,6 @@ class Enemy extends BaseCharacter {
     maxHealth = enemyMaxHealth;
     block = enemyArmor;
     moveset = Moveset();
-    // this.moveset.getNextMove();
   }
 
   makeMove() {
@@ -24,4 +23,22 @@ class Enemy extends BaseCharacter {
     }
     moveset.getNextMove();
   }
+
+  void setMoveset(Moveset moveset) {
+    this.moveset = moveset;
+  }
+
+  factory Enemy.fromJson(dynamic json) {
+    Enemy character = (BaseCharacter.fromJson(json)) as Enemy;
+    Moveset jsonMoveset = Moveset.fromJson(json['moveset']);
+    character.setMoveset(jsonMoveset);
+
+    return character;
+  }
+
+  @override
+  Map toJson() => {
+        ...super.toJson(),
+        'moveset': moveset,
+      };
 }

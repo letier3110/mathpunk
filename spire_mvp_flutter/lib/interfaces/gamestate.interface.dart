@@ -25,29 +25,33 @@ class GameStateInterface {
       required this.currentRoom});
 
   factory GameStateInterface.fromJson(dynamic json) {
-    GameTypeEnum parsedGameMode = GameTypeEnum.standard;
+    GameTypeEnum parsedGameMode = decodeGameTypeFromJson(json['gameMode']);
 
     switch (json['gameMode']) {
-      case 'standard':
+      case GameTypeEnum.standard:
         parsedGameMode = GameTypeEnum.standard;
         break;
-      case 'daily':
+      case GameTypeEnum.daily:
         parsedGameMode = GameTypeEnum.daily;
         break;
-      case 'custom':
+      case GameTypeEnum.custom:
       default:
         parsedGameMode = GameTypeEnum.custom;
         break;
     }
+
+    List<Room> jsonRooms =
+        (json['gameMap'] as List).map((e) => Room.fromJson(e)).toList();
+
+    Room jsonCurrentRoom = Room.fromJson(json['currentRoom']);
+
     return GameStateInterface(
         gameMode: parsedGameMode,
         inMap: json['inMap'] as bool,
         inPause: json['inPause'] as bool,
-        playerCharacter:
-            PlayerCharacter.fromJson(json), // TODO: implement serialize
-        gameMap: json['gameMap'], // TODO: implement serialize
-        currentRoom: json['currentRoom'] // TODO: implement serialize
-        );
+        playerCharacter: PlayerCharacter.fromJson(json['playerCharacter']),
+        gameMap: jsonRooms,
+        currentRoom: jsonCurrentRoom);
   }
 
   Map toJson() => {

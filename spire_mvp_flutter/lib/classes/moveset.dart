@@ -1,4 +1,4 @@
-import '../enums/intension_type.dart';
+import '../enums/intension_type.enum.dart';
 import 'intension.dart';
 import 'player/player.dart';
 
@@ -19,8 +19,12 @@ class Moveset {
     // react to stats change
   }
 
-  setMoves(List<Intension> newMoves) {
+  void setMoves(List<Intension> newMoves) {
     moves = newMoves;
+  }
+
+  void setCurrentMove(Intension currentMove) {
+    currentMove = currentMove;
   }
 
   executeMove() {
@@ -42,4 +46,22 @@ class Moveset {
       moves.add(move);
     }
   }
+
+  factory Moveset.fromJson(dynamic json) {
+    List<Intension> jsonMoves =
+        (json['moves'] as List).map((e) => Intension.fromJson(e)).toList();
+
+    Intension jsonCurrentIntension = Intension.fromJson(json['currentMove']);
+
+    Moveset jsonMoveset = Moveset();
+    jsonMoveset.setMoves(jsonMoves);
+    jsonMoveset.setCurrentMove(jsonCurrentIntension);
+
+    return jsonMoveset;
+  }
+
+  Map toJson() => {
+        'moves': moves,
+        'currentMove': currentMove,
+      };
 }

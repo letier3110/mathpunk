@@ -9,6 +9,8 @@ import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
+import '../classes/deck.dart';
+
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
   bool inMap = false;
@@ -86,10 +88,15 @@ class GamestateController extends ChangeNotifier {
 
     // if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
     if (currentRoom!.enemies.isEmpty) {
-      enterMap();
-      // currentRoom.getRewards();
+      endTheRoom();
     }
 
+    notifyListeners();
+  }
+
+  void endTheRoom() {
+    playerCharacter!.attachDeck(Deck(playerCharacter!.deck.cards));
+    enterMap();
     notifyListeners();
   }
 

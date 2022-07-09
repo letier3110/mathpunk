@@ -104,6 +104,18 @@ class PlayerCharacter extends BaseCharacter {
     this.gold = gold;
   }
 
+  setDeck(Deck deck) {
+    this.deck = deck;
+  }
+
+  setRelics(List<Relic> relics) {
+    this.relics = relics;
+  }
+
+  setItems(List<Item> items) {
+    this.items = items;
+  }
+
   factory PlayerCharacter.fromJson(dynamic json) {
     PlayerCharacter character =
         (BaseCharacter.fromJson(json)) as PlayerCharacter;
@@ -111,9 +123,11 @@ class PlayerCharacter extends BaseCharacter {
     character.setManaPower(json['manaPower'] as int);
     character.setDrawPower(json['drawPower'] as int);
     character.setGold(json['gold'] as int);
-    // character.setGold(json['deck'] as int);
-    // character.setGold(json['relics'] as int);
-    // character.setGold(json['items'] as int);
+    character.setDeck(Deck.fromJson(json['deck']));
+    // character.setRelics(json['relics'] as List<Relic>);
+    character.setRelics([]);
+    // character.setItems(json['items'] as List<Item>);
+    character.setItems([]);
     // character
 
     return character;

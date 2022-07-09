@@ -38,6 +38,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           )),
           if (saves.currentSaveSlot == null) const CreateProfileComponent(),
           if (saves.currentSaveSlot != null)
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                saves.saveSlots[saves.currentSaveSlot!],
+                style: TextStyle(fontSize: getFontSize(24)),
+              ),
+            ),
+          if (saves.currentSaveSlot != null)
             Positioned(
               bottom: 0,
               child: Container(

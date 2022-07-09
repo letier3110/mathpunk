@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
 import 'package:spire_mvp_flutter/storage/gamestate.storage.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/storage/saves.storage.dart.dart';
+import 'package:spire_mvp_flutter/storage/saves.storage.dart';
 
-GameStateStorage storage = GameStateStorage();
+GameStateStorage gameStorage = GameStateStorage();
 
 class SavesController extends ChangeNotifier {
   int? currentSaveSlot;
@@ -34,14 +34,23 @@ class SavesController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void createNewSlot(String slot) {
+    currentSaveSlot = saveSlots.length;
+    saveSlots.add(slot);
+
+    _storage.writeSaves(this);
+
+    notifyListeners();
+  }
+
   String? getSave() {
     if (currentSaveSlot == null) return null;
     return saveSlots.elementAt(currentSaveSlot!);
   }
 
   void loadGame(GamestateController gameState) {
-    storage.loadProfile(gameState, currentSaveSlot!);
-    storage.readProfiles(gameState, currentSaveSlot!);
+    gameStorage.loadProfile(gameState, currentSaveSlot!);
+    gameStorage.readProfiles(gameState, currentSaveSlot!);
   }
 
   void fromJson(dynamic json) {

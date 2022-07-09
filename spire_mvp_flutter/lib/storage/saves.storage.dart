@@ -18,7 +18,7 @@ class SavesStorage {
 
   Future<File> getFile() async {
     final path = await _localPath;
-    return File('$path/mathpunk/saves.bin');
+    return File('$path/saves.bin');
   }
 
   Future<int> loadSaves(

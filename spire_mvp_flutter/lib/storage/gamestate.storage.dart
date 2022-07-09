@@ -14,7 +14,7 @@ class GameStateStorage {
 
   Future<File> getFile(String fileName) async {
     final path = await _localPath;
-    return File('$path/mathpunk/$fileName.bin');
+    return File('$path/$fileName.bin');
   }
 
   Future<int> loadProfile(GamestateController gameState, int profile) async {

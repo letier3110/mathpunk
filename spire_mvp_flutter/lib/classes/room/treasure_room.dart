@@ -10,12 +10,9 @@ class TreasureRoom extends Room implements IChestRoom {
 
   TreasureRoom(
       {required String roomId,
-      required List<Enemy> roomEnemies,
-      required List<Reward> roomRewards})
-      : super(
-            roomEnemies: roomEnemies,
-            roomRewards: roomRewards,
-            roomId: roomId) {
+      List<Enemy>? roomEnemies,
+      List<Reward>? roomRewards})
+      : super(roomEnemies: [], roomRewards: [Reward()], roomId: roomId) {
     isTreasureChestOpened = false;
   }
 

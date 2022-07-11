@@ -12,7 +12,6 @@ class Moveset {
     moves = [Intension(intensionType: IntensionType.offense)];
     // parent = enemyParent;
     currentMove = null;
-    getNextMove();
     // array of moves
     // get next move
     // react to player actions

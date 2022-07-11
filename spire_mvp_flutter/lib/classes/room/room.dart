@@ -42,7 +42,10 @@ class Room implements IRoom {
 
   @override
   bool getCanLeaveRoom() {
-    return true;
+    // can be failed,
+    // because of not correctly loaded from memory state or wrongly casted.
+    // PlayableCard class in not used directly, only as Generic Type
+    throw UnimplementedError();
   }
 
   factory Room.fromJson(dynamic json) {

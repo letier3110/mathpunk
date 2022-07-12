@@ -27,4 +27,4 @@ Enemy enemyFromJson(dynamic json) {
 }
 
 Map enemyToJson(Enemy enemy) =>
-    {...enemy.toJson(), '_runtime': enemy.runtimeType};
+    {...enemy.toJson(), '_runtime': enemy.runtimeType.toString()};

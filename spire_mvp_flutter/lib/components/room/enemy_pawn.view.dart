@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/classes/intension.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/enums/intension_type.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 import 'package:spire_mvp_flutter/utils/intension.util.dart';
 
@@ -61,7 +63,8 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                   height: 50,
                   child: Center(
                     child: Text(
-                      getIntensionType(widget.enemy.moveset.currentMove!),
+                      getIntensionType(widget.enemy.moveset.currentMove ??
+                          Intension(intensionType: IntensionType.special)),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,

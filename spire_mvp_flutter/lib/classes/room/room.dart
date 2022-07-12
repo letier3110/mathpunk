@@ -1,3 +1,5 @@
+import 'package:spire_mvp_flutter/storage/enemy.storage.dart';
+
 import '../../interfaces/room.interface.dart';
 import '../enemy/enemy.dart';
 import '../reward.dart';
@@ -51,7 +53,7 @@ class Room implements IRoom {
   factory Room.fromJson(dynamic json) {
     String jsonId = json['id'] as String;
     List<Enemy> jsonEnemies =
-        (json['enemies'] as List).map((e) => Enemy.fromJson(e)).toList();
+        (json['enemies'] as List).map((e) => enemyFromJson(e)).toList();
     List<Reward> jsonRewards =
         (json['rewards'] as List).map((e) => Reward.fromJson(e)).toList();
     Room jsonRoom = Room(
@@ -61,8 +63,8 @@ class Room implements IRoom {
   }
 
   Map toJson() => {
-        'enemies': enemies,
-        'rewards': rewards,
+        'enemies': enemies.map((e) => enemyToJson(e)).toList(),
+        'rewards': rewards.map((e) => e.toJson()).toList(),
         'id': id,
       };
 }

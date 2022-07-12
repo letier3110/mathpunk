@@ -1,4 +1,6 @@
 import 'dart:core';
+import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+
 import 'card/playable_card.dart';
 
 class Deck {
@@ -86,14 +88,13 @@ class Deck {
 
   factory Deck.fromJson(dynamic json) {
     List<PlayableCard> playCards =
-        (json['cards'] as List).map((e) => PlayableCard.fromJson(e)).toList();
-    List<PlayableCard> drawCards = (json['drawPile'] as List)
-        .map((e) => PlayableCard.fromJson(e))
-        .toList();
+        (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
+    List<PlayableCard> drawCards =
+        (json['drawPile'] as List).map((e) => playableCardFromJson(e)).toList();
     List<PlayableCard> handCards =
-        (json['hand'] as List).map((e) => PlayableCard.fromJson(e)).toList();
+        (json['hand'] as List).map((e) => playableCardFromJson(e)).toList();
     List<PlayableCard> discardCards = (json['discardPile'] as List)
-        .map((e) => PlayableCard.fromJson(e))
+        .map((e) => playableCardFromJson(e))
         .toList();
     Deck deck = Deck(playCards);
     deck.setDrawPile(drawCards);
@@ -104,10 +105,10 @@ class Deck {
   }
 
   Map toJson() => {
-        'drawPile': drawPile,
-        'hand': hand,
-        'discardPile': discardPile,
-        'cards': cards,
+        'drawPile': drawPile.map((e) => playableCardToJson(e)).toList(),
+        'hand': hand.map((e) => playableCardToJson(e)).toList(),
+        'discardPile': discardPile.map((e) => playableCardToJson(e)).toList(),
+        'cards': cards.map((e) => playableCardToJson(e)).toList(),
       };
 }
 

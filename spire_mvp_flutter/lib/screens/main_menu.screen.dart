@@ -19,6 +19,21 @@ class MainMenuScreen extends StatefulWidget {
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    SavesController saves =
+        Provider.of<SavesController>(context, listen: false);
+
+    GamestateController gamestate =
+        Provider.of<GamestateController>(context, listen: false);
+
+    if (saves.currentSaveSlot != null) {
+      saves.loadGame(gamestate);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     SavesController saves = Provider.of<SavesController>(context);
 

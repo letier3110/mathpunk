@@ -50,13 +50,19 @@ class SavesController extends ChangeNotifier {
 
   void loadGame(GamestateController gameState) {
     gameStorage.loadProfile(gameState, currentSaveSlot!);
-    gameStorage.readProfiles(gameState, currentSaveSlot!);
+    // gameStorage.readProfiles(gameState, currentSaveSlot!);
   }
 
-  void fromJson(dynamic json) {
+  void saveGame(GamestateController gameState) {
+    gameStorage.writeState(gameState, currentSaveSlot!);
+    // gameStorage.readProfiles(gameState, currentSaveSlot!);
+  }
+
+  SavesController fromJson(dynamic json) {
     currentSaveSlot = json["currentSaveSlot"] as int;
     saveSlots = (json['saveSlots'] as List).map((e) => e.toString()).toList();
     notifyListeners();
+    return this;
   }
 
   Map toJson() => {

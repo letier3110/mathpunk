@@ -33,6 +33,8 @@ class GameStateStorage {
 
       gameState.fromJson(jsonDecode(contents));
 
+      gameState.notifyListeners();
+
       return 1;
     } catch (e) {
       return 0;
@@ -67,12 +69,21 @@ class GameStateStorage {
     }
   }
 
-  Future<int> writeState(GamestateController gameState, String saveName) async {
-    final save = await getFile(saveName);
+  Future<int> writeState(GamestateController gameState, int profile) async {
+    var profileSaveName = 'save1';
+    if (profile == 2) {
+      profileSaveName = 'save2';
+    } else if (profile == 3) {
+      profileSaveName = 'save3';
+    }
+    final save = await getFile(profileSaveName);
 
     try {
-      save.writeAsString(jsonEncode(gameState.toJson()));
-      return 1;
+      final jsonState = gameState.toJson();
+      final contents = jsonEncode(jsonState);
+      save.writeAsString(contents);
+
+      exit(0);
     } catch (e) {
       return 0;
     }

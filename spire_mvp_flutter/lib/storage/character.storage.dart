@@ -41,4 +41,4 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 }
 
 Map playerCharacterToJson(PlayerCharacter character) =>
-    {...character.toJson(), '_runtime': character.runtimeType};
+    {...character.toJson(), '_runtime': character.runtimeType.toString()};

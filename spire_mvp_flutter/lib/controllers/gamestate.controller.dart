@@ -7,6 +7,7 @@ import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
+import 'package:spire_mvp_flutter/storage/room.storage.dart';
 
 import '../classes/deck.dart';
 

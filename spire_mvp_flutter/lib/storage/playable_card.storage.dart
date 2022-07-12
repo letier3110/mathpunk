@@ -28,4 +28,4 @@ PlayableCard playableCardFromJson(dynamic json) {
 }
 
 Map playableCardToJson(PlayableCard playableCard) =>
-    {...playableCard.toJson(), '_runtime': playableCard.runtimeType};
+    {...playableCard.toJson(), '_runtime': playableCard.runtimeType.toString()};

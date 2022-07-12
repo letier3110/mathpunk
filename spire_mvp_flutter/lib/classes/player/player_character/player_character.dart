@@ -136,9 +136,9 @@ class PlayerCharacter extends BaseCharacter {
   @override
   Map toJson() => {
         ...super.toJson(),
-        'deck': deck,
-        'relics': relics,
-        'items': items,
+        'deck': deck.toJson(),
+        'relics': [],
+        'items': [],
         'mana': mana,
         'manaPower': manaPower,
         'drawPower': drawPower,

@@ -4,6 +4,8 @@ import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
+import 'package:spire_mvp_flutter/storage/character.storage.dart';
+import 'package:spire_mvp_flutter/storage/room.storage.dart';
 
 class GameStateInterface {
   GameTypeEnum? gameMode;
@@ -23,7 +25,7 @@ class GameStateInterface {
       required this.inPause,
       required this.playerCharacter,
       required this.gameMap,
-      required this.currentRoom,
+      this.currentRoom,
       required this.playerName});
 
   factory GameStateInterface.fromJson(dynamic json) {
@@ -51,7 +53,7 @@ class GameStateInterface {
         gameMode: parsedGameMode,
         inMap: json['inMap'] as bool,
         inPause: json['inPause'] as bool,
-        playerCharacter: PlayerCharacter.fromJson(json['playerCharacter']),
+        playerCharacter: playerCharacterFromJson(json['playerCharacter']),
         gameMap: jsonRooms,
         currentRoom: jsonCurrentRoom,
         playerName: json['playerName'] as String);
@@ -61,9 +63,11 @@ class GameStateInterface {
         'gameMode': gameMode.toString(),
         'inMap': inMap,
         'inPause': inPause,
-        'playerCharacter': playerCharacter?.toJson(),
-        'gameMap': gameMap.map((e) => e.toJson()).toList(),
-        'currentRoom': currentRoom?.toJson(),
+        'playerCharacter': playerCharacter == null
+            ? null
+            : playerCharacterToJson(playerCharacter!),
+        'gameMap': gameMap.map((e) => roomToJson(e)).toList(),
+        'currentRoom': currentRoom == null ? null : roomToJson(currentRoom!),
         'playerName': playerName
       };
 }

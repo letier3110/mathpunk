@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
+import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
 import 'package:spire_mvp_flutter/enums/screens.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
@@ -17,10 +18,29 @@ class PauseScreen extends StatefulWidget {
 class _PauseScreenState extends State<PauseScreen> {
   @override
   Widget build(BuildContext context) {
+    SavesController saves =
+        Provider.of<SavesController>(context, listen: false);
+
     GamestateController gameState =
         Provider.of<GamestateController>(context, listen: false);
     NavigationController navigation =
         Provider.of<NavigationController>(context, listen: false);
+
+    void onReturn() {
+      gameState.exitPause();
+    }
+
+    void onAbortRun() {
+      gameState.stopPlaying();
+      navigation.changeScreen(ScreenEnum.mainMenu);
+    }
+
+    void onSaveExit() {
+      gameState.exitPause();
+      saves.saveGame(gameState);
+      // TODO: persist state
+      // exit(0)
+    }
 
     return Stack(children: [
       Container(
@@ -39,7 +59,7 @@ class _PauseScreenState extends State<PauseScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: () => {gameState.exitPause()},
+                        onTap: onReturn,
                         child: Container(
                           width: 580,
                           color: Colors.redAccent,
@@ -53,10 +73,7 @@ class _PauseScreenState extends State<PauseScreen> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => {
-                          gameState.stopPlaying(),
-                          navigation.changeScreen(ScreenEnum.mainMenu)
-                        },
+                        onTap: onAbortRun,
                         child: Container(
                           width: 580,
                           color: Colors.redAccent,
@@ -70,12 +87,7 @@ class _PauseScreenState extends State<PauseScreen> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => {
-                          gameState.exitPause(),
-                          navigation.changeScreen(ScreenEnum.mainMenu),
-                          // TODO: persist state
-                          // exit(0)
-                        },
+                        onTap: onSaveExit,
                         child: Container(
                           width: 580,
                           color: Colors.redAccent,

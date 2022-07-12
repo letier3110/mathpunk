@@ -6,6 +6,7 @@ import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
 import 'package:spire_mvp_flutter/enums/screens.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
+import 'package:spire_mvp_flutter/storage/gamestate.storage.dart';
 
 import '../controllers/navigation.controller.dart';
 
@@ -25,20 +26,24 @@ class SavesStorage {
       SavesController saves, NavigationController navigation) async {
     try {
       final saveFile = await getFile();
-
-      // Read the file
       final contents = await saveFile.readAsString();
 
-      saves.fromJson(jsonDecode(contents));
+      dynamic saveSlots = jsonDecode(contents);
+
+      SavesController savesController = saves.fromJson(saveSlots);
 
       saves.loading = false;
 
+      // if save exist
       saves.notifyListeners();
+
+      GameStateStorage gameStorage;
 
       navigation.changeScreen(ScreenEnum.mainMenu);
 
       return 1;
     } catch (e) {
+      // if save not exist
       saves.loading = false;
       saves.notifyListeners();
 

@@ -31,29 +31,19 @@ class GameStateInterface {
   factory GameStateInterface.fromJson(dynamic json) {
     GameTypeEnum parsedGameMode = decodeGameTypeFromJson(json['gameMode']);
 
-    switch (json['gameMode']) {
-      case GameTypeEnum.standard:
-        parsedGameMode = GameTypeEnum.standard;
-        break;
-      case GameTypeEnum.daily:
-        parsedGameMode = GameTypeEnum.daily;
-        break;
-      case GameTypeEnum.custom:
-      default:
-        parsedGameMode = GameTypeEnum.custom;
-        break;
-    }
-
     List<Room> jsonRooms =
-        (json['gameMap'] as List).map((e) => Room.fromJson(e)).toList();
+        (json['gameMap'] as List).map((e) => roomFromJson(e)).toList();
 
-    Room jsonCurrentRoom = Room.fromJson(json['currentRoom']);
+    Room jsonCurrentRoom = roomFromJson(json['currentRoom']);
+
+    PlayerCharacter character =
+        playerCharacterFromJson(json['playerCharacter']);
 
     return GameStateInterface(
         gameMode: parsedGameMode,
         inMap: json['inMap'] as bool,
         inPause: json['inPause'] as bool,
-        playerCharacter: playerCharacterFromJson(json['playerCharacter']),
+        playerCharacter: character,
         gameMap: jsonRooms,
         currentRoom: jsonCurrentRoom,
         playerName: json['playerName'] as String);

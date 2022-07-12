@@ -6,13 +6,13 @@ enum CardType {
 
 CardType decodeCardTypeFromJson(dynamic json) {
   switch (json) {
-    case CardType.attack:
+    case 'CardType.attack':
       return CardType.attack;
 
-    case CardType.power:
+    case 'CardType.power':
       return CardType.power;
 
-    case CardType.skill:
+    case 'CardType.skill':
     default:
       return CardType.skill;
   }

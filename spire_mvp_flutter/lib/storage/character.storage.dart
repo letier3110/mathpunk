@@ -4,6 +4,8 @@ import 'package:spire_mvp_flutter/classes/player/player_character/irrationalist_
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
 
+import '../classes/deck.dart';
+
 PlayerCharacter playerCharacterFromJson(dynamic json) {
   int jsonHelath = json['health'] as int;
   int jsonMaxHealth = json['maxHealth'] as int;
@@ -31,6 +33,10 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
       character = Barbarian();
       break;
   }
+
+  Deck deck = Deck.fromJson(json['deck']);
+
+  character.setDeck(deck);
 
   character.setHealth(jsonHelath);
   character.setMaxHealth(jsonMaxHealth);

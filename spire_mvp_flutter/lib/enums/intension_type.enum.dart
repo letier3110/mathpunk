@@ -13,34 +13,34 @@ enum IntensionType {
 
 IntensionType decodeIntensionTypeFromJson(dynamic json) {
   switch (json) {
-    case IntensionType.offense:
+    case 'IntensionType.offense':
       return IntensionType.offense;
 
-    case IntensionType.defense:
+    case 'IntensionType.defense':
       return IntensionType.defense;
 
-    case IntensionType.buff:
+    case 'IntensionType.buff':
       return IntensionType.buff;
 
-    case IntensionType.debuff:
+    case 'IntensionType.debuff':
       return IntensionType.debuff;
 
-    case IntensionType.offenseBuff:
+    case 'IntensionType.offenseBuff':
       return IntensionType.offenseBuff;
 
-    case IntensionType.defenseBuff:
+    case 'IntensionType.defenseBuff':
       return IntensionType.defenseBuff;
 
-    case IntensionType.offenseDebuff:
+    case 'IntensionType.offenseDebuff':
       return IntensionType.offenseDebuff;
 
-    case IntensionType.defenseDebuff:
+    case 'IntensionType.defenseDebuff':
       return IntensionType.defenseDebuff;
 
-    case IntensionType.defenseOffense:
+    case 'IntensionType.defenseOffense':
       return IntensionType.defenseOffense;
 
-    case IntensionType.special:
+    case 'IntensionType.special':
     default:
       return IntensionType.special;
   }

@@ -31,9 +31,13 @@ class GameStateStorage {
       // Read the file
       final contents = await saveFile.readAsString();
 
-      gameState.fromJson(jsonDecode(contents));
+      dynamic jsonState = jsonDecode(contents);
 
-      gameState.notifyListeners();
+      GameStateInterface state = GameStateInterface.fromJson(jsonState);
+
+      print('heresy');
+
+      gameState.fromJson(state);
 
       return 1;
     } catch (e) {
@@ -81,7 +85,7 @@ class GameStateStorage {
     try {
       final jsonState = gameState.toJson();
       final contents = jsonEncode(jsonState);
-      save.writeAsString(contents);
+      await save.writeAsString(contents);
 
       exit(0);
     } catch (e) {

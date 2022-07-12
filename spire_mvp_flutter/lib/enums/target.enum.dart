@@ -7,16 +7,16 @@ enum TargetEnum {
 
 TargetEnum decodeTargetEnumFromJson(dynamic json) {
   switch (json) {
-    case TargetEnum.allTargets:
+    case 'TargetEnum.allTargets':
       return TargetEnum.allTargets;
 
-    case TargetEnum.playerTarget:
+    case 'TargetEnum.playerTarget':
       return TargetEnum.playerTarget;
 
-    case TargetEnum.randomTarget:
+    case 'TargetEnum.randomTarget':
       return TargetEnum.randomTarget;
 
-    case TargetEnum.singleTarget:
+    case 'TargetEnum.singleTarget':
     default:
       return TargetEnum.singleTarget;
   }

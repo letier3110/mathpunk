@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/components/game_header/game_header.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/screens/enemy_room.screen.dart';
 import 'package:spire_mvp_flutter/screens/map.screen.dart';
 import 'package:spire_mvp_flutter/screens/pause.screen.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';

@@ -28,7 +28,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     GamestateController gamestate =
         Provider.of<GamestateController>(context, listen: false);
 
-    if (saves.currentSaveSlot != null) {
+    if (saves.currentSaveSlot != null && gamestate.gameMap.isEmpty) {
       saves.loadGame(gamestate);
     }
   }

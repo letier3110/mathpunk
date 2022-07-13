@@ -176,6 +176,9 @@ class GamestateController extends ChangeNotifier {
       // this.currentRoom.getEnemies().forEach(enemy => {
       //   enemy.moveset.getNextMove();
       // }
+      for (var enemy in currentRoom!.getEnemies()) {
+        enemy.initMove();
+      }
       // TODO: init battle
     }
     notifyListeners();

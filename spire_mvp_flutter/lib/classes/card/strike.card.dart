@@ -3,7 +3,7 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 8;
+int damage = 5;
 
 class StrikeCard extends PlayableCard {
   StrikeCard(

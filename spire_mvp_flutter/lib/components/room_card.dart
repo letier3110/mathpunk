@@ -21,27 +21,32 @@ class RoomCardView extends State<RoomCard> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
-    var isAvailable =
-        (gameState.getNextAvailableRooms().contains(widget.room) &&
-                gameState.currentRoom != null &&
-                gameState.currentRoom?.getCanLeaveRoom() == true &&
-                gameState.currentRoom?.id != widget.room.id) ||
-            gameState.getNextAvailableRooms().contains(widget.room);
+    var isNextRoom = gameState.getNextAvailableRooms().contains(widget.room);
+    var isInRoom = gameState.currentRoom != null;
 
-    var inRoom = gameState.currentRoom?.id == widget.room.id;
+    var isAvailable = (!isInRoom && isNextRoom) ||
+        (isInRoom &&
+            gameState.currentRoom!.enemies.isEmpty &&
+            gameState.currentRoom!.id != widget.room.id &&
+            isNextRoom);
+
+    var inCurrentRoom = gameState.currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
-      if (inRoom &&
-          gameState.currentRoom != null &&
-          gameState.currentRoom!.enemies.isEmpty &&
-          gameState.currentRoom!.id != widget.room.id) {
+      if (!isInRoom && isNextRoom) {
         gameState.enterRoom(widget.room);
         return;
       }
-      if (inRoom) {
+      if (isInRoom) {
+        if (gameState.currentRoom!.enemies.isEmpty &&
+            gameState.currentRoom!.id != widget.room.id &&
+            isNextRoom) {
+          gameState.enterRoom(widget.room);
+          return;
+        }
+      }
+      if (inCurrentRoom) {
         gameState.exitMap();
-      } else {
-        gameState.enterRoom(widget.room);
       }
     }
 
@@ -61,7 +66,7 @@ class RoomCardView extends State<RoomCard> {
                 )
               : const BoxDecoration(),
           child: Card(
-            color: inRoom
+            color: inCurrentRoom
                 ? Colors.green
                 : isAvailable
                     ? Colors.amber

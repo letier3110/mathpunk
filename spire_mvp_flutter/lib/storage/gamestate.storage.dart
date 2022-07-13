@@ -87,7 +87,7 @@ class GameStateStorage {
       final contents = jsonEncode(jsonState);
       await save.writeAsString(contents);
 
-      exit(0);
+      return 1;
     } catch (e) {
       return 0;
     }

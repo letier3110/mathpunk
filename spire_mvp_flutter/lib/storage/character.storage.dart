@@ -5,9 +5,19 @@ import 'package:spire_mvp_flutter/classes/player/player_character/player_charact
 import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
 
 import '../classes/deck.dart';
+import '../classes/item.dart';
+import '../classes/relic.dart';
 
 PlayerCharacter playerCharacterFromJson(dynamic json) {
-  int jsonHelath = json['health'] as int;
+  Deck jsonDeck = Deck.fromJson(json['deck']);
+  List<Relic> jsonRelic = [];
+  List<Item> jsonItem = [];
+  int jsonMana = json['mana'] as int;
+  int jsonManaPower = json['manaPower'] as int;
+  int jsonDrawPower = json['drawPower'] as int;
+  int jsonGold = json['gold'] as int;
+
+  int jsonHealth = json['health'] as int;
   int jsonMaxHealth = json['maxHealth'] as int;
   int jsonBlock = json['block'] as int;
   int jsonVulnerable = json['vulnerable'] as int;
@@ -34,11 +44,16 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
       break;
   }
 
-  Deck deck = Deck.fromJson(json['deck']);
+  character.setRelics(jsonRelic);
+  character.setItems(jsonItem);
+  character.setMana(jsonMana);
+  character.setManaPower(jsonManaPower);
+  character.setDrawPower(jsonDrawPower);
+  character.setGold(jsonGold);
 
-  character.setDeck(deck);
+  character.setDeck(jsonDeck);
 
-  character.setHealth(jsonHelath);
+  character.setHealth(jsonHealth);
   character.setMaxHealth(jsonMaxHealth);
   character.addBlock(jsonBlock);
   character.addVulnerable(jsonVulnerable);

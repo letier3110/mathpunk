@@ -24,6 +24,10 @@ class Enemy extends BaseCharacter {
     moveset.getNextMove();
   }
 
+  initMove() {
+    moveset.getNextMove();
+  }
+
   void setMoveset(Moveset moveset) {
     this.moveset = moveset;
   }

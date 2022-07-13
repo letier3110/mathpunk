@@ -38,6 +38,7 @@ class _PauseScreenState extends State<PauseScreen> {
     void onSaveExit() {
       gameState.exitPause();
       saves.saveGame(gameState);
+      navigation.changeScreen(ScreenEnum.mainMenu);
       // TODO: persist state
       // exit(0)
     }

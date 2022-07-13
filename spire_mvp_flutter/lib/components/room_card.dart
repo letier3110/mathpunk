@@ -42,6 +42,7 @@ class RoomCardView extends State<RoomCard> {
             gameState.currentRoom!.id != widget.room.id &&
             isNextRoom) {
           gameState.enterRoom(widget.room);
+          gameState.exitMap();
           return;
         }
       }

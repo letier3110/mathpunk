@@ -35,6 +35,8 @@ class Deck {
 
   void initialLoadDrawPile() {
     drawPile = shuffle(cards);
+    discardPile = [];
+    hand = [];
   }
 
   refreshDrawPile() {

@@ -128,7 +128,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                               child: Column(
                                 children: [
                                   Text(
-                                    widget.card.description,
+                                    widget.card.getCardDescription(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: getFontSize(16)),

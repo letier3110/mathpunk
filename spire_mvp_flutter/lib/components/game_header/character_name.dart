@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class CharacterName extends StatefulWidget {
@@ -15,6 +16,9 @@ class CharacterNameView extends State<CharacterName> {
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
+    SavesController saves = Provider.of<SavesController>(context);
+
+    var playerName = saves.saveSlots[saves.currentSaveSlot ?? 0];
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -24,7 +28,7 @@ class CharacterNameView extends State<CharacterName> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              gameState.playerName ?? 'autosaved',
+              playerName,
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,

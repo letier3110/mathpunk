@@ -164,8 +164,9 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom == null) {
       currentRoom = room;
     } else if ((currentRoom != null &&
-        currentRoom!.getCanLeaveRoom() &&
-        getNextAvailableRooms().contains(currentRoom))) {
+        // currentRoom!.getCanLeaveRoom() &&
+        currentRoom!.enemies.isEmpty &&
+        getNextAvailableRooms().contains(room))) {
       currentRoom = room;
     }
 

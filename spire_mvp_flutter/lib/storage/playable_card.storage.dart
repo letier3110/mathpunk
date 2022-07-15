@@ -1,3 +1,4 @@
+import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 
 import '../classes/card/bash.card.dart';
@@ -18,6 +19,9 @@ PlayableCard playableCardFromJson(dynamic json) {
       break;
     case 'BashCard':
       card = BashCard();
+      break;
+    case 'AngerCard':
+      card = AngerCard();
       break;
     default:
       card = StrikeCard();

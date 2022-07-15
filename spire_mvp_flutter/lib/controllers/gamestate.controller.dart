@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/base_character.dart';
+import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
@@ -48,6 +53,8 @@ class GamestateController extends ChangeNotifier {
 
   void selectPlayerCharacter(PlayerCharacter character) {
     playerCharacter = character;
+    Player player = Player();
+    player.selectCharacter(character);
     notifyListeners();
   }
 
@@ -111,8 +118,11 @@ class GamestateController extends ChangeNotifier {
 
   void generateMap() {
     const count = 10;
+    var rng = Random();
     for (var i = 0; i < count; i++) {
-      gameMap.add(EnemyRoom(roomId: '$i'));
+      gameMap.add(EnemyRoom(roomId: '$i', roomRewards: [
+        Reward(rewardCards: [AngerCard()], rewardGold: rng.nextInt(100) + 50)
+      ]));
     }
 
     notifyListeners();
@@ -211,6 +221,10 @@ class GamestateController extends ChangeNotifier {
     playerCharacter = savedInfo.playerCharacter;
     gameMap = savedInfo.gameMap;
     currentRoom = savedInfo.currentRoom;
+    Player player = Player();
+    if (savedInfo.playerCharacter != null) {
+      player.selectCharacter(savedInfo.playerCharacter!);
+    }
     notifyListeners();
   }
 

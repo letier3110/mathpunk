@@ -44,6 +44,10 @@ class Deck {
     discardPile = [];
   }
 
+  void addToDiscardPile(PlayableCard card) {
+    discardPile.add(card);
+  }
+
   playCard(PlayableCard card) {
     hand.remove(card);
     discardPile.add(card);

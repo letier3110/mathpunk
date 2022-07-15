@@ -1,42 +1,38 @@
+import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+
 import 'relic.dart';
 import 'item.dart';
 import 'card/playable_card.dart';
 
-// type Reward = Relic | Item | Card | number;
-
-// actualy its Relic|Item|Card|number|null now, due to Dart
 class Reward {
-  late Relic? relic;
-  late Item? item;
-  late PlayableCard? card;
-  late int? gold;
+  Relic? relic;
+  Item? item;
+  List<PlayableCard> cards = const [];
+  int? gold;
 
   // specify only one item of its object
   Reward(
       {Relic? rewardRelic,
       Item? rewardItem,
-      PlayableCard? rewardCard,
+      List<PlayableCard> rewardCards = const [],
       int? rewardGold}) {
     relic = rewardRelic;
     item = rewardItem;
-    card = rewardCard;
+    cards = rewardCards;
     gold = rewardGold;
-  }
-
-  getValue() {
-    return relic ?? item ?? card ?? gold;
   }
 
   factory Reward.fromJson(dynamic json) {
     Relic? jsonRelic = Relic(); // TODO: to optional relic
     Item? jsonItem = Item(); // TODOL to optional card
-    PlayableCard? jsonCard = PlayableCard.fromJson(json['card']);
+    List<PlayableCard> jsonCards =
+        (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
     int? jsonGold = json['gold'] as int?;
 
     Reward jsonReward = Reward(
         rewardRelic: jsonRelic,
         rewardItem: jsonItem,
-        rewardCard: jsonCard,
+        rewardCards: jsonCards,
         rewardGold: jsonGold);
 
     return jsonReward;
@@ -45,7 +41,7 @@ class Reward {
   Map toJson() => {
         'relic': relic,
         'item': item,
-        'card': card,
+        'cards': cards.map((e) => playableCardToJson(e)).toList(),
         'gold': gold,
       };
 }

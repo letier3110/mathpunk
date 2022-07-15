@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
@@ -32,6 +30,7 @@ class _PauseScreenState extends State<PauseScreen> {
 
     void onAbortRun() {
       gameState.stopPlaying();
+      saves.saveGame(gameState);
       navigation.changeScreen(ScreenEnum.mainMenu);
     }
 

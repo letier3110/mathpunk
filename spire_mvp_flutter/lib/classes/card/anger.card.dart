@@ -1,16 +1,19 @@
+import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 5;
+int damage = 6;
 
-class StrikeCard extends PlayableCard {
-  StrikeCard(
-      {cardName = 'Strike',
-      cardDescription = 'Deal 5 damage.',
+class AngerCard extends PlayableCard {
+  AngerCard(
+      {cardName = 'Anger',
+      cardDescription = 'Deal 6 damage.',
       cardMana = 1,
-      cardDamage = 5})
+      cardDamage = 6})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -21,7 +24,7 @@ class StrikeCard extends PlayableCard {
   String getCardDescription() {
     var localDamage = damage;
 
-    return 'Deal $localDamage damage.';
+    return 'Deal $localDamage damage.\nAdd a copy of this card to your discard pile.';
   }
 
   @override
@@ -29,5 +32,6 @@ class StrikeCard extends PlayableCard {
     if (target.length == 1) {
       target[0].recieveDamage(damage);
     }
+    Player.getPlayerInstance().getCharacter().getDeck().addToDiscardPile(this);
   }
 }

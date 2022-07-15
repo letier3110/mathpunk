@@ -26,6 +26,9 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    bool isEnemiesPresent = gameState.currentRoom!.enemies.isEmpty;
+    bool isChestEmptied =
+        (gameState.currentRoom! as EnemyRoom).getIsTreasureChestOpened();
 
     return Container(
         color: Colors.black87,

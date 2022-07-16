@@ -1,6 +1,7 @@
 import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
-import 'relic.dart';
+import 'relic/relic.dart';
 import 'item.dart';
 import 'card/playable_card.dart';
 
@@ -23,7 +24,8 @@ class Reward {
   }
 
   factory Reward.fromJson(dynamic json) {
-    Relic? jsonRelic = Relic(); // TODO: to optional relic
+    Relic? jsonRelic =
+        json['relic'] == null ? null : relicFromJson(json['relic']);
     Item? jsonItem = Item(); // TODOL to optional card
     List<PlayableCard> jsonCards =
         (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
@@ -39,7 +41,7 @@ class Reward {
   }
 
   Map toJson() => {
-        'relic': relic,
+        'relic': relic != null ? relicToJson(relic!) : null,
         'item': item,
         'cards': cards.map((e) => playableCardToJson(e)).toList(),
         'gold': gold,

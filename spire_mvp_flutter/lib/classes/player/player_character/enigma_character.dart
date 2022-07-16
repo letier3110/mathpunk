@@ -1,6 +1,6 @@
 import '../../card/cards_implementation.dart';
 import '../../deck.dart';
-import '../../relic.dart';
+import '../../relic/burning_blood.relic.dart';
 import 'player_character.dart';
 
 class Enigma extends PlayerCharacter {
@@ -9,7 +9,7 @@ class Enigma extends PlayerCharacter {
     maxHealth = 70;
     name = 'Enigma';
 
-    relics = [Relic()];
+    relics = [BurningBloodRelic()];
 
     final cards = [strikeCard];
     deck = Deck(cards);

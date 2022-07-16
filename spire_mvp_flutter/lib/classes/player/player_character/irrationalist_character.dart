@@ -1,6 +1,7 @@
 import '../../card/cards_implementation.dart';
 import '../../deck.dart';
-import '../../relic.dart';
+
+import '../../relic/burning_blood.relic.dart';
 import 'player_character.dart';
 
 class Irrationalist extends PlayerCharacter {
@@ -9,7 +10,7 @@ class Irrationalist extends PlayerCharacter {
     maxHealth = 100;
     name = 'Irrationalist';
 
-    relics = [Relic()];
+    relics = [BurningBloodRelic()];
 
     final cards = [strikeCard];
     deck = Deck(cards);

@@ -1,6 +1,7 @@
 import '../../card/cards_implementation.dart';
 import '../../deck.dart';
-import '../../relic.dart';
+import '../../relic/burning_blood.relic.dart';
+import '../../relic/relic.dart';
 import 'player_character.dart';
 
 class Priest extends PlayerCharacter {
@@ -9,7 +10,7 @@ class Priest extends PlayerCharacter {
     maxHealth = 75;
     name = 'Priest';
 
-    relics = [Relic()];
+    relics = [BurningBloodRelic()];
 
     final cards = [strikeCard];
     deck = Deck(cards);

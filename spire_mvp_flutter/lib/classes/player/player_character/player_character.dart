@@ -1,8 +1,9 @@
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
 import '../../deck.dart';
-import '../../relic.dart';
+import '../../relic/relic.dart';
 import '../../item.dart';
 
 import '../../base_character.dart';
@@ -137,7 +138,7 @@ class PlayerCharacter extends BaseCharacter {
   Map toJson() => {
         ...super.toJson(),
         'deck': deck.toJson(),
-        'relics': [],
+        'relics': relics.map((e) => relicToJson(e)).toList(),
         'items': [],
         'mana': mana,
         'manaPower': manaPower,

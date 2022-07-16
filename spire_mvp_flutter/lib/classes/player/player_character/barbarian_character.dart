@@ -1,6 +1,7 @@
+import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
+
 import '../../card/cards_implementation.dart';
 import '../../deck.dart';
-import '../../relic.dart';
 import 'player_character.dart';
 
 class Barbarian extends PlayerCharacter {
@@ -9,7 +10,7 @@ class Barbarian extends PlayerCharacter {
     maxHealth = 200;
     name = 'Barbarian';
 
-    relics = [Relic()];
+    relics = [BurningBloodRelic()];
 
     final cards = [
       strikeCard,

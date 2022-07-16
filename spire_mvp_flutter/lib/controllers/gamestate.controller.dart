@@ -7,6 +7,7 @@ import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
@@ -100,6 +101,11 @@ class GamestateController extends ChangeNotifier {
 
     // if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
     if (currentRoom!.enemies.isEmpty) {
+      // if there are burning blood => add player hp
+      playerCharacter!.relics
+          .firstWhere(
+              (element) => BurningBloodRelic.isRelicBurningBlood(element))
+          .play();
       endTheRoom();
     }
 

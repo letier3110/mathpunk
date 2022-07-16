@@ -9,10 +9,10 @@ class BurningBloodRelic extends Relic {
 
   @override
   void play() {
-    Player.getPlayerInstance().getCharacter().recieveDamage(-6);
+    Player.getPlayerInstance().getCharacter().heal(6);
   }
 
-  static isRelicBurningBlood(Relic relic) {
+  static bool isRelicBurningBlood(Relic relic) {
     return relic.runtimeType == BurningBloodRelic;
   }
 

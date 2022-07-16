@@ -47,6 +47,17 @@ class BaseCharacter implements ICharacter {
     }
   }
 
+  heal(int damage) {
+    if (damage > 0) {
+      int newHealth = (health + damage) % maxHealth;
+      if (newHealth > health) {
+        health = maxHealth;
+      } else {
+        health = newHealth;
+      }
+    }
+  }
+
   @override
   getHealth() {
     return health;

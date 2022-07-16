@@ -20,7 +20,27 @@ class EnemyRoomScreen extends StatefulWidget {
   State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
 }
 
+GamestateController gameState = GamestateController();
+
 class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
+  // bool _isEnemiesPresent = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   gameState.addListener(() => gameState.currentRoom!.enemies.isEmpty
+  //       ? setState(() {
+  //           _isEnemiesPresent = true;
+  //         })
+  //       : null);
+  // }
+
+  // @override
+  // void dispose() {
+  //   gameState.removeListener(() {});
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);

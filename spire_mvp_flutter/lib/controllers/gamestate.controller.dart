@@ -8,6 +8,7 @@ import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
+import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
@@ -192,10 +193,17 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom.runtimeType == EnemyRoom) {
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
-      // if there are burning blood => add player hp
+      // if there are ring of snake => draw 2 cards at the start of combat
       try {
         playerCharacter!.relics
             .firstWhere((element) => RingOfSnake.isRelicRingOfSnake(element))
+            .play();
+      } catch (e) {}
+      // if there are ring of snake => draw 1 cards at the start of combat
+      try {
+        playerCharacter!.relics
+            .firstWhere(
+                (element) => RingOfSerpent.isRelicRingOfSerpent(element))
             .play();
       } catch (e) {}
       playerCharacter!.startTurn();
@@ -220,8 +228,13 @@ class GamestateController extends ChangeNotifier {
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
     }
-
     playerCharacter!.endTurn();
+    // if there are ring of snake => draw 1 cards at the start of round
+    try {
+      playerCharacter!.relics
+          .firstWhere((element) => RingOfSerpent.isRelicRingOfSerpent(element))
+          .play();
+    } catch (e) {}
     notifyListeners();
   }
 

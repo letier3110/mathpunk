@@ -49,7 +49,7 @@ class BaseCharacter implements ICharacter {
 
   heal(int damage) {
     if (damage > 0) {
-      int newHealth = (health + damage) % maxHealth;
+      int newHealth = (health + damage);
       if (newHealth > health) {
         health = maxHealth;
       } else {

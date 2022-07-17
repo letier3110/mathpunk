@@ -46,8 +46,12 @@ class ChestViewView extends State<ChestView> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children:
-                    widget.rewards.map((e) => RewardView(reward: e)).toList(),
+                children: widget.rewards
+                    .asMap()
+                    .entries
+                    .map((entry) =>
+                        RewardView(rewardIndex: entry.key, reward: entry.value))
+                    .toList(),
               ),
             ),
           ),

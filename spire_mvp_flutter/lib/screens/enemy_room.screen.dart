@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/components/room/card_reward.view.dart';
 import 'package:spire_mvp_flutter/components/room/chest.view.dart';
 import 'package:spire_mvp_flutter/components/room/current_mana.view.dart';
 import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
@@ -30,8 +31,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
     bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
-    bool isChestEmptied =
-        (gameState.currentRoom! as EnemyRoom).getIsTreasureChestOpened();
+    bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
 
     return Container(
         color: Colors.black87,
@@ -43,7 +43,10 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
               enemy: enemy,
             );
           }),
-          if (isNoEnemies) ChestView(rewards: widget.room.rewards),
+          if (!isSelectingCardReward && isNoEnemies)
+            ChestView(rewards: widget.room.rewards),
+          if (isSelectingCardReward)
+            CardReward(cards: gameState.selectingCardReward),
           if (isPlayerAlive && !isNoEnemies) const PlayerPawnView(),
           if (!isPlayerAlive) const GameOver(),
           if (isPlayerAlive && !isNoEnemies) const EndturnView(),

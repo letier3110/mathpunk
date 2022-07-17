@@ -37,6 +37,6 @@ class EnemyRoom extends Room implements IChestRoom {
 
   @override
   getCanLeaveRoom() {
-    return getIsTreasureChestOpened();
+    return true;
   }
 }

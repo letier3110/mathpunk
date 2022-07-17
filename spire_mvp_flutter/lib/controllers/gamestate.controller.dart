@@ -28,6 +28,7 @@ class GamestateController extends ChangeNotifier {
   List<Room> gameMap = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
+  List<PlayableCard> selectingCardReward = [];
   int? selectingTargetCardId;
   Enemy? selectedTarget;
   String? playerName;
@@ -122,7 +123,7 @@ class GamestateController extends ChangeNotifier {
 
   void endTheRoom() {
     playerCharacter!.attachDeck(Deck(playerCharacter!.deck.cards));
-    enterMap();
+    // enterMap();
     notifyListeners();
   }
 
@@ -130,8 +131,35 @@ class GamestateController extends ChangeNotifier {
     generateMap();
   }
 
-  void pickReward(
-      int rewardIndex, String fieldType, PlayableCard? selectedCard) {
+  void selectCardReward(List<PlayableCard> cards) {
+    selectingCardReward = cards;
+
+    notifyListeners();
+  }
+
+  void stopSelectingCardReward() {
+    selectingCardReward = [];
+
+    checkIfEveryRewardGet();
+
+    notifyListeners();
+  }
+
+  void pickCardReward(List<PlayableCard> cards, PlayableCard pickedCard) {
+    if (currentRoom == null) return;
+    if (playerCharacter == null) return;
+
+    try {
+      playerCharacter!.deck.addToDeck(pickedCard);
+      int i = currentRoom!.rewards.indexWhere((element) =>
+          element.cards.every((element) => cards.contains(element)));
+      currentRoom!.rewards[i].cards = [];
+    } catch (e) {}
+
+    stopSelectingCardReward();
+  }
+
+  void pickReward(int rewardIndex, String fieldType) {
     if (currentRoom == null) return;
     if (playerCharacter == null) return;
     switch (fieldType) {
@@ -151,15 +179,29 @@ class GamestateController extends ChangeNotifier {
         }
         currentRoom!.rewards[rewardIndex].relic = null;
         break;
-      case 'cards':
-        if (selectedCard != null) {
-          playerCharacter!.deck.addToDeck(selectedCard);
-        }
-        currentRoom!.rewards[rewardIndex].cards = [];
-        break;
+      // case 'cards':
+      //   if (selectedCard != null) {
+      //     playerCharacter!.deck.addToDeck(selectedCard);
+      //   }
+      //   currentRoom!.rewards[rewardIndex].cards = [];
+      //   break;
     }
 
+    checkIfEveryRewardGet();
+
     notifyListeners();
+  }
+
+  void checkIfEveryRewardGet() {
+    if (currentRoom != null) {
+      if (currentRoom!.rewards.every((element) =>
+          element.cards.isEmpty &&
+          element.gold == null &&
+          element.item == null &&
+          element.relic == null)) {
+        enterMap();
+      }
+    }
   }
 
   void generateMap() {
@@ -223,8 +265,8 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom == null) {
       currentRoom = room;
     } else if ((currentRoom != null &&
-        // currentRoom!.getCanLeaveRoom() &&
-        currentRoom!.enemies.isEmpty &&
+        currentRoom!.getCanLeaveRoom() &&
+        // currentRoom!.enemies.isEmpty &&
         getNextAvailableRooms().contains(room))) {
       currentRoom = room;
     }

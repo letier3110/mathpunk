@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/components/room/chest.view.dart';
 import 'package:spire_mvp_flutter/components/room/current_mana.view.dart';
 import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
 import 'package:spire_mvp_flutter/components/room/drawpile.view.dart';
@@ -23,30 +24,12 @@ class EnemyRoomScreen extends StatefulWidget {
 GamestateController gameState = GamestateController();
 
 class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
-  // bool _isEnemiesPresent = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   gameState.addListener(() => gameState.currentRoom!.enemies.isEmpty
-  //       ? setState(() {
-  //           _isEnemiesPresent = true;
-  //         })
-  //       : null);
-  // }
-
-  // @override
-  // void dispose() {
-  //   gameState.removeListener(() {});
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
-    bool isEnemiesPresent = gameState.currentRoom!.enemies.isEmpty;
+    bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
     bool isChestEmptied =
         (gameState.currentRoom! as EnemyRoom).getIsTreasureChestOpened();
 
@@ -60,13 +43,14 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
               enemy: enemy,
             );
           }),
-          const PlayerPawnView(),
+          if (isNoEnemies) ChestView(rewards: widget.room.rewards),
+          if (isPlayerAlive && !isNoEnemies) const PlayerPawnView(),
           if (!isPlayerAlive) const GameOver(),
-          if (isPlayerAlive) const EndturnView(),
-          if (isPlayerAlive) const CurrentManaView(),
-          if (isPlayerAlive) const DrawPileView(),
-          if (isPlayerAlive) const HandView(),
-          if (isPlayerAlive) const DiscardPileView(),
+          if (isPlayerAlive && !isNoEnemies) const EndturnView(),
+          if (isPlayerAlive && !isNoEnemies) const CurrentManaView(),
+          if (isPlayerAlive && !isNoEnemies) const DrawPileView(),
+          if (isPlayerAlive && !isNoEnemies) const HandView(),
+          if (isPlayerAlive && !isNoEnemies) const DiscardPileView(),
         ]));
   }
 }

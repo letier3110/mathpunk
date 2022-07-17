@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/base_character.dart';
 import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
+import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
@@ -27,6 +28,7 @@ class GamestateController extends ChangeNotifier {
   List<Room> gameMap = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
+  int? selectingTargetCardId;
   Enemy? selectedTarget;
   String? playerName;
 
@@ -61,14 +63,16 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void startSelecting(PlayableCard card) {
+  void startSelecting(PlayableCard card, int cardId) {
     selectingTarget = card;
+    selectingTargetCardId = cardId;
     notifyListeners();
   }
 
   void selectTarget(Enemy target) {
     if (selectingTarget == null) return;
     playTheCard(selectingTarget!, [target]);
+    selectingTargetCardId = null;
     selectingTarget = null;
     notifyListeners();
   }
@@ -101,8 +105,8 @@ class GamestateController extends ChangeNotifier {
       i++;
     }
 
-    // if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
-    if (currentRoom!.enemies.isEmpty) {
+    if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
+      // if (currentRoom!.enemies.isEmpty) {
       // if there are burning blood => add player hp
       try {
         playerCharacter!.relics
@@ -126,12 +130,47 @@ class GamestateController extends ChangeNotifier {
     generateMap();
   }
 
+  void pickReward(
+      int rewardIndex, String fieldType, PlayableCard? selectedCard) {
+    if (currentRoom == null) return;
+    if (playerCharacter == null) return;
+    switch (fieldType) {
+      case 'gold':
+        playerCharacter!.gold += currentRoom!.rewards[rewardIndex].gold ?? 0;
+        currentRoom!.rewards[rewardIndex].gold = null;
+        break;
+      case 'item':
+        if (currentRoom!.rewards[rewardIndex].item != null) {
+          playerCharacter!.items.add(currentRoom!.rewards[rewardIndex].item!);
+        }
+        currentRoom!.rewards[rewardIndex].item = null;
+        break;
+      case 'relic':
+        if (currentRoom!.rewards[rewardIndex].relic != null) {
+          playerCharacter!.relics.add(currentRoom!.rewards[rewardIndex].relic!);
+        }
+        currentRoom!.rewards[rewardIndex].relic = null;
+        break;
+      case 'cards':
+        if (selectedCard != null) {
+          playerCharacter!.deck.addToDeck(selectedCard);
+        }
+        currentRoom!.rewards[rewardIndex].cards = [];
+        break;
+    }
+
+    notifyListeners();
+  }
+
   void generateMap() {
     const count = 10;
     var rng = Random();
     for (var i = 0; i < count; i++) {
       gameMap.add(EnemyRoom(roomId: '$i', roomRewards: [
-        Reward(rewardCards: [AngerCard()], rewardGold: rng.nextInt(100) + 50)
+        Reward(
+            rewardCards: [angerCard, strikeCard, bashCard],
+            rewardRelic: BurningBloodRelic(),
+            rewardGold: rng.nextInt(100) + 50)
       ]));
     }
 

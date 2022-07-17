@@ -48,6 +48,10 @@ class Deck {
     discardPile.add(card);
   }
 
+  addToDeck(PlayableCard newCard) {
+    cards.add(newCard);
+  }
+
   playCard(PlayableCard card) {
     hand.remove(card);
     discardPile.add(card);

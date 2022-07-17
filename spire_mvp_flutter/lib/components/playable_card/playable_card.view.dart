@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,10 +17,14 @@ class PlayableCardComponent extends StatefulWidget {
   State<PlayableCardComponent> createState() => PlayableCardComponentView();
 }
 
+var rng = Random();
+
 class PlayableCardComponentView extends State<PlayableCardComponent>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
+
+  final cardId = Random().nextInt(1 << 32);
 
   @override
   void initState() {
@@ -54,7 +60,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
 
     void onTapHandler() {
       if (widget.card.targetType == TargetEnum.singleTarget) {
-        gameState.startSelecting(widget.card);
+        gameState.startSelecting(widget.card, cardId);
         return;
       } else if (widget.card.targetType == TargetEnum.playerTarget) {
         // TODO: implement some random fuzzy logic to select a target
@@ -78,8 +84,13 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         child: Container(
           height: 308,
           width: 208,
-          margin: EdgeInsets.fromLTRB(4, 4, 4,
-              gameState.selectingTarget == widget.card ? 244 : animation.value),
+          margin: EdgeInsets.fromLTRB(
+              4,
+              4,
+              4,
+              gameState.selectingTargetCardId == cardId
+                  ? 244
+                  : animation.value),
           child: Center(
             child: Stack(children: [
               Container(

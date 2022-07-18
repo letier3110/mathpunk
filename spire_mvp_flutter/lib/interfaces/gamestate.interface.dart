@@ -13,7 +13,7 @@ class GameStateInterface {
   bool inPause = false;
   PlayerCharacter? playerCharacter;
   final Player player = Player();
-  List<Room> gameMap = [];
+  List<List<Room>> gameMap = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
   Enemy? selectedTarget;
@@ -31,8 +31,9 @@ class GameStateInterface {
   factory GameStateInterface.fromJson(dynamic json) {
     GameTypeEnum parsedGameMode = decodeGameTypeFromJson(json['gameMode']);
 
-    List<Room> jsonRooms =
-        (json['gameMap'] as List).map((e) => roomFromJson(e)).toList();
+    List<List<Room>> jsonRooms = (json['gameMap'] as List<List>)
+        .map((List list) => list.map((e) => roomFromJson(e)).toList())
+        .toList();
 
     Room jsonCurrentRoom = roomFromJson(json['currentRoom']);
 
@@ -56,7 +57,9 @@ class GameStateInterface {
         'playerCharacter': playerCharacter == null
             ? null
             : playerCharacterToJson(playerCharacter!),
-        'gameMap': gameMap.map((e) => roomToJson(e)).toList(),
+        'gameMap': gameMap
+            .map((list) => list.map((e) => roomToJson(e)).toList())
+            .toList(),
         'currentRoom': currentRoom == null ? null : roomToJson(currentRoom!),
         'playerName': playerName
       };

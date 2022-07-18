@@ -11,15 +11,20 @@ class Room implements IRoom {
   late List<Reward> rewards;
   @override
   late String id;
+  late List<Room> nextRooms = [];
 
   Room(
       {required String roomId,
       required List<Enemy> roomEnemies,
-      required List<Reward> roomRewards})
+      required List<Reward> roomRewards,
+      List<Room>? roomNexts})
       : super() {
     id = roomId;
     enemies = roomEnemies;
     rewards = roomRewards;
+    if (roomNexts != null) {
+      nextRooms = roomNexts;
+    }
   }
 
   attachEnemies(List<Enemy> newEnemies) {
@@ -65,6 +70,8 @@ class Room implements IRoom {
   Map toJson() => {
         'enemies': enemies.map((e) => enemyToJson(e)).toList(),
         'rewards': rewards.map((e) => e.toJson()).toList(),
+        'nextRooms':
+            nextRooms.isEmpty ? [] : nextRooms.map((e) => e.toJson()).toList(),
         'id': id,
       };
 }

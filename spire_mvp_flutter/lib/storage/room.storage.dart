@@ -7,6 +7,9 @@ import '../classes/room/treasure_room.dart';
 
 Room roomFromJson(dynamic json) {
   String jsonId = json['id'] as String;
+  List<Room> jsonNextRooms = (json['nextRoom'] as List).isEmpty
+      ? []
+      : (json['nextRoom'] as List).map((e) => roomFromJson(e)).toList();
   String jsonRuntime = json['_runtime'] as String;
 
   Room room;
@@ -31,6 +34,8 @@ Room roomFromJson(dynamic json) {
       room = EnemyRoom(roomId: jsonId);
       break;
   }
+
+  room.nextRooms = jsonNextRooms;
 
   return room;
 }

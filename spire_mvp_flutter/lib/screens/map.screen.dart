@@ -37,23 +37,25 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  Widget _buildCarousel(BuildContext context, int carouselIndex, Room room) {
-    return Column(
+  Widget _buildCarousel(
+      BuildContext context, int carouselIndex, List<Room> rooms) {
+    return Row(
       mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          // you may want to use an aspect ratio here for tablet support
-          height: 200.0,
-          child: PageView.builder(
-            // store this controller in a State to save the carousel scroll position
-            controller: PageController(viewportFraction: 1),
-            itemBuilder: (BuildContext context, int itemIndex) {
-              return _buildCarouselItem(
-                  context, carouselIndex, itemIndex, room);
-            },
-          ),
-        )
-      ],
+      children: rooms
+          .map((e) => SizedBox(
+                // you may want to use an aspect ratio here for tablet support
+                height: 200.0,
+                width: 100,
+                child: PageView.builder(
+                  // store this controller in a State to save the carousel scroll position
+                  controller: PageController(viewportFraction: 1),
+                  itemBuilder: (BuildContext context, int itemIndex) {
+                    return _buildCarouselItem(
+                        context, carouselIndex, itemIndex, e);
+                  },
+                ),
+              ))
+          .toList(),
     );
   }
 

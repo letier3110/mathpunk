@@ -25,7 +25,7 @@ class GamestateController extends ChangeNotifier {
   bool inMap = false;
   bool inPause = false;
   PlayerCharacter? playerCharacter;
-  List<Room> gameMap = [];
+  List<List<Room>> gameMap = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
   List<PlayableCard> selectingCardReward = [];
@@ -204,17 +204,49 @@ class GamestateController extends ChangeNotifier {
     }
   }
 
+  // 534421
+
   void generateMap() {
-    const count = 10;
     var rng = Random();
-    for (var i = 0; i < count; i++) {
-      gameMap.add(EnemyRoom(roomId: '$i', roomRewards: [
-        Reward(
-            rewardCards: [angerCard, strikeCard, bashCard],
-            rewardRelic: BurningBloodRelic(),
-            rewardGold: rng.nextInt(100) + 50)
-      ]));
+    var maxLevels = rng.nextInt(5) + 5;
+    List<Room> prevSlice = [];
+    for (var i = 0; i < maxLevels; i++) {
+      var roomsCount = rng.nextInt(2) + 3;
+      List<Room> roomSlice = [];
+      for (var j = 0; j < roomsCount; j++) {
+        roomSlice.add(EnemyRoom(roomId: '$j $i', roomRewards: [
+          Reward(
+              rewardCards: [angerCard, strikeCard, bashCard],
+              rewardRelic: BurningBloodRelic(),
+              rewardGold: rng.nextInt(100) + 50)
+        ]));
+      }
+      if (prevSlice.isNotEmpty) {
+        for (var room in prevSlice) {
+          var roomConnections = 0;
+          var maxRoomConnetions = rng.nextInt(1) + 1;
+          for (var j = 0; j < roomsCount; j++) {
+            if (roomConnections == maxRoomConnetions) continue;
+            if (rng.nextBool()) {
+              room.nextRooms.add(roomSlice[j]);
+              roomConnections++;
+            }
+          }
+        }
+      }
+      prevSlice = roomSlice;
+      gameMap.add(roomSlice);
     }
+    var bossRoom = EnemyRoom(roomId: 'boss1', roomRewards: [
+      Reward(
+          rewardCards: [angerCard, strikeCard, bashCard],
+          rewardRelic: BurningBloodRelic(),
+          rewardGold: rng.nextInt(100) + 50)
+    ]);
+    for (var i = 0; i < gameMap.last.length; i++) {
+      gameMap.last[i].nextRooms = [bossRoom];
+    }
+    gameMap.add([bossRoom]);
 
     notifyListeners();
   }
@@ -241,21 +273,8 @@ class GamestateController extends ChangeNotifier {
 
   List<Room> getNextAvailableRooms() {
     if (gameMap.isEmpty) return [];
-    var rooms = gameMap;
-    if (currentRoom == null) return [rooms[0]];
-
-    var index = 0;
-    var foundIndex = index;
-    for (var room in rooms) {
-      if (Room.isEqual(room, currentRoom!)) {
-        foundIndex = index;
-        break;
-      }
-      index++;
-    }
-    var nextRoomIndex = foundIndex + 1;
-    if (rooms.length <= nextRoomIndex) return [];
-    return [rooms[nextRoomIndex]];
+    if (currentRoom == null) return gameMap[0];
+    return currentRoom!.nextRooms;
   }
 
   void enterRoom(Room room) {

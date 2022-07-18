@@ -59,14 +59,27 @@ class CharacterCardView extends State<CharacterCard> {
               : const BoxDecoration(),
           child: Card(
             color: widget.disabled ? Colors.redAccent : Colors.amber,
-            child: Center(
-              child: Text(
-                '${widget.character.name}.png',
-                style: TextStyle(fontSize: getFontSize(16)),
-                // color: Colors.amber
-              ),
-            ),
+            child: Center(child: characterNameToIcon(widget.character.name)),
           ),
         ));
+  }
+}
+
+Widget characterNameToIcon(String name) {
+  switch (name) {
+    case 'Barbarian':
+      return const Icon(
+        Icons.favorite,
+        color: Colors.pink,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    default:
+      return const Icon(
+        Icons.sailing,
+        color: Colors.blueAccent,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
   }
 }

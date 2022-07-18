@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/event_room.dart';
@@ -23,6 +24,48 @@ String getRoomName(Room room) {
       return 'EventRoom';
     default:
       return 'DefaultRoom';
+  }
+}
+
+Widget getRoomIcon(Room room) {
+  var id = room.id;
+  switch (room.runtimeType) {
+    case EnemyRoom:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    case TreasureRoom:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    case TradeRoom:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    case RestRoom:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    case EventRoom:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
+    default:
+      return const Icon(
+        Icons.smart_toy,
+        size: 24.0,
+        semanticLabel: 'Text to announce in accessibility modes',
+      );
   }
 }
 

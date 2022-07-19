@@ -24,7 +24,7 @@ class _GameScreenState extends State<GameScreen> {
         if (gameState.inMap == true || gameState.currentRoom == null)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
-            child: const MapScreen(),
+            child: MapScreen(gameMap: gameState.gameMap),
           ),
         if (gameState.inMap == false && gameState.currentRoom != null)
           Container(

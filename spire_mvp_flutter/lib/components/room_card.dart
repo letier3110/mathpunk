@@ -5,8 +5,6 @@ import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';
 
-import '../utils/font.util.dart';
-
 class RoomCard extends StatefulWidget {
   final Room room;
 
@@ -56,7 +54,7 @@ class RoomCardView extends State<RoomCard> {
         child: Expanded(
           flex: 1,
           child: Container(
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(4),
             decoration: isAvailable
                 ? const BoxDecoration(
                     boxShadow: [

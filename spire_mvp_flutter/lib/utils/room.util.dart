@@ -31,6 +31,13 @@ Widget getRoomIcon(Room room) {
   var id = room.id;
   switch (room.runtimeType) {
     case EnemyRoom:
+      if (room.id.contains('boss')) {
+        return const Icon(
+          Icons.android,
+          size: 24.0,
+          semanticLabel: 'Text to announce in accessibility modes',
+        );
+      }
       return const Icon(
         Icons.smart_toy,
         size: 24.0,

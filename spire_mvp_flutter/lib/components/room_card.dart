@@ -20,6 +20,16 @@ class RoomCardView extends State<RoomCard> {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
     var isNextRoom = gameState.getNextAvailableRooms().contains(widget.room);
+    Room? isVisited;
+
+    try {
+      isVisited = gameState.visitedRooms
+          .firstWhere((element) => Room.isEqual(element, widget.room));
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+
     var isInRoom = gameState.currentRoom != null;
 
     var isAvailable = (!isInRoom && isNextRoom) ||
@@ -69,9 +79,11 @@ class RoomCardView extends State<RoomCard> {
             child: Card(
               color: inCurrentRoom
                   ? Colors.green
-                  : isAvailable
-                      ? Colors.amber
-                      : Colors.grey,
+                  : isVisited != null
+                      ? Colors.lightGreen
+                      : isAvailable
+                          ? Colors.amber
+                          : Colors.grey,
               child: Center(child: getRoomIcon(widget.room)),
             ),
           ),

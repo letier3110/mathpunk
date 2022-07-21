@@ -12,6 +12,7 @@ class GameStateInterface {
   bool inMap = false;
   bool inPause = false;
   PlayerCharacter? playerCharacter;
+  List<Room> visitedRooms = [];
   final Player player = Player();
   List<List<Room>> gameMap = [];
   Room? currentRoom;
@@ -26,6 +27,7 @@ class GameStateInterface {
       required this.playerCharacter,
       required this.gameMap,
       this.currentRoom,
+      this.visitedRooms = const [],
       required this.playerName});
 
   factory GameStateInterface.fromJson(dynamic json) {
@@ -33,6 +35,10 @@ class GameStateInterface {
 
     List<List<Room>> jsonRooms = (json['gameMap'] as List<List>)
         .map((List list) => list.map((e) => roomFromJson(e)).toList())
+        .toList();
+
+    List<Room> jsonVisitedRooms = (json['visitedRooms'] as List)
+        .map((room) => roomFromJson(room))
         .toList();
 
     Room jsonCurrentRoom = roomFromJson(json['currentRoom']);
@@ -46,6 +52,7 @@ class GameStateInterface {
         inPause: json['inPause'] as bool,
         playerCharacter: character,
         gameMap: jsonRooms,
+        visitedRooms: jsonVisitedRooms,
         currentRoom: jsonCurrentRoom,
         playerName: json['playerName'] as String);
   }
@@ -60,6 +67,7 @@ class GameStateInterface {
         'gameMap': gameMap
             .map((list) => list.map((e) => roomToJson(e)).toList())
             .toList(),
+        'visitedRooms': visitedRooms.map((e) => roomToJson(e)).toList(),
         'currentRoom': currentRoom == null ? null : roomToJson(currentRoom!),
         'playerName': playerName
       };

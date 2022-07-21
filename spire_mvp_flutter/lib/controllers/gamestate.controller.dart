@@ -16,7 +16,6 @@ import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
-import 'package:spire_mvp_flutter/storage/room.storage.dart';
 
 import '../classes/deck.dart';
 
@@ -26,6 +25,7 @@ class GamestateController extends ChangeNotifier {
   bool inPause = false;
   PlayerCharacter? playerCharacter;
   List<List<Room>> gameMap = [];
+  List<Room> visitedRooms = [];
   Room? currentRoom;
   PlayableCard? selectingTarget;
   List<PlayableCard> selectingCardReward = [];
@@ -208,10 +208,10 @@ class GamestateController extends ChangeNotifier {
 
   void generateMap() {
     var rng = Random();
-    var maxLevels = rng.nextInt(5) + 5;
+    var maxLevels = rng.nextInt(7) + 7;
     List<Room> prevSlice = [];
     for (var i = 0; i < maxLevels; i++) {
-      var roomsCount = rng.nextInt(2) + 3;
+      var roomsCount = rng.nextInt(5) + 4;
       List<Room> roomSlice = [];
       for (var j = 0; j < roomsCount; j++) {
         roomSlice.add(EnemyRoom(roomId: '$j $i', roomRewards: [
@@ -224,10 +224,10 @@ class GamestateController extends ChangeNotifier {
       if (prevSlice.isNotEmpty) {
         for (var room in prevSlice) {
           var roomConnections = 0;
-          var maxRoomConnetions = rng.nextInt(1) + 1;
+          var maxRoomConnetions = rng.nextInt(2) + 1;
           for (var j = 0; j < roomsCount; j++) {
             if (roomConnections == maxRoomConnetions) continue;
-            if (rng.nextBool()) {
+            if (rng.nextInt(10) > 5) {
               room.nextRooms.add(roomSlice[j]);
               roomConnections++;
             }
@@ -283,11 +283,13 @@ class GamestateController extends ChangeNotifier {
     }
     if (currentRoom == null) {
       currentRoom = room;
+      visitedRooms.add(room);
     } else if ((currentRoom != null &&
         currentRoom!.getCanLeaveRoom() &&
         // currentRoom!.enemies.isEmpty &&
         getNextAvailableRooms().contains(room))) {
       currentRoom = room;
+      visitedRooms.add(room);
     }
 
     if (currentRoom.runtimeType == EnemyRoom) {

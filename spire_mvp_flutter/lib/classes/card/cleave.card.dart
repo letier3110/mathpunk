@@ -4,6 +4,7 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
+import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
 int damage = 8;
@@ -20,27 +21,25 @@ class CleaveCard extends PlayableCard {
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + character.strength;
+    int weak = character.weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
-    return 'Deal $localDamage damage to ALL enemies.';
+    return localDamage;
+  }
+
+  @override
+  String getCardDescription() {
+    return 'Deal ${calculateDamage()} damage to ALL enemies.';
   }
 
   @override
   play(List<BaseCharacter> target) {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
     for (var t in target) {
-      t.recieveDamage(localDamage);
+      t.recieveDamage(calculateDamage());
     }
   }
 }

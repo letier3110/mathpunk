@@ -3,6 +3,7 @@ import 'package:spire_mvp_flutter/classes/player/player.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
+import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
 int damage = 14;
@@ -19,27 +20,25 @@ class HeavyBladeCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + (Player.getPlayerInstance().getCharacter().strength * 3);
-    int weak = Player.getPlayerInstance().getCharacter().weak;
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + (character.strength * 3);
+    int weak = character.weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
-    return 'Deal $localDamage damage.\nStrength affects Heavy Blade 3 times.';
+    return localDamage;
+  }
+
+  @override
+  String getCardDescription() {
+    return 'Deal ${calculateDamage()} damage.\nStrength affects Heavy Blade 3 times.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      int localDamage =
-          damage + (Player.getPlayerInstance().getCharacter().strength * 3);
-      int weak = Player.getPlayerInstance().getCharacter().weak;
-      if (weak > 0) {
-        localDamage = (localDamage * 0.75).floor();
-      }
-      target[0].recieveDamage(localDamage);
+      target[0].recieveDamage(calculateDamage());
     }
   }
 }

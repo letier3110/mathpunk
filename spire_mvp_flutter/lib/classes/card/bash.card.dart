@@ -2,6 +2,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
+import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
 int damage = 8;
@@ -18,30 +19,28 @@ class BashCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    var localVulnerable = vulnerable;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + character.strength;
+    int weak = character.weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
+    return localDamage;
+  }
 
-    return 'Deal $localDamage damage.\nApply $localVulnerable Vulnerable.';
+  @override
+  String getCardDescription() {
+    var localVulnerable = vulnerable;
+
+    return 'Deal ${calculateDamage()} damage.\nApply $localVulnerable Vulnerable.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       target[0].addVulnerable(vulnerable);
-      int localDamage =
-          damage + Player.getPlayerInstance().getCharacter().strength;
-      int weak = Player.getPlayerInstance().getCharacter().weak;
-      if (weak > 0) {
-        localDamage = (localDamage * 0.75).floor();
-      }
-      target[0].recieveDamage(localDamage);
+      target[0].recieveDamage(calculateDamage());
     }
   }
 }

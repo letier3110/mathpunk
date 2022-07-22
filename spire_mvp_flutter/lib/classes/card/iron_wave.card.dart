@@ -21,30 +21,29 @@ class IronWaveCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + character.strength;
+    int weak = character.weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
+    return localDamage;
+  }
+
+  @override
+  String getCardDescription() {
     int localBlock = block;
 
-    return 'Gain $localBlock Block.\nDeal $localDamage damage.';
+    return 'Gain $localBlock Block.\nDeal ${calculateDamage()} damage.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-      int localDamage = damage + character.strength;
       int localBlock = block;
-      int weak = character.weak;
-      if (weak > 0) {
-        localDamage = (localDamage * 0.75).floor();
-      }
-      target[0].recieveDamage(localDamage);
+      target[0].recieveDamage(calculateDamage());
       character.addBlock(localBlock);
     }
   }

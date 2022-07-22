@@ -1,3 +1,4 @@
+import 'package:spire_mvp_flutter/classes/deck.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 
 import '../base_character.dart';
@@ -20,30 +21,29 @@ class HeadbuttCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + character.strength;
+    int weak = character.weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
-    return 'Deal $localDamage damage.\nPlace a card from your discard pile on top of your draw pile.';
+    return localDamage;
+  }
+
+  @override
+  String getCardDescription() {
+    return 'Deal ${calculateDamage()} damage.\nPlace a card from your discard pile on top of your draw pile.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-      int localDamage = damage + character.strength;
-      int weak = character.weak;
-      if (weak > 0) {
-        localDamage = (localDamage * 0.75).floor();
-      }
-      target[0].recieveDamage(localDamage);
+      Deck deck = Player.getPlayerInstance().getCharacter().getDeck();
+      target[0].recieveDamage(calculateDamage());
 
-      List<PlayableCard> discardPile = character.getDeck().getDiscardPile();
-      List<PlayableCard> drawPile = character.getDeck().getDrawPile();
+      List<PlayableCard> discardPile = deck.getDiscardPile();
+      List<PlayableCard> drawPile = deck.getDrawPile();
 
       PlayableCard card = discardPile.removeLast();
       drawPile.insert(0, card);

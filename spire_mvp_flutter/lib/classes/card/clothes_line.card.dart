@@ -3,6 +3,7 @@ import 'package:spire_mvp_flutter/classes/player/player.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
+import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
 int damage = 12;
@@ -19,28 +20,27 @@ class ClothesLineCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  @override
-  String getCardDescription() {
-    int localDamage =
-        damage + Player.getPlayerInstance().getCharacter().strength;
-    int localWeak = weak;
-    int playerWeak = Player.getPlayerInstance().getCharacter().weak;
-    if (playerWeak > 0) {
+  int calculateDamage() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = damage + character.strength;
+    int weak = character.weak;
+    if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
-    return 'Deal $localDamage damage.\nApply $localWeak Weak.';
+    return localDamage;
+  }
+
+  @override
+  String getCardDescription() {
+    int localWeak = weak;
+
+    return 'Deal ${calculateDamage()} damage.\nApply $localWeak Weak.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      int localDamage =
-          damage + Player.getPlayerInstance().getCharacter().strength;
-      int playerWeak = Player.getPlayerInstance().getCharacter().weak;
-      if (playerWeak > 0) {
-        localDamage = (localDamage * 0.75).floor();
-      }
-      target[0].recieveDamage(localDamage);
+      target[0].recieveDamage(calculateDamage());
       target[0].addWeak(weak);
     }
   }

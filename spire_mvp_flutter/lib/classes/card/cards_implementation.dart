@@ -13,27 +13,15 @@ import 'package:spire_mvp_flutter/classes/card/perfect_strike.card.dart';
 import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
 
 final strikeCard = StrikeCard();
-
 final bashCard = BashCard();
-
 final defendCard = DefendCard();
-
 final angerCard = AngerCard();
-
 final bodySlamCard = BodySlamCard();
-
 final clashCard = ClashCard();
-
 final cleaveCard = CleaveCard();
-
 final clothesLineCard = ClothesLineCard();
-
 final flexCard = FlexCard();
-
 final headbuttCard = HeadbuttCard();
-
 final heavyBladeCard = HeavyBladeCard();
-
 final ironWaveCard = IronWaveCard();
-
 final perfectStrikeCard = PerfectStrikeCard();

@@ -12,17 +12,7 @@ class Barbarian extends PlayerCharacter {
 
     relics = [BurningBloodRelic()];
 
-    final cards = [
-      strikeCard,
-      strikeCard,
-      strikeCard,
-      strikeCard,
-      bashCard,
-      defendCard,
-      defendCard,
-      defendCard,
-      defendCard
-    ];
+    final cards = [flexCard, bashCard, clothesLineCard];
 
     deck = Deck(cards);
   }

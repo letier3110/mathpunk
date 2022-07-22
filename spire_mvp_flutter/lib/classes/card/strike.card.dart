@@ -1,6 +1,7 @@
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
+import '../player/player.dart';
 import 'playable_card.dart';
 
 int damage = 5;
@@ -20,6 +21,10 @@ class StrikeCard extends PlayableCard {
   @override
   String getCardDescription() {
     var localDamage = damage;
+    int weak = Player.getPlayerInstance().getCharacter().weak;
+    if (weak > 0) {
+      localDamage = (localDamage * 0.75).floor();
+    }
 
     return 'Deal $localDamage damage.';
   }
@@ -27,7 +32,12 @@ class StrikeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(damage);
+      var localDamage = damage;
+      int weak = Player.getPlayerInstance().getCharacter().weak;
+      if (weak > 0) {
+        localDamage = (localDamage * 0.75).floor();
+      }
+      target[0].recieveDamage(localDamage);
     }
   }
 }

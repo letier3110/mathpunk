@@ -1,20 +1,19 @@
 import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 6;
+int damage = 12;
+int weak = 2;
 
-class AngerCard extends PlayableCard {
-  AngerCard(
-      {cardName = 'Anger',
-      cardDescription = 'Deal 6 damage.',
-      cardMana = 1,
-      cardDamage = 6})
-      : super(
+class ClothesLineCard extends PlayableCard {
+  ClothesLineCard({
+    cardName = 'Clothesline',
+    cardDescription = 'Deal 12(14) damage. Apply 2(3) Weak.',
+    cardMana = 2,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
@@ -22,25 +21,25 @@ class AngerCard extends PlayableCard {
 
   @override
   String getCardDescription() {
-    var localDamage = damage;
-    int weak = Player.getPlayerInstance().getCharacter().weak;
-    if (weak > 0) {
+    int localDamage = damage;
+    int localWeak = weak;
+    int playerWeak = Player.getPlayerInstance().getCharacter().weak;
+    if (playerWeak > 0) {
       localDamage = (localDamage * 0.75).floor();
     }
-
-    return 'Deal $localDamage damage.\nAdd a copy of this card to your discard pile.';
+    return 'Deal $localDamage damage.\nApply $localWeak Weak.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       var localDamage = damage;
-      int weak = Player.getPlayerInstance().getCharacter().weak;
-      if (weak > 0) {
+      int playerWeak = Player.getPlayerInstance().getCharacter().weak;
+      if (playerWeak > 0) {
         localDamage = (localDamage * 0.75).floor();
       }
       target[0].recieveDamage(localDamage);
+      target[0].addWeak(weak);
     }
-    Player.getPlayerInstance().getCharacter().getDeck().addToDiscardPile(this);
   }
 }

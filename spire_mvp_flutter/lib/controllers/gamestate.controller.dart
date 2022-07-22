@@ -6,6 +6,7 @@ import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
@@ -18,6 +19,15 @@ import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
+import '../utils/room.util.dart';
+
+const int levelsRandomLength = 7;
+const int levelsFixedLength = 7;
+const int roomsCountPerSliceRandom = 5;
+const int roomsCountPerSliceFixed = 4;
+const int nextRoomsConnectionsRandom = 2;
+const int nextRoomsConnectionsFixed = 1;
+const int roomConnectionProbability = 50;
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
@@ -82,8 +92,10 @@ class GamestateController extends ChangeNotifier {
     if (playerCharacter == null) return;
     if (currentRoom == null) return;
     if (playerCharacter!.mana < card.mana) return;
+    if (card.isCardPlayable() == false) return;
+
     playerCharacter!.mana -= card.mana;
-    card.play([playerCharacter!] as List<BaseCharacter>);
+    card.play([playerCharacter] as List<BaseCharacter>);
     card.disposeToDiscard(
         playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
     notifyListeners();
@@ -208,10 +220,11 @@ class GamestateController extends ChangeNotifier {
 
   void generateMap() {
     var rng = Random();
-    var maxLevels = rng.nextInt(7) + 7;
+    var maxLevels = rng.nextInt(levelsRandomLength) + levelsFixedLength;
     List<Room> prevSlice = [];
     for (var i = 0; i < maxLevels; i++) {
-      var roomsCount = rng.nextInt(5) + 4;
+      var roomsCount =
+          rng.nextInt(roomsCountPerSliceRandom) + roomsCountPerSliceFixed;
       List<Room> roomSlice = [];
       for (var j = 0; j < roomsCount; j++) {
         roomSlice.add(EnemyRoom(roomId: '$j $i', roomRewards: [
@@ -224,10 +237,11 @@ class GamestateController extends ChangeNotifier {
       if (prevSlice.isNotEmpty) {
         for (var room in prevSlice) {
           var roomConnections = 0;
-          var maxRoomConnetions = rng.nextInt(2) + 1;
+          var maxRoomConnetions = rng.nextInt(nextRoomsConnectionsRandom) +
+              nextRoomsConnectionsFixed;
           for (var j = 0; j < roomsCount; j++) {
             if (roomConnections == maxRoomConnetions) continue;
-            if (rng.nextInt(10) > 5) {
+            if (getProbability(roomConnectionProbability)) {
               room.nextRooms.add(roomSlice[j]);
               roomConnections++;
             }
@@ -242,6 +256,8 @@ class GamestateController extends ChangeNotifier {
           rewardCards: [angerCard, strikeCard, bashCard],
           rewardRelic: BurningBloodRelic(),
           rewardGold: rng.nextInt(100) + 50)
+    ], roomEnemies: [
+      EnemyOgre()
     ]);
     for (var i = 0; i < gameMap.last.length; i++) {
       gameMap.last[i].nextRooms = [bossRoom];
@@ -329,6 +345,13 @@ class GamestateController extends ChangeNotifier {
     }
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
+      enemy.block = 0;
+      if (enemy.vulnerable > 0) {
+        enemy.vulnerable -= 1;
+      }
+      if (enemy.weak > 0) {
+        enemy.weak -= 1;
+      }
     }
     playerCharacter!.endTurn();
     // if there are ring of snake => draw 1 cards at the start of round

@@ -99,7 +99,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 height: 304,
                 width: 204,
               ),
-              if (playerMana >= widget.card.mana)
+              if (playerMana >= widget.card.mana &&
+                  widget.card.isCardPlayable())
                 const Center(
                   child: GlowEffect(
                       child: SizedBox(

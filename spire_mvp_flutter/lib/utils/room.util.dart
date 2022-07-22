@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -95,3 +97,5 @@ Widget getRoomComponent(Room room) {
     //   return 'DefaultRoom';
   }
 }
+
+bool getProbability(int probability) => Random().nextInt(100) <= probability;

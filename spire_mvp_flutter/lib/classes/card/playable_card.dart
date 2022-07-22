@@ -39,6 +39,8 @@ class PlayableCard {
     return true;
   }
 
+  bool isCardPlayable() => true;
+
   play(List<BaseCharacter> target) {
     // can be failed,
     // because of not correctly loaded from memory state or wrongly casted.

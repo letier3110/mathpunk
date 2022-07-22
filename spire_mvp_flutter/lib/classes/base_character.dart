@@ -8,6 +8,7 @@ class BaseCharacter implements ICharacter {
   late int maxHealth;
   int block = 0;
   int vulnerable = 0;
+  int weak = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -28,6 +29,10 @@ class BaseCharacter implements ICharacter {
 
   addVulnerable(int vulnerable) {
     this.vulnerable += vulnerable;
+  }
+
+  addWeak(int weak) {
+    this.weak += weak;
   }
 
   recieveDamage(int damage) {
@@ -89,6 +94,7 @@ class BaseCharacter implements ICharacter {
     character.setMaxHealth(json['maxHealth'] as int);
     character.addBlock(json['block'] as int);
     character.addVulnerable(json['vulnerable'] as int);
+    character.addVulnerable(json['weak'] as int);
 
     return character;
   }
@@ -98,6 +104,7 @@ class BaseCharacter implements ICharacter {
         'health': health,
         'maxHealth': maxHealth,
         'block': block,
-        'vulnerable': vulnerable
+        'vulnerable': vulnerable,
+        'weak': weak,
       };
 }

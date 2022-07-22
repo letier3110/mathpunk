@@ -19,7 +19,7 @@ class Enemy extends BaseCharacter {
 
   makeMove() {
     if (health > 0) {
-      moveset.executeMove();
+      moveset.executeMove(this);
     }
     moveset.getNextMove();
   }

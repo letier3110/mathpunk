@@ -77,6 +77,12 @@ class PlayerCharacter extends BaseCharacter {
       }
     }
     block = 0;
+    if (vulnerable > 0) {
+      vulnerable -= 1;
+    }
+    if (weak > 0) {
+      weak -= 1;
+    }
     startTurn();
   }
 

@@ -1,5 +1,3 @@
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
@@ -14,7 +12,7 @@ class FlexCard extends PlayableCard {
     cardName = 'Flex',
     cardDescription =
         'Gain 2(4) Strength. At the end of your turn, lose 2(4) Strength.',
-    cardMana = 1,
+    cardMana = 0,
   }) : super(
             cardName: cardName,
             cardDescription: cardDescription,

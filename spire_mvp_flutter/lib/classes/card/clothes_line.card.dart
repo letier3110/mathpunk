@@ -21,7 +21,8 @@ class ClothesLineCard extends PlayableCard {
 
   @override
   String getCardDescription() {
-    int localDamage = damage;
+    int localDamage =
+        damage + Player.getPlayerInstance().getCharacter().strength;
     int localWeak = weak;
     int playerWeak = Player.getPlayerInstance().getCharacter().weak;
     if (playerWeak > 0) {
@@ -33,7 +34,8 @@ class ClothesLineCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      var localDamage = damage;
+      int localDamage =
+          damage + Player.getPlayerInstance().getCharacter().strength;
       int playerWeak = Player.getPlayerInstance().getCharacter().weak;
       if (playerWeak > 0) {
         localDamage = (localDamage * 0.75).floor();

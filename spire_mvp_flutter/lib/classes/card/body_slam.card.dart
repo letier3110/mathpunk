@@ -25,7 +25,8 @@ class BodySlamCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     int damage = Player.getPlayerInstance().getCharacter().block;
     if (target.length == 1) {
-      var localDamage = damage;
+      int localDamage =
+          damage + Player.getPlayerInstance().getCharacter().strength;
       int weak = Player.getPlayerInstance().getCharacter().weak;
       if (weak > 0) {
         localDamage = (localDamage * 0.75).floor();

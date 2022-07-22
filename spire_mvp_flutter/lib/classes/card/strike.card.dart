@@ -20,7 +20,8 @@ class StrikeCard extends PlayableCard {
 
   @override
   String getCardDescription() {
-    var localDamage = damage;
+    int localDamage =
+        damage + Player.getPlayerInstance().getCharacter().strength;
     int weak = Player.getPlayerInstance().getCharacter().weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
@@ -32,7 +33,8 @@ class StrikeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      var localDamage = damage;
+      int localDamage =
+          damage + Player.getPlayerInstance().getCharacter().strength;
       int weak = Player.getPlayerInstance().getCharacter().weak;
       if (weak > 0) {
         localDamage = (localDamage * 0.75).floor();

@@ -9,6 +9,9 @@ class BaseCharacter implements ICharacter {
   int block = 0;
   int vulnerable = 0;
   int weak = 0;
+  int strength = 0;
+  int strengthEmpower = 0;
+  int strengthCurse = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -33,6 +36,18 @@ class BaseCharacter implements ICharacter {
 
   addWeak(int weak) {
     this.weak += weak;
+  }
+
+  addStrength(int strength) {
+    this.strength += strength;
+  }
+
+  addStrengthCurse(int strengthCurse) {
+    this.strengthCurse += strengthCurse;
+  }
+
+  addStrengthEmpower(int strengthEmpower) {
+    this.strengthEmpower += strengthEmpower;
   }
 
   recieveDamage(int damage) {
@@ -94,7 +109,10 @@ class BaseCharacter implements ICharacter {
     character.setMaxHealth(json['maxHealth'] as int);
     character.addBlock(json['block'] as int);
     character.addVulnerable(json['vulnerable'] as int);
-    character.addVulnerable(json['weak'] as int);
+    character.addWeak(json['weak'] as int);
+    character.addStrength(json['strength'] as int);
+    character.addStrengthCurse(json['strengthCurse'] as int);
+    character.addStrengthEmpower(json['strengthEmpower'] as int);
 
     return character;
   }
@@ -106,5 +124,8 @@ class BaseCharacter implements ICharacter {
         'block': block,
         'vulnerable': vulnerable,
         'weak': weak,
+        'strength': strength,
+        'strengthCurse': strengthCurse,
+        'strengthEmpower': strengthEmpower,
       };
 }

@@ -22,7 +22,8 @@ class CleaveCard extends PlayableCard {
 
   @override
   String getCardDescription() {
-    int localDamage = damage;
+    int localDamage =
+        damage + Player.getPlayerInstance().getCharacter().strength;
     int weak = Player.getPlayerInstance().getCharacter().weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();
@@ -32,7 +33,8 @@ class CleaveCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
-    var localDamage = damage;
+    int localDamage =
+        damage + Player.getPlayerInstance().getCharacter().strength;
     int weak = Player.getPlayerInstance().getCharacter().weak;
     if (weak > 0) {
       localDamage = (localDamage * 0.75).floor();

@@ -5,6 +5,7 @@ import 'package:spire_mvp_flutter/classes/card/clash.card.dart';
 import 'package:spire_mvp_flutter/classes/card/cleave.card.dart';
 import 'package:spire_mvp_flutter/classes/card/clothes_line.card.dart';
 import 'package:spire_mvp_flutter/classes/card/defend.card.dart';
+import 'package:spire_mvp_flutter/classes/card/flex.card.dart';
 import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
 
 final strikeCard = StrikeCard();
@@ -22,3 +23,5 @@ final clashCard = ClashCard();
 final cleaveCard = CleaveCard();
 
 final clothesLineCard = ClothesLineCard();
+
+final flexCard = FlexCard();

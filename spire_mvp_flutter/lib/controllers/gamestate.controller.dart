@@ -48,6 +48,11 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setSelectedCards(List<PlayableCard> selectedCards) {
+    if (selectedTarget == null) return;
+    selectingTarget!.setSelectedCards(selectedCards);
+  }
+
   void exitGameMode() {
     gameMode = null;
     notifyListeners();
@@ -83,12 +88,6 @@ class GamestateController extends ChangeNotifier {
   void selectTarget(Enemy target) {
     if (selectingTarget == null) return;
     playTheCard(selectingTarget!, [target]);
-    if (selectingTarget!.step == selectingTarget!.maxSteps) {
-      selectingTargetCardId = null;
-      selectingTarget = null;
-    } else {
-      selectingTarget!.step = 1;
-    }
     notifyListeners();
   }
 
@@ -113,6 +112,15 @@ class GamestateController extends ChangeNotifier {
       } else {
         card.disposeToDiscard(
             playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+      }
+    }
+
+    if (selectedTarget != null) {
+      if (selectingTarget!.step == selectingTarget!.maxSteps) {
+        selectingTargetCardId = null;
+        selectingTarget = null;
+      } else {
+        selectingTarget!.step = 1;
       }
     }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/components/room/card_reward.view.dart';
+import 'package:spire_mvp_flutter/components/room/card_to_draw.view.dart';
 import 'package:spire_mvp_flutter/components/room/chest.view.dart';
 import 'package:spire_mvp_flutter/components/room/current_mana.view.dart';
 import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
@@ -12,6 +13,7 @@ import 'package:spire_mvp_flutter/components/room/game_over.view.dart';
 import 'package:spire_mvp_flutter/components/room/hand.view.dart';
 import 'package:spire_mvp_flutter/components/room/player_pawn.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 class EnemyRoomScreen extends StatefulWidget {
   final EnemyRoom room;
@@ -31,6 +33,8 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
     bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
+    bool isSelectingCard = gameState.selectingTarget != null &&
+        gameState.selectingTarget!.targetType == TargetEnum.cardTarget;
     bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
 
     return Container(
@@ -54,6 +58,10 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
           if (isPlayerAlive && !isNoEnemies) const DrawPileView(),
           if (isPlayerAlive && !isNoEnemies) const HandView(),
           if (isPlayerAlive && !isNoEnemies) const DiscardPileView(),
+          if (isSelectingCard)
+            CardToDraw(
+                cards: gameState.selectingTarget!.getSelectableCards(),
+                currentCard: gameState.selectingTarget!)
         ]));
   }
 }

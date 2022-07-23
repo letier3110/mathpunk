@@ -65,8 +65,8 @@ class HeadbuttCard extends PlayableCard {
         List<PlayableCard> discardPile = deck.getDiscardPile();
         List<PlayableCard> drawPile = deck.getDrawPile();
 
-        discardPile.remove(selectedCards[0]);
         drawPile.insert(0, selectedCards[0]);
+        discardPile.remove(selectedCards[0]);
         setSelectedCards([]);
       }
       targetType = TargetEnum.singleTarget;

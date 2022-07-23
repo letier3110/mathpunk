@@ -8,6 +8,7 @@ import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
 int draw = 1;
+int maxSelectableCards = 1;
 
 class WarCryCard extends PlayableCard {
   WarCryCard(
@@ -34,15 +35,35 @@ class WarCryCard extends PlayableCard {
   }
 
   @override
+  List<PlayableCard> getSelectableCards() {
+    return Player.getPlayerInstance().getCharacter().getDeck().getHand();
+  }
+
+  @override
+  int getMaxSelectableCards() {
+    int localMaxSelectableCards = maxSelectableCards;
+    return localMaxSelectableCards;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     if (step == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
       int localDraw = draw;
       character.deck.draw(localDraw);
+      step++;
+      targetType = TargetEnum.cardTarget;
     } else {
-      // select card from hand
+      if (selectedCards.isNotEmpty) {
+        List<PlayableCard> hand = character.deck.getHand();
+        List<PlayableCard> drawPile = character.deck.getDrawPile();
 
+        drawPile.insert(0, selectedCards[0]);
+        hand.remove(selectedCards[0]);
+        setSelectedCards([]);
+      }
+      targetType = TargetEnum.allTargets;
+      step++;
     }
-    step++;
   }
 }

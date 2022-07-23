@@ -17,6 +17,7 @@ import '../classes/card/strike.card.dart';
 import '../classes/card/thunderclap.card.dart';
 import '../classes/card/true_gift.card.dart';
 import '../classes/card/twin_strike.card.dart';
+import '../classes/card/warcry.card.dart';
 
 PlayableCard playableCardFromJson(dynamic json) {
   String jsonRuntime = json['_runtime'] as String;
@@ -74,6 +75,9 @@ PlayableCard playableCardFromJson(dynamic json) {
       break;
     case 'TwinStrikeCard':
       card = TwinStrikeCard();
+      break;
+    case 'WarCryCard':
+      card = WarCryCard();
       break;
     default:
       card = StrikeCard();

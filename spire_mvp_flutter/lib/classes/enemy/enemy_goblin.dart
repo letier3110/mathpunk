@@ -6,7 +6,7 @@ import 'enemy.dart';
 
 class EnemyGoblin extends Enemy {
   EnemyGoblin({String enemyName = 'goblin'})
-      : super(enemyName: enemyName, enemyMaxHealth: 10, enemyHealth: 8) {
+      : super(enemyName: enemyName, enemyMaxHealth: 10, enemyHealth: 10) {
     moveset = Moveset();
     moveset.setMoves([
       Intension(intensionType: IntensionType.offense, intensionDamage: 5),

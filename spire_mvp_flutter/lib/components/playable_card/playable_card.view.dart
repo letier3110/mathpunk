@@ -12,7 +12,11 @@ import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class PlayableCardComponent extends StatefulWidget {
   final PlayableCard card;
-  const PlayableCardComponent({required this.card, Key? key}) : super(key: key);
+  final bool glow;
+  final bool animate;
+  const PlayableCardComponent(
+      {required this.card, this.glow = true, this.animate = true, Key? key})
+      : super(key: key);
 
   @override
   State<PlayableCardComponent> createState() => PlayableCardComponentView();
@@ -48,15 +52,19 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
     int playerMana = gameState.playerCharacter!.mana;
 
     void onEnterHandler(PointerEnterEvent p) {
-      setState(() {
-        controller.forward();
-      });
+      if (widget.animate) {
+        setState(() {
+          controller.forward();
+        });
+      }
     }
 
     void onExitHandler(PointerExitEvent p) {
-      setState(() {
-        controller.reverse();
-      });
+      if (widget.animate) {
+        setState(() {
+          controller.reverse();
+        });
+      }
     }
 
     void onTapHandler() {
@@ -97,7 +105,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 height: 304,
                 width: 204,
               ),
-              if (playerMana >= widget.card.mana &&
+              if (widget.glow &&
+                  playerMana >= widget.card.mana &&
                   widget.card.isCardPlayable())
                 const Center(
                   child: GlowEffect(

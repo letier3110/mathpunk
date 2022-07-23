@@ -15,6 +15,7 @@ import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
 import 'package:spire_mvp_flutter/classes/card/thunderclap.card.dart';
 import 'package:spire_mvp_flutter/classes/card/true_gift.card.dart';
 import 'package:spire_mvp_flutter/classes/card/twin_strike.card.dart';
+import 'package:spire_mvp_flutter/classes/card/warcry.card.dart';
 
 final strikeCard = StrikeCard();
 final bashCard = BashCard();
@@ -33,3 +34,4 @@ final pommelStrikeCard = PommelStrikeCard();
 final thunderclapCard = ThunderclapCard();
 final trueGiftCard = TrueGiftCard();
 final twiStrikeCard = TwinStrikeCard();
+final warcryCard = WarCryCard();

@@ -25,7 +25,7 @@ class PlayableCard {
       cardTargetType = TargetEnum.singleTarget,
       cardSteps = 1,
       cardMaxSteps = 1,
-      cardSelectedCards = const [],
+      List<PlayableCard> cardSelectedCards = const [],
       cardEthereal = false,
       cardExhaused = false}) {
     ethereal = cardEthereal;

@@ -1,7 +1,7 @@
-import '../../card/cards_implementation.dart';
+import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
+
 import '../../deck.dart';
 import '../../relic/burning_blood.relic.dart';
-import '../../relic/relic.dart';
 import 'player_character.dart';
 
 class Priest extends PlayerCharacter {
@@ -12,7 +12,7 @@ class Priest extends PlayerCharacter {
 
     relics = [BurningBloodRelic()];
 
-    final cards = [strikeCard];
+    final cards = [StrikeCard()];
     deck = Deck(cards);
   }
 }

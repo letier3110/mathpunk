@@ -1,6 +1,9 @@
+import 'package:spire_mvp_flutter/classes/card/bash.card.dart';
+import 'package:spire_mvp_flutter/classes/card/defend.card.dart';
+import 'package:spire_mvp_flutter/classes/card/headbutt.card.dart';
+import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
 
-import '../../card/cards_implementation.dart';
 import '../../deck.dart';
 import 'player_character.dart';
 
@@ -12,7 +15,18 @@ class Barbarian extends PlayerCharacter {
 
     relics = [BurningBloodRelic()];
 
-    final cards = [flexCard, bashCard, clothesLineCard];
+    final cards = [
+      StrikeCard(),
+      StrikeCard(),
+      StrikeCard(),
+      StrikeCard(),
+      HeadbuttCard(),
+      BashCard(),
+      DefendCard(),
+      DefendCard(),
+      DefendCard(),
+      DefendCard()
+    ];
 
     deck = Deck(cards);
   }

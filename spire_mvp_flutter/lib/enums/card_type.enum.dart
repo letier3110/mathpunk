@@ -2,6 +2,7 @@ enum CardType {
   attack,
   skill,
   power,
+  status,
 }
 
 CardType decodeCardTypeFromJson(dynamic json) {
@@ -11,6 +12,9 @@ CardType decodeCardTypeFromJson(dynamic json) {
 
     case 'CardType.power':
       return CardType.power;
+
+    case 'CardType.status':
+      return CardType.status;
 
     case 'CardType.skill':
     default:

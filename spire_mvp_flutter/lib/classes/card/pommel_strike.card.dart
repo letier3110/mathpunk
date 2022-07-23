@@ -1,19 +1,21 @@
+import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
-import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-int damage = 8;
-int vulnerable = 2;
+int damage = 9;
+int draw = 1;
 
-class BashCard extends PlayableCard {
-  BashCard({
-    cardName = 'Bash',
-    cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',
-    cardMana = 2,
-  }) : super(
+class PommelStrikeCard extends PlayableCard {
+  PommelStrikeCard(
+      {cardName = 'Pommel Strike',
+      cardDescription = 'Deal 9(10) damage. Draw 1(2) card(s).',
+      cardMana = 1,
+      cardDamage = 5})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
@@ -31,17 +33,18 @@ class BashCard extends PlayableCard {
 
   @override
   String getCardDescription() {
-    var localVulnerable = vulnerable;
+    int localDraw = draw;
 
-    return 'Deal ${calculateDamage()} damage.\nApply $localVulnerable Vulnerable.';
+    return 'Deal ${calculateDamage()} damage.\nDraw $localDraw card.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage());
-      int localVulnerable = vulnerable;
-      target[0].addVulnerable(localVulnerable);
+      int localDraw = draw;
+      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+      character.deck.draw(localDraw);
     }
   }
 }

@@ -10,18 +10,34 @@ class PlayableCard {
   late int mana;
   late CardType type;
   late TargetEnum targetType = TargetEnum.singleTarget;
+  bool exhausted = false;
+  bool ethereal = false;
+  int step = 1;
+  int maxSteps = 1;
+  // possible place of bugs with selectedCards logic
+  List<PlayableCard> selectedCards = [];
 
   PlayableCard(
       {cardName = '',
       cardDescription = '',
       cardMana = 0,
       cardType = CardType.skill,
-      cardTargetType = TargetEnum.singleTarget}) {
+      cardTargetType = TargetEnum.singleTarget,
+      cardSteps = 1,
+      cardMaxSteps = 1,
+      cardSelectedCards = const [],
+      cardEthereal = false,
+      cardExhaused = false}) {
+    ethereal = cardEthereal;
+    exhausted = cardExhaused;
     name = cardName;
     description = cardDescription;
     mana = cardMana;
+    step = cardSteps;
+    maxSteps = cardMaxSteps;
     type = cardType;
     targetType = cardTargetType;
+    selectedCards = cardSelectedCards;
   }
 
   String getCardName() {
@@ -32,9 +48,29 @@ class PlayableCard {
     return description;
   }
 
+  bool getExhausted() {
+    return exhausted;
+  }
+
+  List<PlayableCard> getSelectableCards() {
+    // only for cards with targetEnum.cardTarget
+    throw UnimplementedError();
+  }
+
+  void setSelectedCards(List<PlayableCard> selectedCards) {
+    this.selectedCards = selectedCards;
+  }
+
+  int getMaxSelectableCards() {
+    // only for cards with targetEnum.cardTarget
+    throw UnimplementedError();
+  }
+
   bool disposeToDiscard(
       List<PlayableCard> hand, List<PlayableCard> discardPile) {
-    discardPile.add(this);
+    if (!ethereal) {
+      discardPile.add(this);
+    }
     hand.remove(this);
     return true;
   }
@@ -53,6 +89,10 @@ class PlayableCard {
         cardName: json['name'] as String,
         cardDescription: json['description'] as String,
         cardMana: json['mana'] as int,
+        cardSteps: json['step'] as int,
+        cardMaxSteps: json['maxSteps'] as int,
+        cardExhaused: json['exhausted'] as bool,
+        cardEthereal: json['ethereal'] as bool,
         cardType: decodeCardTypeFromJson(json['type']),
         cardTargetType: decodeTargetEnumFromJson(json['targetType']));
   }
@@ -61,6 +101,10 @@ class PlayableCard {
         'name': name,
         'description': description,
         'mana': mana,
+        'step': step,
+        'maxSteps': maxSteps,
+        'exhausted': exhausted,
+        'ethereal': ethereal,
         'type': type.toString(),
         'targetType': targetType.toString(),
       };

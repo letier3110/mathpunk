@@ -1,3 +1,4 @@
+import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
@@ -18,7 +19,7 @@ class DefendCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.skill,
-            cardTargetType: TargetEnum.playerTarget);
+            cardTargetType: TargetEnum.allTargets);
 
   @override
   String getCardDescription() {
@@ -29,9 +30,7 @@ class DefendCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
-    var tg = target as List<PlayerCharacter>;
-    if ((tg.runtimeType == List<PlayerCharacter>) && tg.length == 1) {
-      tg[0].addBlock(block);
-    }
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addBlock(block);
   }
 }

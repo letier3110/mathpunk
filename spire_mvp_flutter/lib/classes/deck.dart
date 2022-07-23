@@ -6,6 +6,7 @@ import 'card/playable_card.dart';
 class Deck {
   List<PlayableCard> cards = [];
 
+  List<PlayableCard> exhaustPile = [];
   List<PlayableCard> drawPile = [];
   List<PlayableCard> hand = [];
   List<PlayableCard> discardPile = [];
@@ -17,20 +18,24 @@ class Deck {
     discardPile = [];
   }
 
-  getCards() {
+  List<PlayableCard> getCards() {
     return cards;
   }
 
-  getDrawPile() {
+  List<PlayableCard> getDrawPile() {
     return drawPile;
   }
 
-  getHand() {
+  List<PlayableCard> getHand() {
     return hand;
   }
 
-  getDiscardPile() {
+  List<PlayableCard> getDiscardPile() {
     return discardPile;
+  }
+
+  List<PlayableCard> getExhaustedPile() {
+    return exhaustPile;
   }
 
   void initialLoadDrawPile() {
@@ -84,6 +89,10 @@ class Deck {
     }
   }
 
+  void setExhausPile(List<PlayableCard> exhaustPile) {
+    this.exhaustPile = exhaustPile;
+  }
+
   void setDrawPile(List<PlayableCard> drawPile) {
     this.drawPile = drawPile;
   }
@@ -99,6 +108,9 @@ class Deck {
   factory Deck.fromJson(dynamic json) {
     List<PlayableCard> playCards =
         (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
+    List<PlayableCard> exhaustPile = (json['exhaustPile'] as List)
+        .map((e) => playableCardFromJson(e))
+        .toList();
     List<PlayableCard> drawCards =
         (json['drawPile'] as List).map((e) => playableCardFromJson(e)).toList();
     List<PlayableCard> handCards =
@@ -107,6 +119,7 @@ class Deck {
         .map((e) => playableCardFromJson(e))
         .toList();
     Deck deck = Deck(playCards);
+    deck.setExhausPile(exhaustPile);
     deck.setDrawPile(drawCards);
     deck.setHand(handCards);
     deck.setDiscardPile(discardCards);
@@ -115,6 +128,7 @@ class Deck {
   }
 
   Map toJson() => {
+        'exhaustPile': exhaustPile.map((e) => playableCardToJson(e)).toList(),
         'drawPile': drawPile.map((e) => playableCardToJson(e)).toList(),
         'hand': hand.map((e) => playableCardToJson(e)).toList(),
         'discardPile': discardPile.map((e) => playableCardToJson(e)).toList(),

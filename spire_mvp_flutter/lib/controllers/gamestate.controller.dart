@@ -83,32 +83,38 @@ class GamestateController extends ChangeNotifier {
   void selectTarget(Enemy target) {
     if (selectingTarget == null) return;
     playTheCard(selectingTarget!, [target]);
-    selectingTargetCardId = null;
-    selectingTarget = null;
+    if (selectingTarget!.step == selectingTarget!.maxSteps) {
+      selectingTargetCardId = null;
+      selectingTarget = null;
+    } else {
+      selectingTarget!.step = 1;
+    }
     notifyListeners();
   }
 
-  void playTheCardOnPlayer(PlayableCard card) {
-    if (playerCharacter == null) return;
-    if (currentRoom == null) return;
-    if (playerCharacter!.mana < card.mana) return;
-    if (card.isCardPlayable() == false) return;
-
-    playerCharacter!.mana -= card.mana;
-    card.play([playerCharacter] as List<BaseCharacter>);
-    card.disposeToDiscard(
-        playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
-    notifyListeners();
+  bool _checkIfCardPlayable(PlayableCard card) {
+    if (playerCharacter == null) return false;
+    if (currentRoom == null) return false;
+    if (playerCharacter!.mana < card.mana) return false;
+    if (card.isCardPlayable() == false) return false;
+    return true;
   }
 
   void playTheCard(PlayableCard card, List<Enemy> targets) {
-    if (playerCharacter == null) return;
-    if (currentRoom == null) return;
-    if (playerCharacter!.mana < card.mana) return;
+    if (!_checkIfCardPlayable(card)) {
+      return;
+    }
     playerCharacter!.mana -= card.mana;
     card.play(targets);
-    card.disposeToDiscard(
-        playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+    if (card.step == card.maxSteps) {
+      if (card.exhausted) {
+        card.disposeToDiscard(
+            playerCharacter!.deck.hand, playerCharacter!.deck.exhaustPile);
+      } else {
+        card.disposeToDiscard(
+            playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+      }
+    }
 
     var i = 0;
     while (i < targets.length) {

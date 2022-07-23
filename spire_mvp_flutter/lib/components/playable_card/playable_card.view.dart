@@ -63,13 +63,10 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       if (widget.card.targetType == TargetEnum.singleTarget) {
         gameState.startSelecting(widget.card, cardId);
         return;
-      } else if (widget.card.targetType == TargetEnum.playerTarget) {
+      } else if (widget.card.targetType == TargetEnum.cardTarget) {
         // TODO: implement some random fuzzy logic to select a target
-        gameState.playTheCardOnPlayer(widget.card);
-        return;
-      } else if (widget.card.targetType == TargetEnum.randomTarget) {
-        // TODO: implement some random fuzzy logic to select a target
-        gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
+        // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
+        gameState.startSelecting(widget.card, cardId);
         return;
       } else {
         gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
@@ -143,7 +140,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                   HighlightText(
                                     text: widget.card.getCardDescription(),
                                     highlightRegex: RegExp(
-                                        r'Block|Strength|Weak|Vulnerable'),
+                                        r'Block|Strength|Weak|Vulnerable|Exhaust'),
                                     highlightStyle: TextStyle(
                                         color: Colors.yellow,
                                         fontWeight: FontWeight.bold,

@@ -1,17 +1,18 @@
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
+import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
 import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
 import '../../deck.dart';
 import '../../relic/relic.dart';
-import '../../item.dart';
+import '../../items/consumable_item.dart';
 
 import '../../base_character.dart';
 
 class PlayerCharacter extends BaseCharacter {
   late Deck deck;
   late List<Relic> relics;
-  late List<Item> items;
+  late List<ConsumableItem> items;
   late int mana = 0;
   late int manaPower = 3;
   late int drawPower = 3;
@@ -40,11 +41,6 @@ class PlayerCharacter extends BaseCharacter {
     relics.add(relic);
   }
 
-  // removeRelic(relic: Relic) {
-  //   // TODO
-  //   // this.relics.filter by id?
-  // }
-
   getRelics() {
     return relics;
   }
@@ -54,11 +50,11 @@ class PlayerCharacter extends BaseCharacter {
     mana = manaPower;
   }
 
-  attachItems(List<Item> newItems) {
+  attachItems(List<ConsumableItem> newItems) {
     items = newItems;
   }
 
-  addItem(Item item) {
+  addItem(ConsumableItem item) {
     items.add(item);
   }
 
@@ -89,11 +85,6 @@ class PlayerCharacter extends BaseCharacter {
     startTurn();
   }
 
-  // removeItem(item: Item) {
-  //   // TODO
-  //   // this.relics.filter by id?
-  // }
-
   getItems() {
     return items;
   }
@@ -122,7 +113,7 @@ class PlayerCharacter extends BaseCharacter {
     this.relics = relics;
   }
 
-  setItems(List<Item> items) {
+  setItems(List<ConsumableItem> items) {
     this.items = items;
   }
 
@@ -134,11 +125,10 @@ class PlayerCharacter extends BaseCharacter {
     character.setDrawPower(json['drawPower'] as int);
     character.setGold(json['gold'] as int);
     character.setDeck(Deck.fromJson(json['deck']));
-    // character.setRelics(json['relics'] as List<Relic>);
-    character.setRelics([]);
-    // character.setItems(json['items'] as List<Item>);
-    character.setItems([]);
-    // character
+    character.setRelics(
+        (json['relics'] as List).map((e) => relicFromJson(e)).toList());
+    character.setItems(
+        (json['items'] as List).map((e) => consumableItemFromJson(e)).toList());
 
     return character;
   }
@@ -148,7 +138,7 @@ class PlayerCharacter extends BaseCharacter {
         ...super.toJson(),
         'deck': deck.toJson(),
         'relics': relics.map((e) => relicToJson(e)).toList(),
-        'items': [],
+        'items': items.map((e) => consumableItemToJson(e)).toList(),
         'mana': mana,
         'manaPower': manaPower,
         'drawPower': drawPower,

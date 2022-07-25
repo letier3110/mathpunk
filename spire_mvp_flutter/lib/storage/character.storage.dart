@@ -3,17 +3,19 @@ import 'package:spire_mvp_flutter/classes/player/player_character/enigma_charact
 import 'package:spire_mvp_flutter/classes/player/player_character/irrationalist_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
+import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
 import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
 import '../classes/deck.dart';
-import '../classes/item.dart';
+import '../classes/items/consumable_item.dart';
 import '../classes/relic/relic.dart';
 
 PlayerCharacter playerCharacterFromJson(dynamic json) {
   Deck jsonDeck = Deck.fromJson(json['deck']);
   List<Relic> jsonRelic =
       (json['relics'] as List).map((e) => relicFromJson(e)).toList();
-  List<Item> jsonItem = [];
+  List<ConsumableItem> jsonItem =
+      (json['items'] as List).map((e) => consumableItemFromJson(e)).toList();
   int jsonMana = json['mana'] as int;
   int jsonManaPower = json['manaPower'] as int;
   int jsonDrawPower = json['drawPower'] as int;

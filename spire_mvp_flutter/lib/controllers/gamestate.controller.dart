@@ -1,12 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/base_character.dart';
-import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
+import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
@@ -244,6 +243,7 @@ class GamestateController extends ChangeNotifier {
         roomSlice.add(EnemyRoom(roomId: '$j $i', roomRewards: [
           Reward(
               rewardCards: [angerCard, strikeCard, bashCard],
+              rewardItem: FearPotion(),
               rewardRelic: BurningBloodRelic(),
               rewardGold: rng.nextInt(100) + 50)
         ]));

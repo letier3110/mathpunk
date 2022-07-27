@@ -38,7 +38,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
     bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
 
     return Container(
-        color: Colors.black87,
+        color: const Color(0xFF222222),
         width: double.infinity,
         height: double.infinity,
         child: Stack(children: [

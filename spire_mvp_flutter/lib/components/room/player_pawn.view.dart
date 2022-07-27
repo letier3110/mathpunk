@@ -103,13 +103,25 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                             borderRadius: BorderRadius.circular(hpBarHeight),
                           ),
                           child: Center(
-                            child: Text(
-                              '$block',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: getFontSize(16),
-                                  fontWeight: FontWeight.w600),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(2),
+                                  child: const Icon(
+                                    Icons.shield,
+                                    color: Colors.white,
+                                    size: 12,
+                                  ),
+                                ),
+                                Text(
+                                  '$block',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: getFontSize(16),
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
                             ),
                           ),
                         ),

@@ -20,7 +20,6 @@ class _GameScreenState extends State<GameScreen> {
 
     return Scaffold(
       body: Stack(children: [
-        const GameHeader(),
         if (gameState.inMap == true || gameState.currentRoom == null)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
@@ -38,6 +37,7 @@ class _GameScreenState extends State<GameScreen> {
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: const PauseScreen(),
           ),
+        const GameHeader(),
       ]),
     );
   }

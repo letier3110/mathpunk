@@ -22,19 +22,23 @@ class CharacterHitpointsView extends State<CharacterHitpoints> {
     return Container(
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.fromLTRB(150, 0, 0, 0),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'HP: $hp / $maxhp',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: getFontSize(22),
-                  fontWeight: FontWeight.w600),
-            ),
-          ]),
+      child: Row(children: [
+        Container(
+          margin: const EdgeInsets.only(right: 4),
+          child: const Icon(
+            Icons.favorite,
+            color: Colors.redAccent,
+          ),
+        ),
+        Text(
+          '$hp / $maxhp',
+          textAlign: TextAlign.left,
+          style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: getFontSize(22),
+              fontWeight: FontWeight.w600),
+        ),
+      ]),
     );
   }
 }

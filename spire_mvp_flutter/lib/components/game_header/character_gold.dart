@@ -20,20 +20,24 @@ class CharacterGoldView extends State<CharacterGold> {
 
     return Container(
       padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.fromLTRB(328, 0, 0, 0),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Gold: $gold',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Colors.yellow,
-                  fontSize: getFontSize(22),
-                  fontWeight: FontWeight.w600),
-            ),
-          ]),
+      margin: const EdgeInsets.fromLTRB(150, 32, 0, 0),
+      child: Row(children: [
+        Container(
+          margin: const EdgeInsets.only(right: 4),
+          child: const Icon(
+            Icons.savings,
+            color: Colors.yellow,
+          ),
+        ),
+        Text(
+          gold.toString(),
+          textAlign: TextAlign.left,
+          style: TextStyle(
+              color: Colors.yellow,
+              fontSize: getFontSize(22),
+              fontWeight: FontWeight.w600),
+        ),
+      ]),
     );
   }
 }

@@ -35,8 +35,8 @@ class HandViewView extends State<HandView> {
               padding: const EdgeInsets.all(8),
               height: 600,
               // color: Colors.black,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
                 children:
                     hand.map((e) => PlayableCardComponent(card: e)).toList(),
               )),

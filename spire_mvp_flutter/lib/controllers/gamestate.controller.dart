@@ -9,6 +9,7 @@ import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
+import 'package:spire_mvp_flutter/classes/relic/ninja_scroll.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
@@ -336,6 +337,12 @@ class GamestateController extends ChangeNotifier {
         playerCharacter!.relics
             .firstWhere(
                 (element) => RingOfSerpent.isRelicRingOfSerpent(element))
+            .play();
+      } catch (e) {}
+      // if there are ninja scroll => add 3 shivs
+      try {
+        playerCharacter!.relics
+            .firstWhere((element) => NinjaScroll.isRelicNinjaScroll(element))
             .play();
       } catch (e) {}
       playerCharacter!.startTurn();

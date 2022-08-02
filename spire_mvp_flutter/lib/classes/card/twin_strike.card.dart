@@ -4,6 +4,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 5;
@@ -20,26 +21,16 @@ class TwinStrikeCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
-    return 'Deal ${calculateDamage()} damage twice.';
+    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage twice.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }
   }
 }

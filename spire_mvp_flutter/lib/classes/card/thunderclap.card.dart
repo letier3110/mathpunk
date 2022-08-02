@@ -5,6 +5,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 4;
@@ -22,26 +23,16 @@ class ThunderclapCard extends PlayableCard {
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
     int localVulnerable = vulnerable;
-    return 'Deal ${calculateDamage()} damage and apply $localVulnerable Vulnerable to ALL enemies.';
+    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage and apply $localVulnerable Vulnerable to ALL enemies.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     for (var t in target) {
-      t.recieveDamage(calculateDamage());
+      t.recieveDamage(calculateDamage(damage: damage, mana: mana));
       int localVulnerable = vulnerable;
       target[0].addVulnerable(localVulnerable);
     }

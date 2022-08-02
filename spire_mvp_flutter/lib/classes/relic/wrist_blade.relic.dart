@@ -4,29 +4,21 @@ import 'package:spire_mvp_flutter/classes/relic/relic.dart';
 
 int count = 3;
 
-class NinjaScroll extends Relic {
-  NinjaScroll(
-      {relicName = 'Ninja Scroll',
-      relicDescription = 'Start each combat with 3 Shivs in hand.'})
+class WristBlade extends Relic {
+  WristBlade(
+      {relicName = 'Wrist Blade',
+      relicDescription = 'Attacks that cost 0 deal 4 additional damage.'})
       : super(relicDescription: relicDescription, relicName: relicName);
 
   @override
-  void play() {
-    for (var i = 0; i < 3; i++) {
-      Player.getPlayerInstance()
-          .getCharacter()
-          .getDeck()
-          .getHand()
-          .add(ShivCard());
-    }
+  void play() {}
+
+  static bool isRelicWristBlade(Relic relic) {
+    return relic.runtimeType == WristBlade;
   }
 
-  static bool isRelicNinjaScroll(Relic relic) {
-    return relic.runtimeType == NinjaScroll;
-  }
-
-  factory NinjaScroll.fromJson(dynamic json) {
-    return NinjaScroll(
+  factory WristBlade.fromJson(dynamic json) {
+    return WristBlade(
       relicName: json['name'] as String,
       relicDescription: json['description'] as String,
     );

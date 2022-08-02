@@ -4,6 +4,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 9;
@@ -21,27 +22,17 @@ class PommelStrikeCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
     int localDraw = draw;
 
-    return 'Deal ${calculateDamage()} damage.\nDraw $localDraw card.';
+    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nDraw $localDraw card.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
       int localDraw = draw;
       PlayerCharacter character = Player.getPlayerInstance().getCharacter();
       character.deck.draw(localDraw);

@@ -6,6 +6,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 9;
@@ -25,19 +26,9 @@ class HeadbuttCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
-    return 'Deal ${calculateDamage()} damage.\nPlace a card from your discard pile on top of your draw pile.';
+    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nPlace a card from your discard pile on top of your draw pile.';
   }
 
   @override
@@ -55,7 +46,7 @@ class HeadbuttCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     if (step == 1) {
       if (target.length == 1) {
-        target[0].recieveDamage(calculateDamage());
+        target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
         step++;
         targetType = TargetEnum.cardTarget;
       }

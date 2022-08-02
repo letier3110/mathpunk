@@ -4,6 +4,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 12;
@@ -20,27 +21,17 @@ class ClothesLineCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
     int localWeak = weak;
 
-    return 'Deal ${calculateDamage()} damage.\nApply $localWeak Weak.';
+    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nApply $localWeak Weak.';
   }
 
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
       target[0].addWeak(weak);
     }
   }

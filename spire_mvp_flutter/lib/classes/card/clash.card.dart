@@ -4,6 +4,7 @@ import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
+import '../util.dart';
 import 'playable_card.dart';
 
 int damage = 14;
@@ -20,19 +21,9 @@ class ClashCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   String getCardDescription() {
-    return 'Can only be played if every card in your hand is an Attack.\nDeal ${calculateDamage()} damage.';
+    return 'Can only be played if every card in your hand is an Attack.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.';
   }
 
   @override
@@ -45,7 +36,7 @@ class ClashCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }
   }
 }

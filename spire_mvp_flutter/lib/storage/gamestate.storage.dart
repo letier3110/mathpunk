@@ -35,8 +35,6 @@ class GameStateStorage {
 
       GameStateInterface state = GameStateInterface.fromJson(jsonState);
 
-      print('heresy');
-
       gameState.fromJson(state);
 
       return 1;

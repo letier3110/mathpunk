@@ -52,6 +52,14 @@ class PlayableCard {
     return exhausted;
   }
 
+  int getMana() {
+    return mana;
+  }
+
+  void setMana(int mana) {
+    this.mana = mana;
+  }
+
   List<PlayableCard> getSelectableCards() {
     // only for cards with targetEnum.cardTarget
     throw UnimplementedError();

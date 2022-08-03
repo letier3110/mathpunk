@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/deck.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player_character/player_character.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
@@ -27,8 +28,10 @@ class HeadbuttCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nPlace a card from your discard pile on top of your draw pile.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nPlace a card from your discard pile on top of your draw pile.');
   }
 
   @override

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -24,10 +26,13 @@ class FlexCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
-    return 'Gain $localStrength Strength.\nAt the end of your turn, lose $localStrengthCurse Strength.';
+
+    return HighlightDescriptionText(
+        text:
+            'Gain $localStrength Strength.\nAt the end of your turn, lose $localStrengthCurse Strength.');
   }
 
   @override

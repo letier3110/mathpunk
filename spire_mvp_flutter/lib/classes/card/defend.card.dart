@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -22,10 +24,9 @@ class DefendCard extends PlayableCard {
             cardTargetType: TargetEnum.allTargets);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     var localBlock = block;
-
-    return 'Gain $localBlock Block.';
+    return HighlightDescriptionText(text: 'Gain $localBlock Block.');
   }
 
   @override

@@ -1,10 +1,10 @@
-import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player_character/player_character.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
@@ -23,8 +23,10 @@ class CleaveCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage to ALL enemies.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage(damage: damage, mana: mana)} damage to ALL enemies.');
   }
 
   @override

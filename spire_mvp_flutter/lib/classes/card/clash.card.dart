@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player_character/player_character.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
@@ -22,8 +23,10 @@ class ClashCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
-    return 'Can only be played if every card in your hand is an Attack.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Can only be played if every card in your hand is an Attack.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.');
   }
 
   @override

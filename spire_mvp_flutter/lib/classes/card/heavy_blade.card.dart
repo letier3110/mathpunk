@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -31,8 +33,10 @@ class HeavyBladeCard extends PlayableCard {
   }
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage()} damage.\nStrength affects Heavy Blade 3 times.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage()} damage.\nStrength affects Heavy Blade 3 times.');
   }
 
   @override

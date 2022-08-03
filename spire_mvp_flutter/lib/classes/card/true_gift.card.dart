@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -25,9 +27,11 @@ class TrueGiftCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localBlock = block;
-    return 'Gain $localBlock Block.\nExhaust a random card from your hand.';
+
+    return HighlightDescriptionText(
+        text: 'Gain $localBlock Block.\nExhaust a random card from your hand.');
   }
 
   @override

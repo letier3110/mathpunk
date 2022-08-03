@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
+
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player.dart';
-import '../player/player_character/player_character.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
@@ -21,10 +22,12 @@ class BashCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     var localVulnerable = vulnerable;
 
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nApply $localVulnerable Vulnerable.';
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nApply $localVulnerable Vulnerable.');
   }
 
   @override

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../../enums/target.enum.dart';
 import '../base_character.dart';
@@ -28,10 +30,12 @@ class WarCryCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localDraw = draw;
 
-    return 'Draw $localDraw card.\nPlace a card from your hand on top of your draw pile.\nExhaust.';
+    return HighlightDescriptionText(
+        text:
+            'Draw $localDraw card.\nPlace a card from your hand on top of your draw pile.\nExhaust.');
   }
 
   @override

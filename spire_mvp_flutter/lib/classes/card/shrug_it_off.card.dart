@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -24,11 +26,11 @@ class ShrugItOffCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localBlock = block;
     int localDraw = draw;
-
-    return 'Gain $localBlock Block.\nDraw $localDraw card.';
+    return HighlightDescriptionText(
+        text: 'Gain $localBlock Block.\nDraw $localDraw card.');
   }
 
   @override

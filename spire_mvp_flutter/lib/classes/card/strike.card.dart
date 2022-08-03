@@ -1,9 +1,9 @@
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
@@ -22,8 +22,9 @@ class StrikeCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text: 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.');
   }
 
   @override

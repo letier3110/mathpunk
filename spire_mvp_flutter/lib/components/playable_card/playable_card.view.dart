@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/components/highlight_text.dart';
 import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
@@ -146,18 +145,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                               height: 160,
                               child: Column(
                                 children: [
-                                  HighlightText(
-                                    text: widget.card.getCardDescription(),
-                                    highlightRegex: RegExp(
-                                        r'Block|Strength|Weak|Vulnerable|Exhaust'),
-                                    highlightStyle: TextStyle(
-                                        color: Colors.yellow,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: getFontSize(16)),
-                                    nonHighlightStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: getFontSize(16)),
-                                  ),
+                                  widget.card.getCardDescription(),
                                 ],
                               ),
                             ),

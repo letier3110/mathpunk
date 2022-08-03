@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -23,10 +25,11 @@ class PommelStrikeCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localDraw = draw;
-
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nDraw $localDraw card.';
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nDraw $localDraw card.');
   }
 
   @override

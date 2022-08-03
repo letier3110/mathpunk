@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/deck.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -53,8 +55,10 @@ class PerfectStrikeCard extends PlayableCard {
   }
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage()} damage.\nDeals an additional 2 damage for ALL of your cards containing "Strike".';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage()} damage.\nDeals an additional 2 damage for ALL of your cards containing "Strike".');
   }
 
   @override

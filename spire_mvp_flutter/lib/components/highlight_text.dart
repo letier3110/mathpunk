@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class HighlightText extends StatelessWidget {
   final String? text;
@@ -61,4 +62,21 @@ class HighlightText extends StatelessWidget {
   TextSpan _normalSpan(String content) {
     return TextSpan(text: content);
   }
+}
+
+class HighlightDescriptionText extends HighlightText {
+  HighlightDescriptionText({
+    Key? key,
+    required String text,
+  }) : super(
+          key: key,
+          text: text,
+          highlightRegex: RegExp(r'Block|Strength|Weak|Vulnerable|Exhaust'),
+          highlightStyle: TextStyle(
+              color: Colors.yellow,
+              fontWeight: FontWeight.bold,
+              fontSize: getFontSize(16)),
+          nonHighlightStyle:
+              TextStyle(color: Colors.white, fontSize: getFontSize(16)),
+        );
 }

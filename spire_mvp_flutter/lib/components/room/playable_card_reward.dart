@@ -70,14 +70,7 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                             SizedBox(
                               height: 160,
                               child: Column(
-                                children: [
-                                  Text(
-                                    widget.card.getCardDescription(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: getFontSize(16)),
-                                  ),
-                                ],
+                                children: [widget.card.getCardDescription()],
                               ),
                             ),
                           ],

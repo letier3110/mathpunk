@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -21,8 +23,10 @@ class AngerCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
-    return 'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nAdd a copy of this card to your discard pile.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text:
+            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nAdd a copy of this card to your discard pile.');
   }
 
   @override

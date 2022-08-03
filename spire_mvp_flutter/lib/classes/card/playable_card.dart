@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
+import '../../components/highlight_text.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
@@ -44,8 +46,12 @@ class PlayableCard {
     return name;
   }
 
-  String getCardDescription() {
-    return description;
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(text: description);
+  }
+
+  StatelessWidget getCardMana() {
+    return Text(mana.toString());
   }
 
   bool getExhausted() {

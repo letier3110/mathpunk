@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -16,9 +18,11 @@ class BodySlamCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack);
+
   @override
-  String getCardDescription() {
-    return 'Deal damage equal to your current Block.';
+  StatelessWidget getCardDescription() {
+    return HighlightDescriptionText(
+        text: 'Deal damage equal to your current Block.');
   }
 
   @override

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:spire_mvp_flutter/components/highlight_text.dart';
 
 import '../base_character.dart';
 
@@ -23,10 +25,12 @@ class IronWaveCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  String getCardDescription() {
+  StatelessWidget getCardDescription() {
     int localBlock = block;
 
-    return 'Gain $localBlock Block.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.';
+    return HighlightDescriptionText(
+        text:
+            'Gain $localBlock Block.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.');
   }
 
   @override

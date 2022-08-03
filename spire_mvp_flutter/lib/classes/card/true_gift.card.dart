@@ -30,8 +30,15 @@ class TrueGiftCard extends PlayableCard {
   StatelessWidget getCardDescription() {
     int localBlock = block;
 
-    return HighlightDescriptionText(
-        text: 'Gain $localBlock Block.\nExhaust a random card from your hand.');
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
+          HighlightDescriptionText(
+              text: 'Exhaust a random card from your hand.'),
+        ],
+      ),
+    );
   }
 
   @override

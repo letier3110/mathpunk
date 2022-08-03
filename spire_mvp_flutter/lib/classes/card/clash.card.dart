@@ -24,9 +24,29 @@ class ClashCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    return HighlightDescriptionText(
-        text:
-            'Can only be played if every card in your hand is an Attack.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.');
+    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(
+              text:
+                  'Can only be played if every card in your hand is an Attack.'),
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ]))
+        ],
+      ),
+    );
   }
 
   @override

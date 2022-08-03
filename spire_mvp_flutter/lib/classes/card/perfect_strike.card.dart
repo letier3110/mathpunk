@@ -56,9 +56,29 @@ class PerfectStrikeCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    return HighlightDescriptionText(
-        text:
-            'Deal ${calculateDamage()} damage.\nDeals an additional 2 damage for ALL of your cards containing "Strike".');
+    int finalDamage = calculateDamage();
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ])),
+          HighlightDescriptionText(
+              text:
+                  'Deals an additional 2 damage for ALL of your cards containing "Strike".'),
+        ],
+      ),
+    );
   }
 
   @override

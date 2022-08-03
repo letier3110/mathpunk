@@ -30,9 +30,16 @@ class FlexCard extends PlayableCard {
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
 
-    return HighlightDescriptionText(
-        text:
-            'Gain $localStrength Strength.\nAt the end of your turn, lose $localStrengthCurse Strength.');
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(text: 'Gain $localStrength Strength.'),
+          HighlightDescriptionText(
+              text:
+                  'At the end of your turn, lose $localStrengthCurse Strength.'),
+        ],
+      ),
+    );
   }
 
   @override

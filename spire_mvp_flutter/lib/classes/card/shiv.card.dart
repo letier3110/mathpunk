@@ -24,9 +24,27 @@ class ShivCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    return HighlightDescriptionText(
-        text:
-            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nExhaust.');
+    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ])),
+          HighlightDescriptionText(text: 'Exhaust.'),
+        ],
+      ),
+    );
   }
 
   @override

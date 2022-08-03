@@ -29,9 +29,31 @@ class HeadbuttCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    return HighlightDescriptionText(
-        text:
-            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nPlace a card from your discard pile on top of your draw pile.');
+    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ])),
+          const Text(
+              'Place a card from your discard pile on top of your draw pile.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white)),
+        ],
+      ),
+    );
   }
 
   @override

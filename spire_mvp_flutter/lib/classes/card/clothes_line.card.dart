@@ -24,10 +24,28 @@ class ClothesLineCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localWeak = weak;
+    int finalDamage = calculateDamage(damage: damage, mana: mana);
 
-    return HighlightDescriptionText(
-        text:
-            'Deal ${calculateDamage(damage: damage, mana: mana)} damage.\nApply $localWeak Weak.');
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ])),
+          HighlightDescriptionText(text: 'Apply $localWeak Weak.'),
+        ],
+      ),
+    );
   }
 
   @override

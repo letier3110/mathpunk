@@ -324,6 +324,8 @@ class GamestateController extends ChangeNotifier {
     }
 
     if (currentRoom.runtimeType == EnemyRoom) {
+      // playerCharacter!.strength = 5;
+      playerCharacter!.weak = 5;
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
       // if there are ring of snake => draw 2 cards at the start of combat

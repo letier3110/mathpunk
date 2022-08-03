@@ -34,9 +34,28 @@ class HeavyBladeCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    return HighlightDescriptionText(
-        text:
-            'Deal ${calculateDamage()} damage.\nStrength affects Heavy Blade 3 times.');
+    int finalDamage = calculateDamage();
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ])),
+          HighlightDescriptionText(
+              text: 'Strength affects Heavy Blade 3 times.'),
+        ],
+      ),
+    );
   }
 
   @override

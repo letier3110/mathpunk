@@ -17,16 +17,9 @@ class Barbarian extends PlayerCharacter {
     maxHealth = 200;
     name = 'Barbarian';
 
-    relics = [BurningBloodRelic(), RingOfSerpent(), RingOfSnake()];
+    relics = [BurningBloodRelic()];
 
-    items = [
-      FearPotion(),
-      FearPotion(),
-      FearPotion(),
-      FearPotion(),
-      FearPotion(),
-      BlockPotion()
-    ];
+    items = [];
 
     final cards = [
       StrikeCard(),

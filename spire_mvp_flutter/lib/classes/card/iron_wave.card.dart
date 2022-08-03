@@ -27,10 +27,28 @@ class IronWaveCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localBlock = block;
+    int finalDamage = calculateDamage(damage: damage, mana: mana);
 
-    return HighlightDescriptionText(
-        text:
-            'Gain $localBlock Block.\nDeal ${calculateDamage(damage: damage, mana: mana)} damage.');
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
+          RichText(
+              text: TextSpan(children: [
+            const TextSpan(text: 'Deal '),
+            TextSpan(
+                text: finalDamage.toString(),
+                style: TextStyle(
+                    color: finalDamage > damage
+                        ? Colors.greenAccent
+                        : finalDamage < damage
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: ' damage.')
+          ]))
+        ],
+      ),
+    );
   }
 
   @override

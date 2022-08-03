@@ -47,7 +47,7 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                   height: 300,
                   width: 200,
                   decoration: BoxDecoration(
-                    color: Colors.redAccent,
+                    color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Stack(

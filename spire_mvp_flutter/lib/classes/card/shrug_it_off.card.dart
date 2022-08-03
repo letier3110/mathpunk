@@ -29,8 +29,14 @@ class ShrugItOffCard extends PlayableCard {
   StatelessWidget getCardDescription() {
     int localBlock = block;
     int localDraw = draw;
-    return HighlightDescriptionText(
-        text: 'Gain $localBlock Block.\nDraw $localDraw card.');
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
+          HighlightDescriptionText(text: 'Draw $localDraw card.')
+        ],
+      ),
+    );
   }
 
   @override

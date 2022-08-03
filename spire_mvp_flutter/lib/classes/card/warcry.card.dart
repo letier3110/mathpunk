@@ -33,9 +33,16 @@ class WarCryCard extends PlayableCard {
   StatelessWidget getCardDescription() {
     int localDraw = draw;
 
-    return HighlightDescriptionText(
-        text:
-            'Draw $localDraw card.\nPlace a card from your hand on top of your draw pile.\nExhaust.');
+    return Container(
+      child: Column(
+        children: [
+          HighlightDescriptionText(text: 'Draw $localDraw card.'),
+          HighlightDescriptionText(
+              text: 'Place a card from your hand on top of your draw pile.'),
+          HighlightDescriptionText(text: 'Exhaust.')
+        ],
+      ),
+    );
   }
 
   @override

@@ -12,6 +12,7 @@ class BaseCharacter implements ICharacter {
   int strength = 0;
   int strengthEmpower = 0;
   int strengthCurse = 0;
+  int timesReceivedDamageInRound = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -50,6 +51,14 @@ class BaseCharacter implements ICharacter {
     this.strengthEmpower += strengthEmpower;
   }
 
+  addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
+    this.timesReceivedDamageInRound += timesReceivedDamageInRound;
+  }
+
+  void resetRoundStatuses() {
+    timesReceivedDamageInRound = 0;
+  }
+
   recieveDamage(int damage) {
     double localDamage = damage.toDouble();
     if (vulnerable > 1) {
@@ -65,6 +74,7 @@ class BaseCharacter implements ICharacter {
     if (localDamage > 0) {
       health -= localDamage.floor();
     }
+    addTimesReceivedDamageInRound(1);
   }
 
   heal(int damage) {
@@ -113,6 +123,8 @@ class BaseCharacter implements ICharacter {
     character.addStrength(json['strength'] as int);
     character.addStrengthCurse(json['strengthCurse'] as int);
     character.addStrengthEmpower(json['strengthEmpower'] as int);
+    character.addTimesReceivedDamageInRound(
+        json['timesReceivedDamageInRound'] as int);
 
     return character;
   }
@@ -127,5 +139,6 @@ class BaseCharacter implements ICharacter {
         'strength': strength,
         'strengthCurse': strengthCurse,
         'strengthEmpower': strengthEmpower,
+        'timesReceivedDamageInRound': timesReceivedDamageInRound,
       };
 }

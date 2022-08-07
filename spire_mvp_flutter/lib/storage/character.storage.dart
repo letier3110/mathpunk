@@ -26,6 +26,14 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   int jsonBlock = json['block'] as int;
   int jsonVulnerable = json['vulnerable'] as int;
 
+  int jsonWeak = json['weak'] as int;
+  int jsonStrength = json['strength'] as int;
+  int jsonStrengthCurse = json['strengthCurse'] as int;
+  int jsonStrengthEmpower = json['strengthEmpower'] as int;
+
+  int jsonTimesReceivedDamageInRound =
+      json['timesReceivedDamageInRound'] as int;
+
   String jsonRuntime = json['_runtime'] as String;
 
   PlayerCharacter character;
@@ -61,6 +69,13 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   character.setMaxHealth(jsonMaxHealth);
   character.addBlock(jsonBlock);
   character.addVulnerable(jsonVulnerable);
+
+  character.addWeak(jsonWeak);
+  character.addStrength(jsonStrength);
+  character.addStrengthCurse(jsonStrengthCurse);
+  character.addStrengthEmpower(jsonStrengthEmpower);
+
+  character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
 
   return character;
 }

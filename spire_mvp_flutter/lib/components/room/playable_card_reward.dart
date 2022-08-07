@@ -87,14 +87,7 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                             color: Colors.blueAccent,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Center(
-                            child: Text(
-                              widget.card.mana.toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: getFontSize(22)),
-                            ),
-                          ),
+                          child: Center(child: widget.card.getCardMana()),
                         ),
                       ),
                     ],

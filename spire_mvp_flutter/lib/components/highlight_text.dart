@@ -68,6 +68,7 @@ class HighlightDescriptionText extends HighlightText {
   HighlightDescriptionText({
     Key? key,
     required String text,
+    double fontSize = 16,
   }) : super(
           key: key,
           text: text,
@@ -75,7 +76,7 @@ class HighlightDescriptionText extends HighlightText {
           highlightStyle: TextStyle(
               color: Colors.yellow,
               fontWeight: FontWeight.bold,
-              fontSize: getFontSize(16)),
+              fontSize: getFontSize(fontSize)),
           nonHighlightStyle:
               TextStyle(color: Colors.white, fontSize: getFontSize(16)),
         );

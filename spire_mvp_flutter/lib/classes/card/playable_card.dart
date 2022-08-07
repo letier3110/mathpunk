@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 
 import '../../components/highlight_text.dart';
+import '../../utils/font.util.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
@@ -51,7 +52,18 @@ class PlayableCard {
   }
 
   StatelessWidget getCardMana() {
-    return Text(mana.toString());
+    int currentMana = getMana();
+
+    return Text(
+      getMana().toString(),
+      style: TextStyle(
+          color: currentMana < mana
+              ? Colors.greenAccent
+              : currentMana > mana
+                  ? Colors.redAccent
+                  : Colors.white,
+          fontSize: getFontSize(22)),
+    );
   }
 
   bool getExhausted() {

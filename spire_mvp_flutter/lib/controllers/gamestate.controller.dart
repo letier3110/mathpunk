@@ -94,7 +94,7 @@ class GamestateController extends ChangeNotifier {
   bool _checkIfCardPlayable(PlayableCard card) {
     if (playerCharacter == null) return false;
     if (currentRoom == null) return false;
-    if (playerCharacter!.mana < card.mana) return false;
+    if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
     return true;
   }
@@ -103,7 +103,7 @@ class GamestateController extends ChangeNotifier {
     if (!_checkIfCardPlayable(card)) {
       return;
     }
-    playerCharacter!.mana -= card.mana;
+    playerCharacter!.mana -= card.getMana();
     card.play(targets);
     if (card.step == card.maxSteps) {
       if (card.exhausted) {
@@ -312,6 +312,7 @@ class GamestateController extends ChangeNotifier {
     if (playerCharacter == null) {
       return;
     }
+    playerCharacter!.resetRoundStatuses();
     if (currentRoom == null) {
       currentRoom = room;
       visitedRooms.add(room);

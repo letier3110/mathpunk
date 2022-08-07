@@ -1,5 +1,6 @@
 import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
 import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
+import 'package:spire_mvp_flutter/classes/items/energy.potion.dart';
 import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
 import 'package:spire_mvp_flutter/classes/items/fruit_juice.potion.dart';
 
@@ -23,6 +24,10 @@ ConsumableItem consumableItemFromJson(dynamic json) {
     case 'CunningPotion':
       item = CunningPotion();
       break;
+    case 'EnergyPotion':
+      item = EnergyPotion();
+      break;
+
     default:
       item = BlockPotion();
       break;

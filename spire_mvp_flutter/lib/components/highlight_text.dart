@@ -72,7 +72,8 @@ class HighlightDescriptionText extends HighlightText {
   }) : super(
           key: key,
           text: text,
-          highlightRegex: RegExp(r'Block|Strength|Weak|Vulnerable|Exhaust'),
+          highlightRegex:
+              RegExp(r'Block|Strength|Weak|Vulnerable|Exhaust|Energy'),
           highlightStyle: TextStyle(
               color: Colors.yellow,
               fontWeight: FontWeight.bold,

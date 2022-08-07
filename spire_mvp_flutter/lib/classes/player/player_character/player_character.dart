@@ -54,6 +54,10 @@ class PlayerCharacter extends BaseCharacter {
     items = newItems;
   }
 
+  addMana(int mana) {
+    this.mana += mana;
+  }
+
   addItem(ConsumableItem item) {
     items.add(item);
   }

@@ -1,3 +1,4 @@
+import 'package:spire_mvp_flutter/classes/relic/art_of_war.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ninja_scroll.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
@@ -29,6 +30,9 @@ Relic relicFromJson(dynamic json) {
       break;
     case 'WristBlade':
       relic = WristBlade();
+      break;
+    case 'ArtOfWar':
+      relic = ArtOfWar();
       break;
     default:
       relic = BurningBloodRelic();

@@ -17,19 +17,12 @@ class TraderView extends StatefulWidget {
 class TraderViewView extends State<TraderView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    // GamestateController gameState =
+    //     Provider.of<GamestateController>(context, listen: false);
 
-    void onTapHandler() {
-      // gameState.nextTurn();
-    }
-
-    int goldReward = widget.rewards
-            .reduce((value, element) =>
-                Reward(rewardGold: (value.gold ?? 0) + (element.gold ?? 0)))
-            .gold ??
-        0;
-
+    // void onTapHandler() {
+    //   // gameState.nextTurn();
+    // }
     return Center(
       child: Row(
         children: [

@@ -108,6 +108,9 @@ class GamestateController extends ChangeNotifier {
       } else {
         selectingTarget!.step = 1;
       }
+    } else {
+      selectingTarget = null;
+      selectingTargetCardId = null;
     }
 
     var i = 0;

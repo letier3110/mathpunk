@@ -9,6 +9,7 @@ import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
 import 'package:spire_mvp_flutter/classes/room/treasure_room.dart';
 import 'package:spire_mvp_flutter/screens/rooms/enemy_room.screen.dart';
+import 'package:spire_mvp_flutter/screens/rooms/trader_room.screen.dart';
 
 String getRoomName(Room room) {
   var id = room.id;
@@ -81,6 +82,8 @@ Widget getRoomComponent(Room room) {
   switch (room.runtimeType) {
     case EnemyRoom:
       return EnemyRoomScreen(room: room as EnemyRoom);
+    case TradeRoom:
+      return TraderRoomScreen(room: room as TradeRoom);
     default:
       return EnemyRoomScreen(room: room as EnemyRoom);
     // TODO: implement other types of rooms

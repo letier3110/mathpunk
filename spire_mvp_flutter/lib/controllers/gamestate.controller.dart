@@ -1,33 +1,19 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
-import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
+import 'package:spire_mvp_flutter/classes/game_map.dart';
 import 'package:spire_mvp_flutter/classes/player/player.dart';
 import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ninja_scroll.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
-import '../utils/room.util.dart';
-
-const int levelsRandomLength = 7;
-const int levelsFixedLength = 7;
-const int roomsCountPerSliceRandom = 5;
-const int roomsCountPerSliceFixed = 4;
-const int nextRoomsConnectionsRandom = 2;
-const int nextRoomsConnectionsFixed = 1;
-const int roomConnectionProbability = 50;
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
@@ -154,7 +140,7 @@ class GamestateController extends ChangeNotifier {
   }
 
   void startGame() {
-    generateMap();
+    _generateMap();
   }
 
   void selectCardReward(List<PlayableCard> cards) {
@@ -232,52 +218,8 @@ class GamestateController extends ChangeNotifier {
 
   // 534421
 
-  void generateMap() {
-    var rng = Random();
-    var maxLevels = rng.nextInt(levelsRandomLength) + levelsFixedLength;
-    List<Room> prevSlice = [];
-    for (var i = 0; i < maxLevels; i++) {
-      var roomsCount =
-          rng.nextInt(roomsCountPerSliceRandom) + roomsCountPerSliceFixed;
-      List<Room> roomSlice = [];
-      for (var j = 0; j < roomsCount; j++) {
-        roomSlice.add(EnemyRoom(roomId: '$j $i', roomRewards: [
-          Reward(
-              rewardCards: [angerCard, strikeCard, bashCard],
-              rewardItem: FearPotion(),
-              rewardRelic: BurningBloodRelic(),
-              rewardGold: rng.nextInt(100) + 50)
-        ]));
-      }
-      if (prevSlice.isNotEmpty) {
-        for (var room in prevSlice) {
-          var roomConnections = 0;
-          var maxRoomConnetions = rng.nextInt(nextRoomsConnectionsRandom) +
-              nextRoomsConnectionsFixed;
-          for (var j = 0; j < roomsCount; j++) {
-            if (roomConnections == maxRoomConnetions) continue;
-            if (getProbability(roomConnectionProbability)) {
-              room.nextRooms.add(roomSlice[j]);
-              roomConnections++;
-            }
-          }
-        }
-      }
-      prevSlice = roomSlice;
-      gameMap.add(roomSlice);
-    }
-    var bossRoom = EnemyRoom(roomId: 'boss1', roomRewards: [
-      Reward(
-          rewardCards: [angerCard, strikeCard, bashCard],
-          rewardRelic: BurningBloodRelic(),
-          rewardGold: rng.nextInt(100) + 50)
-    ], roomEnemies: [
-      EnemyOgre()
-    ]);
-    for (var i = 0; i < gameMap.last.length; i++) {
-      gameMap.last[i].nextRooms = [bossRoom];
-    }
-    gameMap.add([bossRoom]);
+  void _generateMap() {
+    gameMap = generateMap();
 
     notifyListeners();
   }

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
@@ -9,7 +8,7 @@ import 'package:spire_mvp_flutter/classes/room/rest_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
 import 'package:spire_mvp_flutter/classes/room/treasure_room.dart';
-import 'package:spire_mvp_flutter/screens/enemy_room.screen.dart';
+import 'package:spire_mvp_flutter/screens/rooms/enemy_room.screen.dart';
 
 String getRoomName(Room room) {
   var id = room.id;
@@ -53,7 +52,7 @@ Widget getRoomIcon(Room room) {
       );
     case TradeRoom:
       return const Icon(
-        Icons.smart_toy,
+        Icons.shopping_cart_outlined,
         size: 24.0,
         semanticLabel: 'Text to announce in accessibility modes',
       );

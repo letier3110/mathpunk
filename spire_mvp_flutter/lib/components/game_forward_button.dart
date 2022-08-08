@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
+
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
-import '../enums/screens.enum.dart';
+class GameForwardButton extends StatefulWidget {
+  final Function goForward;
 
-class MenuEmbarkButton extends StatefulWidget {
-  const MenuEmbarkButton({Key? key}) : super(key: key);
+  const GameForwardButton({required this.goForward, Key? key})
+      : super(key: key);
 
   @override
-  State<MenuEmbarkButton> createState() => _MenuEmbarkButtonState();
+  State<GameForwardButton> createState() => _GameForwardButtonState();
 }
 
-class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
+class _GameForwardButtonState extends State<GameForwardButton> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
-
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    void onTapHandler() {
+      widget.goForward();
+    }
 
     return Positioned(
       bottom: 0,
@@ -33,10 +30,7 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
           child: Stack(
             children: [
               GestureDetector(
-                  onTap: () => {
-                        gameState.startGame(),
-                        navigation.changeScreen(ScreenEnum.game)
-                      },
+                  onTap: onTapHandler,
                   child: Positioned(
                     top: 120,
                     child: Column(children: [
@@ -46,7 +40,7 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
                           color: Colors.white,
                           child: Center(
                             child: Text(
-                              'Embark',
+                              'Proceed',
                               style: TextStyle(fontSize: getFontSize(22)),
                             ),
                           )),

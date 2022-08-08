@@ -24,8 +24,6 @@ class EnemyRoomScreen extends StatefulWidget {
   State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
 }
 
-GamestateController gameState = GamestateController();
-
 class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
   @override
   Widget build(BuildContext context) {

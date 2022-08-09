@@ -28,20 +28,20 @@ const int tradeRoomProbability = 10;
 
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];
-  var tradeRoom = TradeRoom(roomId: 'trade1', cards: [
-    AngerCard(),
-    StrikeCard(),
-    BashCard(),
-    ShivCard(),
-    ShrugItOffCard(),
-    PerfectStrikeCard()
-  ], relics: [
-    BurningBloodRelic()
-  ], items: [
-    FearPotion(),
-    BlockPotion(),
-    EnergyPotion()
-  ]);
+  // var tradeRoom = TradeRoom(roomId: 'trade1', cards: [
+  //   AngerCard(),
+  //   StrikeCard(),
+  //   BashCard(),
+  //   ShivCard(),
+  //   ShrugItOffCard(),
+  //   PerfectStrikeCard()
+  // ], relics: [
+  //   BurningBloodRelic()
+  // ], items: [
+  //   FearPotion(),
+  //   BlockPotion(),
+  //   EnergyPotion()
+  // ]);
   var rng = Random();
   var maxLevels = rng.nextInt(levelsRandomLength) + levelsFixedLength;
   List<Room> prevSlice = [];
@@ -57,9 +57,21 @@ List<List<Room>> generateMap() {
             rewardRelic: BurningBloodRelic(),
             rewardGold: rng.nextInt(100) + 50)
       ]);
-      if (getProbability(tradeRoomProbability)) {
-        room = tradeRoom;
-        room.id = 'trade$j $i';
+      if (getProbability(tradeRoomProbability) || i == 0) {
+        room = TradeRoom(roomId: 'trade$j $i', cards: [
+          AngerCard(),
+          StrikeCard(),
+          BashCard(),
+          ShivCard(),
+          ShrugItOffCard(),
+          PerfectStrikeCard()
+        ], relics: [
+          BurningBloodRelic()
+        ], items: [
+          FearPotion(),
+          BlockPotion(),
+          EnergyPotion()
+        ]);
       }
       roomSlice.add(room);
     }

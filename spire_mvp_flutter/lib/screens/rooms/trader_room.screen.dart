@@ -43,7 +43,7 @@ class _TraderRoomScreenState extends State<TraderRoomScreen> {
             TraderPawnView(
               callback: traderPawnPress,
             ),
-          if (inTradeMenu) TraderView(rewards: widget.room.rewards),
+          if (inTradeMenu) TraderView(room: widget.room),
           if (!inTradeMenu && widget.room.visitedTrader)
             GameForwardButton(
               goForward: proceedHandler,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
-import 'package:spire_mvp_flutter/components/room/reward.view.dart';
 
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/components/consumable.view.dart';
+import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
+import 'package:spire_mvp_flutter/components/relic.view.dart';
 
 // View of rewards
 class TraderView extends StatefulWidget {
-  final List<Reward> rewards;
-  const TraderView({required this.rewards, Key? key}) : super(key: key);
+  final TradeRoom room;
+  const TraderView({required this.room, Key? key}) : super(key: key);
 
   @override
   State<TraderView> createState() => TraderViewView();
@@ -37,14 +37,34 @@ class TraderViewView extends State<TraderView> {
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: widget.rewards
-                    .asMap()
-                    .entries
-                    .map((entry) =>
-                        RewardView(rewardIndex: entry.key, reward: entry.value))
-                    .toList(),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: widget.room.cards
+                          .map((card) => PlayableCardComponent(
+                                card: card,
+                                glow: false,
+                                animate: false,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: widget.room.relics
+                          .map((relic) => RelicView(relic: relic))
+                          .toList(),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: widget.room.items
+                          .map((item) => ConsumableView(item: item))
+                          .toList(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

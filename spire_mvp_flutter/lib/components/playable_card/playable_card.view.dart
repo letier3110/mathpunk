@@ -9,12 +9,26 @@ import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
+const double defaultHeight = 300;
+const double defaultWidth = 200;
+
 class PlayableCardComponent extends StatefulWidget {
   final PlayableCard card;
   final bool glow;
   final bool animate;
+  final Function? onTap;
+  final double? width;
+  final double? height;
+  final bool disabled;
   const PlayableCardComponent(
-      {required this.card, this.glow = true, this.animate = true, Key? key})
+      {required this.card,
+      this.glow = true,
+      this.animate = true,
+      this.onTap,
+      this.height = defaultHeight,
+      this.width = defaultWidth,
+      this.disabled = false,
+      Key? key})
       : super(key: key);
 
   @override
@@ -67,6 +81,13 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
     }
 
     void onTapHandler() {
+      if (widget.disabled) {
+        return;
+      }
+      if (widget.onTap != null) {
+        widget.onTap!();
+        return;
+      }
       if (widget.card.targetType == TargetEnum.singleTarget) {
         gameState.startSelecting(widget.card, cardId);
         return;
@@ -87,8 +108,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         onEnter: onEnterHandler,
         onExit: onExitHandler,
         child: Container(
-          height: 308,
-          width: 208,
+          height: (widget.height ?? defaultHeight) + 8,
+          width: (widget.width ?? defaultWidth) + 8,
           margin: EdgeInsets.fromLTRB(
               4,
               4,
@@ -101,34 +122,35 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
               Container(
                 margin: const EdgeInsets.all(4),
                 padding: const EdgeInsets.all(8),
-                height: 304,
-                width: 204,
+                height: widget.height! + 4,
+                width: widget.width! + 4,
               ),
-              if (widget.glow &&
+              if ((widget.disabled == false || widget.glow) &&
                   playerMana >= widget.card.getMana() &&
                   widget.card.isCardPlayable())
-                const Center(
+                Center(
                   child: GlowEffect(
                       child: SizedBox(
-                    height: 300,
-                    width: 200,
+                    height: (widget.height ?? defaultHeight),
+                    width: (widget.width ?? defaultWidth),
                   )),
                 ),
               Center(
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   // margin: const EdgeInsets.all(4),
-                  height: 300,
-                  width: 200,
+                  height: (widget.height ?? defaultHeight),
+                  width: (widget.width ?? defaultWidth),
                   decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent,
+                    color:
+                        widget.disabled ? Colors.grey : Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Stack(
                     children: [
                       SizedBox(
-                        height: 400,
-                        width: 300,
+                        height: (widget.height ?? defaultHeight),
+                        width: (widget.width ?? defaultWidth),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -138,7 +160,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                 widget.card.name,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: getFontSize(22)),
+                                    fontSize: getFontSize(
+                                        22 * (widget.width! / defaultWidth))),
                               ),
                             ),
                             SizedBox(
@@ -156,8 +179,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                         top: 0,
                         left: 0,
                         child: Container(
-                          width: 40,
-                          height: 40,
+                          width: 40 * (widget.width! / defaultWidth),
+                          height: 40 * (widget.height! / defaultHeight),
                           // padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: Colors.blueAccent,

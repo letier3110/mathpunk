@@ -11,10 +11,13 @@ import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
 import 'package:spire_mvp_flutter/classes/items/energy.potion.dart';
 import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
+import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
+import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/classes/sellable.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';
 
 const int levelsRandomLength = 7;
@@ -26,22 +29,20 @@ const int nextRoomsConnectionsFixed = 1;
 const int roomConnectionProbability = 50;
 const int tradeRoomProbability = 10;
 
+const int traderCardCostRandom = 125;
+const int traderCardCostFixed = 25;
+const int traderCardCostSaleProbability = 12;
+
+const int traderRelicCostRandom = 225;
+const int traderRelicCostFixed = 125;
+const int traderRelicCostSaleProbability = 5;
+
+const int traderItemCostRandom = 150;
+const int traderItemCostFixed = 50;
+const int traderItemCostSaleProbability = 5;
+
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];
-  // var tradeRoom = TradeRoom(roomId: 'trade1', cards: [
-  //   AngerCard(),
-  //   StrikeCard(),
-  //   BashCard(),
-  //   ShivCard(),
-  //   ShrugItOffCard(),
-  //   PerfectStrikeCard()
-  // ], relics: [
-  //   BurningBloodRelic()
-  // ], items: [
-  //   FearPotion(),
-  //   BlockPotion(),
-  //   EnergyPotion()
-  // ]);
   var rng = Random();
   var maxLevels = rng.nextInt(levelsRandomLength) + levelsFixedLength;
   List<Room> prevSlice = [];
@@ -59,18 +60,60 @@ List<List<Room>> generateMap() {
       ]);
       if (getProbability(tradeRoomProbability) || i == 0) {
         room = TradeRoom(roomId: 'trade$j $i', cards: [
-          AngerCard(),
-          StrikeCard(),
-          BashCard(),
-          ShivCard(),
-          ShrugItOffCard(),
-          PerfectStrikeCard()
+          SellableCard(
+              card: AngerCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: StrikeCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: BashCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: ShivCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: ShrugItOffCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: ShrugItOffCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true),
+          SellableCard(
+              card: PerfectStrikeCard(),
+              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
+              inStock: true)
         ], relics: [
-          BurningBloodRelic()
+          SellableRelic(
+              relic: BurningBloodRelic(),
+              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
+              inStock: true),
+          SellableRelic(
+              relic: RingOfSerpent(),
+              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
+              inStock: true),
+          SellableRelic(
+              relic: RingOfSnake(),
+              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
+              inStock: true)
         ], items: [
-          FearPotion(),
-          BlockPotion(),
-          EnergyPotion()
+          SellableItem(
+              item: FearPotion(),
+              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
+              inStock: true),
+          SellableItem(
+              item: BlockPotion(),
+              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
+              inStock: true),
+          SellableItem(
+              item: EnergyPotion(),
+              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
+              inStock: true)
         ]);
       }
       roomSlice.add(room);

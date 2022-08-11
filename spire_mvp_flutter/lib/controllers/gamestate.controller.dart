@@ -10,6 +10,8 @@ import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
+import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/classes/sellable.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
@@ -83,6 +85,33 @@ class GamestateController extends ChangeNotifier {
     if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
     return true;
+  }
+
+  void buyItem(Sellable sellable) {
+    if (playerCharacter == null) return;
+    if (playerCharacter!.gold - sellable.getCost() < 0) {
+      return;
+    }
+
+    switch (sellable.runtimeType.toString()) {
+      case 'SellableRemoval':
+        // sellable = SellableRemoval(cost: jsonCost, inStock: jsonInStock);
+        break;
+      case 'SellableCard':
+        playerCharacter!.getDeck().addToDeck((sellable as SellableCard).card);
+        break;
+      case 'SellableRelic':
+        playerCharacter!.addRelic((sellable as SellableRelic).relic);
+        break;
+      case 'SellableItem':
+      default:
+        playerCharacter!.addItem((sellable as SellableItem).item);
+        break;
+    }
+
+    sellable.inStock = false;
+    playerCharacter!.gold -= sellable.getCost();
+    notifyListeners();
   }
 
   void playTheCard(PlayableCard card, List<Enemy> targets) {

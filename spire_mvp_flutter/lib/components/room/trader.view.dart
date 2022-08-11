@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/classes/sellable.dart';
 import 'package:spire_mvp_flutter/components/consumable.view.dart';
 import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
 import 'package:spire_mvp_flutter/components/relic.view.dart';
+import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+
+const double cardHeight = 225;
+const double cardWidth = 150;
 
 // View of rewards
 class TraderView extends StatefulWidget {
@@ -17,12 +24,13 @@ class TraderView extends StatefulWidget {
 class TraderViewView extends State<TraderView> {
   @override
   Widget build(BuildContext context) {
-    // GamestateController gameState =
-    //     Provider.of<GamestateController>(context, listen: false);
+    GamestateController gameState =
+        Provider.of<GamestateController>(context, listen: false);
 
-    // void onTapHandler() {
-    //   // gameState.nextTurn();
-    // }
+    void onTapHandler(Sellable sellable) {
+      gameState.buyItem(sellable);
+    }
+
     return Center(
       child: Row(
         children: [
@@ -30,40 +38,267 @@ class TraderViewView extends State<TraderView> {
             flex: 1,
           ),
           Expanded(
-            flex: 2,
+            flex: 10,
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: ListView(
-                      children: widget.room.cards
-                          .map((card) => PlayableCardComponent(
-                                card: card,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[0].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[0].card,
                                 glow: false,
                                 animate: false,
-                              ))
-                          .toList(),
-                    ),
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[0])},
+                              ),
+                            if (widget.room.cards[0].inStock)
+                              widget.room.cards[0].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[1].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[1].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[1])},
+                              ),
+                            if (widget.room.cards[1].inStock)
+                              widget.room.cards[1].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[2].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[2].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[2])},
+                              ),
+                            if (widget.room.cards[2].inStock)
+                              widget.room.cards[2].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[3].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[3].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[3])},
+                              ),
+                            if (widget.room.cards[3].inStock)
+                              widget.room.cards[3].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[4].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[4].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[4])},
+                              ),
+                            if (widget.room.cards[4].inStock)
+                              widget.room.cards[4].getCostDescription()
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: ListView(
-                      children: widget.room.relics
-                          .map((relic) => RelicView(relic: relic))
-                          .toList(),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView(
-                      children: widget.room.items
-                          .map((item) => ConsumableView(item: item))
-                          .toList(),
-                    ),
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[5].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[5].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[5])},
+                              ),
+                            if (widget.room.cards[5].inStock)
+                              widget.room.cards[5].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            if (widget.room.cards[6].inStock)
+                              PlayableCardComponent(
+                                width: cardWidth,
+                                height: cardHeight,
+                                card: widget.room.cards[6].card,
+                                glow: false,
+                                animate: false,
+                                onTap: () =>
+                                    {onTapHandler(widget.room.cards[6])},
+                              ),
+                            if (widget.room.cards[6].inStock)
+                              widget.room.cards[6].getCostDescription()
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 412,
+                        height: cardHeight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              children: widget.room.relics
+                                  .where((element) => element.inStock)
+                                  .map((sellable) => Container(
+                                          child: Column(
+                                        children: [
+                                          RelicView(relic: sellable.relic),
+                                          sellable.getCostDescription()
+                                        ],
+                                      )))
+                                  .toList(),
+                            ),
+                            Row(
+                              children: widget.room.items
+                                  .where((element) => element.inStock)
+                                  .map((sellable) => Container(
+                                          child: Column(
+                                        children: [
+                                          ConsumableView(item: sellable.item),
+                                          sellable.getCostDescription()
+                                        ],
+                                      )))
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Removal
+                      SizedBox(
+                        height: cardHeight + 40,
+                        width: cardWidth,
+                        child: Column(
+                          children: [
+                            PlayableCardComponent(
+                              width: cardWidth,
+                              height: cardHeight,
+                              card: AngerCard(),
+                              glow: false,
+                              animate: false,
+                              disabled: true,
+                              onTap: () => {},
+                            ),
+                            widget.room.removal.getCostDescription()
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                  // Expanded(
+                  //   child: ListView(
+                  //     children: widget.room.cards
+                  //         .where((element) => element.inStock)
+                  //         .map((sellable) => Container(
+                  //               child: Column(
+                  //                 children: [
+                  //                   PlayableCardComponent(
+                  //                     card: sellable.card,
+                  //                     glow: false,
+                  //                     animate: false,
+                  //                     onTap: () => {},
+                  //                   ),
+                  //                   sellable.getCostDescription()
+                  //                 ],
+                  //               ),
+                  //             ))
+                  //         .toList(),
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: ListView(
+                  //     children: widget.room.relics
+                  //         .where((element) => element.inStock)
+                  //         .map((sellable) => Container(
+                  //                 child: Column(
+                  //               children: [
+                  //                 RelicView(relic: sellable.relic),
+                  //                 sellable.getCostDescription()
+                  //               ],
+                  //             )))
+                  //         .toList(),
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //   child: ListView(
+                  //     children: widget.room.items
+                  //         .where((element) => element.inStock)
+                  //         .map((sellable) => Container(
+                  //                 child: Column(
+                  //               children: [
+                  //                 ConsumableView(item: sellable.item),
+                  //                 sellable.getCostDescription()
+                  //               ],
+                  //             )))
+                  //         .toList(),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

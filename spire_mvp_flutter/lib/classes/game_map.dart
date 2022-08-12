@@ -1,131 +1,59 @@
 import 'dart:math';
 
-import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
-import 'package:spire_mvp_flutter/classes/card/bash.card.dart';
-import 'package:spire_mvp_flutter/classes/card/perfect_strike.card.dart';
-import 'package:spire_mvp_flutter/classes/card/shiv.card.dart';
-import 'package:spire_mvp_flutter/classes/card/shrug_it_off.card.dart';
-import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
-import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/energy.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
-import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/classes/sellable.dart';
+import 'package:spire_mvp_flutter/pools/reward.pools.dart';
+import 'package:spire_mvp_flutter/pools/trader.pools.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';
 
-const int levelsRandomLength = 7;
-const int levelsFixedLength = 12;
-const int roomsCountPerSliceRandom = 3;
-const int roomsCountPerSliceFixed = 2;
-const int nextRoomsConnectionsRandom = 1;
-const int nextRoomsConnectionsFixed = 1;
-const int roomConnectionProbability = 50;
-const int tradeRoomProbability = 10;
-
-const int traderCardCostRandom = 125;
-const int traderCardCostFixed = 25;
-const int traderCardCostSaleProbability = 12;
-
-const int traderRelicCostRandom = 225;
-const int traderRelicCostFixed = 125;
-const int traderRelicCostSaleProbability = 5;
-
-const int traderItemCostRandom = 150;
-const int traderItemCostFixed = 50;
-const int traderItemCostSaleProbability = 5;
+const int _levelsRandomLength = 7;
+const int _levelsFixedLength = 12;
+const int _roomsCountPerSliceRandom = 3;
+const int _roomsCountPerSliceFixed = 2;
+const int _nextRoomsConnectionsRandom = 1;
+const int _nextRoomsConnectionsFixed = 1;
+const int _roomConnectionProbability = 50;
+const int _tradeRoomProbability = 10;
 
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];
   var rng = Random();
-  var maxLevels = rng.nextInt(levelsRandomLength) + levelsFixedLength;
+  var maxLevels = rng.nextInt(_levelsRandomLength) + _levelsFixedLength;
   List<Room> prevSlice = [];
   for (var i = 0; i < maxLevels; i++) {
     var roomsCount =
-        rng.nextInt(roomsCountPerSliceRandom) + roomsCountPerSliceFixed;
+        rng.nextInt(_roomsCountPerSliceRandom) + _roomsCountPerSliceFixed;
     List<Room> roomSlice = [];
     for (var j = 0; j < roomsCount; j++) {
+      Level1RewardPool pool = Level1RewardPool();
       Room room = EnemyRoom(roomId: '$j $i', roomRewards: [
         Reward(
-            rewardCards: [AngerCard(), StrikeCard(), BashCard()],
-            rewardItem: FearPotion(),
-            rewardRelic: BurningBloodRelic(),
+            rewardCards: pool.getCards(),
+            rewardItem: pool.getItems(),
+            rewardRelic: pool.getRelics(),
             rewardGold: rng.nextInt(100) + 50)
       ]);
-      if (getProbability(tradeRoomProbability) || i == 0) {
-        room = TradeRoom(roomId: 'trade$j $i', cards: [
-          SellableCard(
-              card: AngerCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: StrikeCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: BashCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: ShivCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: ShrugItOffCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: ShrugItOffCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true),
-          SellableCard(
-              card: PerfectStrikeCard(),
-              cost: rng.nextInt(traderCardCostRandom) + traderCardCostFixed,
-              inStock: true)
-        ], relics: [
-          SellableRelic(
-              relic: BurningBloodRelic(),
-              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
-              inStock: true),
-          SellableRelic(
-              relic: RingOfSerpent(),
-              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
-              inStock: true),
-          SellableRelic(
-              relic: RingOfSnake(),
-              cost: rng.nextInt(traderRelicCostRandom) + traderRelicCostFixed,
-              inStock: true)
-        ], items: [
-          SellableItem(
-              item: FearPotion(),
-              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
-              inStock: true),
-          SellableItem(
-              item: BlockPotion(),
-              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
-              inStock: true),
-          SellableItem(
-              item: EnergyPotion(),
-              cost: rng.nextInt(traderItemCostRandom) + traderItemCostFixed,
-              inStock: true)
-        ]);
+      if (getProbability(_tradeRoomProbability) || i == 0) {
+        Level1TraderPool pool = Level1TraderPool();
+        room = TradeRoom(
+            roomId: 'trade$j $i',
+            cards: pool.getCards(),
+            relics: pool.getRelics(),
+            items: pool.getItems());
       }
       roomSlice.add(room);
     }
     if (prevSlice.isNotEmpty) {
       for (var room in prevSlice) {
         var roomConnections = 0;
-        var maxRoomConnetions =
-            rng.nextInt(nextRoomsConnectionsRandom) + nextRoomsConnectionsFixed;
+        var maxRoomConnetions = rng.nextInt(_nextRoomsConnectionsRandom) +
+            _nextRoomsConnectionsFixed;
         for (var j = 0; j < roomsCount; j++) {
           if (roomConnections == maxRoomConnetions) continue;
-          if (getProbability(roomConnectionProbability)) {
+          if (getProbability(_roomConnectionProbability)) {
             room.nextRooms.add(roomSlice[j]);
             roomConnections++;
           }
@@ -135,10 +63,11 @@ List<List<Room>> generateMap() {
     prevSlice = roomSlice;
     gameMap.add(roomSlice);
   }
+  Level1RewardBossPool pool = Level1RewardBossPool();
   var bossRoom = EnemyRoom(roomId: 'boss1', roomRewards: [
     Reward(
-        rewardCards: [AngerCard(), StrikeCard(), BashCard()],
-        rewardRelic: BurningBloodRelic(),
+        rewardCards: pool.getRelics(),
+        rewardRelic: pool.getRelics(),
         rewardGold: rng.nextInt(100) + 50)
   ], roomEnemies: [
     EnemyOgre()

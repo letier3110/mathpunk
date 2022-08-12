@@ -66,7 +66,7 @@ List<List<Room>> generateMap() {
   Level1RewardBossPool pool = Level1RewardBossPool();
   var bossRoom = EnemyRoom(roomId: 'boss1', roomRewards: [
     Reward(
-        rewardCards: pool.getRelics(),
+        rewardCards: pool.getCards(),
         rewardRelic: pool.getRelics(),
         rewardGold: rng.nextInt(100) + 50)
   ], roomEnemies: [

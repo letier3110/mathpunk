@@ -276,6 +276,13 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void visitTrader() {
+    if (currentRoom == null) return;
+    (currentRoom! as TradeRoom).visitedTrader = true;
+
+    notifyListeners();
+  }
+
   List<Room> getNextAvailableRooms() {
     if (gameMap.isEmpty) return [];
     if (currentRoom == null) return gameMap[0];

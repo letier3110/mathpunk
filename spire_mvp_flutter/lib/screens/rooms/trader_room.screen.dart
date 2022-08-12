@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/components/game_back_button.dart';
 import 'package:spire_mvp_flutter/components/game_forward_button.dart';
 import 'package:spire_mvp_flutter/components/room/trader.view.dart';
 import 'package:spire_mvp_flutter/components/room/trader_pawn.view.dart';
@@ -28,6 +29,13 @@ class _TraderRoomScreenState extends State<TraderRoomScreen> {
       setState(() {
         inTradeMenu = true;
       });
+      gameState.visitTrader();
+    }
+
+    void back() {
+      setState(() {
+        inTradeMenu = false;
+      });
     }
 
     void proceedHandler() {
@@ -42,6 +50,10 @@ class _TraderRoomScreenState extends State<TraderRoomScreen> {
           if (!inTradeMenu)
             TraderPawnView(
               callback: traderPawnPress,
+            ),
+          if (inTradeMenu)
+            GameBackButton(
+              goBack: back,
             ),
           if (inTradeMenu) TraderView(room: widget.room),
           if (!inTradeMenu && widget.room.visitedTrader)

@@ -10,7 +10,11 @@ Probability<T> weightedRandomPick<T>(List<Probability<T>> options) {
   var rng = Random();
 
   for (i = 0; i < options.length; i++) {
-    weights[i] = options[i].weight + (weights[i - 1] ?? 0);
+    try {
+      weights.add(options[i].weight + (weights[i - 1] ?? 0));
+    } catch (e) {
+      weights.add(options[i].weight);
+    }
   }
 
   var random = rng.nextInt(weights[weights.length - 1]);

@@ -204,24 +204,35 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             Row(
                               children: widget.room.relics
-                                  .where((element) => element.inStock)
                                   .map((sellable) => Container(
-                                          child: Column(
+                                      width: 130,
+                                      child: Column(
                                         children: [
-                                          RelicView(relic: sellable.relic),
-                                          sellable.getCostDescription()
+                                          if (sellable.inStock)
+                                            RelicView(
+                                              relic: sellable.relic,
+                                              onTap: () =>
+                                                  {onTapHandler(sellable)},
+                                            ),
+                                          if (sellable.inStock)
+                                            sellable.getCostDescription()
                                         ],
                                       )))
                                   .toList(),
                             ),
                             Row(
                               children: widget.room.items
-                                  .where((element) => element.inStock)
                                   .map((sellable) => Container(
-                                          child: Column(
+                                      width: 130,
+                                      child: Column(
                                         children: [
-                                          ConsumableView(item: sellable.item),
-                                          sellable.getCostDescription()
+                                          if (sellable.inStock)
+                                            ConsumableView(
+                                                item: sellable.item,
+                                                onTap: () =>
+                                                    {onTapHandler(sellable)}),
+                                          if (sellable.inStock)
+                                            sellable.getCostDescription()
                                         ],
                                       )))
                                   .toList(),
@@ -251,54 +262,6 @@ class TraderViewView extends State<TraderView> {
                       ),
                     ],
                   )
-                  // Expanded(
-                  //   child: ListView(
-                  //     children: widget.room.cards
-                  //         .where((element) => element.inStock)
-                  //         .map((sellable) => Container(
-                  //               child: Column(
-                  //                 children: [
-                  //                   PlayableCardComponent(
-                  //                     card: sellable.card,
-                  //                     glow: false,
-                  //                     animate: false,
-                  //                     onTap: () => {},
-                  //                   ),
-                  //                   sellable.getCostDescription()
-                  //                 ],
-                  //               ),
-                  //             ))
-                  //         .toList(),
-                  //   ),
-                  // ),
-                  // Expanded(
-                  //   child: ListView(
-                  //     children: widget.room.relics
-                  //         .where((element) => element.inStock)
-                  //         .map((sellable) => Container(
-                  //                 child: Column(
-                  //               children: [
-                  //                 RelicView(relic: sellable.relic),
-                  //                 sellable.getCostDescription()
-                  //               ],
-                  //             )))
-                  //         .toList(),
-                  //   ),
-                  // ),
-                  // Expanded(
-                  //   child: ListView(
-                  //     children: widget.room.items
-                  //         .where((element) => element.inStock)
-                  //         .map((sellable) => Container(
-                  //                 child: Column(
-                  //               children: [
-                  //                 ConsumableView(item: sellable.item),
-                  //                 sellable.getCostDescription()
-                  //               ],
-                  //             )))
-                  //         .toList(),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

@@ -78,7 +78,7 @@ class Level1TraderPool {
   getItems() {
     var rng = Random();
     return List.generate(
-        7,
+        3,
         (index) => SellableItem(
             item: weightedRandomPick(_pool1Items).obj,
             cost: rng.nextInt(_traderItemCostRandom) + _traderItemCostFixed,

@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
+import 'package:spire_mvp_flutter/pools/events.pools.dart';
 import 'package:spire_mvp_flutter/pools/reward.pools.dart';
 import 'package:spire_mvp_flutter/pools/trader.pools.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';
@@ -17,6 +19,7 @@ const int _nextRoomsConnectionsRandom = 1;
 const int _nextRoomsConnectionsFixed = 1;
 const int _roomConnectionProbability = 50;
 const int _tradeRoomProbability = 10;
+const int _eventRoomProbability = 30;
 
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];
@@ -36,7 +39,11 @@ List<List<Room>> generateMap() {
             rewardRelic: pool.getRelics(),
             rewardGold: rng.nextInt(100) + 50)
       ]);
-      if (getProbability(_tradeRoomProbability) || i == 0) {
+      if (getProbability(_eventRoomProbability) || i == 0) {
+        Level1EventRoomPool pool = Level1EventRoomPool();
+        room = pool.getEventRoom();
+        room.id = 'event$j $i';
+      } else if (getProbability(_tradeRoomProbability)) {
         Level1TraderPool pool = Level1TraderPool();
         room = TradeRoom(
             roomId: 'trade$j $i',

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room.dart';
+import 'package:spire_mvp_flutter/classes/room/event_room/event_room.dart';
 import 'package:spire_mvp_flutter/classes/room/rest_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
@@ -65,7 +65,7 @@ Widget getRoomIcon(Room room) {
       );
     case EventRoom:
       return const Icon(
-        Icons.smart_toy,
+        Icons.question_mark,
         size: 24.0,
         semanticLabel: 'Text to announce in accessibility modes',
       );

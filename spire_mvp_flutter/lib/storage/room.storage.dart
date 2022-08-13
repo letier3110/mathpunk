@@ -3,7 +3,7 @@ import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/storage/enemy.storage.dart';
 
 import '../classes/room/enemy_room.dart';
-import '../classes/room/event_room.dart';
+import '../classes/room/event_room/event_room.dart';
 import '../classes/room/rest_room.dart';
 import '../classes/room/room.dart';
 import '../classes/room/trade_room.dart';

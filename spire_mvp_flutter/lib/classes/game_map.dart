@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
+import 'package:spire_mvp_flutter/classes/room/event_room/event_room.dart';
 import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
@@ -42,6 +43,7 @@ List<List<Room>> generateMap() {
       if (getProbability(_eventRoomProbability) || i == 0) {
         Level1EventRoomPool pool = Level1EventRoomPool();
         room = pool.getEventRoom();
+        (room as EventRoom).setId('event$j $i');
         room.id = 'event$j $i';
       } else if (getProbability(_tradeRoomProbability)) {
         Level1TraderPool pool = Level1TraderPool();

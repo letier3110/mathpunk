@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
 import 'package:spire_mvp_flutter/classes/room/event_room/event_room.dart';
+import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
 import 'package:spire_mvp_flutter/classes/room/rest_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
@@ -64,6 +65,7 @@ Widget getRoomIcon(Room room) {
         semanticLabel: 'Text to announce in accessibility modes',
       );
     case EventRoom:
+    case MindBloomEventRoom:
       return const Icon(
         Icons.question_mark,
         size: 24.0,

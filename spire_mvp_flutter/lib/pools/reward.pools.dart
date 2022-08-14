@@ -15,6 +15,9 @@ import 'package:spire_mvp_flutter/classes/relic/relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/pools/utils.dart';
+import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
+import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
 List<Probability<PlayableCard>> _pool1Cards = [
   Probability(obj: AngerCard(), weight: 500),
@@ -41,15 +44,19 @@ class Level1RewardPool {
   Level1RewardPool();
 
   getCards() {
-    return List.generate(3, (index) => weightedRandomPick(_pool1Cards).obj);
+    return List.generate(
+        3,
+        (index) => playableCardFromJson(
+            playableCardToJson(weightedRandomPick(_pool1Cards).obj)));
   }
 
   getRelics() {
-    return weightedRandomPick(_pool1Relics).obj;
+    return relicFromJson(relicToJson(weightedRandomPick(_pool1Relics).obj));
   }
 
   getItems() {
-    return weightedRandomPick(_pool1Items).obj;
+    return consumableItemFromJson(
+        consumableItemToJson(weightedRandomPick(_pool1Items).obj));
   }
 }
 
@@ -57,14 +64,18 @@ class Level1RewardBossPool {
   Level1RewardBossPool();
 
   getCards() {
-    return List.generate(3, (index) => weightedRandomPick(_pool1Cards).obj);
+    return List.generate(
+        3,
+        (index) => playableCardFromJson(
+            playableCardToJson(weightedRandomPick(_pool1Cards).obj)));
   }
 
   getRelics() {
-    return weightedRandomPick(_pool1Relics).obj;
+    return relicFromJson(relicToJson(weightedRandomPick(_pool1Relics).obj));
   }
 
   getItems() {
-    return weightedRandomPick(_pool1Items).obj;
+    return consumableItemFromJson(
+        consumableItemToJson(weightedRandomPick(_pool1Items).obj));
   }
 }

@@ -7,10 +7,6 @@ class EventRoom extends Room {
     String roomId = '0',
   }) : super(roomEnemies: [], roomRewards: [], roomId: roomId);
 
-  void setId(String id) {
-    this.id = id;
-  }
-
   @override
   bool getCanLeaveRoom() {
     return true;

@@ -27,6 +27,10 @@ class Room implements IRoom {
     }
   }
 
+  void setId(String id) {
+    this.id = id;
+  }
+
   attachEnemies(List<Enemy> newEnemies) {
     enemies = newEnemies;
   }

@@ -18,6 +18,9 @@ import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
 import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
 import 'package:spire_mvp_flutter/classes/sellable.dart';
 import 'package:spire_mvp_flutter/pools/utils.dart';
+import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
+import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+import 'package:spire_mvp_flutter/storage/relic.storage.dart';
 
 const int _traderCardCostRandom = 125;
 const int _traderCardCostFixed = 25;
@@ -60,7 +63,8 @@ class Level1TraderPool {
     return List.generate(
         7,
         (index) => SellableCard(
-            card: weightedRandomPick(_pool1Cards).obj,
+            card: playableCardFromJson(
+                playableCardToJson(weightedRandomPick(_pool1Cards).obj)),
             cost: rng.nextInt(_traderCardCostRandom) + _traderCardCostFixed,
             inStock: true));
   }
@@ -70,7 +74,8 @@ class Level1TraderPool {
     return List.generate(
         3,
         (index) => SellableRelic(
-            relic: weightedRandomPick(_pool1Relics).obj,
+            relic: relicFromJson(
+                relicToJson(weightedRandomPick(_pool1Relics).obj)),
             cost: rng.nextInt(_traderRelicCostRandom) + _traderRelicCostFixed,
             inStock: true));
   }
@@ -80,7 +85,8 @@ class Level1TraderPool {
     return List.generate(
         3,
         (index) => SellableItem(
-            item: weightedRandomPick(_pool1Items).obj,
+            item: consumableItemFromJson(
+                consumableItemToJson(weightedRandomPick(_pool1Items).obj)),
             cost: rng.nextInt(_traderItemCostRandom) + _traderItemCostFixed,
             inStock: true));
   }

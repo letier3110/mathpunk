@@ -1,5 +1,6 @@
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/reward.dart';
+import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
 import 'package:spire_mvp_flutter/storage/enemy.storage.dart';
 
 import '../classes/room/enemy_room.dart';
@@ -11,7 +12,7 @@ import '../classes/room/treasure_room.dart';
 
 Room roomFromJson(dynamic json) {
   String jsonId = json['id'] as String;
-  List<Room> jsonNextRooms = (json['nextRoom'] as List).isEmpty
+  List<Room> jsonNextRooms = ((json['nextRoom'] ?? []) as List).isEmpty
       ? []
       : (json['nextRoom'] as List).map((e) => roomFromJson(e)).toList();
   String jsonRuntime = json['_runtime'] as String;
@@ -43,6 +44,11 @@ Room roomFromJson(dynamic json) {
       break;
     case 'EventRoom':
       room = EventRoom(roomId: jsonId);
+      room.attachEnemies(jsonEnemies);
+      room.attachRewards(jsonRewards);
+      break;
+    case 'MindBloomEventRoom':
+      room = MindBloomEventRoom(roomId: jsonId);
       room.attachEnemies(jsonEnemies);
       room.attachRewards(jsonRewards);
       break;

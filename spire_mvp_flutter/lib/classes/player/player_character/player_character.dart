@@ -17,6 +17,7 @@ class PlayerCharacter extends BaseCharacter {
   late int manaPower = 3;
   late int drawPower = 3;
   late int gold = 100;
+  late int cardsPlayedInRound = 0;
 
   PlayerCharacter({playerGold = 100}) : super() {
     deck = Deck([]);
@@ -121,6 +122,10 @@ class PlayerCharacter extends BaseCharacter {
     this.items = items;
   }
 
+  addCardsPlayedInRound(int cardsPlayedInRound) {
+    this.cardsPlayedInRound += cardsPlayedInRound;
+  }
+
   factory PlayerCharacter.fromJson(dynamic json) {
     PlayerCharacter character =
         (BaseCharacter.fromJson(json)) as PlayerCharacter;
@@ -133,6 +138,8 @@ class PlayerCharacter extends BaseCharacter {
         (json['relics'] as List).map((e) => relicFromJson(e)).toList());
     character.setItems(
         (json['items'] as List).map((e) => consumableItemFromJson(e)).toList());
+
+    character.addCardsPlayedInRound(json['cardsPlayedInRound'] as int);
 
     return character;
   }
@@ -147,5 +154,6 @@ class PlayerCharacter extends BaseCharacter {
         'manaPower': manaPower,
         'drawPower': drawPower,
         'gold': gold,
+        'cardsPlayedInRound': cardsPlayedInRound,
       };
 }

@@ -9,6 +9,7 @@ import 'package:spire_mvp_flutter/classes/room/rest_room.dart';
 import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
 import 'package:spire_mvp_flutter/classes/room/treasure_room.dart';
+import 'package:spire_mvp_flutter/components/event_room/mind_bloom.view.dart';
 import 'package:spire_mvp_flutter/screens/rooms/enemy_room.screen.dart';
 import 'package:spire_mvp_flutter/screens/rooms/trader_room.screen.dart';
 
@@ -86,6 +87,8 @@ Widget getRoomComponent(Room room) {
       return EnemyRoomScreen(room: room as EnemyRoom);
     case TradeRoom:
       return TraderRoomScreen(room: room as TradeRoom);
+    case MindBloomEventRoom:
+      return const MindBloomView();
     default:
       return EnemyRoomScreen(room: room as EnemyRoom);
     // TODO: implement other types of rooms

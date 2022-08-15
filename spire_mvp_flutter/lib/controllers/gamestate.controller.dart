@@ -13,6 +13,7 @@ import 'package:spire_mvp_flutter/classes/room/room.dart';
 import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
 import 'package:spire_mvp_flutter/classes/sellable.dart';
 import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
+import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
@@ -84,6 +85,7 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom == null) return false;
     if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
+    if (card.targetType == TargetEnum.unplayable) return false;
     return true;
   }
 
@@ -119,7 +121,9 @@ class GamestateController extends ChangeNotifier {
       return;
     }
     playerCharacter!.mana -= card.getMana();
+    playerCharacter!.addCardsPlayedInRound(1);
     card.play(targets);
+
     if (card.step == card.maxSteps) {
       if (card.exhausted) {
         card.disposeToDiscard(
@@ -348,6 +352,7 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom == null) {
       return;
     }
+    playerCharacter!.cardsPlayedInRound = 0;
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
       enemy.block = 0;

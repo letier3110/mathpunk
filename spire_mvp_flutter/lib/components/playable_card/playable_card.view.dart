@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/enums/card_type.enum.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
@@ -84,6 +85,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       if (widget.disabled) {
         return;
       }
+      if (widget.card.type == CardType.curse) {
+        return;
+      }
       if (widget.onTap != null) {
         widget.onTap!();
         return;
@@ -125,7 +129,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 height: widget.height! + 4,
                 width: widget.width! + 4,
               ),
-              if ((widget.disabled == false || widget.glow) &&
+              if ((widget.disabled == false ||
+                      widget.card.type != CardType.curse ||
+                      widget.glow) &&
                   playerMana >= widget.card.getMana() &&
                   widget.card.isCardPlayable())
                 Center(
@@ -142,8 +148,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   height: (widget.height ?? defaultHeight),
                   width: (widget.width ?? defaultWidth),
                   decoration: BoxDecoration(
-                    color:
-                        widget.disabled ? Colors.grey : Colors.deepPurpleAccent,
+                    color: widget.disabled || widget.card.type == CardType.curse
+                        ? Colors.grey
+                        : Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Stack(

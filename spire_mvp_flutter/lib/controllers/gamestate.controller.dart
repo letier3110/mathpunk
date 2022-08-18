@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
 import 'package:spire_mvp_flutter/classes/game_map.dart';
@@ -86,6 +87,15 @@ class GamestateController extends ChangeNotifier {
     if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
     if (card.targetType == TargetEnum.unplayable) return false;
+    if (playerCharacter!
+        .getDeck()
+        .getHand()
+        .where((x) => x.runtimeType == NormalityCard)
+        .isNotEmpty) {
+      if (playerCharacter!.cardsPlayedInRound >= 3) {
+        return false;
+      }
+    }
     return true;
   }
 

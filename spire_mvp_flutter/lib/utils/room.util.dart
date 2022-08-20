@@ -88,7 +88,7 @@ Widget getRoomComponent(Room room) {
     case TradeRoom:
       return TraderRoomScreen(room: room as TradeRoom);
     case MindBloomEventRoom:
-      return const MindBloomView();
+      return MindBloomView(room: room as MindBloomEventRoom);
     default:
       return EnemyRoomScreen(room: room as EnemyRoom);
     // TODO: implement other types of rooms

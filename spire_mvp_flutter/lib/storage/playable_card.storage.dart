@@ -1,5 +1,6 @@
 import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
 import 'package:spire_mvp_flutter/classes/card/blood_for_blood.card.dart';
+import 'package:spire_mvp_flutter/classes/card/doubt.card.dart';
 import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/card/shiv.card.dart';
@@ -90,6 +91,9 @@ PlayableCard playableCardFromJson(dynamic json) {
       break;
     case 'NormalityCard':
       card = NormalityCard();
+      break;
+    case 'DoubtCard':
+      card = DoubtCard();
       break;
     default:
       card = StrikeCard();

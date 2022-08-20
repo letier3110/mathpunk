@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/enums/card_type.enum.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
 
@@ -85,7 +84,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       if (widget.disabled) {
         return;
       }
-      if (widget.card.type == CardType.curse) {
+      if (widget.card.targetType == TargetEnum.unplayable) {
         return;
       }
       if (widget.onTap != null) {
@@ -130,7 +129,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 width: widget.width! + 4,
               ),
               if ((widget.disabled == false ||
-                      widget.card.type != CardType.curse ||
+                      widget.card.targetType != TargetEnum.unplayable ||
                       widget.glow) &&
                   playerMana >= widget.card.getMana() &&
                   widget.card.isCardPlayable())
@@ -148,7 +147,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   height: (widget.height ?? defaultHeight),
                   width: (widget.width ?? defaultWidth),
                   decoration: BoxDecoration(
-                    color: widget.disabled || widget.card.type == CardType.curse
+                    color: widget.disabled ||
+                            widget.card.targetType == TargetEnum.unplayable
                         ? Colors.grey
                         : Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(20),
@@ -182,20 +182,21 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                           ],
                         ),
                       ),
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        child: Container(
-                          width: 40 * (widget.width! / defaultWidth),
-                          height: 40 * (widget.height! / defaultHeight),
-                          // padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(20),
+                      if (widget.card.targetType != TargetEnum.unplayable)
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          child: Container(
+                            width: 40 * (widget.width! / defaultWidth),
+                            height: 40 * (widget.height! / defaultHeight),
+                            // padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(child: widget.card.getCardMana()),
                           ),
-                          child: Center(child: widget.card.getCardMana()),
                         ),
-                      ),
                     ],
                   ),
                 ),

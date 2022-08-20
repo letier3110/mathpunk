@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spire_mvp_flutter/classes/card/doubt.card.dart';
 import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
@@ -18,6 +19,13 @@ import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
+
+enum HealPlayer {
+  fullHeal,
+  percentageMaxHpHeal,
+  percentageCurrentHpHeal,
+  valueHeal
+}
 
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
@@ -72,6 +80,43 @@ class GamestateController extends ChangeNotifier {
   void startSelecting(PlayableCard card, int cardId) {
     selectingTarget = card;
     selectingTargetCardId = cardId;
+    notifyListeners();
+  }
+
+  void changeCurrentRoom(Room room) {
+    if (currentRoom == null) return;
+    currentRoom = room;
+
+    notifyListeners();
+  }
+
+  void givePlayerGold(int goldValue) {
+    if (playerCharacter == null) return;
+    playerCharacter!.gold += goldValue;
+
+    notifyListeners();
+  }
+
+  void healPlayer(HealPlayer healType, double? percentageValue) {
+    if (playerCharacter == null) return;
+    switch (healType) {
+      case HealPlayer.fullHeal:
+        playerCharacter!.heal(playerCharacter!.getMaxHealth());
+        break;
+      case HealPlayer.percentageMaxHpHeal:
+        double healValue =
+            (playerCharacter!.getMaxHealth() * (percentageValue ?? 1));
+        playerCharacter!.heal(healValue.toInt());
+        break;
+      case HealPlayer.percentageCurrentHpHeal:
+        double healValue =
+            (playerCharacter!.getHealth() * (percentageValue ?? 1));
+        playerCharacter!.heal(healValue.toInt());
+        break;
+      case HealPlayer.valueHeal:
+        break;
+    }
+
     notifyListeners();
   }
 
@@ -363,6 +408,13 @@ class GamestateController extends ChangeNotifier {
       return;
     }
     playerCharacter!.cardsPlayedInRound = 0;
+    if (playerCharacter!
+        .getDeck()
+        .getHand()
+        .where((x) => x.runtimeType == DoubtCard)
+        .isNotEmpty) {
+      playerCharacter!.addWeak(1);
+    }
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
       enemy.block = 0;

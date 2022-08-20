@@ -71,6 +71,17 @@ List<List<Room>> generateMap() {
     prevSlice = roomSlice;
     gameMap.add(roomSlice);
   }
+  var bossRoom = generateBossRoom();
+  for (var i = 0; i < gameMap.last.length; i++) {
+    gameMap.last[i].nextRooms = [bossRoom];
+  }
+  gameMap.add([bossRoom]);
+
+  return gameMap;
+}
+
+Room generateBossRoom() {
+  var rng = Random();
   Level1RewardBossPool pool = Level1RewardBossPool();
   var bossRoom = EnemyRoom(roomId: 'boss1', roomRewards: [
     Reward(
@@ -80,10 +91,5 @@ List<List<Room>> generateMap() {
   ], roomEnemies: [
     EnemyOgre()
   ]);
-  for (var i = 0; i < gameMap.last.length; i++) {
-    gameMap.last[i].nextRooms = [bossRoom];
-  }
-  gameMap.add([bossRoom]);
-
-  return gameMap;
+  return bossRoom;
 }

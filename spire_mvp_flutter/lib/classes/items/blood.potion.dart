@@ -21,6 +21,11 @@ class BloodPotion extends ConsumableItem {
   }
 
   @override
+  String getAssetImage() {
+    return 'assets/gray_potion.png';
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     double localHealAmount = healAmount;

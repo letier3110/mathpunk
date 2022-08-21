@@ -22,6 +22,11 @@ class CunningPotion extends ConsumableItem {
   }
 
   @override
+  String getAssetImage() {
+    return 'assets/orange_potion.png';
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localCount = count;

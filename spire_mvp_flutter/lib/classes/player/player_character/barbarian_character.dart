@@ -2,6 +2,8 @@ import 'package:spire_mvp_flutter/classes/card/bash.card.dart';
 import 'package:spire_mvp_flutter/classes/card/blood_for_blood.card.dart';
 import 'package:spire_mvp_flutter/classes/card/defend.card.dart';
 import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
+import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
+import 'package:spire_mvp_flutter/classes/items/cunning.potion.dart';
 import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
 
 import '../../deck.dart';
@@ -15,7 +17,7 @@ class Barbarian extends PlayerCharacter {
 
     relics = [BurningBloodRelic()];
 
-    items = [];
+    items = [CunningPotion(), BlockPotion()];
 
     final cards = [
       StrikeCard(),

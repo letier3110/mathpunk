@@ -23,6 +23,11 @@ class ConsumableItem {
     return name;
   }
 
+  String getAssetImage() {
+    // return 'assets/gray_potion.png';
+    throw UnimplementedError();
+  }
+
   String getItemDescription() {
     return description;
   }

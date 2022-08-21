@@ -20,6 +20,11 @@ class FearPotion extends ConsumableItem {
   }
 
   @override
+  String getAssetImage() {
+    return 'assets/gray_potion.png';
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       int localVulnerable = vulnerable;

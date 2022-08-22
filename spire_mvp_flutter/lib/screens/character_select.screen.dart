@@ -79,29 +79,31 @@ class _CharacterSelectState extends State<CharacterSelect> {
                         ),
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                          child: Row(
-                            children: [
-                              Text(
-                                // gameStateState.playerCharacter!.description,
-                                '${gameStateState.playerCharacter!.relics[0].name}: ',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: getFontSize(16),
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              Text(
-                                // gameStateState.playerCharacter!.description,
-                                gameStateState
-                                    .playerCharacter!.relics[0].description,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: getFontSize(16),
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
+                          child: Column(
+                              children: gameStateState.playerCharacter!.relics
+                                  .map((e) => Row(
+                                        children: [
+                                          Text(
+                                            // gameStateState.playerCharacter!.description,
+                                            '${e.name}: ',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontSize: getFontSize(16),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            // gameStateState.playerCharacter!.description,
+                                            e.description,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontSize: getFontSize(16),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ))
+                                  .toList()),
                         ),
                       ],
                     )

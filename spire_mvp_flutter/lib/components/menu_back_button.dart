@@ -21,11 +21,11 @@ class _MenuBackButtonState extends State<MenuBackButton> {
           margin: const EdgeInsets.all(8.0),
           height: 200,
           alignment: Alignment.bottomLeft,
-          width: 100,
+          width: 200,
           child: Stack(
             children: [
-              Positioned(
-                top: 120,
+              Container(
+                margin: const EdgeInsets.only(top: 120),
                 child: Column(children: [
                   MainMenuItem(
                     text: 'Back',

@@ -41,14 +41,19 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
       body: Stack(
         children: [
           Container(
-            color: Colors.white,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/bg.png'), fit: BoxFit.cover),
+            ),
           ),
           Center(
               child: Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
-            child: Text(
-              'Mathpunk spire',
-              style: TextStyle(fontSize: getFontSize(34)),
+            margin: const EdgeInsets.fromLTRB(400, 0, 400, 0),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/logo_empty_1.png'),
+                  fit: BoxFit.contain),
             ),
           )),
           if (saves.currentSaveSlot == null) const CreateProfileComponent(),
@@ -68,13 +73,10 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   height: 500,
                   alignment: Alignment.bottomLeft,
                   width: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0)),
                   child: Stack(
                     children: [
-                      Positioned(
-                        top: 120,
+                      Container(
+                        padding: const EdgeInsets.all(20),
                         child: Column(children: [
                           Consumer<GamestateController>(builder:
                               (gameStateContext, gameStateState, child) {

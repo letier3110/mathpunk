@@ -19,17 +19,23 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
       body: Stack(
         children: [
           Container(
-            color: Colors.white,
-          ),
+              decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/bg.png'), fit: BoxFit.cover),
+          )),
           Center(
             // color: Colors.blue,
             child: Container(
               padding: const EdgeInsets.all(40),
+              constraints: const BoxConstraints(
+                minHeight: 255.0,
+                maxHeight: 830.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Spacer(
-                    flex: 3,
+                    flex: 2,
                   ),
                   ModeSelectNavigationCard(
                     heading: 'Standard',
@@ -60,7 +66,7 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
                     disabled: true,
                   ),
                   Spacer(
-                    flex: 3,
+                    flex: 2,
                   ),
                 ],
               ),

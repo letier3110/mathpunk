@@ -26,31 +26,38 @@ class MainMenuItemState extends State<MainMenuItem> {
     NavigationController navigation =
         Provider.of<NavigationController>(context, listen: false);
 
-    return Container(
-        width: 300,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            GestureDetector(
-                onTap: () {
-                  if (widget.screen == ScreenEnum.quit) {
-                    exit(0);
-                  } else if (widget.screen != null) {
-                    navigation
-                        .changeScreen(widget.screen ?? ScreenEnum.mainMenu);
-                  }
-                },
-                child: Container(
-                  width: 300,
-                  height: 50.0,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text(
-                    widget.text,
-                    style: TextStyle(fontSize: getFontSize(22)),
-                  ),
-                ))
-          ],
-        ));
+    void onTapHandler() {
+      if (widget.screen == ScreenEnum.quit) {
+        exit(0);
+      } else if (widget.screen != null) {
+        navigation.changeScreen(widget.screen ?? ScreenEnum.mainMenu);
+      }
+    }
+
+    return GestureDetector(
+      onTap: onTapHandler,
+      child: Container(
+          width: 300,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/menu_bg_2.png'), fit: BoxFit.fill),
+          ),
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+          margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+          child: Stack(
+            children: [
+              Container(
+                width: 300,
+                height: 50.0,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text(
+                  widget.text,
+                  style: TextStyle(fontSize: getFontSize(22)),
+                ),
+              )
+            ],
+          )),
+    );
   }
 }

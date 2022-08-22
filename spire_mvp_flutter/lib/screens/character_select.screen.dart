@@ -77,34 +77,35 @@ class _CharacterSelectState extends State<CharacterSelect> {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                          child: Column(
-                              children: gameStateState.playerCharacter!.relics
-                                  .map((e) => Row(
-                                        children: [
-                                          Text(
-                                            // gameStateState.playerCharacter!.description,
-                                            '${e.name}: ',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontSize: getFontSize(16),
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          ),
-                                          Text(
-                                            // gameStateState.playerCharacter!.description,
-                                            e.description,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontSize: getFontSize(16),
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          )
-                                        ],
-                                      ))
-                                  .toList()),
-                        ),
+                        if (gameStateState.playerCharacter!.relics.isNotEmpty)
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                            child: Column(
+                                children: gameStateState.playerCharacter!.relics
+                                    .map((e) => Row(
+                                          children: [
+                                            Text(
+                                              // gameStateState.playerCharacter!.description,
+                                              '${e.name}: ',
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: getFontSize(16),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            ),
+                                            Text(
+                                              // gameStateState.playerCharacter!.description,
+                                              e.description,
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: getFontSize(16),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            )
+                                          ],
+                                        ))
+                                    .toList()),
+                          ),
                       ],
                     )
                   ]),

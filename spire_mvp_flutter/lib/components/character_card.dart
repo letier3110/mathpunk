@@ -35,6 +35,10 @@ class CharacterCardView extends State<CharacterCard> {
       if (widget.disabled) {
         return;
       }
+      if (isPcEqualsWidgetPc) {
+        gameState.deselectPlayerCharacter();
+        return;
+      }
       gameState.selectPlayerCharacter(widget.character);
       var player = Player();
       player.selectCharacter(widget.character);

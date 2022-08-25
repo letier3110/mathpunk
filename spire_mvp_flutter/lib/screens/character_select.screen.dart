@@ -20,134 +20,189 @@ class CharacterSelect extends StatefulWidget {
   State<CharacterSelect> createState() => _CharacterSelectState();
 }
 
+AssetImage pickCharacterImage(bool disabled, String assetName) {
+  if (disabled) {
+    return const AssetImage('assets/character_select_class.png');
+  }
+  return AssetImage(assetName);
+}
+
+AssetImage pickDescriptionImage(bool disabled, String assetName) {
+  if (disabled) {
+    return const AssetImage('assets/character_select_description.png');
+  }
+  return const AssetImage('assets/menu_bg_1.png');
+}
+
 class _CharacterSelectState extends State<CharacterSelect> {
   @override
   Widget build(BuildContext context) {
+    GamestateController gamestate = Provider.of<GamestateController>(context);
+
+    var assetName = getCharacterAssetByName(gamestate.playerCharacter);
+
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            color: Colors.white,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/character_select_bg.png'),
+                  fit: BoxFit.cover),
+            ),
           ),
-          Consumer<GamestateController>(
-              builder: (gameStateContext, gameStateState, child) {
-            if (gameStateState.playerCharacter == null) {
-              return Container();
-            } else {
-              var assetName =
-                  getCharacterAssetByName(gameStateState.playerCharacter);
-              return Stack(children: [
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(assetName), fit: BoxFit.fill),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(150, 250, 0, 0),
+          Container(
+            padding: const EdgeInsets.fromLTRB(80, 40, 80, 40),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 1,
                   child: Row(children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          gameStateState.playerCharacter!.name,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: getFontSize(48),
-                              fontWeight: FontWeight.bold,
-                              color: Colors.yellow),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                          child: Text(
-                            'HP: ${gameStateState.playerCharacter!.health} / ${gameStateState.playerCharacter!.maxHealth}',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: getFontSize(22),
-                                fontWeight: FontWeight.bold,
-                                color: Colors.redAccent),
-                          ),
-                        ),
-                        Text(
-                          // gameStateState.playerCharacter!.description,
-                          'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: getFontSize(16),
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        if (gameStateState.playerCharacter!.relics.isNotEmpty)
+                    const SizedBox(
+                      width: 72,
+                    ),
+                    Container(
+                      width: 832,
+                      height: 564,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: pickCharacterImage(
+                                gamestate.playerCharacter == null, assetName),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                    const Spacer(
+                      flex: 1,
+                    ),
+                    Container(
+                      width: 804,
+                      height: 564,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: pickDescriptionImage(
+                                gamestate.playerCharacter == null, assetName),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Row(children: [
+                        if (gamestate.playerCharacter != null)
                           Container(
-                            padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(60, 52, 60, 52),
                             child: Column(
-                                children: gameStateState.playerCharacter!.relics
-                                    .map((e) => Row(
-                                          children: [
-                                            Text(
-                                              // gameStateState.playerCharacter!.description,
-                                              '${e.name}: ',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                  fontSize: getFontSize(16),
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            ),
-                                            Text(
-                                              // gameStateState.playerCharacter!.description,
-                                              e.description,
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                  fontSize: getFontSize(16),
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            )
-                                          ],
-                                        ))
-                                    .toList()),
-                          ),
-                      ],
-                    )
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  gamestate.playerCharacter!.name,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: getFontSize(26),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.yellow),
+                                ),
+                                Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                  child: Text(
+                                    'HP: ${gamestate.playerCharacter!.health} / ${gamestate.playerCharacter!.maxHealth}',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontSize: getFontSize(16),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.redAccent),
+                                  ),
+                                ),
+                                Text(
+                                  // gameStateState.playerCharacter!.description,
+                                  'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: getFontSize(16),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                if (gamestate
+                                    .playerCharacter!.relics.isNotEmpty)
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                                    child: Column(
+                                        children: gamestate
+                                            .playerCharacter!.relics
+                                            .map((e) => Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '${e.name}: ',
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              getFontSize(16),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    ),
+                                                    Container(
+                                                      constraints:
+                                                          const BoxConstraints(
+                                                              minWidth: 100,
+                                                              maxWidth: 450),
+                                                      child: Text(
+                                                        '''
+${e.description}
+''',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                getFontSize(16),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ))
+                                            .toList()),
+                                  ),
+                              ],
+                            ),
+                          )
+                      ]),
+                    ),
+                    const SizedBox(
+                      width: 128,
+                    ),
                   ]),
-                )
-              ]);
-            }
-          }),
+                ),
+              ],
+            ),
+          ),
           Column(
             // color: Colors.blue,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Consumer<GamestateController>(
-                  builder: (gameStateContext, gameStateState, child) {
-                return Text(
-                  'Game mode ${gameStateState.gameMode.toString()}',
-                  style: TextStyle(
-                    fontSize: getFontSize(30),
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }),
+              // Text(
+              //   'Game mode ${gamestate.gameMode.toString()}',
+              //   style: TextStyle(
+              //     fontSize: getFontSize(30),
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               const Spacer(flex: 1),
               Container(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                   child: Row(
                     children: [
                       const Spacer(flex: 1),
-                      Consumer<GamestateController>(
-                          builder: (gameStateContext, gameStateState, child) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Barbarian(),
-                              Irrationalist(),
-                              Priest(),
-                              Enigma()
-                            ]
-                                .map((e) => CharacterCard(
-                                      character: e,
-                                    ))
-                                .toList());
-                      }),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:
+                              [Barbarian(), Irrationalist(), Priest(), Enigma()]
+                                  .map((e) => CharacterCard(
+                                        character: e,
+                                      ))
+                                  .toList()),
                       const Spacer(flex: 1),
                     ],
                   ))

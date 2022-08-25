@@ -70,6 +70,11 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deselectPlayerCharacter() {
+    playerCharacter = null;
+    notifyListeners();
+  }
+
   void selectPlayerCharacter(PlayerCharacter character) {
     playerCharacter = character;
     Player player = Player();

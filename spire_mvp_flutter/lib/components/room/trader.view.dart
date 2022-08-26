@@ -58,8 +58,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[0].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[0].card,
                                 glow: false,
                                 animate: false,
@@ -78,8 +77,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[1].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[1].card,
                                 glow: false,
                                 animate: false,
@@ -98,8 +96,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[2].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[2].card,
                                 glow: false,
                                 animate: false,
@@ -118,8 +115,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[3].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[3].card,
                                 glow: false,
                                 animate: false,
@@ -138,8 +134,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[4].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[4].card,
                                 glow: false,
                                 animate: false,
@@ -163,8 +158,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[5].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[5].card,
                                 glow: false,
                                 animate: false,
@@ -183,8 +177,7 @@ class TraderViewView extends State<TraderView> {
                           children: [
                             if (widget.room.cards[6].inStock)
                               PlayableCardComponent(
-                                width: cardWidth,
-                                height: cardHeight,
+                                size: cardWidth,
                                 card: widget.room.cards[6].card,
                                 glow: false,
                                 animate: false,
@@ -248,8 +241,7 @@ class TraderViewView extends State<TraderView> {
                         child: Column(
                           children: [
                             PlayableCardComponent(
-                              width: cardWidth,
-                              height: cardHeight,
+                              size: cardWidth,
                               card: AngerCard(),
                               glow: false,
                               animate: false,

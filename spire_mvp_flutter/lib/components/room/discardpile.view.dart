@@ -20,7 +20,12 @@ class DiscardPileViewView extends State<DiscardPileView> {
         (gameState.playerCharacter?.deck.discardPile ?? []).length;
 
     void onTapHandler() {
-      // TODO: implement discard pile tap handler
+      if (gameState.inDeck.isEmpty) {
+        gameState.enterDeck(
+            cards: gameState.playerCharacter?.deck.discardPile ?? []);
+        return;
+      }
+      gameState.exitDeck();
     }
 
     return Positioned(

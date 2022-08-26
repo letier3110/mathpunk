@@ -62,7 +62,7 @@ class PlayableCard {
               : currentMana > mana
                   ? Colors.redAccent
                   : Colors.white,
-          fontSize: getFontSize(22)),
+          fontSize: getFontSize(16)),
     );
   }
 

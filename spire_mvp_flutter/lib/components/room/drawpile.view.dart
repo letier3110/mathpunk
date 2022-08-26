@@ -20,7 +20,12 @@ class DrawPileViewView extends State<DrawPileView> {
         (gameState.playerCharacter?.deck.drawPile ?? []).length;
 
     void onTapHandler() {
-      // TODO: implement drawpile tap handler
+      if (gameState.inDeck.isEmpty) {
+        gameState.enterDeck(
+            cards: gameState.playerCharacter?.deck.drawPile ?? []);
+        return;
+      }
+      gameState.exitDeck();
     }
 
     return Positioned(

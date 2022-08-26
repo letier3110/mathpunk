@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/components/game_header/game_header.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:spire_mvp_flutter/screens/deck.screen.dart';
+import 'package:spire_mvp_flutter/screens/lore.screen.dart';
 import 'package:spire_mvp_flutter/screens/map.screen.dart';
 import 'package:spire_mvp_flutter/screens/pause.screen.dart';
 import 'package:spire_mvp_flutter/utils/room.util.dart';
@@ -18,9 +20,12 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
+    bool inDeck = gameState.inDeck.isNotEmpty;
+
     return Scaffold(
       body: Stack(children: [
-        if (gameState.inMap == true || gameState.currentRoom == null)
+        if ((gameState.inMap == true || gameState.currentRoom == null) &&
+            gameState.inDeck.isEmpty)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: MapScreen(
@@ -32,6 +37,12 @@ class _GameScreenState extends State<GameScreen> {
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: getRoomComponent(gameState.currentRoom!),
           ),
+        if (inDeck)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
+            child: const DeckScreen(),
+          ),
+        if (gameState.loreCard != null) const LoreScreen(),
         if (gameState.inPause)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),

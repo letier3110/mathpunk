@@ -18,23 +18,34 @@ class CharacterDeckView extends State<CharacterDeck> {
 
     var deckLength = (gameState.playerCharacter?.deck.cards ?? []).length;
 
+    void onTapHandler() {
+      if (gameState.inDeck.isEmpty) {
+        gameState.enterDeck(cards: gameState.playerCharacter?.deck.cards ?? []);
+        return;
+      }
+      gameState.exitDeck();
+    }
+
     return Positioned(
       top: 0,
       bottom: 0,
       right: 100,
       child: Stack(children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          width: 80,
-          color: Colors.black,
-          child: Center(
-            child: Text(
-              'Deck',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: getFontSize(22),
-                  fontWeight: FontWeight.w600),
+        GestureDetector(
+          onTap: onTapHandler,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            width: 80,
+            color: Colors.black,
+            child: Center(
+              child: Text(
+                'Deck',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: getFontSize(22),
+                    fontWeight: FontWeight.w600),
+              ),
             ),
           ),
         ),

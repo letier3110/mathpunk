@@ -31,7 +31,11 @@ class _GameBackButtonState extends State<GameBackButton> {
                 child: Column(children: [
                   Container(
                       width: 300,
-                      color: Colors.white,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/menu_bg_2.png'),
+                            fit: BoxFit.fill),
+                      ),
                       child: Stack(
                         children: [
                           GestureDetector(

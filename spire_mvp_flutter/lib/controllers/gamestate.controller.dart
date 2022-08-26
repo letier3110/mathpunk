@@ -30,6 +30,8 @@ enum HealPlayer {
 class GamestateController extends ChangeNotifier {
   GameTypeEnum? gameMode;
   bool inMap = false;
+  List<PlayableCard> inDeck = [];
+  PlayableCard? loreCard;
   bool inPause = false;
   PlayerCharacter? playerCharacter;
   List<List<Room>> gameMap = [];
@@ -337,6 +339,29 @@ class GamestateController extends ChangeNotifier {
 
   void exitMap() {
     inMap = false;
+    notifyListeners();
+  }
+
+  void enterDeck({List<PlayableCard> cards = const []}) {
+    if (cards.isEmpty) {
+      return;
+    }
+    inDeck = cards;
+    notifyListeners();
+  }
+
+  void exitDeck() {
+    inDeck = [];
+    notifyListeners();
+  }
+
+  void openLoreCard(PlayableCard card) {
+    loreCard = card;
+    notifyListeners();
+  }
+
+  void closeLoreCard() {
+    loreCard = null;
     notifyListeners();
   }
 

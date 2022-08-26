@@ -43,7 +43,11 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
                       Container(
                           width: 300,
                           height: 50,
-                          color: Colors.white,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/menu_bg_2.png'),
+                                fit: BoxFit.fill),
+                          ),
                           child: Center(
                             child: Text(
                               'Embark',

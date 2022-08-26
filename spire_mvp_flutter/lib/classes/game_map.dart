@@ -18,7 +18,7 @@ const int _nextRoomsConnectionsRandom = 1;
 const int _nextRoomsConnectionsFixed = 1;
 const int _roomConnectionProbability = 50;
 const int _tradeRoomProbability = 10;
-const int _eventRoomProbability = 30;
+const int _eventRoomProbability = 5;
 
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];
@@ -38,7 +38,7 @@ List<List<Room>> generateMap() {
             rewardRelic: rewardPool.getRelics(),
             rewardGold: rng.nextInt(100) + 50)
       ]);
-      if (getProbability(_eventRoomProbability) || i == 0) {
+      if (getProbability(_eventRoomProbability)) {
         Level1EventRoomPool pool = Level1EventRoomPool();
         room = pool.getEventRoom();
         String id = 'event$j $i';

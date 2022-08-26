@@ -42,7 +42,11 @@ class _GameScreenState extends State<GameScreen> {
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: const DeckScreen(),
           ),
-        if (gameState.loreCard != null) const LoreScreen(),
+        if (gameState.loreCard != null)
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
+            child: const LoreScreen(),
+          ),
         if (gameState.inPause)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),

@@ -41,6 +41,9 @@ class _CharacterSelectState extends State<CharacterSelect> {
 
     var assetName = getCharacterAssetByName(gamestate.playerCharacter);
 
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -48,22 +51,22 @@ class _CharacterSelectState extends State<CharacterSelect> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/character_select_bg.png'),
-                  fit: BoxFit.cover),
+                  fit: BoxFit.fitWidth),
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(80, 40, 80, 40),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, width / 100),
             child: Column(
               children: [
                 Expanded(
                   flex: 1,
                   child: Row(children: [
-                    const SizedBox(
-                      width: 72,
+                    SizedBox(
+                      width: (width * 7) / 100,
                     ),
                     Container(
-                      width: 832,
-                      height: 564,
+                      width: width * 3 / 8,
+                      height: width / 4,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: pickCharacterImage(
@@ -71,12 +74,12 @@ class _CharacterSelectState extends State<CharacterSelect> {
                             fit: BoxFit.cover),
                       ),
                     ),
-                    const Spacer(
-                      flex: 1,
+                    SizedBox(
+                      width: width * 2.9 / 30,
                     ),
                     Container(
-                      width: 804,
-                      height: 564,
+                      width: width * 109 / 300,
+                      height: width * 76 / 300,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: pickDescriptionImage(
@@ -85,20 +88,23 @@ class _CharacterSelectState extends State<CharacterSelect> {
                       ),
                       child: Row(children: [
                         if (gamestate.playerCharacter != null)
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(60, 52, 60, 52),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                width / 30, width / 30, width / 30, width / 60),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  gamestate.playerCharacter!.name,
+                                  // gamestate.playerCharacter!.name,
+                                  // '$height',
+                                  '$width',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       fontSize: getFontSize(26),
                                       fontWeight: FontWeight.bold,
                                       color: Colors.yellow),
                                 ),
-                                Container(
+                                Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                   child: Text(
@@ -110,18 +116,21 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                         color: Colors.redAccent),
                                   ),
                                 ),
-                                Text(
-                                  // gameStateState.playerCharacter!.description,
-                                  'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: getFontSize(16),
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                SizedBox(
+                                  width: width * 1 / 4,
+                                  child: Text(
+                                    // gameStateState.playerCharacter!.description,
+                                    'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontSize: getFontSize(16),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
                                 ),
                                 if (gamestate
                                     .playerCharacter!.relics.isNotEmpty)
-                                  Container(
+                                  Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(0, 8, 0, 0),
                                     child: Column(
@@ -131,21 +140,23 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      '${e.name}: ',
-                                                      textAlign: TextAlign.left,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              getFontSize(16),
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
+                                                    SizedBox(
+                                                      width: width / 9,
+                                                      child: Text(
+                                                        '${e.name}: ',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                                getFontSize(16),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
                                                     ),
-                                                    Container(
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                              minWidth: 100,
-                                                              maxWidth: 450),
+                                                    SizedBox(
+                                                      width: width / 6,
                                                       child: Text(
                                                         '''
 ${e.description}
@@ -169,9 +180,6 @@ ${e.description}
                             ),
                           )
                       ]),
-                    ),
-                    const SizedBox(
-                      width: 128,
                     ),
                   ]),
                 ),

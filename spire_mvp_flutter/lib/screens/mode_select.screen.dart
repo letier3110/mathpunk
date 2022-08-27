@@ -15,6 +15,8 @@ class ModeSelectScreen extends StatefulWidget {
 class _ModeSelectScreenState extends State<ModeSelectScreen> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -26,26 +28,21 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
           Center(
             // color: Colors.blue,
             child: Container(
-              padding: const EdgeInsets.all(40),
+              margin: const EdgeInsets.all(120),
               constraints: const BoxConstraints(
-                minHeight: 255.0,
-                maxHeight: 830.0,
+                minHeight: 300,
+                maxHeight: 800,
               ),
+              height: height / 1.25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Spacer(
-                    flex: 2,
-                  ),
                   ModeSelectNavigationCard(
                     heading: 'Standard',
                     description:
                         "Standard mode is the default mode. It is the most common mode for players.",
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.standard,
-                  ),
-                  Spacer(
-                    flex: 1,
                   ),
                   ModeSelectNavigationCard(
                     heading: 'Daily Climb',
@@ -54,9 +51,6 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.daily,
                   ),
-                  Spacer(
-                    flex: 1,
-                  ),
                   ModeSelectNavigationCard(
                     heading: 'Custom',
                     description:
@@ -64,9 +58,6 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.custom,
                     disabled: true,
-                  ),
-                  Spacer(
-                    flex: 2,
                   ),
                 ],
               ),

@@ -37,6 +37,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   Widget build(BuildContext context) {
     SavesController saves = Provider.of<SavesController>(context);
 
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -48,8 +50,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           ),
           Center(
               child: Container(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
-            margin: const EdgeInsets.fromLTRB(400, 0, 400, 0),
+            // padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
+            // margin: const EdgeInsets.fromLTRB(400, 0, 400, 0),
+            width: width / 2,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/logo_empty_1.png'),
@@ -70,9 +73,11 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
               bottom: 0,
               child: Container(
                   margin: const EdgeInsets.all(8.0),
+                  constraints:
+                      const BoxConstraints(minWidth: 100, maxWidth: 300),
                   height: 500,
                   alignment: Alignment.bottomLeft,
-                  width: 300,
+                  width: width / 4,
                   child: Stack(
                     children: [
                       Container(

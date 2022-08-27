@@ -14,7 +14,7 @@ class NavigationCardView extends State<INavigationCard> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 10,
+      flex: 1,
       child: GestureDetector(
         onTap: () => widget.navigate(context, widget.screen),
         child: Container(

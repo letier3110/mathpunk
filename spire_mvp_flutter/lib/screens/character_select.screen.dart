@@ -95,9 +95,9 @@ class _CharacterSelectState extends State<CharacterSelect> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  // gamestate.playerCharacter!.name,
+                                  gamestate.playerCharacter!.name,
                                   // '$height',
-                                  '$width',
+                                  // '$width',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       fontSize: getFontSize(26),

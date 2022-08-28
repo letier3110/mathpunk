@@ -17,8 +17,10 @@ class _DeckScreenState extends State<DeckScreen> {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
     void onCardTap(PlayableCard card) {
-      gameState.openLoreCard(card);
+      // gameState.openLoreCard(card);
     }
+
+    double width = MediaQuery.of(context).size.width;
 
     return Stack(children: [
       Container(
@@ -26,23 +28,33 @@ class _DeckScreenState extends State<DeckScreen> {
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/deck_bg.png'), fit: BoxFit.fill),
+                image: AssetImage('assets/game_bg.png'), fit: BoxFit.fill),
+          )),
+      Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/deck_bg.png'), fit: BoxFit.fitWidth),
           ),
           child: Center(
             child: Stack(
               children: [
-                Container(
-                    padding: const EdgeInsets.fromLTRB(92, 60, 82, 68),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.deepOrangeAccent, width: 1)),
+                SizedBox(
+                    width: width * 0.855,
+                    height: width * 0.4625,
+                    child: Center(
+                      // decoration: BoxDecoration(
+                      //     border: Border.all(
+                      //         color: Colors.deepOrangeAccent, width: 1)),
                       child: GridView.count(
                         crossAxisCount: 4,
+                        childAspectRatio: 20 / 31,
                         children: gameState.inDeck
                             .map((e) => PlayableCardComponent(
                                 card: e,
                                 glow: false,
+                                size: width * 0.855 / 4.2,
                                 animate: false,
                                 onTap: () => {onCardTap(e)}))
                             .toList(),

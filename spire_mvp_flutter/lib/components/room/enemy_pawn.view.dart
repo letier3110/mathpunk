@@ -32,16 +32,18 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
       gameState.selectTarget(widget.enemy);
     }
 
+    double width = MediaQuery.of(context).size.width;
+
     return Positioned(
       top: 100,
-      right: 220,
+      right: width / 6,
       child: GestureDetector(
         onTap: onTapHandler,
         child: Stack(children: [
           Container(
             padding: const EdgeInsets.all(8),
-            height: 300,
-            width: 300,
+            height: width / 4,
+            width: width / 4,
             child: Center(
               child: Text(
                 widget.enemy.name,

@@ -41,7 +41,8 @@ class _MapScreenState extends State<MapScreen> {
       for (var room in roomSlice) {
         final slice = RoomSlice(
             room: room,
-            offset: Offset((j.toDouble() + 1) * columnWidth,
+            offset: Offset(
+                (j.toDouble() + 1 - roomSlice.length / 2) * columnWidth,
                 (i.toDouble() + 0.5) * rowHeight));
 
         roomsCoords.add(slice);
@@ -49,7 +50,8 @@ class _MapScreenState extends State<MapScreen> {
           final tuple = RoomTuple(
               room: room,
               targetRoom: nextRoom,
-              offset: Offset((j.toDouble() + 1) * columnWidth + 32,
+              offset: Offset(
+                  (j.toDouble() + 1 - roomSlice.length / 2) * columnWidth + 32,
                   (i.toDouble() + 0.5) * rowHeight + 32));
           roomsTuple.add(tuple);
         }
@@ -59,13 +61,22 @@ class _MapScreenState extends State<MapScreen> {
       i++;
     }
 
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
-          Container(
-              height: widget.gameMap.length * rowHeight + (topMargin * 2),
-              width: 1000,
-              color: Colors.white),
+          Positioned.fill(
+            child: Image.asset(
+              'assets/map_bg.png',
+              repeat: ImageRepeat.repeat,
+            ),
+          ),
+          SizedBox(
+            height: widget.gameMap.length * rowHeight + (topMargin * 2),
+            width: width,
+          ),
           ...roomsTuple
               .map((tuple) => MapConnection(
                   roomTuple: tuple, mapConnections: mapConnections))
@@ -110,9 +121,13 @@ class MapCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    double dxCenter = (width / 3);
+
     return Positioned(
         top: roomSlice.offset.dy,
-        left: roomSlice.offset.dx,
+        left: roomSlice.offset.dx + dxCenter,
         child: SizedBox(
             width: 64, height: 64, child: RoomCard(room: roomSlice.room)));
   }
@@ -128,12 +143,22 @@ class MapConnection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     RoomSlice targetSlice =
         (mapConnections[roomTuple.targetRoom.id] as RoomSlice);
-    Offset targetOffset =
-        Offset(targetSlice.offset.dx + 32, targetSlice.offset.dy + 32);
+
+    double dxCenter = (width / 3);
+
+    Offset targetOffset = Offset(
+        (targetSlice.offset.dx + dxCenter) + 32, targetSlice.offset.dy + 32);
+
+    Offset initialOffset =
+        Offset(roomTuple.offset.dx + dxCenter, roomTuple.offset.dy);
+
+    // double height = MediaQuery.of(context).size.height;
+
     return CustomPaint(
-        size: const Size(1200, 1200),
-        painter: LinesPainter(roomTuple.offset, targetOffset));
+        size: Size(width, width),
+        painter: LinesPainter(initialOffset, targetOffset));
   }
 }

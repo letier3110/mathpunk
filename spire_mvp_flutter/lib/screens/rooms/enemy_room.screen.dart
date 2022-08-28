@@ -36,9 +36,13 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
     bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
 
     return Container(
-        color: const Color(0xFF222222),
+        // color: const Color(0xFF222222),
         width: double.infinity,
         height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/bg3.png'), fit: BoxFit.fill),
+        ),
         child: Stack(children: [
           ...widget.room.enemies.map((enemy) {
             return EnemyPawnView(

@@ -23,20 +23,22 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
     var maxhp = gameState.playerCharacter?.maxHealth ?? 0;
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
 
+    double width = MediaQuery.of(context).size.width;
+
     void onTapHandler() {
       // TODO: implement drawpile tap handler
     }
 
     return Positioned(
       top: 100,
-      left: 220,
+      left: width / 6,
       child: GestureDetector(
         onTap: onTapHandler,
         child: Stack(children: [
           Container(
             padding: const EdgeInsets.all(8),
-            height: 300,
-            width: 300,
+            height: width / 4,
+            width: width / 4,
             child: Center(
               child: Text(
                 'Player',

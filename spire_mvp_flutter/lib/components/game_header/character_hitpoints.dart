@@ -19,9 +19,11 @@ class CharacterHitpointsView extends State<CharacterHitpoints> {
     var hp = gameState.playerCharacter?.health ?? '0';
     var maxhp = gameState.playerCharacter?.maxHealth ?? '0';
 
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
       padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.fromLTRB(150, 0, 0, 0),
+      margin: EdgeInsets.fromLTRB(width * 1.5 / 16 + 10, 0, 0, 0),
       child: Row(children: [
         Container(
           margin: const EdgeInsets.only(right: 4),

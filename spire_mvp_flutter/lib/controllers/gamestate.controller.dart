@@ -84,6 +84,12 @@ class GamestateController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void stopSelecting() {
+    selectingTarget = null;
+    selectingTargetCardId = null;
+    notifyListeners();
+  }
+
   void startSelecting(PlayableCard card, int cardId) {
     selectingTarget = card;
     selectingTargetCardId = cardId;

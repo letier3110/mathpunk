@@ -47,7 +47,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
     super.initState();
     controller = AnimationController(
         duration: const Duration(milliseconds: 100), vsync: this);
-    animation = Tween<double>(begin: 4, end: 244).animate(controller)
+    animation = Tween<double>(begin: 4, end: (widget.size ?? defaultWidth) * 1)
+        .animate(controller)
       ..addListener(() {
         setState(() {
           // The state that has changed here is the animation object’s value.
@@ -90,6 +91,10 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         return;
       }
       if (widget.card.targetType == TargetEnum.singleTarget) {
+        if (cardId == gameState.selectingTargetCardId) {
+          gameState.stopSelecting();
+          return;
+        }
         gameState.startSelecting(widget.card, cardId);
         return;
       } else if (widget.card.targetType == TargetEnum.cardTarget) {
@@ -103,20 +108,22 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       }
     }
 
+    double width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: onTapHandler,
       child: MouseRegion(
         onEnter: onEnterHandler,
         onExit: onExitHandler,
         child: Container(
-          height: (widget.size ?? defaultHeight) + 8,
+          height: (widget.size ?? defaultWidth) + 8,
           width: (widget.size ?? defaultWidth) + 8,
           margin: EdgeInsets.fromLTRB(
               4,
               4,
               4,
               gameState.selectingTargetCardId == cardId
-                  ? 244
+                  ? (widget.size ?? defaultWidth) * 1
                   : animation.value),
           child: Center(
             child: Stack(children: [
@@ -128,7 +135,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 Center(
                   child: GlowEffect(
                       child: SizedBox(
-                    height: calcHeightByWidth(widget.size ?? defaultHeight),
+                    height: calcHeightByWidth(widget.size ?? defaultWidth),
                     width: (widget.size ?? defaultWidth),
                   )),
                 ),
@@ -136,7 +143,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   // margin: const EdgeInsets.all(4),
-                  height: calcHeightByWidth(widget.size ?? defaultHeight),
+                  height: calcHeightByWidth(widget.size ?? defaultWidth),
                   width: (widget.size ?? defaultWidth),
                   decoration: BoxDecoration(
                     color: widget.disabled ||
@@ -148,7 +155,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   child: Stack(
                     children: [
                       SizedBox(
-                        height: calcHeightByWidth(widget.size ?? defaultHeight),
+                        height: calcHeightByWidth(widget.size ?? defaultWidth),
                         width: (widget.size ?? defaultWidth),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -164,7 +171,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                               ),
                             ),
                             SizedBox(
-                              height: 160,
+                              height: calcHeightByWidth(
+                                      widget.size ?? defaultWidth) *
+                                  0.75,
                               child: Column(
                                 children: [
                                   widget.card.getCardDescription(),

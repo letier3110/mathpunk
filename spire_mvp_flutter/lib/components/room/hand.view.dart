@@ -19,19 +19,27 @@ class HandViewView extends State<HandView> {
 
     List<PlayableCard> hand = gameState.playerCharacter!.deck.hand;
 
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Positioned(
-      bottom: -260,
-      left: 220,
-      right: 220,
+      bottom: -(height * 9 / 35),
+      left: width / 6,
+      right: width / 6,
       child: Stack(children: [
         Container(
             padding: const EdgeInsets.all(8),
-            height: 600,
-            // color: Colors.black,
+            // height: width * 1 / 3,
+            // height: 600,
+            height: height * 4 / 7,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children:
-                  hand.map((e) => PlayableCardComponent(card: e)).toList(),
+              children: hand
+                  .map((e) => PlayableCardComponent(
+                        card: e,
+                        size: height * 1.5 / 7,
+                      ))
+                  .toList(),
             )),
       ]),
     );

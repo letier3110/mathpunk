@@ -17,29 +17,39 @@ class TraderPawnViewView extends State<TraderPawnView> {
       widget.callback();
     }
 
-    return Positioned(
-      top: 100,
-      right: 220,
-      child: GestureDetector(
-        onTap: onTapHandler,
-        child: Stack(children: [
-          Container(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return GestureDetector(
+      onTap: onTapHandler,
+      child: Stack(children: [
+        Center(
+          child: Container(
             padding: const EdgeInsets.all(8),
-            height: 300,
-            width: 300,
-            child: Center(
-              child: Text(
-                "Shl'don trader",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: getFontSize(22),
-                    fontWeight: FontWeight.w600),
-              ),
+            height: width / 3,
+            width: width / 3,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/shopkeeper.jpeg'),
+                  fit: BoxFit.fill),
             ),
           ),
-        ]),
-      ),
+        ),
+        Center(
+          child: Container(
+            height: width / 3,
+            margin: EdgeInsets.fromLTRB(0, height - 120, 0, 0),
+            child: Text(
+              "Shopkeeper",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: getFontSize(22),
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

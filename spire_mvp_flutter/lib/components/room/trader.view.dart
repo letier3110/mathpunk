@@ -9,8 +9,7 @@ import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.da
 import 'package:spire_mvp_flutter/components/relic.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 
-const double cardHeight = 225;
-const double cardWidth = 150;
+const double cardHeight = 300;
 
 // View of rewards
 class TraderView extends StatefulWidget {
@@ -31,7 +30,14 @@ class TraderViewView extends State<TraderView> {
       gameState.buyItem(sellable);
     }
 
-    return Center(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/game_bg.png'), fit: BoxFit.fill),
+      ),
       child: Row(
         children: [
           const Spacer(
@@ -40,30 +46,34 @@ class TraderViewView extends State<TraderView> {
           Expanded(
             flex: 10,
             child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.06, width * 0.036, width * 0.06, width * 0.036),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/deck_bg.png'),
+                    fit: BoxFit.fitWidth),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: ListView(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[0].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[0].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[0])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[0].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[0])},
+                                ),
                               ),
                             if (widget.room.cards[0].inStock)
                               widget.room.cards[0].getCostDescription()
@@ -71,18 +81,21 @@ class TraderViewView extends State<TraderView> {
                         ),
                       ),
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[1].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[1].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[1])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[1].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[1])},
+                                ),
                               ),
                             if (widget.room.cards[1].inStock)
                               widget.room.cards[1].getCostDescription()
@@ -90,18 +103,21 @@ class TraderViewView extends State<TraderView> {
                         ),
                       ),
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[2].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[2].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[2])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[2].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[2])},
+                                ),
                               ),
                             if (widget.room.cards[2].inStock)
                               widget.room.cards[2].getCostDescription()
@@ -109,18 +125,21 @@ class TraderViewView extends State<TraderView> {
                         ),
                       ),
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[3].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[3].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[3])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[3].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[3])},
+                                ),
                               ),
                             if (widget.room.cards[3].inStock)
                               widget.room.cards[3].getCostDescription()
@@ -128,18 +147,21 @@ class TraderViewView extends State<TraderView> {
                         ),
                       ),
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[4].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[4].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[4])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[4].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[4])},
+                                ),
                               ),
                             if (widget.room.cards[4].inStock)
                               widget.room.cards[4].getCostDescription()
@@ -152,18 +174,21 @@ class TraderViewView extends State<TraderView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[5].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[5].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[5])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[5].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[5])},
+                                ),
                               ),
                             if (widget.room.cards[5].inStock)
                               widget.room.cards[5].getCostDescription()
@@ -171,34 +196,37 @@ class TraderViewView extends State<TraderView> {
                         ),
                       ),
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
                             if (widget.room.cards[6].inStock)
-                              PlayableCardComponent(
-                                size: cardWidth,
-                                card: widget.room.cards[6].card,
-                                glow: false,
-                                animate: false,
-                                onTap: () =>
-                                    {onTapHandler(widget.room.cards[6])},
+                              SizedBox(
+                                height: height * 0.44,
+                                child: PlayableCardComponent(
+                                  size: width * 0.154,
+                                  card: widget.room.cards[6].card,
+                                  glow: false,
+                                  animate: false,
+                                  onTap: () =>
+                                      {onTapHandler(widget.room.cards[6])},
+                                ),
                               ),
                             if (widget.room.cards[6].inStock)
                               widget.room.cards[6].getCostDescription()
                           ],
                         ),
                       ),
-                      Container(
-                        width: 412,
+                      SizedBox(
+                        width: width * 0.300,
                         height: cardHeight,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Row(
                               children: widget.room.relics
-                                  .map((sellable) => Container(
-                                      width: 130,
+                                  .map((sellable) => SizedBox(
+                                      width: width * 0.09,
                                       child: Column(
                                         children: [
                                           if (sellable.inStock)
@@ -215,8 +243,8 @@ class TraderViewView extends State<TraderView> {
                             ),
                             Row(
                               children: widget.room.items
-                                  .map((sellable) => Container(
-                                      width: 130,
+                                  .map((sellable) => SizedBox(
+                                      width: width * 0.09,
                                       child: Column(
                                         children: [
                                           if (sellable.inStock)
@@ -236,17 +264,20 @@ class TraderViewView extends State<TraderView> {
 
                       // Removal
                       SizedBox(
-                        height: cardHeight + 40,
-                        width: cardWidth,
+                        height: height * 0.5,
+                        width: width * 0.155,
                         child: Column(
                           children: [
-                            PlayableCardComponent(
-                              size: cardWidth,
-                              card: AngerCard(),
-                              glow: false,
-                              animate: false,
-                              disabled: true,
-                              onTap: () => {},
+                            SizedBox(
+                              height: height * 0.44,
+                              child: PlayableCardComponent(
+                                size: width * 0.154,
+                                card: AngerCard(),
+                                glow: false,
+                                animate: false,
+                                disabled: true,
+                                onTap: () => {},
+                              ),
                             ),
                             widget.room.removal.getCostDescription()
                           ],
@@ -257,9 +288,6 @@ class TraderViewView extends State<TraderView> {
                 ],
               ),
             ),
-          ),
-          const Spacer(
-            flex: 1,
           ),
         ],
       ),

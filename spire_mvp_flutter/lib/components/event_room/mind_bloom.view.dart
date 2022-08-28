@@ -63,24 +63,29 @@ class _MindBloomViewView extends State<MindBloomView> {
       gameState.enterMap();
     }
 
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
-        margin: const EdgeInsets.all(60),
-        color: Colors.amber,
-        width: double.infinity,
-        height: double.infinity,
-        child: Stack(
-          children: [
-            Row(
+      width: double.maxFinite,
+      height: double.maxFinite,
+      color: const Color(0xFF222222),
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(60),
+            color: Colors.amber,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 1,
+                SizedBox(
+                  width: width / 3,
+                  height: width / 3,
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(10, 28, 10, 10),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(getCharacterAssetByName(
-                              Player.getPlayerInstance().getCharacter())),
+                          image: AssetImage('assets/mind_bloom.png'),
                           fit: BoxFit.fill),
                     ),
                   ),
@@ -89,20 +94,20 @@ class _MindBloomViewView extends State<MindBloomView> {
                   flex: 2,
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(10, 28, 10, 10),
-                    child: Column(
+                    child: ListView(
                       children: [
-                        if (this.canLeave)
+                        if (canLeave)
                           Text('Can it really be this easy?',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: getFontSize(24))),
-                        if (!this.canLeave)
+                        if (!canLeave)
                           Text(
                               'While walking and traversing through the chaos of the Spire, your thoughts suddenly begin to feel very... real...',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: getFontSize(24))),
-                        if (!this.canLeave)
+                        if (!canLeave)
                           RichText(
                               textAlign: TextAlign.left,
                               text: TextSpan(children: [
@@ -136,7 +141,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                         const Spacer(
                           flex: 1,
                         ),
-                        if (!this.canLeave)
+                        if (!canLeave)
                           Row(
                             children: [
                               Container(
@@ -147,6 +152,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                                     //     surfaceTintColor: Colors.greenAccent),
                                     child: Container(
                                         padding: const EdgeInsets.all(12),
+                                        width: (width - 200) / 2,
                                         child: Text(
                                           "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
                                           style: TextStyle(
@@ -155,7 +161,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                                   )),
                             ],
                           ),
-                        if (!this.canLeave)
+                        if (!canLeave)
                           Row(
                             children: [
                               Container(
@@ -167,6 +173,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                                     child: Expanded(
                                       child: Container(
                                           padding: const EdgeInsets.all(12),
+                                          width: (width - 200) / 2,
                                           child: Text(
                                             "[I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.",
                                             style: TextStyle(
@@ -176,7 +183,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                                   )),
                             ],
                           ),
-                        if (!this.canLeave)
+                        if (!canLeave)
                           Row(
                             children: [
                               Container(
@@ -187,6 +194,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                                   //     surfaceTintColor: Colors.greenAccent),
                                   child: Container(
                                       padding: const EdgeInsets.all(12),
+                                      width: (width - 200) / 2,
                                       child: Text(
                                         "[I am Healthy] Heal to full HP. Become Cursed - Doubt.",
                                         style: TextStyle(
@@ -196,7 +204,7 @@ class _MindBloomViewView extends State<MindBloomView> {
                               ),
                             ],
                           ),
-                        if (this.canLeave)
+                        if (canLeave)
                           Row(
                             children: [
                               Container(
@@ -222,19 +230,21 @@ class _MindBloomViewView extends State<MindBloomView> {
                 ),
               ],
             ),
-            Positioned(
-              top: -10,
-              left: 40,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 180, 10),
-                color: Colors.amberAccent,
-                child: Text('Mind Bloom',
-                    style: TextStyle(
-                        color: Colors.black, fontSize: getFontSize(24))),
-              ),
-            ),
-          ],
-        ));
+          ),
+          // Positioned(
+          //   top: 10,
+          //   left: 40,
+          //   child: Container(
+          //     padding: const EdgeInsets.fromLTRB(10, 10, 180, 10),
+          //     color: Colors.amberAccent,
+          //     child: Text('Mind Bloom',
+          //         style: TextStyle(
+          //             color: Colors.black, fontSize: getFontSize(24))),
+          //   ),
+          // ),
+        ],
+      ),
+    );
   }
 }
 

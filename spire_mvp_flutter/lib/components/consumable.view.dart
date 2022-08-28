@@ -36,10 +36,13 @@ class ConsumableViewView extends State<ConsumableView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              width: 48,
+              height: 48,
               padding: const EdgeInsets.only(bottom: 8),
-              child: const Icon(
-                Icons.local_bar,
-                color: Colors.pinkAccent,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(widget.item.getAssetImage()),
+                    fit: BoxFit.fill),
               ),
             ),
             Text(

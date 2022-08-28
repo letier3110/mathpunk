@@ -23,14 +23,14 @@ class _GameBackButtonState extends State<GameBackButton> {
           margin: const EdgeInsets.all(8.0),
           height: 200,
           alignment: Alignment.bottomLeft,
-          width: 100,
+          width: 120,
           child: Stack(
             children: [
               Positioned(
                 top: 120,
                 child: Column(children: [
                   Container(
-                      width: 300,
+                      width: 120,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/menu_bg_2.png'),

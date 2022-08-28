@@ -39,16 +39,20 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
             padding: const EdgeInsets.all(8),
             height: width / 4,
             width: width / 4,
-            child: Center(
-              child: Text(
-                'Player',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: getFontSize(22),
-                    fontWeight: FontWeight.w600),
-              ),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/hero.png'), fit: BoxFit.cover),
             ),
+            // child: Center(
+            //   child: Text(
+            //     'Player',
+            //     textAlign: TextAlign.left,
+            //     style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: getFontSize(22),
+            //         fontWeight: FontWeight.w600),
+            //   ),
+            // ),
           ),
           if (isPlayerAlive)
             Positioned(

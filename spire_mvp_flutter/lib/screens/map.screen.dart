@@ -69,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
         children: <Widget>[
           Positioned.fill(
             child: Image.asset(
-              'assets/map_bg.png',
+              'assets/map_bg2.png',
               repeat: ImageRepeat.repeat,
             ),
           ),

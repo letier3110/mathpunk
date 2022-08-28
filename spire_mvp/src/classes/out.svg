@@ -1,0 +1,1199 @@
+<svg version="1.1" baseProfile="full" width="5314.0" height="967.0" viewbox="0 0 5314 967" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[Game|+gameMode: GameMode|+attachGameMode(): void;+getGameMode(): GameMode]
+[GameMode|+gameSession: GameSession|+attachGameSession(): void;+getGameSession(): GameSession]
+[GameSession|+player: Player;+gameMap: GameMap;+currentRoom: Room;+static instance: GameSession|+static getGameSessionInstance(): GameSession;+static setGameSessionInstance(): void;+attachPlayer(): void;+getPlayer(): Player;+attachGameMap(): void;+getGameMap(): GameMap;+getNextAvailableRooms(): Room\[\];+enterRoom(): boolean;+getCurrentRoom(): Room]
+[GameMap|+rooms: Room\[\]|+generateMap(): void;+getRooms(): Room\[\]]
+[BaseCharacter|+name: string;+health: number;+maxHealth: number|+getHealth(): number;+getMaxHealth(): number;+setHealth(): void;+changeHealth(): void;+setMaxHealth(): void]
+[PlayerCharacter|+deck: Deck;+relics: Relic\[\];+items: Item\[\]|+attachDeck(): void;+getDeck(): Deck;+attachRelics(): void;+addRelic(): void;+getRelics(): Relic\[\];+attachItems(): void;+addItem(): void;+getItems(): Item\[\]]
+[Warrior||]
+[Mage||]
+[Rogue||]
+[Enigma||]
+[Relic||]
+[Item||]
+[Deck|+cards: Card\[\];+drawPile: Card\[\];+hand: Card\[\];+discardPile: Card\[\]|+getCards(): Card\[\];+getDrawPile(): Card\[\];+getHand(): Card\[\];+getDiscardPile(): Card\[\];+initialLoadDrawPile(): void;+refreshDrawPile(): void;+draw(): void]
+[EmptyDeck||+getCards(): Card\[\]]
+[Card|+name: string;+description: string;+mana: number;+type: string|+play(): void]
+[AttackCard|+damage: number;+subtype: string|+play(): void]
+[Intension|+type: IntensionType;+baseDamage: number;+count: number|]
+[Moveset|+moves: Intension\[\];+currentMove: Intension;+parent: Enemy|+executeMove(): void;+getNextMove(): void]
+[GoblinMoveset||]
+[Enemy|+name: string;+health: number;+maxHealth: number;+armor: number;+moveset: Moveset|+getName(): string;+getHealth(): number;+getMaxHealth(): number;+setHealth(): void;+changeHealth(): void;+setMaxHealth(): void;+getArmor(): number;+makeMove(): void]
+[EnemyGoblin||]
+[Room|+_id: string;+enemies: Enemy\[\];+rewards: Reward\[\]|+attachEnemies(): void;+attachRewards(): void;+getEnemies(): Enemy\[\];+getRewards(): Reward\[\];+getCanLeaveRoom(): boolean;+static isEqual(): boolean]
+[TreasureRoom|+isTreasureChestOpened: boolean|+getShowTreasureChest(): boolean;+getIsTreasureChestOpened(): boolean;+openTreasureChest(): void;+getCanLeaveRoom(): boolean]
+[EventRoom||]
+[RestRoom||]
+[TradeRoom||]
+[EnemyRoom|+isTreasureChestOpened: boolean|+getShowTreasureChest(): boolean;+getIsTreasureChestOpened(): boolean;+openTreasureChest(): void;+getCanLeaveRoom(): boolean]
+[MiniBossRoom|+isTreasureChestOpened: boolean|+getShowTreasureChest(): boolean;+getIsTreasureChestOpened(): boolean;+openTreasureChest(): void;+getCanLeaveRoom(): boolean]
+[BossRoom|+isTreasureChestOpened: boolean|+getShowTreasureChest(): boolean;+getIsTreasureChestOpened(): boolean;+openTreasureChest(): void;+getCanLeaveRoom(): boolean]
+[Player|+name: string;+character: PlayerCharacter|+getName(): string;+selectCharacter(): void;+getCharacter(): PlayerCharacter]
+[&lt;interface&gt;Character|+health: number;+maxHealth: number;+getHealth: () =&gt; number;+getMaxHealth: () =&gt; number;+setHealth: (health: number) =&gt; void;+changeHealth: (health: number) =&gt; void;+setMaxHealth: (health: number) =&gt; void|]
+[&lt;interface&gt;ISelectableTarget|+target: Enemy|]
+[&lt;interface&gt;IRandomTarget||]
+[&lt;interface&gt;IAreaDamage|+target: Enemy|]
+[&lt;interface&gt;EnemyContructorProps|+name: string;+health: number;+maxHealth: number;+armor: number|]
+[&lt;interface&gt;IRoom|+_id: string;+enemies: Enemy\[\];+rewards: Reward\[\];+getCanLeaveRoom: () =&gt; boolean|]
+[&lt;enumeration&gt;CardType|Attack;Skill;Power]
+[&lt;enumeration&gt;AttackCardType|SingleTarget;AllTargets;RandomTarget]
+[&lt;enumeration&gt;IntensionType|Offense;Deffence;Buff;Debuff;OffenseBuff;DeffenceBuff;OffenseDebuff;DeffenceDebuff;DeffenceOffense;Special]
+[&lt;type&gt;RoomConstructorProps|+id: string;+enemies: Enemy\[\];+rewards: Reward\[\]|]
+[&lt;type&gt;BossRoomConstructorProps|+id: string;+level: number|]
+[Character]&lt;:--[BaseCharacter]
+[BaseCharacter]&lt;:-[PlayerCharacter]
+[PlayerCharacter]&lt;:-[Warrior]
+[PlayerCharacter]&lt;:-[Mage]
+[PlayerCharacter]&lt;:-[Rogue]
+[PlayerCharacter]&lt;:-[Enigma]
+[Deck]&lt;:-[EmptyDeck]
+[Card]&lt;:-[AttackCard]
+[Moveset]&lt;:-[GoblinMoveset]
+[Character]&lt;:--[Enemy]
+[Enemy]&lt;:-[EnemyGoblin]
+[IRoom]&lt;:--[Room]
+[Room]&lt;:-[TreasureRoom]
+[Room]&lt;:-[EventRoom]
+[Room]&lt;:-[RestRoom]
+[Room]&lt;:-[TradeRoom]
+[Room]&lt;:-[EnemyRoom]
+[Room]&lt;:-[MiniBossRoom]
+[Room]&lt;:-[BossRoom]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g transform="translate(0.5, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="967.0" width="5314.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M2298.3 219.1 L2247.5 278 L2247.5 335.5 L2247.5 335.5 " fill="none"></path>
+</g>
+<path d="M2302.3 222.6 L2298.3 219.1 L2294.3 215.6 L2307.0 209.0 Z"></path>
+<path d="M2247.5 531.8 L2247.5 576 L2247.5 596 L2247.5 596.0 " fill="none"></path>
+<path d="M2252.8 531.8 L2247.5 531.8 L2242.2 531.8 L2247.5 518.5 Z"></path>
+<path d="M2148.3 793.6 L2088.5 844 L2088.5 864 L2088.5 864.0 " fill="none"></path>
+<path d="M2151.7 797.7 L2148.3 793.6 L2144.9 789.5 L2158.5 785.0 Z"></path>
+<path d="M2198.4 836.4 L2195.5 844 L2195.5 864 L2195.5 864.0 " fill="none"></path>
+<path d="M2203.4 838.4 L2198.4 836.4 L2193.5 834.5 L2203.3 824.0 Z"></path>
+<path d="M2296.6 836.4 L2299.5 844 L2299.5 864 L2299.5 864.0 " fill="none"></path>
+<path d="M2301.5 834.5 L2296.6 836.4 L2291.6 838.4 L2291.7 824.0 Z"></path>
+<path d="M2346.8 791.4 L2411 844 L2411 864 L2411.0 864.0 " fill="none"></path>
+<path d="M2350.2 787.3 L2346.8 791.4 L2343.4 795.5 L2336.5 782.9 Z"></path>
+<path d="M1602.5 256.3 L1602.5 278 L1602.5 392 L1602.5 392.0 " fill="none"></path>
+<path d="M1607.8 256.3 L1602.5 256.3 L1597.2 256.3 L1602.5 243.0 Z"></path>
+<path d="M1841.5 211.3 L1841.5 278 L1841.5 373 L1841.5 373.0 " fill="none"></path>
+<path d="M1846.8 211.3 L1841.5 211.3 L1836.2 211.3 L1841.5 198.0 Z"></path>
+<path d="M3009.0 211.3 L3009 278 L3009 403.5 L3009.0 403.5 " fill="none"></path>
+<path d="M3014.3 211.3 L3009.0 211.3 L3003.7 211.3 L3009.0 198.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M2498.9 216.7 L2584.75 278 L2584.75 298 L2584.8 298.0 " fill="none"></path>
+</g>
+<path d="M2502.0 212.4 L2498.9 216.7 L2495.8 221.1 L2488.1 209.0 Z"></path>
+<path d="M2584.8 569.3 L2584.75 576 L2584.75 686.5 L2584.8 686.5 " fill="none"></path>
+<path d="M2590.1 569.3 L2584.8 569.3 L2579.4 569.3 L2584.8 556.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M4088.0 199.8 L4088 278 L4088 328 L4088.0 328.0 " fill="none"></path>
+</g>
+<path d="M4093.3 199.8 L4088.0 199.8 L4082.7 199.8 L4088.0 186.5 Z"></path>
+<path d="M3942.8 448.7 L3092.75 576 L3092.75 641 L3092.8 641.0 " fill="none"></path>
+<path d="M3943.6 454.0 L3942.8 448.7 L3942.0 443.5 L3956.0 446.8 Z"></path>
+<path d="M3942.9 456.4 L3351.75 576 L3351.75 686.5 L3351.8 686.5 " fill="none"></path>
+<path d="M3944.0 461.6 L3942.9 456.4 L3941.9 451.1 L3956.0 453.7 Z"></path>
+<path d="M3943.1 463.4 L3494.25 576 L3494.25 686.5 L3494.3 686.5 " fill="none"></path>
+<path d="M3944.4 468.5 L3943.1 463.4 L3941.8 458.2 L3956.0 460.1 Z"></path>
+<path d="M4088.0 539.3 L4088 576 L4088 686.5 L4088.0 686.5 " fill="none"></path>
+<path d="M4093.3 539.3 L4088.0 539.3 L4082.7 539.3 L4088.0 526.0 Z"></path>
+<path d="M4231.6 509.4 L4347.5 576 L4347.5 641 L4347.5 641.0 " fill="none"></path>
+<path d="M4234.2 504.8 L4231.6 509.4 L4228.9 514.1 L4220.0 502.8 Z"></path>
+<path d="M4233.0 461.3 L4718.5 576 L4718.5 641 L4718.5 641.0 " fill="none"></path>
+<path d="M4234.2 456.1 L4233.0 461.3 L4231.7 466.5 L4220.0 458.2 Z"></path>
+<path d="M4233.2 448.6 L5089.5 576 L5089.5 641 L5089.5 641.0 " fill="none"></path>
+<path d="M4234.0 443.3 L4233.2 448.6 L4232.4 453.9 L4220.0 446.6 Z"></path>
+<g data-name="Game">
+<g fill="#eee8d5" stroke="#33322E" data-name="Game">
+<rect x="0.0" y="75.0" height="108.0" width="255.0" data-name="Game"></rect>
+<path d="M0.0 106.0 L255.0 106.0" fill="none" data-name="Game"></path>
+<path d="M0.0 137.0 L255.0 137.0" fill="none" data-name="Game"></path>
+</g>
+<g transform="translate(0, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Game">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Game">
+<a id=".Game" xlink:href=""><text x="119.5" y="13.5" stroke="none" text-anchor="middle" data-name="Game">Game</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Game">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Game">
+<text x="0.0" y="13.5" stroke="none" data-name="Game">+gameMode: GameMode</text>
+
+</g>
+</g>
+<g transform="translate(0, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Game">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Game">
+<text x="0.0" y="13.5" stroke="none" data-name="Game">+attachGameMode(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Game">+getGameMode(): GameMode</text>
+
+</g>
+</g>
+</g>
+<g data-name="GameMode">
+<g fill="#eee8d5" stroke="#33322E" data-name="GameMode">
+<rect x="295.0" y="75.0" height="108.0" width="293.0" data-name="GameMode"></rect>
+<path d="M295.0 106.0 L588.0 106.0" fill="none" data-name="GameMode"></path>
+<path d="M295.0 137.0 L588.0 137.0" fill="none" data-name="GameMode"></path>
+</g>
+<g transform="translate(295, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GameMode">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GameMode">
+<a id=".GameMode" xlink:href=""><text x="138.5" y="13.5" stroke="none" text-anchor="middle" data-name="GameMode">GameMode</text></a>
+
+</g>
+</g>
+<g transform="translate(295, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameMode">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameMode">
+<text x="0.0" y="13.5" stroke="none" data-name="GameMode">+gameSession: GameSession</text>
+
+</g>
+</g>
+<g transform="translate(295, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameMode">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameMode">
+<text x="0.0" y="13.5" stroke="none" data-name="GameMode">+attachGameSession(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="GameMode">+getGameSession(): GameSession</text>
+
+</g>
+</g>
+</g>
+<g data-name="GameSession">
+<g fill="#eee8d5" stroke="#33322E" data-name="GameSession">
+<rect x="628.0" y="0.0" height="258.0" width="408.0" data-name="GameSession"></rect>
+<path d="M628.0 31.0 L1036.0 31.0" fill="none" data-name="GameSession"></path>
+<path d="M628.0 107.0 L1036.0 107.0" fill="none" data-name="GameSession"></path>
+</g>
+<g transform="translate(628, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GameSession">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GameSession">
+<a id=".GameSession" xlink:href=""><text x="196.0" y="13.5" stroke="none" text-anchor="middle" data-name="GameSession">GameSession</text></a>
+
+</g>
+</g>
+<g transform="translate(628, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameSession">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameSession">
+<text x="0.0" y="13.5" stroke="none" data-name="GameSession">+player: Player</text>
+<text x="0.0" y="28.5" stroke="none" data-name="GameSession">+gameMap: GameMap</text>
+<text x="0.0" y="43.5" stroke="none" data-name="GameSession">+currentRoom: Room</text>
+<text x="0.0" y="58.5" stroke="none" data-name="GameSession">+static instance: GameSession</text>
+
+</g>
+</g>
+<g transform="translate(628, 107)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameSession">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameSession">
+<text x="0.0" y="13.5" stroke="none" data-name="GameSession">+static getGameSessionInstance(): GameSession</text>
+<text x="0.0" y="28.5" stroke="none" data-name="GameSession">+static setGameSessionInstance(): void</text>
+<text x="0.0" y="43.5" stroke="none" data-name="GameSession">+attachPlayer(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="GameSession">+getPlayer(): Player</text>
+<text x="0.0" y="73.5" stroke="none" data-name="GameSession">+attachGameMap(): void</text>
+<text x="0.0" y="88.5" stroke="none" data-name="GameSession">+getGameMap(): GameMap</text>
+<text x="0.0" y="103.5" stroke="none" data-name="GameSession">+getNextAvailableRooms(): Room[]</text>
+<text x="0.0" y="118.5" stroke="none" data-name="GameSession">+enterRoom(): boolean</text>
+<text x="0.0" y="133.5" stroke="none" data-name="GameSession">+getCurrentRoom(): Room</text>
+
+</g>
+</g>
+</g>
+<g data-name="GameMap">
+<g fill="#eee8d5" stroke="#33322E" data-name="GameMap">
+<rect x="1076.0" y="75.0" height="108.0" width="186.0" data-name="GameMap"></rect>
+<path d="M1076.0 106.0 L1262.0 106.0" fill="none" data-name="GameMap"></path>
+<path d="M1076.0 137.0 L1262.0 137.0" fill="none" data-name="GameMap"></path>
+</g>
+<g transform="translate(1076, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GameMap">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GameMap">
+<a id=".GameMap" xlink:href=""><text x="85.0" y="13.5" stroke="none" text-anchor="middle" data-name="GameMap">GameMap</text></a>
+
+</g>
+</g>
+<g transform="translate(1076, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameMap">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameMap">
+<text x="0.0" y="13.5" stroke="none" data-name="GameMap">+rooms: Room[]</text>
+
+</g>
+</g>
+<g transform="translate(1076, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GameMap">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="GameMap">
+<text x="0.0" y="13.5" stroke="none" data-name="GameMap">+generateMap(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="GameMap">+getRooms(): Room[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="BaseCharacter">
+<g fill="#eee8d5" stroke="#33322E" data-name="BaseCharacter">
+<rect x="2139.0" y="336.0" height="183.0" width="217.0" data-name="BaseCharacter"></rect>
+<path d="M2139.0 367.0 L2356.0 367.0" fill="none" data-name="BaseCharacter"></path>
+<path d="M2139.0 428.0 L2356.0 428.0" fill="none" data-name="BaseCharacter"></path>
+</g>
+<g transform="translate(2139, 336)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="BaseCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BaseCharacter">
+<a id=".BaseCharacter" xlink:href=""><text x="100.5" y="13.5" stroke="none" text-anchor="middle" data-name="BaseCharacter">BaseCharacter</text></a>
+
+</g>
+</g>
+<g transform="translate(2139, 367)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BaseCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BaseCharacter">
+<text x="0.0" y="13.5" stroke="none" data-name="BaseCharacter">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BaseCharacter">+health: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="BaseCharacter">+maxHealth: number</text>
+
+</g>
+</g>
+<g transform="translate(2139, 428)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BaseCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BaseCharacter">
+<text x="0.0" y="13.5" stroke="none" data-name="BaseCharacter">+getHealth(): number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BaseCharacter">+getMaxHealth(): number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="BaseCharacter">+setHealth(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="BaseCharacter">+changeHealth(): void</text>
+<text x="0.0" y="73.5" stroke="none" data-name="BaseCharacter">+setMaxHealth(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="PlayerCharacter">
+<g fill="#eee8d5" stroke="#33322E" data-name="PlayerCharacter">
+<rect x="2159.0" y="596.0" height="228.0" width="178.0" data-name="PlayerCharacter"></rect>
+<path d="M2159.0 627.0 L2337.0 627.0" fill="none" data-name="PlayerCharacter"></path>
+<path d="M2159.0 688.0 L2337.0 688.0" fill="none" data-name="PlayerCharacter"></path>
+</g>
+<g transform="translate(2159, 596)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PlayerCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PlayerCharacter">
+<a id=".PlayerCharacter" xlink:href=""><text x="81.0" y="13.5" stroke="none" text-anchor="middle" data-name="PlayerCharacter">PlayerCharacter</text></a>
+
+</g>
+</g>
+<g transform="translate(2159, 627)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PlayerCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PlayerCharacter">
+<text x="0.0" y="13.5" stroke="none" data-name="PlayerCharacter">+deck: Deck</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PlayerCharacter">+relics: Relic[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PlayerCharacter">+items: Item[]</text>
+
+</g>
+</g>
+<g transform="translate(2159, 688)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PlayerCharacter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PlayerCharacter">
+<text x="0.0" y="13.5" stroke="none" data-name="PlayerCharacter">+attachDeck(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PlayerCharacter">+getDeck(): Deck</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PlayerCharacter">+attachRelics(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PlayerCharacter">+addRelic(): void</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PlayerCharacter">+getRelics(): Relic[]</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PlayerCharacter">+attachItems(): void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PlayerCharacter">+addItem(): void</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PlayerCharacter">+getItems(): Item[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="Warrior">
+<g fill="#eee8d5" stroke="#33322E" data-name="Warrior">
+<rect x="2052.0" y="864.0" height="47.0" width="74.0" data-name="Warrior"></rect>
+<path d="M2052.0 895.0 L2126.0 895.0" fill="none" data-name="Warrior"></path>
+<path d="M2052.0 903.0 L2126.0 903.0" fill="none" data-name="Warrior"></path>
+</g>
+<g transform="translate(2052, 864)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Warrior">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Warrior">
+<a id=".Warrior" xlink:href=""><text x="29.0" y="13.5" stroke="none" text-anchor="middle" data-name="Warrior">Warrior</text></a>
+
+</g>
+</g>
+<g transform="translate(2052, 895)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Warrior">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Warrior">
+
+</g>
+</g>
+<g transform="translate(2052, 903)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Warrior">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Warrior">
+
+</g>
+</g>
+</g>
+<g data-name="Mage">
+<g fill="#eee8d5" stroke="#33322E" data-name="Mage">
+<rect x="2166.0" y="864.0" height="47.0" width="60.0" data-name="Mage"></rect>
+<path d="M2166.0 895.0 L2226.0 895.0" fill="none" data-name="Mage"></path>
+<path d="M2166.0 903.0 L2226.0 903.0" fill="none" data-name="Mage"></path>
+</g>
+<g transform="translate(2166, 864)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Mage">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Mage">
+<a id=".Mage" xlink:href=""><text x="22.0" y="13.5" stroke="none" text-anchor="middle" data-name="Mage">Mage</text></a>
+
+</g>
+</g>
+<g transform="translate(2166, 895)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Mage">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Mage">
+
+</g>
+</g>
+<g transform="translate(2166, 903)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Mage">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Mage">
+
+</g>
+</g>
+</g>
+<g data-name="Rogue">
+<g fill="#eee8d5" stroke="#33322E" data-name="Rogue">
+<rect x="2266.0" y="864.0" height="47.0" width="68.0" data-name="Rogue"></rect>
+<path d="M2266.0 895.0 L2334.0 895.0" fill="none" data-name="Rogue"></path>
+<path d="M2266.0 903.0 L2334.0 903.0" fill="none" data-name="Rogue"></path>
+</g>
+<g transform="translate(2266, 864)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Rogue">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Rogue">
+<a id=".Rogue" xlink:href=""><text x="26.0" y="13.5" stroke="none" text-anchor="middle" data-name="Rogue">Rogue</text></a>
+
+</g>
+</g>
+<g transform="translate(2266, 895)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Rogue">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Rogue">
+
+</g>
+</g>
+<g transform="translate(2266, 903)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Rogue">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Rogue">
+
+</g>
+</g>
+</g>
+<g data-name="Enigma">
+<g fill="#eee8d5" stroke="#33322E" data-name="Enigma">
+<rect x="2374.0" y="864.0" height="47.0" width="75.0" data-name="Enigma"></rect>
+<path d="M2374.0 895.0 L2449.0 895.0" fill="none" data-name="Enigma"></path>
+<path d="M2374.0 903.0 L2449.0 903.0" fill="none" data-name="Enigma"></path>
+</g>
+<g transform="translate(2374, 864)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Enigma">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Enigma">
+<a id=".Enigma" xlink:href=""><text x="29.5" y="13.5" stroke="none" text-anchor="middle" data-name="Enigma">Enigma</text></a>
+
+</g>
+</g>
+<g transform="translate(2374, 895)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Enigma">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Enigma">
+
+</g>
+</g>
+<g transform="translate(2374, 903)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Enigma">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Enigma">
+
+</g>
+</g>
+</g>
+<g data-name="Relic">
+<g fill="#eee8d5" stroke="#33322E" data-name="Relic">
+<rect x="1302.0" y="106.0" height="47.0" width="55.0" data-name="Relic"></rect>
+<path d="M1302.0 137.0 L1357.0 137.0" fill="none" data-name="Relic"></path>
+<path d="M1302.0 145.0 L1357.0 145.0" fill="none" data-name="Relic"></path>
+</g>
+<g transform="translate(1302, 106)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Relic">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Relic">
+<a id=".Relic" xlink:href=""><text x="19.5" y="13.5" stroke="none" text-anchor="middle" data-name="Relic">Relic</text></a>
+
+</g>
+</g>
+<g transform="translate(1302, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Relic">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Relic">
+
+</g>
+</g>
+<g transform="translate(1302, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Relic">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Relic">
+
+</g>
+</g>
+</g>
+<g data-name="Item">
+<g fill="#eee8d5" stroke="#33322E" data-name="Item">
+<rect x="1397.0" y="106.0" height="47.0" width="50.0" data-name="Item"></rect>
+<path d="M1397.0 137.0 L1447.0 137.0" fill="none" data-name="Item"></path>
+<path d="M1397.0 145.0 L1447.0 145.0" fill="none" data-name="Item"></path>
+</g>
+<g transform="translate(1397, 106)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Item">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Item">
+<a id=".Item" xlink:href=""><text x="17.0" y="13.5" stroke="none" text-anchor="middle" data-name="Item">Item</text></a>
+
+</g>
+</g>
+<g transform="translate(1397, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Item">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Item">
+
+</g>
+</g>
+<g transform="translate(1397, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Item">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Item">
+
+</g>
+</g>
+</g>
+<g data-name="Deck">
+<g fill="#eee8d5" stroke="#33322E" data-name="Deck">
+<rect x="1487.0" y="15.0" height="228.0" width="231.0" data-name="Deck"></rect>
+<path d="M1487.0 46.0 L1718.0 46.0" fill="none" data-name="Deck"></path>
+<path d="M1487.0 122.0 L1718.0 122.0" fill="none" data-name="Deck"></path>
+</g>
+<g transform="translate(1487, 15)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Deck">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Deck">
+<a id=".Deck" xlink:href=""><text x="107.5" y="13.5" stroke="none" text-anchor="middle" data-name="Deck">Deck</text></a>
+
+</g>
+</g>
+<g transform="translate(1487, 46)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Deck">
+<text x="0.0" y="13.5" stroke="none" data-name="Deck">+cards: Card[]</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Deck">+drawPile: Card[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Deck">+hand: Card[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Deck">+discardPile: Card[]</text>
+
+</g>
+</g>
+<g transform="translate(1487, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Deck">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Deck">
+<text x="0.0" y="13.5" stroke="none" data-name="Deck">+getCards(): Card[]</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Deck">+getDrawPile(): Card[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Deck">+getHand(): Card[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Deck">+getDiscardPile(): Card[]</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Deck">+initialLoadDrawPile(): void</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Deck">+refreshDrawPile(): void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Deck">+draw(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="EmptyDeck">
+<g fill="#eee8d5" stroke="#33322E" data-name="EmptyDeck">
+<rect x="1519.0" y="392.0" height="70.0" width="168.0" data-name="EmptyDeck"></rect>
+<path d="M1519.0 423.0 L1687.0 423.0" fill="none" data-name="EmptyDeck"></path>
+<path d="M1519.0 431.0 L1687.0 431.0" fill="none" data-name="EmptyDeck"></path>
+</g>
+<g transform="translate(1519, 392)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EmptyDeck">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EmptyDeck">
+<a id=".EmptyDeck" xlink:href=""><text x="76.0" y="13.5" stroke="none" text-anchor="middle" data-name="EmptyDeck">EmptyDeck</text></a>
+
+</g>
+</g>
+<g transform="translate(1519, 423)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EmptyDeck">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EmptyDeck">
+
+</g>
+</g>
+<g transform="translate(1519, 431)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EmptyDeck">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EmptyDeck">
+<text x="0.0" y="13.5" stroke="none" data-name="EmptyDeck">+getCards(): Card[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="Card">
+<g fill="#eee8d5" stroke="#33322E" data-name="Card">
+<rect x="1758.0" y="60.0" height="138.0" width="167.0" data-name="Card"></rect>
+<path d="M1758.0 91.0 L1925.0 91.0" fill="none" data-name="Card"></path>
+<path d="M1758.0 167.0 L1925.0 167.0" fill="none" data-name="Card"></path>
+</g>
+<g transform="translate(1758, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Card">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Card">
+<a id=".Card" xlink:href=""><text x="75.5" y="13.5" stroke="none" text-anchor="middle" data-name="Card">Card</text></a>
+
+</g>
+</g>
+<g transform="translate(1758, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Card">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Card">
+<text x="0.0" y="13.5" stroke="none" data-name="Card">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Card">+description: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Card">+mana: number</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Card">+type: string</text>
+
+</g>
+</g>
+<g transform="translate(1758, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Card">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Card">
+<text x="0.0" y="13.5" stroke="none" data-name="Card">+play(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="AttackCard">
+<g fill="#eee8d5" stroke="#33322E" data-name="AttackCard">
+<rect x="1762.0" y="373.0" height="108.0" width="160.0" data-name="AttackCard"></rect>
+<path d="M1762.0 404.0 L1922.0 404.0" fill="none" data-name="AttackCard"></path>
+<path d="M1762.0 450.0 L1922.0 450.0" fill="none" data-name="AttackCard"></path>
+</g>
+<g transform="translate(1762, 373)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AttackCard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AttackCard">
+<a id=".AttackCard" xlink:href=""><text x="72.0" y="13.5" stroke="none" text-anchor="middle" data-name="AttackCard">AttackCard</text></a>
+
+</g>
+</g>
+<g transform="translate(1762, 404)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AttackCard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AttackCard">
+<text x="0.0" y="13.5" stroke="none" data-name="AttackCard">+damage: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AttackCard">+subtype: string</text>
+
+</g>
+</g>
+<g transform="translate(1762, 450)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AttackCard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AttackCard">
+<text x="0.0" y="13.5" stroke="none" data-name="AttackCard">+play(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="Intension">
+<g fill="#eee8d5" stroke="#33322E" data-name="Intension">
+<rect x="1965.0" y="79.0" height="100.0" width="201.0" data-name="Intension"></rect>
+<path d="M1965.0 110.0 L2166.0 110.0" fill="none" data-name="Intension"></path>
+<path d="M1965.0 171.0 L2166.0 171.0" fill="none" data-name="Intension"></path>
+</g>
+<g transform="translate(1965, 79)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Intension">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Intension">
+<a id=".Intension" xlink:href=""><text x="92.5" y="13.5" stroke="none" text-anchor="middle" data-name="Intension">Intension</text></a>
+
+</g>
+</g>
+<g transform="translate(1965, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Intension">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Intension">
+<text x="0.0" y="13.5" stroke="none" data-name="Intension">+type: IntensionType</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Intension">+baseDamage: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Intension">+count: number</text>
+
+</g>
+</g>
+<g transform="translate(1965, 171)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Intension">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Intension">
+
+</g>
+</g>
+</g>
+<g data-name="Moveset">
+<g fill="#eee8d5" stroke="#33322E" data-name="Moveset">
+<rect x="2905.0" y="60.0" height="138.0" width="208.0" data-name="Moveset"></rect>
+<path d="M2905.0 91.0 L3113.0 91.0" fill="none" data-name="Moveset"></path>
+<path d="M2905.0 152.0 L3113.0 152.0" fill="none" data-name="Moveset"></path>
+</g>
+<g transform="translate(2905, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Moveset">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Moveset">
+<a id=".Moveset" xlink:href=""><text x="96.0" y="13.5" stroke="none" text-anchor="middle" data-name="Moveset">Moveset</text></a>
+
+</g>
+</g>
+<g transform="translate(2905, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Moveset">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Moveset">
+<text x="0.0" y="13.5" stroke="none" data-name="Moveset">+moves: Intension[]</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Moveset">+currentMove: Intension</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Moveset">+parent: Enemy</text>
+
+</g>
+</g>
+<g transform="translate(2905, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Moveset">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Moveset">
+<text x="0.0" y="13.5" stroke="none" data-name="Moveset">+executeMove(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Moveset">+getNextMove(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="GoblinMoveset">
+<g fill="#eee8d5" stroke="#33322E" data-name="GoblinMoveset">
+<rect x="2942.0" y="404.0" height="47.0" width="134.0" data-name="GoblinMoveset"></rect>
+<path d="M2942.0 435.0 L3076.0 435.0" fill="none" data-name="GoblinMoveset"></path>
+<path d="M2942.0 443.0 L3076.0 443.0" fill="none" data-name="GoblinMoveset"></path>
+</g>
+<g transform="translate(2942, 404)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GoblinMoveset">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GoblinMoveset">
+<a id=".GoblinMoveset" xlink:href=""><text x="59.0" y="13.5" stroke="none" text-anchor="middle" data-name="GoblinMoveset">GoblinMoveset</text></a>
+
+</g>
+</g>
+<g transform="translate(2942, 435)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GoblinMoveset">
+<g transform="translate(8, 8)" fill="#33322E" data-name="GoblinMoveset">
+
+</g>
+</g>
+<g transform="translate(2942, 443)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GoblinMoveset">
+<g transform="translate(8, 8)" fill="#33322E" data-name="GoblinMoveset">
+
+</g>
+</g>
+</g>
+<g data-name="Enemy">
+<g fill="#eee8d5" stroke="#33322E" data-name="Enemy">
+<rect x="2476.0" y="298.0" height="258.0" width="217.0" data-name="Enemy"></rect>
+<path d="M2476.0 329.0 L2693.0 329.0" fill="none" data-name="Enemy"></path>
+<path d="M2476.0 420.0 L2693.0 420.0" fill="none" data-name="Enemy"></path>
+</g>
+<g transform="translate(2476, 298)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Enemy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Enemy">
+<a id=".Enemy" xlink:href=""><text x="100.5" y="13.5" stroke="none" text-anchor="middle" data-name="Enemy">Enemy</text></a>
+
+</g>
+</g>
+<g transform="translate(2476, 329)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Enemy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Enemy">
+<text x="0.0" y="13.5" stroke="none" data-name="Enemy">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Enemy">+health: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Enemy">+maxHealth: number</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Enemy">+armor: number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Enemy">+moveset: Moveset</text>
+
+</g>
+</g>
+<g transform="translate(2476, 420)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Enemy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Enemy">
+<text x="0.0" y="13.5" stroke="none" data-name="Enemy">+getName(): string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Enemy">+getHealth(): number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Enemy">+getMaxHealth(): number</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Enemy">+setHealth(): void</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Enemy">+changeHealth(): void</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Enemy">+setMaxHealth(): void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Enemy">+getArmor(): number</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Enemy">+makeMove(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="EnemyGoblin">
+<g fill="#eee8d5" stroke="#33322E" data-name="EnemyGoblin">
+<rect x="2524.0" y="687.0" height="47.0" width="121.0" data-name="EnemyGoblin"></rect>
+<path d="M2524.0 718.0 L2645.0 718.0" fill="none" data-name="EnemyGoblin"></path>
+<path d="M2524.0 726.0 L2645.0 726.0" fill="none" data-name="EnemyGoblin"></path>
+</g>
+<g transform="translate(2524, 687)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EnemyGoblin">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EnemyGoblin">
+<a id=".EnemyGoblin" xlink:href=""><text x="52.5" y="13.5" stroke="none" text-anchor="middle" data-name="EnemyGoblin">EnemyGoblin</text></a>
+
+</g>
+</g>
+<g transform="translate(2524, 718)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyGoblin">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EnemyGoblin">
+
+</g>
+</g>
+<g transform="translate(2524, 726)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyGoblin">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EnemyGoblin">
+
+</g>
+</g>
+</g>
+<g data-name="Room">
+<g fill="#eee8d5" stroke="#33322E" data-name="Room">
+<rect x="3956.0" y="328.0" height="198.0" width="264.0" data-name="Room"></rect>
+<path d="M3956.0 359.0 L4220.0 359.0" fill="none" data-name="Room"></path>
+<path d="M3956.0 420.0 L4220.0 420.0" fill="none" data-name="Room"></path>
+</g>
+<g transform="translate(3956, 328)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Room">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Room">
+<a id=".Room" xlink:href=""><text x="124.0" y="13.5" stroke="none" text-anchor="middle" data-name="Room">Room</text></a>
+
+</g>
+</g>
+<g transform="translate(3956, 359)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Room">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Room">
+<text x="0.0" y="13.5" stroke="none" data-name="Room">+_id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Room">+enemies: Enemy[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Room">+rewards: Reward[]</text>
+
+</g>
+</g>
+<g transform="translate(3956, 420)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Room">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Room">
+<text x="0.0" y="13.5" stroke="none" data-name="Room">+attachEnemies(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Room">+attachRewards(): void</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Room">+getEnemies(): Enemy[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Room">+getRewards(): Reward[]</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Room">+getCanLeaveRoom(): boolean</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Room">+static isEqual(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="TreasureRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="TreasureRoom">
+<rect x="2927.0" y="641.0" height="138.0" width="331.0" data-name="TreasureRoom"></rect>
+<path d="M2927.0 672.0 L3258.0 672.0" fill="none" data-name="TreasureRoom"></path>
+<path d="M2927.0 703.0 L3258.0 703.0" fill="none" data-name="TreasureRoom"></path>
+</g>
+<g transform="translate(2927, 641)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TreasureRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TreasureRoom">
+<a id=".TreasureRoom" xlink:href=""><text x="157.5" y="13.5" stroke="none" text-anchor="middle" data-name="TreasureRoom">TreasureRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(2927, 672)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TreasureRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TreasureRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="TreasureRoom">+isTreasureChestOpened: boolean</text>
+
+</g>
+</g>
+<g transform="translate(2927, 703)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TreasureRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TreasureRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="TreasureRoom">+getShowTreasureChest(): boolean</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TreasureRoom">+getIsTreasureChestOpened(): boolean</text>
+<text x="0.0" y="43.5" stroke="none" data-name="TreasureRoom">+openTreasureChest(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="TreasureRoom">+getCanLeaveRoom(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="EventRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="EventRoom">
+<rect x="3298.0" y="687.0" height="47.0" width="107.0" data-name="EventRoom"></rect>
+<path d="M3298.0 718.0 L3405.0 718.0" fill="none" data-name="EventRoom"></path>
+<path d="M3298.0 726.0 L3405.0 726.0" fill="none" data-name="EventRoom"></path>
+</g>
+<g transform="translate(3298, 687)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EventRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EventRoom">
+<a id=".EventRoom" xlink:href=""><text x="45.5" y="13.5" stroke="none" text-anchor="middle" data-name="EventRoom">EventRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(3298, 718)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EventRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EventRoom">
+
+</g>
+</g>
+<g transform="translate(3298, 726)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EventRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EventRoom">
+
+</g>
+</g>
+</g>
+<g data-name="RestRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="RestRoom">
+<rect x="3445.0" y="687.0" height="47.0" width="98.0" data-name="RestRoom"></rect>
+<path d="M3445.0 718.0 L3543.0 718.0" fill="none" data-name="RestRoom"></path>
+<path d="M3445.0 726.0 L3543.0 726.0" fill="none" data-name="RestRoom"></path>
+</g>
+<g transform="translate(3445, 687)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="RestRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RestRoom">
+<a id=".RestRoom" xlink:href=""><text x="41.0" y="13.5" stroke="none" text-anchor="middle" data-name="RestRoom">RestRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(3445, 718)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RestRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RestRoom">
+
+</g>
+</g>
+<g transform="translate(3445, 726)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RestRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RestRoom">
+
+</g>
+</g>
+</g>
+<g data-name="TradeRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="TradeRoom">
+<rect x="4034.0" y="687.0" height="47.0" width="108.0" data-name="TradeRoom"></rect>
+<path d="M4034.0 718.0 L4142.0 718.0" fill="none" data-name="TradeRoom"></path>
+<path d="M4034.0 726.0 L4142.0 726.0" fill="none" data-name="TradeRoom"></path>
+</g>
+<g transform="translate(4034, 687)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TradeRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TradeRoom">
+<a id=".TradeRoom" xlink:href=""><text x="46.0" y="13.5" stroke="none" text-anchor="middle" data-name="TradeRoom">TradeRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(4034, 718)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TradeRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TradeRoom">
+
+</g>
+</g>
+<g transform="translate(4034, 726)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TradeRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TradeRoom">
+
+</g>
+</g>
+</g>
+<g data-name="EnemyRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="EnemyRoom">
+<rect x="4182.0" y="641.0" height="138.0" width="331.0" data-name="EnemyRoom"></rect>
+<path d="M4182.0 672.0 L4513.0 672.0" fill="none" data-name="EnemyRoom"></path>
+<path d="M4182.0 703.0 L4513.0 703.0" fill="none" data-name="EnemyRoom"></path>
+</g>
+<g transform="translate(4182, 641)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EnemyRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EnemyRoom">
+<a id=".EnemyRoom" xlink:href=""><text x="157.5" y="13.5" stroke="none" text-anchor="middle" data-name="EnemyRoom">EnemyRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(4182, 672)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EnemyRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="EnemyRoom">+isTreasureChestOpened: boolean</text>
+
+</g>
+</g>
+<g transform="translate(4182, 703)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EnemyRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="EnemyRoom">+getShowTreasureChest(): boolean</text>
+<text x="0.0" y="28.5" stroke="none" data-name="EnemyRoom">+getIsTreasureChestOpened(): boolean</text>
+<text x="0.0" y="43.5" stroke="none" data-name="EnemyRoom">+openTreasureChest(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="EnemyRoom">+getCanLeaveRoom(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="MiniBossRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="MiniBossRoom">
+<rect x="4553.0" y="641.0" height="138.0" width="331.0" data-name="MiniBossRoom"></rect>
+<path d="M4553.0 672.0 L4884.0 672.0" fill="none" data-name="MiniBossRoom"></path>
+<path d="M4553.0 703.0 L4884.0 703.0" fill="none" data-name="MiniBossRoom"></path>
+</g>
+<g transform="translate(4553, 641)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="MiniBossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="MiniBossRoom">
+<a id=".MiniBossRoom" xlink:href=""><text x="157.5" y="13.5" stroke="none" text-anchor="middle" data-name="MiniBossRoom">MiniBossRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(4553, 672)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MiniBossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MiniBossRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="MiniBossRoom">+isTreasureChestOpened: boolean</text>
+
+</g>
+</g>
+<g transform="translate(4553, 703)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MiniBossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MiniBossRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="MiniBossRoom">+getShowTreasureChest(): boolean</text>
+<text x="0.0" y="28.5" stroke="none" data-name="MiniBossRoom">+getIsTreasureChestOpened(): boolean</text>
+<text x="0.0" y="43.5" stroke="none" data-name="MiniBossRoom">+openTreasureChest(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="MiniBossRoom">+getCanLeaveRoom(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="BossRoom">
+<g fill="#eee8d5" stroke="#33322E" data-name="BossRoom">
+<rect x="4924.0" y="641.0" height="138.0" width="331.0" data-name="BossRoom"></rect>
+<path d="M4924.0 672.0 L5255.0 672.0" fill="none" data-name="BossRoom"></path>
+<path d="M4924.0 703.0 L5255.0 703.0" fill="none" data-name="BossRoom"></path>
+</g>
+<g transform="translate(4924, 641)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="BossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BossRoom">
+<a id=".BossRoom" xlink:href=""><text x="157.5" y="13.5" stroke="none" text-anchor="middle" data-name="BossRoom">BossRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(4924, 672)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BossRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="BossRoom">+isTreasureChestOpened: boolean</text>
+
+</g>
+</g>
+<g transform="translate(4924, 703)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BossRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BossRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="BossRoom">+getShowTreasureChest(): boolean</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BossRoom">+getIsTreasureChestOpened(): boolean</text>
+<text x="0.0" y="43.5" stroke="none" data-name="BossRoom">+openTreasureChest(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="BossRoom">+getCanLeaveRoom(): boolean</text>
+
+</g>
+</g>
+</g>
+<g data-name="Player">
+<g fill="#eee8d5" stroke="#33322E" data-name="Player">
+<rect x="2586.0" y="60.0" height="138.0" width="279.0" data-name="Player"></rect>
+<path d="M2586.0 91.0 L2865.0 91.0" fill="none" data-name="Player"></path>
+<path d="M2586.0 137.0 L2865.0 137.0" fill="none" data-name="Player"></path>
+</g>
+<g transform="translate(2586, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Player">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Player">
+<a id=".Player" xlink:href=""><text x="131.5" y="13.5" stroke="none" text-anchor="middle" data-name="Player">Player</text></a>
+
+</g>
+</g>
+<g transform="translate(2586, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Player">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Player">
+<text x="0.0" y="13.5" stroke="none" data-name="Player">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Player">+character: PlayerCharacter</text>
+
+</g>
+</g>
+<g transform="translate(2586, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Player">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Player">
+<text x="0.0" y="13.5" stroke="none" data-name="Player">+getName(): string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Player">+selectCharacter(): void</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Player">+getCharacter(): PlayerCharacter</text>
+
+</g>
+</g>
+</g>
+<g data-name="Character">
+<g fill="lightblue" stroke="#33322E" data-name="Character">
+<rect x="2206.0" y="49.0" height="160.0" width="340.0" data-name="Character"></rect>
+<path d="M2206.0 80.0 L2546.0 80.0" fill="none" data-name="Character"></path>
+<path d="M2206.0 201.0 L2546.0 201.0" fill="none" data-name="Character"></path>
+</g>
+<g transform="translate(2206, 49)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Character">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Character">
+<a id=".Character" xlink:href=""><text x="162.0" y="13.5" stroke="none" text-anchor="middle" data-name="Character">Character</text></a>
+
+</g>
+</g>
+<g transform="translate(2206, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Character">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Character">
+<text x="0.0" y="13.5" stroke="none" data-name="Character">+health: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Character">+maxHealth: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Character">+getHealth: () =&gt; number</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Character">+getMaxHealth: () =&gt; number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Character">+setHealth: (health: number) =&gt; void</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Character">+changeHealth: (health: number) =&gt; void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Character">+setMaxHealth: (health: number) =&gt; void</text>
+
+</g>
+</g>
+<g transform="translate(2206, 201)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Character">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Character">
+
+</g>
+</g>
+</g>
+<g data-name="ISelectableTarget">
+<g fill="lightblue" stroke="#33322E" data-name="ISelectableTarget">
+<rect x="3153.0" y="94.0" height="70.0" width="155.0" data-name="ISelectableTarget"></rect>
+<path d="M3153.0 125.0 L3308.0 125.0" fill="none" data-name="ISelectableTarget"></path>
+<path d="M3153.0 156.0 L3308.0 156.0" fill="none" data-name="ISelectableTarget"></path>
+</g>
+<g transform="translate(3153, 94)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ISelectableTarget">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ISelectableTarget">
+<a id=".ISelectableTarget" xlink:href=""><text x="69.5" y="13.5" stroke="none" text-anchor="middle" data-name="ISelectableTarget">ISelectableTarget</text></a>
+
+</g>
+</g>
+<g transform="translate(3153, 125)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ISelectableTarget">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ISelectableTarget">
+<text x="0.0" y="13.5" stroke="none" data-name="ISelectableTarget">+target: Enemy</text>
+
+</g>
+</g>
+<g transform="translate(3153, 156)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ISelectableTarget">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ISelectableTarget">
+
+</g>
+</g>
+</g>
+<g data-name="IRandomTarget">
+<g fill="lightblue" stroke="#33322E" data-name="IRandomTarget">
+<rect x="3348.0" y="106.0" height="47.0" width="138.0" data-name="IRandomTarget"></rect>
+<path d="M3348.0 137.0 L3486.0 137.0" fill="none" data-name="IRandomTarget"></path>
+<path d="M3348.0 145.0 L3486.0 145.0" fill="none" data-name="IRandomTarget"></path>
+</g>
+<g transform="translate(3348, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRandomTarget">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IRandomTarget">
+<a id=".IRandomTarget" xlink:href=""><text x="61.0" y="13.5" stroke="none" text-anchor="middle" data-name="IRandomTarget">IRandomTarget</text></a>
+
+</g>
+</g>
+<g transform="translate(3348, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRandomTarget">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IRandomTarget">
+
+</g>
+</g>
+<g transform="translate(3348, 145)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRandomTarget">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IRandomTarget">
+
+</g>
+</g>
+</g>
+<g data-name="IAreaDamage">
+<g fill="lightblue" stroke="#33322E" data-name="IAreaDamage">
+<rect x="3526.0" y="94.0" height="70.0" width="136.0" data-name="IAreaDamage"></rect>
+<path d="M3526.0 125.0 L3662.0 125.0" fill="none" data-name="IAreaDamage"></path>
+<path d="M3526.0 156.0 L3662.0 156.0" fill="none" data-name="IAreaDamage"></path>
+</g>
+<g transform="translate(3526, 94)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAreaDamage">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IAreaDamage">
+<a id=".IAreaDamage" xlink:href=""><text x="60.0" y="13.5" stroke="none" text-anchor="middle" data-name="IAreaDamage">IAreaDamage</text></a>
+
+</g>
+</g>
+<g transform="translate(3526, 125)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAreaDamage">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IAreaDamage">
+<text x="0.0" y="13.5" stroke="none" data-name="IAreaDamage">+target: Enemy</text>
+
+</g>
+</g>
+<g transform="translate(3526, 156)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAreaDamage">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IAreaDamage">
+
+</g>
+</g>
+</g>
+<g data-name="EnemyContructorProps">
+<g fill="lightblue" stroke="#33322E" data-name="EnemyContructorProps">
+<rect x="3702.0" y="72.0" height="115.0" width="199.0" data-name="EnemyContructorProps"></rect>
+<path d="M3702.0 103.0 L3901.0 103.0" fill="none" data-name="EnemyContructorProps"></path>
+<path d="M3702.0 179.0 L3901.0 179.0" fill="none" data-name="EnemyContructorProps"></path>
+</g>
+<g transform="translate(3702, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyContructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EnemyContructorProps">
+<a id=".EnemyContructorProps" xlink:href=""><text x="91.5" y="13.5" stroke="none" text-anchor="middle" data-name="EnemyContructorProps">EnemyContructorProps</text></a>
+
+</g>
+</g>
+<g transform="translate(3702, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyContructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EnemyContructorProps">
+<text x="0.0" y="13.5" stroke="none" data-name="EnemyContructorProps">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="EnemyContructorProps">+health: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="EnemyContructorProps">+maxHealth: number</text>
+<text x="0.0" y="58.5" stroke="none" data-name="EnemyContructorProps">+armor: number</text>
+
+</g>
+</g>
+<g transform="translate(3702, 179)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnemyContructorProps">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EnemyContructorProps">
+
+</g>
+</g>
+</g>
+<g data-name="IRoom">
+<g fill="lightblue" stroke="#33322E" data-name="IRoom">
+<rect x="3941.0" y="72.0" height="115.0" width="294.0" data-name="IRoom"></rect>
+<path d="M3941.0 103.0 L4235.0 103.0" fill="none" data-name="IRoom"></path>
+<path d="M3941.0 179.0 L4235.0 179.0" fill="none" data-name="IRoom"></path>
+</g>
+<g transform="translate(3941, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IRoom">
+<a id=".IRoom" xlink:href=""><text x="139.0" y="13.5" stroke="none" text-anchor="middle" data-name="IRoom">IRoom</text></a>
+
+</g>
+</g>
+<g transform="translate(3941, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRoom">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IRoom">
+<text x="0.0" y="13.5" stroke="none" data-name="IRoom">+_id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IRoom">+enemies: Enemy[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IRoom">+rewards: Reward[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IRoom">+getCanLeaveRoom: () =&gt; boolean</text>
+
+</g>
+</g>
+<g transform="translate(3941, 179)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IRoom">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IRoom">
+
+</g>
+</g>
+</g>
+<g data-name="RoomConstructorProps">
+<g fill="lightgray" stroke="#33322E" data-name="RoomConstructorProps">
+<rect x="4275.0" y="79.0" height="100.0" width="200.0" data-name="RoomConstructorProps"></rect>
+<path d="M4275.0 110.0 L4475.0 110.0" fill="none" data-name="RoomConstructorProps"></path>
+<path d="M4275.0 171.0 L4475.0 171.0" fill="none" data-name="RoomConstructorProps"></path>
+</g>
+<g transform="translate(4275, 79)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RoomConstructorProps">
+<a id=".RoomConstructorProps" xlink:href=""><text x="92.0" y="13.5" stroke="none" text-anchor="middle" data-name="RoomConstructorProps">RoomConstructorProps</text></a>
+
+</g>
+</g>
+<g transform="translate(4275, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RoomConstructorProps">
+<text x="0.0" y="13.5" stroke="none" data-name="RoomConstructorProps">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="RoomConstructorProps">+enemies: Enemy[]</text>
+<text x="0.0" y="43.5" stroke="none" data-name="RoomConstructorProps">+rewards: Reward[]</text>
+
+</g>
+</g>
+<g transform="translate(4275, 171)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RoomConstructorProps">
+
+</g>
+</g>
+</g>
+<g data-name="BossRoomConstructorProps">
+<g fill="lightgray" stroke="#33322E" data-name="BossRoomConstructorProps">
+<rect x="4515.0" y="87.0" height="85.0" width="239.0" data-name="BossRoomConstructorProps"></rect>
+<path d="M4515.0 118.0 L4754.0 118.0" fill="none" data-name="BossRoomConstructorProps"></path>
+<path d="M4515.0 164.0 L4754.0 164.0" fill="none" data-name="BossRoomConstructorProps"></path>
+</g>
+<g transform="translate(4515, 87)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BossRoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BossRoomConstructorProps">
+<a id=".BossRoomConstructorProps" xlink:href=""><text x="111.5" y="13.5" stroke="none" text-anchor="middle" data-name="BossRoomConstructorProps">BossRoomConstructorProps</text></a>
+
+</g>
+</g>
+<g transform="translate(4515, 118)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BossRoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BossRoomConstructorProps">
+<text x="0.0" y="13.5" stroke="none" data-name="BossRoomConstructorProps">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BossRoomConstructorProps">+level: number</text>
+
+</g>
+</g>
+<g transform="translate(4515, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BossRoomConstructorProps">
+<g transform="translate(8, 8)" fill="#33322E" data-name="BossRoomConstructorProps">
+
+</g>
+</g>
+</g>
+<g data-name="CardType">
+<g fill="lightgreen" stroke="#33322E" data-name="CardType">
+<rect x="4794.0" y="83.0" height="92.0" width="93.0" data-name="CardType"></rect>
+<path d="M4794.0 114.0 L4887.0 114.0" fill="none" data-name="CardType"></path>
+</g>
+<g transform="translate(4794, 83)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CardType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CardType">
+<a id=".CardType" xlink:href=""><text x="38.5" y="13.5" stroke="none" text-anchor="middle" data-name="CardType">CardType</text></a>
+
+</g>
+</g>
+<g transform="translate(4794, 114)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CardType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CardType">
+<text x="0.0" y="13.5" stroke="none" data-name="CardType">Attack</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CardType">Skill</text>
+<text x="0.0" y="43.5" stroke="none" data-name="CardType">Power</text>
+
+</g>
+</g>
+</g>
+<g data-name="AttackCardType">
+<g fill="lightgreen" stroke="#33322E" data-name="AttackCardType">
+<rect x="4927.0" y="83.0" height="92.0" width="142.0" data-name="AttackCardType"></rect>
+<path d="M4927.0 114.0 L5069.0 114.0" fill="none" data-name="AttackCardType"></path>
+</g>
+<g transform="translate(4927, 83)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AttackCardType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AttackCardType">
+<a id=".AttackCardType" xlink:href=""><text x="63.0" y="13.5" stroke="none" text-anchor="middle" data-name="AttackCardType">AttackCardType</text></a>
+
+</g>
+</g>
+<g transform="translate(4927, 114)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AttackCardType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AttackCardType">
+<text x="0.0" y="13.5" stroke="none" data-name="AttackCardType">SingleTarget</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AttackCardType">AllTargets</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AttackCardType">RandomTarget</text>
+
+</g>
+</g>
+</g>
+<g data-name="IntensionType">
+<g fill="lightgreen" stroke="#33322E" data-name="IntensionType">
+<rect x="5109.0" y="31.0" height="197.0" width="149.0" data-name="IntensionType"></rect>
+<path d="M5109.0 62.0 L5258.0 62.0" fill="none" data-name="IntensionType"></path>
+</g>
+<g transform="translate(5109, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IntensionType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IntensionType">
+<a id=".IntensionType" xlink:href=""><text x="66.5" y="13.5" stroke="none" text-anchor="middle" data-name="IntensionType">IntensionType</text></a>
+
+</g>
+</g>
+<g transform="translate(5109, 62)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IntensionType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IntensionType">
+<text x="0.0" y="13.5" stroke="none" data-name="IntensionType">Offense</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IntensionType">Deffence</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IntensionType">Buff</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IntensionType">Debuff</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IntensionType">OffenseBuff</text>
+<text x="0.0" y="88.5" stroke="none" data-name="IntensionType">DeffenceBuff</text>
+<text x="0.0" y="103.5" stroke="none" data-name="IntensionType">OffenseDebuff</text>
+<text x="0.0" y="118.5" stroke="none" data-name="IntensionType">DeffenceDebuff</text>
+<text x="0.0" y="133.5" stroke="none" data-name="IntensionType">DeffenceOffense</text>
+<text x="0.0" y="148.5" stroke="none" data-name="IntensionType">Special</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

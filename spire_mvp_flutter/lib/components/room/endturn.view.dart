@@ -35,13 +35,13 @@ class EndturnViewView extends State<EndturnView> {
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(color: Colors.white, width: 2)
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'End Turn',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: getFontSize(22),
+                    fontSize: 22,
                     fontWeight: FontWeight.w600),
               ),
             ),

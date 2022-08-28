@@ -77,8 +77,7 @@ class HighlightDescriptionText extends HighlightText {
           highlightStyle: TextStyle(
               color: Colors.yellow,
               fontWeight: FontWeight.bold,
-              fontSize: getFontSize(fontSize)),
-          nonHighlightStyle:
-              TextStyle(color: Colors.white, fontSize: getFontSize(16)),
+              fontSize: fontSize),
+          nonHighlightStyle: const TextStyle(color: Colors.white, fontSize: 16),
         );
 }

@@ -54,7 +54,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
             //     textAlign: TextAlign.left,
             //     style: TextStyle(
             //         color: Colors.white,
-            //         fontSize: getFontSize(22),
+            //         fontSize: 22,
             //         fontWeight: FontWeight.w600),
             //   ),
             // ),
@@ -72,9 +72,9 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                       getIntensionType(widget.enemy.moveset.currentMove ??
                           Intension(intensionType: IntensionType.special)),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
-                          fontSize: getFontSize(16),
+                          fontSize: 16,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w600),
                     ),
@@ -130,9 +130,9 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                         child: Text(
                           '$hp / $maxhp',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
-                              fontSize: getFontSize(16),
+                              fontSize: 14,
                               fontWeight: FontWeight.w600),
                         ),
                       ),

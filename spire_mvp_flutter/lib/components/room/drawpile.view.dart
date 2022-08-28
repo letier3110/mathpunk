@@ -39,13 +39,13 @@ class DrawPileViewView extends State<DrawPileView> {
             width: 80,
             height: 80,
             color: Colors.black,
-            child: Center(
+            child: const Center(
               child: Text(
                 'Draw',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: getFontSize(22),
+                    fontSize: 22,
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -60,9 +60,9 @@ class DrawPileViewView extends State<DrawPileView> {
                   child: Text(
                     drawPileLength.toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
-                        fontSize: getFontSize(22),
+                        fontSize: 22,
                         fontWeight: FontWeight.w600),
                   ),
                 ),

@@ -42,9 +42,9 @@ class CharacterItemsView extends State<CharacterItems> {
                         Text(
                           e.name,
                           textAlign: TextAlign.left,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.pinkAccent,
-                              fontSize: getFontSize(12),
+                              fontSize: 12.0,
                               fontWeight: FontWeight.w600),
                         ),
                       ],

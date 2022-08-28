@@ -39,13 +39,13 @@ class DiscardPileViewView extends State<DiscardPileView> {
             width: 100,
             height: 80,
             color: Colors.black,
-            child: Center(
+            child: const Center(
               child: Text(
                 'Discard',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: getFontSize(22),
+                    fontSize: 22,
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -60,9 +60,9 @@ class DiscardPileViewView extends State<DiscardPileView> {
                   child: Text(
                     discardPileLength.toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
-                        fontSize: getFontSize(22),
+                        fontSize: 22,
                         fontWeight: FontWeight.w600),
                   ),
                 ),

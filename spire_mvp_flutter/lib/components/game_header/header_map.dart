@@ -34,16 +34,18 @@ class HeaderMapView extends State<HeaderMap> {
           width: 80,
           padding: const EdgeInsets.all(8),
           color: Colors.black,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              'Map',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: getFontSize(22),
-                  fontWeight: FontWeight.w600),
-            ),
-          ]),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'Map',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600),
+                ),
+              ]),
         ),
       ),
     );

@@ -166,8 +166,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                 widget.card.name,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: getFontSize(
-                                        22 * (widget.size! / defaultWidth))),
+                                    fontSize:
+                                        22 * (widget.size! / defaultWidth)),
                               ),
                             ),
                             SizedBox(

@@ -37,13 +37,13 @@ class CharacterDeckView extends State<CharacterDeck> {
             padding: const EdgeInsets.all(8),
             width: 80,
             color: Colors.black,
-            child: Center(
+            child: const Center(
               child: Text(
                 'Deck',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: getFontSize(22),
+                    fontSize: 22,
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -59,9 +59,9 @@ class CharacterDeckView extends State<CharacterDeck> {
                 child: Text(
                   deckLength.toString(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
-                      fontSize: getFontSize(22),
+                      fontSize: 22,
                       fontWeight: FontWeight.w600),
                 ),
               ),

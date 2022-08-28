@@ -39,7 +39,7 @@ class BloodForBloodCard extends PlayableCard {
         children: [
           HighlightDescriptionText(
             text: 'Costs 1 less mana for each time you lose HP this combat.',
-            fontSize: 22,
+            fontSize: 14,
           ),
           RichText(
               text: TextSpan(children: [
@@ -51,7 +51,8 @@ class BloodForBloodCard extends PlayableCard {
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
-                            : Colors.white)),
+                            : Colors.white,
+                    fontSize: 14)),
             const TextSpan(text: ' damage.')
           ]))
         ],

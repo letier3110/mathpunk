@@ -27,13 +27,13 @@ class HeaderPauseView extends State<HeaderPause> {
           padding: const EdgeInsets.all(8),
           width: 80,
           color: Colors.black,
-          child: Center(
+          child: const Center(
             child: Text(
               'Pause',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: getFontSize(22),
+                  fontSize: 22.0,
                   fontWeight: FontWeight.w600),
             ),
           ),

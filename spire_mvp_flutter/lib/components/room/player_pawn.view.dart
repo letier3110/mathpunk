@@ -49,7 +49,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
             //     textAlign: TextAlign.left,
             //     style: TextStyle(
             //         color: Colors.white,
-            //         fontSize: getFontSize(22),
+            //         fontSize: 22,
             //         fontWeight: FontWeight.w600),
             //   ),
             // ),
@@ -122,9 +122,9 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                                 Text(
                                   '$block',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: getFontSize(16),
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -139,9 +139,9 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                         child: Text(
                           '$hp / $maxhp',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
-                              fontSize: getFontSize(16),
+                              fontSize: 14,
                               fontWeight: FontWeight.w600),
                         ),
                       ),

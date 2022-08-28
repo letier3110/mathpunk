@@ -41,7 +41,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/bg3.png'), fit: BoxFit.fill),
+              image: AssetImage('assets/bg5.png'), fit: BoxFit.fill),
         ),
         child: Stack(children: [
           ...widget.room.enemies.map((enemy) {

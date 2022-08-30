@@ -13,6 +13,7 @@ class PlayableCard {
   late int mana;
   late CardType type;
   late TargetEnum targetType = TargetEnum.singleTarget;
+  String asset;
   bool exhausted = false;
   bool ethereal = false;
   int step = 1;
@@ -21,7 +22,8 @@ class PlayableCard {
   List<PlayableCard> selectedCards = [];
 
   PlayableCard(
-      {cardName = '',
+      {this.asset = 'assets/cards/anger.png',
+      cardName = '',
       cardDescription = '',
       cardMana = 0,
       cardType = CardType.skill,

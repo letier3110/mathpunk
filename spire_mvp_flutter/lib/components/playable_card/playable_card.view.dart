@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
 import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
+import 'package:spire_mvp_flutter/components/room/trader.view.dart';
 import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
 import 'package:spire_mvp_flutter/enums/target.enum.dart';
 import 'package:spire_mvp_flutter/utils/font.util.dart';
@@ -109,6 +110,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
     }
 
     double width = MediaQuery.of(context).size.width;
+    double cardWidth = widget.size ?? defaultWidth;
 
     return GestureDetector(
       onTap: onTapHandler,
@@ -116,14 +118,14 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         onEnter: onEnterHandler,
         onExit: onExitHandler,
         child: Container(
-          height: (widget.size ?? defaultWidth) + 8,
-          width: (widget.size ?? defaultWidth) + 8,
+          height: cardWidth + 8,
+          width: cardWidth + 8,
           margin: EdgeInsets.fromLTRB(
               4,
               4,
               4,
               gameState.selectingTargetCardId == cardId
-                  ? (widget.size ?? defaultWidth) * 1
+                  ? cardWidth * 1
                   : animation.value),
           child: Center(
             child: Stack(children: [
@@ -135,45 +137,63 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                 Center(
                   child: GlowEffect(
                       child: SizedBox(
-                    height: calcHeightByWidth(widget.size ?? defaultWidth),
-                    width: (widget.size ?? defaultWidth),
+                    height: calcHeightByWidth(cardWidth),
+                    width: cardWidth,
                   )),
                 ),
+              Center(
+                  child: Container(
+                padding: const EdgeInsets.all(8),
+                margin: EdgeInsets.fromLTRB(0, 0, 0, cardWidth / 2.5),
+                height: calcHeightByWidth(cardWidth / 2),
+                width: cardWidth,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(widget.card.asset),
+                      fit: BoxFit.fitWidth),
+                ),
+              )),
               Center(
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   // margin: const EdgeInsets.all(4),
-                  height: calcHeightByWidth(widget.size ?? defaultWidth),
-                  width: (widget.size ?? defaultWidth),
-                  decoration: BoxDecoration(
-                    color: widget.disabled ||
-                            widget.card.targetType == TargetEnum.unplayable
-                        ? Colors.grey
-                        : Colors.deepPurpleAccent,
-                    borderRadius: BorderRadius.circular(20),
+                  height: calcHeightByWidth(cardWidth),
+                  width: cardWidth,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/card_front_full.png'),
+                        fit: BoxFit.fill),
                   ),
+                  // decoration: BoxDecoration(
+                  //   color: widget.disabled ||
+                  //           widget.card.targetType == TargetEnum.unplayable
+                  //       ? Colors.grey
+                  //       : Colors.deepPurpleAccent,
+                  //   borderRadius: BorderRadius.circular(20),
+                  // ),
                   child: Stack(
                     children: [
                       SizedBox(
-                        height: calcHeightByWidth(widget.size ?? defaultWidth),
-                        width: (widget.size ?? defaultWidth),
+                        height: calcHeightByWidth(cardWidth),
+                        width: cardWidth,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+                              margin:
+                                  EdgeInsets.fromLTRB(0, cardWidth / 40, 0, 0),
                               child: Text(
                                 widget.card.name,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
-                                        22 * (widget.size! / defaultWidth)),
+                                        16 * (widget.size! / defaultWidth)),
                               ),
                             ),
-                            SizedBox(
-                              height: calcHeightByWidth(
-                                      widget.size ?? defaultWidth) *
-                                  0.75,
+                            Container(
+                              height: calcHeightByWidth(cardWidth) * 0.3,
+                              margin: EdgeInsets.fromLTRB(
+                                  width / 35, 0, width / 35, 0),
                               child: Column(
                                 children: [
                                   widget.card.getCardDescription(),
@@ -185,18 +205,19 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                       ),
                       if (widget.card.targetType != TargetEnum.unplayable)
                         Positioned(
-                          top: 0,
-                          left: 0,
+                          top: 8,
+                          left: cardWidth / 24,
                           child: Container(
-                            width: 24 * (widget.size! / defaultWidth),
+                            width: 24 * (cardWidth / defaultWidth),
                             height: 24 *
-                                (calcHeightByWidth(widget.size!) /
-                                    defaultHeight),
+                                (calcHeightByWidth(cardWidth) / defaultHeight),
                             // padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
+                                color: const Color(0xFFC99C66),
+                                borderRadius: BorderRadius.circular(
+                                    24 * (cardWidth / defaultWidth)),
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
                             child: Center(child: widget.card.getCardMana()),
                           ),
                         ),

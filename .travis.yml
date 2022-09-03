@@ -9,7 +9,7 @@ before_script:
 script:
   - cd ./spire_mvp_flutter 
   - ../flutter/bin/flutter build macos --release
-  - mv ./build/macos/Build/Products/Release.zip ./mathpunk.zip
+  - zip ./mathpunk.zip ./build/macos/Build/Products/Release
 cache:
   directories:
     - $HOME/.pub-cache

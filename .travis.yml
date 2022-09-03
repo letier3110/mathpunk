@@ -1,0 +1,15 @@
+os:
+  - macos
+sudo: false
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+script:
+  - cd ./spire_mvp_flutter 
+  - ../flutter/bin/flutter build macos --release
+  - zip ./build/macos/Build/Products/Release ./mathpunk.zip
+cache:
+  directories:
+    - $HOME/.pub-cache
+after_script:
+  chmod +x ./spire_mvp_flutter/deploy.sh && ./spire_mvp_flutter/deploy.sh

@@ -16,7 +16,7 @@ prepare_butler() {
 
 prepare_and_push() {
     echo "Push $3 build to itch.io..."
-    ./butler push $2 $1:$3
+    ./butler push $2 $1:$3 --userversion $4
 }
 
 download_if_not_exist() {
@@ -27,12 +27,13 @@ download_if_not_exist() {
 
 
 project="toxcik/mathpunk-card-game"
-artifact="mathpunk.zip"
+artifact="./spire_mvp_flutter/mathpunk.zip"
 platform="windows-linux-mac"
+version="0.0.1"
 
 prepare_butler
 
-prepare_and_push $project $artifact $platform
+prepare_and_push $project $artifact $platform $version
 
 echo "Done."
 exit 0

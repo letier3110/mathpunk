@@ -1,5 +1,7 @@
-os:
-  - macos
+jobs:
+  include:
+    - os: osx
+      osx_image: xcode13.4
 sudo: false
 before_script:
   - git clone https://github.com/flutter/flutter.git -b beta

@@ -33,6 +33,18 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
           margin: const EdgeInsets.all(4),
           child: Center(
             child: Stack(children: [
+              Center(
+                  child: Container(
+                padding: const EdgeInsets.all(8),
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 92),
+                height: 200,
+                width: 160,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(widget.card.asset),
+                      fit: BoxFit.fitWidth),
+                ),
+              )),
               Container(
                 margin: const EdgeInsets.all(4),
                 padding: const EdgeInsets.all(8),
@@ -53,21 +65,19 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                   child: Stack(
                     children: [
                       SizedBox(
-                        height: 400,
-                        width: 300,
+                        height: 300,
+                        width: 200,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                              child: Text(
-                                widget.card.name,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 22),
-                              ),
+                            Text(
+                              widget.card.name,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
                             ),
-                            SizedBox(
-                              height: 160,
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              height: 110,
                               child: Column(
                                 children: [widget.card.getCardDescription()],
                               ),
@@ -76,16 +86,17 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                         ),
                       ),
                       Positioned(
-                        top: 0,
-                        left: 0,
+                        top: 8,
+                        left: 190 / 24,
                         child: Container(
-                          width: 40,
-                          height: 40,
+                          width: 24,
+                          height: 24,
                           // padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                              color: const Color(0xFFC99C66),
+                              borderRadius: BorderRadius.circular(24),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
                           child: Center(child: widget.card.getCardMana()),
                         ),
                       ),

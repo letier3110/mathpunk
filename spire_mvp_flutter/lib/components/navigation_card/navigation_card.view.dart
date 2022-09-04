@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/components/navigation_card/navigation_card.interface.dart';
+import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 
 import '../../utils/font.util.dart';
 

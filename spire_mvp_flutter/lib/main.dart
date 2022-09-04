@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
-import 'package:spire_mvp_flutter/screens/character_select.screen.dart';
-import 'package:spire_mvp_flutter/screens/game.screen.dart';
-import 'package:spire_mvp_flutter/screens/main_loading.screen.dart';
-import 'package:spire_mvp_flutter/screens/mode_select.screen.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/screens/character_select.screen.dart';
+import 'package:mathpunk_cardgame/screens/game.screen.dart';
+import 'package:mathpunk_cardgame/screens/main_loading.screen.dart';
+import 'package:mathpunk_cardgame/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
 import './screens/main_menu.screen.dart';
@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
     if (defaultTargetPlatform == TargetPlatform.linux ||
         defaultTargetPlatform == TargetPlatform.macOS ||
         defaultTargetPlatform == TargetPlatform.windows) {
-      setWindowTitle("Mathpunk spire");
+      setWindowTitle("Mathpunk: card game");
     }
     return MaterialApp(
-      title: 'Mathpunk spire demo',
+      title: 'Mathpunk: card game',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -1,7 +1,7 @@
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
-import 'package:spire_mvp_flutter/storage/relic.storage.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
+import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
 import '../../deck.dart';
 import '../../relic/relic.dart';

@@ -1,16 +1,13 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/intension.dart';
-import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
-
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/enums/intension_type.enum.dart';
-import 'package:spire_mvp_flutter/utils/intension.util.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/intension.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
+import 'package:mathpunk_cardgame/utils/intension.util.dart';
 
 import 'dart:async';
 

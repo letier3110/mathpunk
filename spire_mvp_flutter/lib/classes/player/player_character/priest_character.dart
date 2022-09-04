@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
+import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
 
 import '../../deck.dart';
 import '../../relic/burning_blood.relic.dart';

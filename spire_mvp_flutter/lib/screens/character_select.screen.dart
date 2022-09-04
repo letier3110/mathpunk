@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/irrationalist_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/barbarian_character.dart';
-import 'package:spire_mvp_flutter/components/character_card.dart';
-import 'package:spire_mvp_flutter/components/menu_embark_button.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/character.util.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/enigma_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/irrationalist_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/priest_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/barbarian_character.dart';
+import 'package:mathpunk_cardgame/components/character_card.dart';
+import 'package:mathpunk_cardgame/components/menu_embark_button.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/utils/character.util.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';

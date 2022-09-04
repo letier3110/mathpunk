@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/components/highlight_text.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
 

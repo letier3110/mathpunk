@@ -1,5 +1,5 @@
 import 'dart:core';
-import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
+import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
 
 import 'card/playable_card.dart';
 

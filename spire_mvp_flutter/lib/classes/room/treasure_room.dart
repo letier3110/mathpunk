@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/interfaces/chest_room.interface.dart';
+import 'package:mathpunk_cardgame/interfaces/chest_room.interface.dart';
 
 import '../enemy/enemy.dart';
 import '../reward.dart';

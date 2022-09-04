@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class HeaderMap extends StatefulWidget {
   const HeaderMap({Key? key}) : super(key: key);

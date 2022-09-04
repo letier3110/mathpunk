@@ -1,10 +1,10 @@
-import 'package:spire_mvp_flutter/classes/card/bash.card.dart';
-import 'package:spire_mvp_flutter/classes/card/blood_for_blood.card.dart';
-import 'package:spire_mvp_flutter/classes/card/defend.card.dart';
-import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
-import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/cunning.potion.dart';
-import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/card/bash.card.dart';
+import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
+import 'package:mathpunk_cardgame/classes/card/defend.card.dart';
+import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
+import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/cunning.potion.dart';
+import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
 
 import '../../deck.dart';
 import 'player_character.dart';

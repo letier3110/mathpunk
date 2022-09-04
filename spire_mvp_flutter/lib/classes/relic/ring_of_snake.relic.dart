@@ -1,5 +1,5 @@
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 class RingOfSnake extends Relic {
   RingOfSnake(

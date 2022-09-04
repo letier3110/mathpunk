@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/deck.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/classes/deck.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
 

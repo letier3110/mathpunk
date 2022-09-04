@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/components/playable_card/glow_effect.view.dart';
-import 'package:spire_mvp_flutter/components/room/trader.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart';
+import 'package:mathpunk_cardgame/components/room/trader.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 const double defaultHeight = 300;
 const double defaultWidth = 200;
@@ -99,7 +99,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         gameState.startSelecting(widget.card, cardId);
         return;
       } else if (widget.card.targetType == TargetEnum.cardTarget) {
-        // TODO: implement some random fuzzy logic to select a target
+        // TODO: implement some random fuzzy logic to select a targe
         // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
         gameState.startSelecting(widget.card, cardId);
         return;

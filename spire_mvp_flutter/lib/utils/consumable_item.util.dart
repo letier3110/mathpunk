@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 
 String getItemAssetByName(ConsumableItem? item) {
   switch (item?.name) {

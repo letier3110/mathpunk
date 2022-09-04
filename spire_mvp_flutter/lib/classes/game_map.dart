@@ -1,14 +1,14 @@
 import 'dart:math';
 
-import 'package:spire_mvp_flutter/classes/enemy/enemy_ogre.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
-import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/pools/events.pools.dart';
-import 'package:spire_mvp_flutter/pools/reward.pools.dart';
-import 'package:spire_mvp_flutter/pools/trader.pools.dart';
-import 'package:spire_mvp_flutter/utils/room.util.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy_ogre.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
+import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/pools/events.pools.dart';
+import 'package:mathpunk_cardgame/pools/reward.pools.dart';
+import 'package:mathpunk_cardgame/pools/trader.pools.dart';
+import 'package:mathpunk_cardgame/utils/room.util.dart';
 
 const int _levelsRandomLength = 7;
 const int _levelsFixedLength = 12;

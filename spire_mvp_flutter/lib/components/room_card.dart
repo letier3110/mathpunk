@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/room.util.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/utils/room.util.dart';
 
 class RoomCard extends StatefulWidget {
   final Room room;

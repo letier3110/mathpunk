@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
-import 'package:spire_mvp_flutter/components/room/reward.view.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
+import 'package:mathpunk_cardgame/components/room/reward.view.dart';
 
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class ChestView extends StatefulWidget {
   final List<Reward> rewards;

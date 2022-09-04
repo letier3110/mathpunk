@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 
 String getCharacterAssetByName(PlayerCharacter? pc) {
   switch (pc?.name) {

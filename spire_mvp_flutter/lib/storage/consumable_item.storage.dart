@@ -1,9 +1,9 @@
-import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/blood.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
-import 'package:spire_mvp_flutter/classes/items/energy.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/fruit_juice.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/blood.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/items/energy.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/fear.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/fruit_juice.potion.dart';
 
 import '../classes/items/cunning.potion.dart';
 

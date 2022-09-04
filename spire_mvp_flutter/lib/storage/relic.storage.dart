@@ -1,9 +1,9 @@
-import 'package:spire_mvp_flutter/classes/relic/art_of_war.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ninja_scroll.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/wrist_blade.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/art_of_war.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/wrist_blade.relic.dart';
 
 import '../classes/relic/relic.dart';
 

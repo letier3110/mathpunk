@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
 
-import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/classes/sellable.dart';
-import 'package:spire_mvp_flutter/components/consumable.view.dart';
-import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
-import 'package:spire_mvp_flutter/components/relic.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/classes/sellable.dart';
+import 'package:mathpunk_cardgame/components/consumable.view.dart';
+import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
+import 'package:mathpunk_cardgame/components/relic.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 const double cardHeight = 300;
 

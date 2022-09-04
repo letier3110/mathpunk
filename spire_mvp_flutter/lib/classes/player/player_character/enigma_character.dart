@@ -1,7 +1,6 @@
-import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
 
 import '../../card/bash.card.dart';
-import '../../card/cards_implementation.dart';
 import '../../card/defend.card.dart';
 import '../../card/headbutt.card.dart';
 import '../../card/strike.card.dart';

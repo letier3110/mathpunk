@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/components/room_card.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/components/room_card.dart';
 
 class MapScreen extends StatefulWidget {
   final List<List<Room>> gameMap;

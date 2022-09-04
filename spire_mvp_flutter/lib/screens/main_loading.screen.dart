@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
-import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
 import '../utils/font.util.dart';
 

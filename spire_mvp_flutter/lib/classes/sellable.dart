@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
-import 'package:spire_mvp_flutter/classes/relic/relic.dart';
-import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
-import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
-import 'package:spire_mvp_flutter/storage/relic.storage.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
+import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
+import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
 class Sellable {
   final int cost;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class TraderPawnView extends StatefulWidget {
   final Function callback;

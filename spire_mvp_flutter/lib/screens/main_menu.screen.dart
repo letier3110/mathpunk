@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/components/create_profile.component.dart';
-// import 'package:spire_mvp_flutter/classes/card/cards_implementation.dart';
-// import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/components/create_profile.component.dart';
+// import 'package:mathpunk_cardgame/classes/card/cards_implementation.dart';
+// import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';

@@ -1,10 +1,10 @@
-import 'package:spire_mvp_flutter/classes/player/player_character/barbarian_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/enigma_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/irrationalist_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/priest_character.dart';
-import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
-import 'package:spire_mvp_flutter/storage/relic.storage.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/barbarian_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/enigma_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/irrationalist_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/priest_character.dart';
+import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
+import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
 import '../classes/deck.dart';
 import '../classes/items/consumable_item.dart';

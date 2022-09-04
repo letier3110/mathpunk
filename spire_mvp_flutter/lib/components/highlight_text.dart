@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
 
 class HighlightText extends StatelessWidget {
   final String? text;

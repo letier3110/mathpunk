@@ -1,6 +1,6 @@
-import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
-import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
-import 'package:spire_mvp_flutter/storage/relic.storage.dart';
+import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
+import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
+import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
 import 'relic/relic.dart';
 import 'items/consumable_item.dart';

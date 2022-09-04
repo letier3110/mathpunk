@@ -61,31 +61,28 @@ class RoomCardView extends State<RoomCard> {
 
     return GestureDetector(
         onTap: onTapHandler,
-        child: Expanded(
-          flex: 1,
-          child: Container(
-            margin: const EdgeInsets.all(4),
-            decoration: isAvailable
-                ? const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.green,
-                        blurRadius: 20.0,
-                        spreadRadius: 8.0,
-                      )
-                    ],
-                  )
-                : const BoxDecoration(),
-            child: Card(
-              color: inCurrentRoom
-                  ? Colors.green
-                  : isVisited != null
-                      ? Colors.lightGreen
-                      : isAvailable
-                          ? Colors.amber
-                          : Colors.grey,
-              child: Center(child: getRoomIcon(widget.room)),
-            ),
+        child: Container(
+          margin: const EdgeInsets.all(4),
+          decoration: isAvailable
+              ? const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.green,
+                      blurRadius: 20.0,
+                      spreadRadius: 8.0,
+                    )
+                  ],
+                )
+              : const BoxDecoration(),
+          child: Card(
+            color: inCurrentRoom
+                ? Colors.green
+                : isVisited != null
+                    ? Colors.lightGreen
+                    : isAvailable
+                        ? Colors.amber
+                        : Colors.grey,
+            child: Center(child: getRoomIcon(widget.room)),
           ),
         ));
   }

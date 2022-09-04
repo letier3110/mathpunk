@@ -39,110 +39,126 @@ class RewardViewView extends State<RewardView> {
 
     int goldReward = widget.reward.gold ?? 0;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (widget.reward.gold != null)
-          GestureDetector(
-            onTap: onGoldTapHandler,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.circular(8)),
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'gold.png ',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getFontSize(16),
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    '$goldReward gold',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getFontSize(16),
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (widget.reward.gold != null)
+            GestureDetector(
+              onTap: onGoldTapHandler,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/menu_bg_2.png'),
+                      fit: BoxFit.fill),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: [
+                    // const Text(
+                    //   'gold.png ',
+                    //   textAlign: TextAlign.left,
+                    //   style: TextStyle(
+                    //       color: Colors.white,
+                    //       fontSize: 16,
+                    //       fontWeight: FontWeight.w600),
+                    // ),
+                    Text(
+                      '$goldReward gold',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        if (widget.reward.item != null)
-          GestureDetector(
-            onTap: onItemTapHandler,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.circular(8)),
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'Item',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getFontSize(16),
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
+          if (widget.reward.item != null)
+            GestureDetector(
+              onTap: onItemTapHandler,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/menu_bg_2.png'),
+                      fit: BoxFit.fill),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      widget.reward.item!.name,
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        if (widget.reward.relic != null)
-          GestureDetector(
-            onTap: onRelicTapHandler,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.circular(8)),
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Text(
-                    widget.reward.relic!.name,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getFontSize(16),
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
+          if (widget.reward.relic != null)
+            GestureDetector(
+              onTap: onRelicTapHandler,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/menu_bg_2.png'),
+                      fit: BoxFit.fill),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      widget.reward.relic!.name,
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        if (widget.reward.cards.isNotEmpty)
-          GestureDetector(
-            onTap: onCardTapHandler,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.circular(8)),
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'Add card to your deck',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getFontSize(16),
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
+          if (widget.reward.cards.isNotEmpty)
+            GestureDetector(
+              onTap: onCardTapHandler,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/menu_bg_2.png'),
+                      fit: BoxFit.fill),
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: const [
+                    Text(
+                      'Add card to your deck',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

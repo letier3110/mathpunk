@@ -35,7 +35,7 @@ class GameOverView extends State<GameOver> {
         Container(
           padding: const EdgeInsets.all(8),
           height: 100,
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 400),
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 400),
           child: Center(
             child: Text(
               'Death...',

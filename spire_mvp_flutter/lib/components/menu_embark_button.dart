@@ -25,39 +25,31 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
     return Positioned(
       bottom: 0,
       right: 20,
-      child: Container(
-          margin: const EdgeInsets.all(8.0),
-          height: 80,
-          alignment: Alignment.bottomLeft,
-          width: 100,
-          child: Stack(
-            children: [
-              GestureDetector(
-                  onTap: () => {
-                        gameState.startGame(),
-                        navigation.changeScreen(ScreenEnum.game)
-                      },
-                  child: Positioned(
-                    top: 120,
-                    child: Column(children: [
-                      Container(
-                          width: 300,
-                          height: 50,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/menu_bg_2.png'),
-                                fit: BoxFit.fill),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Embark',
-                              style: TextStyle(fontSize: getFontSize(22)),
-                            ),
-                          )),
-                    ]),
-                  )),
-            ],
-          )),
+      child: Stack(
+        children: [
+          GestureDetector(
+              onTap: () => {
+                    gameState.startGame(),
+                    navigation.changeScreen(ScreenEnum.game)
+                  },
+              child: Container(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 8, 0, 32),
+                  width: 120,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/menu_bg_2.png'),
+                        fit: BoxFit.fill),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Embark',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ))),
+        ],
+      ),
     );
   }
 }

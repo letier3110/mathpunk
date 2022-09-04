@@ -53,7 +53,7 @@ class MainMenuItemState extends State<MainMenuItem> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Text(
                   widget.text,
-                  style: TextStyle(fontSize: getFontSize(22)),
+                  style: const TextStyle(fontSize: 22.0),
                 ),
               )
             ],

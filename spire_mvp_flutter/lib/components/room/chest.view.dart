@@ -40,9 +40,10 @@ class ChestViewView extends State<ChestView> {
             flex: 1,
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
+              margin: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/pause_bg.png'), fit: BoxFit.fill),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,6 +1,4 @@
-import 'package:mathpunk_cardgame/classes/card/bash.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
-import 'package:mathpunk_cardgame/classes/card/defend.card.dart';
 import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
 import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
 import 'package:mathpunk_cardgame/classes/items/cunning.potion.dart';

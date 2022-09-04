@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 import '../enums/screens.enum.dart';
 
@@ -53,7 +53,7 @@ class MainMenuItemState extends State<MainMenuItem> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Text(
                   widget.text,
-                  style: TextStyle(fontSize: getFontSize(22)),
+                  style: const TextStyle(fontSize: 22.0),
                 ),
               )
             ],

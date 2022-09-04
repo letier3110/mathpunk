@@ -1,4 +1,4 @@
-name: spire_mvp_flutter
+name: mathpunk_cardgame
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -43,6 +43,7 @@ dependencies:
   path_provider: ^2.0.11
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.10.0"
   flutter_test:
     sdk: flutter
 
@@ -52,6 +53,29 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  msix: ^2.8.18
+
+msix_config:
+  display_name: Mathpunk - card game
+  publisher_display_name: Toxcik
+  identity_name: mathpunk-card-game
+  msix_version: 0.0.0.2
+  logo_path: D:\job\mathpunk\spire_mvp_flutter\assets\app_icon.png
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/app_icon.png"
+    background_color: "#aaffaa"
+    theme_color: "#aaffaa"
+  windows:
+    generate: true
+    image_path: "assets/app_icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -96,3 +120,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets: 
     - assets/
+    - assets/cards/

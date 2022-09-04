@@ -1,11 +1,11 @@
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
-import 'package:spire_mvp_flutter/storage/character.storage.dart';
-import 'package:spire_mvp_flutter/storage/room.storage.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
+import 'package:mathpunk_cardgame/storage/character.storage.dart';
+import 'package:mathpunk_cardgame/storage/room.storage.dart';
 
 class GameStateInterface {
   GameTypeEnum? gameMode;

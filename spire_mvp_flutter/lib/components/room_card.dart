@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/room.util.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/utils/room.util.dart';
 
 class RoomCard extends StatefulWidget {
   final Room room;
@@ -61,31 +61,28 @@ class RoomCardView extends State<RoomCard> {
 
     return GestureDetector(
         onTap: onTapHandler,
-        child: Expanded(
-          flex: 1,
-          child: Container(
-            margin: const EdgeInsets.all(4),
-            decoration: isAvailable
-                ? const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.green,
-                        blurRadius: 20.0,
-                        spreadRadius: 8.0,
-                      )
-                    ],
-                  )
-                : const BoxDecoration(),
-            child: Card(
-              color: inCurrentRoom
-                  ? Colors.green
-                  : isVisited != null
-                      ? Colors.lightGreen
-                      : isAvailable
-                          ? Colors.amber
-                          : Colors.grey,
-              child: Center(child: getRoomIcon(widget.room)),
-            ),
+        child: Container(
+          margin: const EdgeInsets.all(4),
+          decoration: isAvailable
+              ? const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.green,
+                      blurRadius: 20.0,
+                      spreadRadius: 8.0,
+                    )
+                  ],
+                )
+              : const BoxDecoration(),
+          child: Card(
+            color: inCurrentRoom
+                ? Colors.green
+                : isVisited != null
+                    ? Colors.lightGreen
+                    : isAvailable
+                        ? Colors.amber
+                        : Colors.grey,
+            child: Center(child: getRoomIcon(widget.room)),
           ),
         ));
   }

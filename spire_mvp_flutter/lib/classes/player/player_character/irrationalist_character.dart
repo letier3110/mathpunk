@@ -1,5 +1,3 @@
-import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
-
 import '../../card/bash.card.dart';
 import '../../card/defend.card.dart';
 import '../../card/headbutt.card.dart';

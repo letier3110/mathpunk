@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
-import 'package:spire_mvp_flutter/components/room/card_reward.view.dart';
-import 'package:spire_mvp_flutter/components/room/card_to_draw.view.dart';
-import 'package:spire_mvp_flutter/components/room/chest.view.dart';
-import 'package:spire_mvp_flutter/components/room/current_mana.view.dart';
-import 'package:spire_mvp_flutter/components/room/discardpile.view.dart';
-import 'package:spire_mvp_flutter/components/room/drawpile.view.dart';
-import 'package:spire_mvp_flutter/components/room/endturn.view.dart';
-import 'package:spire_mvp_flutter/components/room/enemy_pawn.view.dart';
-import 'package:spire_mvp_flutter/components/room/game_over.view.dart';
-import 'package:spire_mvp_flutter/components/room/hand.view.dart';
-import 'package:spire_mvp_flutter/components/room/player_pawn.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
+import 'package:mathpunk_cardgame/components/room/card_reward.view.dart';
+import 'package:mathpunk_cardgame/components/room/card_to_draw.view.dart';
+import 'package:mathpunk_cardgame/components/room/chest.view.dart';
+import 'package:mathpunk_cardgame/components/room/current_mana.view.dart';
+import 'package:mathpunk_cardgame/components/room/discardpile.view.dart';
+import 'package:mathpunk_cardgame/components/room/drawpile.view.dart';
+import 'package:mathpunk_cardgame/components/room/endturn.view.dart';
+import 'package:mathpunk_cardgame/components/room/enemy_pawn.view.dart';
+import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
+import 'package:mathpunk_cardgame/components/room/hand.view.dart';
+import 'package:mathpunk_cardgame/components/room/player_pawn.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 class EnemyRoomScreen extends StatefulWidget {
   final EnemyRoom room;

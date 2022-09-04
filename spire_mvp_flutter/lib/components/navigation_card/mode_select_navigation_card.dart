@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/components/navigation_card/navigation_card.interface.dart';
-import 'package:spire_mvp_flutter/components/navigation_card/navigation_card.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
-import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
-import 'package:spire_mvp_flutter/enums/screens.enum.dart';
+import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
+import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
+import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
 class ModeSelectNavigationCard extends INavigationCard {
   final GameTypeEnum gameType;

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/card/doubt.card.dart';
-import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/game_map.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ninja_scroll.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
-import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/classes/sellable.dart';
-import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
-import 'package:spire_mvp_flutter/interfaces/gamestate.interface.dart';
+import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
+import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/game_map.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
+import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/classes/sellable.dart';
+import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
 
@@ -402,7 +402,7 @@ class GamestateController extends ChangeNotifier {
 
     if (currentRoom.runtimeType == EnemyRoom) {
       // playerCharacter!.strength = 5;
-      playerCharacter!.weak = 5;
+      // playerCharacter!.weak = 5;
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
       // if there are ring of snake => draw 2 cards at the start of combat

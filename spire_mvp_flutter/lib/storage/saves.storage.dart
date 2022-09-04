@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
-import 'package:spire_mvp_flutter/enums/screens.enum.dart';
-import 'package:spire_mvp_flutter/storage/gamestate.storage.dart';
+import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/enums/screens.enum.dart';
+import 'package:mathpunk_cardgame/storage/gamestate.storage.dart';
 
 import '../controllers/navigation.controller.dart';
 

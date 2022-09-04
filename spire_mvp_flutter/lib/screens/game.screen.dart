@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/components/game_header/game_header.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/screens/deck.screen.dart';
-import 'package:spire_mvp_flutter/screens/lore.screen.dart';
-import 'package:spire_mvp_flutter/screens/map.screen.dart';
-import 'package:spire_mvp_flutter/screens/pause.screen.dart';
-import 'package:spire_mvp_flutter/utils/room.util.dart';
+import 'package:mathpunk_cardgame/components/game_header/game_header.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/screens/deck.screen.dart';
+import 'package:mathpunk_cardgame/screens/lore.screen.dart';
+import 'package:mathpunk_cardgame/screens/map.screen.dart';
+import 'package:mathpunk_cardgame/screens/pause.screen.dart';
+import 'package:mathpunk_cardgame/utils/room.util.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);

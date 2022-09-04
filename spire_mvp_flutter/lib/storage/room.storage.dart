@@ -1,7 +1,7 @@
-import 'package:spire_mvp_flutter/classes/enemy/enemy.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
-import 'package:spire_mvp_flutter/storage/enemy.storage.dart';
+import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
+import 'package:mathpunk_cardgame/storage/enemy.storage.dart';
 
 import '../classes/room/enemy_room.dart';
 import '../classes/room/event_room/event_room.dart';

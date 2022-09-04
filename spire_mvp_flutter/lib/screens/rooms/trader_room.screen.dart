@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/components/game_back_button.dart';
-import 'package:spire_mvp_flutter/components/game_forward_button.dart';
-import 'package:spire_mvp_flutter/components/room/trader.view.dart';
-import 'package:spire_mvp_flutter/components/room/trader_pawn.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/components/game_back_button.dart';
+import 'package:mathpunk_cardgame/components/game_forward_button.dart';
+import 'package:mathpunk_cardgame/components/room/trader.view.dart';
+import 'package:mathpunk_cardgame/components/room/trader_pawn.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class TraderRoomScreen extends StatefulWidget {
   final TradeRoom room;

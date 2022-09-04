@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/components/navigation_card/mode_select_navigation_card.dart';
-import 'package:spire_mvp_flutter/enums/game_type.enum.dart';
+import 'package:mathpunk_cardgame/components/navigation_card/mode_select_navigation_card.dart';
+import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';

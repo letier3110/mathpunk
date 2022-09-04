@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:spire_mvp_flutter/classes/probability.dart';
+import 'package:mathpunk_cardgame/classes/probability.dart';
 
 Probability<T> weightedRandomPick<T>(List<Probability<T>> options) {
   var i = 0;

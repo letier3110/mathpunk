@@ -1,6 +1,6 @@
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/classes/relic/wrist_blade.relic.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/relic/wrist_blade.relic.dart';
 
 int calculateDamage({required int damage, int mana = 2}) {
   PlayerCharacter character = Player.getPlayerInstance().getCharacter();

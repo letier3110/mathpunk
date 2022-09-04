@@ -1,6 +1,4 @@
-import 'package:spire_mvp_flutter/classes/card/shiv.card.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 int count = 3;
 

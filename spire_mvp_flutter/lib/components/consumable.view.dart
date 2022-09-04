@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class ConsumableView extends StatefulWidget {
   final ConsumableItem item;

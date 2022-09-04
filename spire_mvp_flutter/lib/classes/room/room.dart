@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/storage/enemy.storage.dart';
+import 'package:mathpunk_cardgame/storage/enemy.storage.dart';
 
 import '../../interfaces/room.interface.dart';
 import '../enemy/enemy.dart';

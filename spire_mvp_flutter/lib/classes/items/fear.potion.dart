@@ -1,6 +1,6 @@
-import 'package:spire_mvp_flutter/classes/base_character.dart';
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/classes/base_character.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 int vulnerable = 3;
 

@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 class ArtOfWar extends Relic {
   ArtOfWar(

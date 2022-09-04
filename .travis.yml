@@ -1,0 +1,22 @@
+jobs:
+  include:
+    - os: osx
+      osx_image: xcode13.4
+sudo: false
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+  - curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
+  - unzip butler.zip
+  - chmod +x butler
+  - ./butler -V
+script:
+  - cd ./spire_mvp_flutter 
+  - ../flutter/bin/flutter build macos --release
+  - zip ./mathpunk.zip ./build/macos/Build/Products/Release
+  - cd ..
+cache:
+  directories:
+    - $HOME/.pub-cache
+after_script:
+  chmod +x ./spire_mvp_flutter/deploy.sh && ./spire_mvp_flutter/deploy.sh

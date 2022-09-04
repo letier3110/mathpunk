@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/navigation.controller.dart';
-import 'package:spire_mvp_flutter/enums/screens.enum.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/enums/screens.enum.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class GameOver extends StatefulWidget {
   const GameOver({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class GameOverView extends State<GameOver> {
         Container(
           padding: const EdgeInsets.all(8),
           height: 100,
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 400),
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 400),
           child: Center(
             child: Text(
               'Death...',

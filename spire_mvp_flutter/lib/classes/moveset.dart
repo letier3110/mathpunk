@@ -1,4 +1,4 @@
-import 'package:spire_mvp_flutter/classes/base_character.dart';
+import 'package:mathpunk_cardgame/classes/base_character.dart';
 
 import '../enums/intension_type.enum.dart';
 import 'intension.dart';

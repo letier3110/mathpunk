@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../../components/highlight_text.dart';
 import '../../utils/font.util.dart';
@@ -13,6 +13,7 @@ class PlayableCard {
   late int mana;
   late CardType type;
   late TargetEnum targetType = TargetEnum.singleTarget;
+  String asset;
   bool exhausted = false;
   bool ethereal = false;
   int step = 1;
@@ -21,7 +22,8 @@ class PlayableCard {
   List<PlayableCard> selectedCards = [];
 
   PlayableCard(
-      {cardName = '',
+      {this.asset = 'assets/cards/anger.png',
+      cardName = '',
       cardDescription = '',
       cardMana = 0,
       cardType = CardType.skill,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/reward.dart';
-import 'package:spire_mvp_flutter/components/room/reward.view.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
+import 'package:mathpunk_cardgame/components/room/reward.view.dart';
 
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class ChestView extends StatefulWidget {
   final List<Reward> rewards;
@@ -40,9 +40,10 @@ class ChestViewView extends State<ChestView> {
             flex: 1,
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
+              margin: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/pause_bg.png'), fit: BoxFit.fill),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

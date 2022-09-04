@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
 
-import 'package:spire_mvp_flutter/classes/player/player_character/player_character.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-
-import '../utils/font.util.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class CharacterCard extends StatefulWidget {
   final PlayerCharacter character;

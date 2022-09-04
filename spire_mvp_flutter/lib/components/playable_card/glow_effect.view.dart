@@ -12,7 +12,7 @@ const double minAnimationValue = 1;
 const double maxAnimationValue = 8;
 const double divider = 1;
 
-const wavecolor = Color.fromARGB(119, 13, 190, 235);
+const wavecolor = Color.fromARGB(119, 52, 223, 46);
 
 class GlowEffectView extends State<GlowEffect>
     with SingleTickerProviderStateMixin {

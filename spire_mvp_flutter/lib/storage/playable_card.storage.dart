@@ -1,9 +1,9 @@
-import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
-import 'package:spire_mvp_flutter/classes/card/blood_for_blood.card.dart';
-import 'package:spire_mvp_flutter/classes/card/doubt.card.dart';
-import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/card/shiv.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
+import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
+import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 
 import '../classes/card/bash.card.dart';
 import '../classes/card/body_slam.card.dart';

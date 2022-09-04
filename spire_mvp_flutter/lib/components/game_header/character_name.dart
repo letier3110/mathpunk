@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/controllers/saves.controller.dart';
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CharacterName extends StatefulWidget {
   const CharacterName({Key? key}) : super(key: key);
@@ -31,8 +31,8 @@ class CharacterNameView extends State<CharacterName> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              // playerName,
-              '$height',
+              playerName,
+              // '$height',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
@@ -42,8 +42,8 @@ class CharacterNameView extends State<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                // gameState.playerCharacter?.name ?? 'no class',
-                '$width',
+                gameState.playerCharacter?.name ?? 'no class',
+                // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w600),

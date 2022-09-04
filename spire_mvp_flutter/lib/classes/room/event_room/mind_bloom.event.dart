@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room/event_room.dart';
-import 'package:spire_mvp_flutter/components/event_room/mind_bloom.view.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/event_room.dart';
+import 'package:mathpunk_cardgame/components/event_room/mind_bloom.view.dart';
 
 class MindBloomEventRoom extends EventRoom {
   bool canLeaveRoom = false;

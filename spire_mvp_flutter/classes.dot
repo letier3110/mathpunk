@@ -129,7 +129,7 @@ digraph "" {
   "/lib/utils/intension.util.dart" [label="intension.util"];
   "/lib/utils/room.util.dart" [label="room.util"];
   subgraph "cluster~" {
-    label="spire_mvp_flutter";
+    label="mathpunk_card_game";
     subgraph "cluster~/lib" {
       label="lib";
       "/lib/main.dart";

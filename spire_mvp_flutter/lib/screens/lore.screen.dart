@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/components/playable_card/playable_card.view.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class LoreScreen extends StatefulWidget {
   const LoreScreen({Key? key}) : super(key: key);

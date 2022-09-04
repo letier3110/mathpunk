@@ -2,16 +2,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:spire_mvp_flutter/classes/room/enemy_room.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room/event_room.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
-import 'package:spire_mvp_flutter/classes/room/rest_room.dart';
-import 'package:spire_mvp_flutter/classes/room/room.dart';
-import 'package:spire_mvp_flutter/classes/room/trade_room.dart';
-import 'package:spire_mvp_flutter/classes/room/treasure_room.dart';
-import 'package:spire_mvp_flutter/components/event_room/mind_bloom.view.dart';
-import 'package:spire_mvp_flutter/screens/rooms/enemy_room.screen.dart';
-import 'package:spire_mvp_flutter/screens/rooms/trader_room.screen.dart';
+import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/event_room.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
+import 'package:mathpunk_cardgame/classes/room/rest_room.dart';
+import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/classes/room/treasure_room.dart';
+import 'package:mathpunk_cardgame/components/event_room/mind_bloom.view.dart';
+import 'package:mathpunk_cardgame/screens/rooms/enemy_room.screen.dart';
+import 'package:mathpunk_cardgame/screens/rooms/trader_room.screen.dart';
 
 String getRoomName(Room room) {
   var id = room.id;

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spire_mvp_flutter/classes/card/doubt.card.dart';
-import 'package:spire_mvp_flutter/classes/card/normality.card.dart';
-import 'package:spire_mvp_flutter/classes/deck.dart';
-import 'package:spire_mvp_flutter/classes/game_map.dart';
-import 'package:spire_mvp_flutter/classes/player/player.dart';
-import 'package:spire_mvp_flutter/classes/room/event_room/mind_bloom.event.dart';
-import 'package:spire_mvp_flutter/controllers/gamestate.controller.dart';
-import 'package:spire_mvp_flutter/utils/character.util.dart';
+import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
+import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
+import 'package:mathpunk_cardgame/classes/deck.dart';
+import 'package:mathpunk_cardgame/classes/game_map.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
-import 'package:spire_mvp_flutter/utils/font.util.dart';
+import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class MindBloomView extends StatefulWidget {
   final MindBloomEventRoom room;

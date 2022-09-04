@@ -1,23 +1,23 @@
-import 'package:spire_mvp_flutter/classes/card/anger.card.dart';
-import 'package:spire_mvp_flutter/classes/card/bash.card.dart';
-import 'package:spire_mvp_flutter/classes/card/perfect_strike.card.dart';
-import 'package:spire_mvp_flutter/classes/card/playable_card.dart';
-import 'package:spire_mvp_flutter/classes/card/shiv.card.dart';
-import 'package:spire_mvp_flutter/classes/card/shrug_it_off.card.dart';
-import 'package:spire_mvp_flutter/classes/card/strike.card.dart';
-import 'package:spire_mvp_flutter/classes/items/block.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/consumable_item.dart';
-import 'package:spire_mvp_flutter/classes/items/energy.potion.dart';
-import 'package:spire_mvp_flutter/classes/items/fear.potion.dart';
-import 'package:spire_mvp_flutter/classes/probability.dart';
-import 'package:spire_mvp_flutter/classes/relic/burning_blood.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_serpent.relic.dart';
-import 'package:spire_mvp_flutter/classes/relic/ring_of_snake.relic.dart';
-import 'package:spire_mvp_flutter/pools/utils.dart';
-import 'package:spire_mvp_flutter/storage/consumable_item.storage.dart';
-import 'package:spire_mvp_flutter/storage/playable_card.storage.dart';
-import 'package:spire_mvp_flutter/storage/relic.storage.dart';
+import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/bash.card.dart';
+import 'package:mathpunk_cardgame/classes/card/perfect_strike.card.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
+import 'package:mathpunk_cardgame/classes/card/shrug_it_off.card.dart';
+import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
+import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/items/energy.potion.dart';
+import 'package:mathpunk_cardgame/classes/items/fear.potion.dart';
+import 'package:mathpunk_cardgame/classes/probability.dart';
+import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
+import 'package:mathpunk_cardgame/pools/utils.dart';
+import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
+import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
+import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
 List<Probability<PlayableCard>> _pool1Cards = [
   Probability(obj: AngerCard(), weight: 500),

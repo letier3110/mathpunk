@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class GameOver extends StatefulWidget {
   const GameOver({Key? key}) : super(key: key);
@@ -36,13 +35,13 @@ class GameOverView extends State<GameOver> {
           padding: const EdgeInsets.all(8),
           height: 100,
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 400),
-          child: Center(
+          child: const Center(
             child: Text(
               'Death...',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: getFontSize(22),
+                  fontSize: 22,
                   fontWeight: FontWeight.w600),
             ),
           ),
@@ -59,12 +58,12 @@ class GameOverView extends State<GameOver> {
                       borderRadius: BorderRadius.circular(50),
                       // border: Border.all(color: Colors.white, width: 2)
                     ),
-                    child: Text(
+                    child: const Text(
                       'Continue',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: getFontSize(22),
+                          fontSize: 22,
                           fontWeight: FontWeight.w600),
                     ),
                   ),

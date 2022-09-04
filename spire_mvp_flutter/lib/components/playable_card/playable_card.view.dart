@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart';
-import 'package:mathpunk_cardgame/components/room/trader.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 const double defaultHeight = 300;
 const double defaultWidth = 200;

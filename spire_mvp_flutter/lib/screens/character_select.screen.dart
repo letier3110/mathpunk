@@ -8,7 +8,6 @@ import 'package:mathpunk_cardgame/components/character_card.dart';
 import 'package:mathpunk_cardgame/components/menu_embark_button.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/utils/character.util.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';
@@ -99,8 +98,8 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                   // '$height',
                                   // '$width',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: getFontSize(26),
+                                  style: const TextStyle(
+                                      fontSize: 26,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.yellow),
                                 ),
@@ -110,20 +109,20 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                   child: Text(
                                     'HP: ${gamestate.playerCharacter!.health} / ${gamestate.playerCharacter!.maxHealth}',
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        fontSize: getFontSize(16),
+                                    style: const TextStyle(
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.redAccent),
                                   ),
                                 ),
                                 SizedBox(
                                   width: width * 1 / 4,
-                                  child: Text(
+                                  child: const Text(
                                     // gameStateState.playerCharacter!.description,
                                     'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: getFontSize(16),
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
                                   ),
@@ -146,9 +145,8 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                                         '${e.name}: ',
                                                         textAlign:
                                                             TextAlign.left,
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                getFontSize(16),
+                                                        style: const TextStyle(
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color:
@@ -163,9 +161,8 @@ ${e.description}
 ''',
                                                         textAlign:
                                                             TextAlign.left,
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                getFontSize(16),
+                                                        style: const TextStyle(
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color:

@@ -8,8 +8,6 @@ import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
-import 'package:mathpunk_cardgame/utils/font.util.dart';
-
 class MindBloomView extends StatefulWidget {
   final MindBloomEventRoom room;
 
@@ -96,46 +94,40 @@ class _MindBloomViewView extends State<MindBloomView> {
                     child: ListView(
                       children: [
                         if (canLeave)
-                          Text('Can it really be this easy?',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: getFontSize(24))),
+                          const Text('Can it really be this easy?',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
                         if (!canLeave)
-                          Text(
+                          const Text(
                               'While walking and traversing through the chaos of the Spire, your thoughts suddenly begin to feel very... real...',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: getFontSize(24))),
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
                         if (!canLeave)
                           RichText(
                               textAlign: TextAlign.left,
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Imaginings of ',
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: getFontSize(24))),
+                                        color: Colors.black, fontSize: 24)),
                                 TextSpan(
                                     text: 'monsters',
                                     style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: getFontSize(24))),
+                                        color: Colors.redAccent, fontSize: 24)),
                                 TextSpan(
                                     text: ' and ',
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: getFontSize(24))),
+                                        color: Colors.black, fontSize: 24)),
                                 TextSpan(
                                     text: 'riches ',
                                     style: TextStyle(
                                         color: Colors.deepPurple,
-                                        fontSize: getFontSize(24))),
+                                        fontSize: 24)),
                                 TextSpan(
                                     text:
                                         'begin to manifest themselves into reality.',
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: getFontSize(24))),
+                                        color: Colors.black, fontSize: 24)),
                               ])),
                         const Spacer(
                           flex: 1,
@@ -152,10 +144,9 @@ class _MindBloomViewView extends State<MindBloomView> {
                                     child: Container(
                                         padding: const EdgeInsets.all(12),
                                         width: (width - 200) / 2,
-                                        child: Text(
+                                        child: const Text(
                                           "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
-                                          style: TextStyle(
-                                              fontSize: getFontSize(24)),
+                                          style: TextStyle(fontSize: 24),
                                         )),
                                   )),
                             ],
@@ -173,10 +164,9 @@ class _MindBloomViewView extends State<MindBloomView> {
                                       child: Container(
                                           padding: const EdgeInsets.all(12),
                                           width: (width - 200) / 2,
-                                          child: Text(
+                                          child: const Text(
                                             "[I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.",
-                                            style: TextStyle(
-                                                fontSize: getFontSize(24)),
+                                            style: TextStyle(fontSize: 24),
                                           )),
                                     ),
                                   )),
@@ -194,10 +184,9 @@ class _MindBloomViewView extends State<MindBloomView> {
                                   child: Container(
                                       padding: const EdgeInsets.all(12),
                                       width: (width - 200) / 2,
-                                      child: Text(
+                                      child: const Text(
                                         "[I am Healthy] Heal to full HP. Become Cursed - Doubt.",
-                                        style: TextStyle(
-                                            fontSize: getFontSize(24)),
+                                        style: TextStyle(fontSize: 24),
                                       )),
                                 ),
                               ),
@@ -214,10 +203,9 @@ class _MindBloomViewView extends State<MindBloomView> {
                                   //     surfaceTintColor: Colors.greenAccent),
                                   child: Container(
                                       padding: const EdgeInsets.all(12),
-                                      child: Text(
+                                      child: const Text(
                                         "Continue",
-                                        style: TextStyle(
-                                            fontSize: getFontSize(24)),
+                                        style: TextStyle(fontSize: 24),
                                       )),
                                 ),
                               ),
@@ -246,8 +234,3 @@ class _MindBloomViewView extends State<MindBloomView> {
     );
   }
 }
-
-// [I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.
-// [I am Awake] Upgrade all Cards. Obtain MarkoftheBloom.png Mark of the Bloom, prohibiting you from healing.
-// [I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.
-// [I am Healthy] Heal to full HP. Become Cursed - Doubt.

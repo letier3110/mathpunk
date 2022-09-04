@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class GameBackButton extends StatefulWidget {
   final Function goBack;
@@ -45,9 +44,9 @@ class _GameBackButtonState extends State<GameBackButton> {
                                 height: 50.0,
                                 alignment: Alignment.centerLeft,
                                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                child: Text(
+                                child: const Text(
                                   'Leave',
-                                  style: TextStyle(fontSize: getFontSize(22)),
+                                  style: TextStyle(fontSize: 22),
                                 ),
                               ))
                         ],

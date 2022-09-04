@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CharacterHitpoints extends StatefulWidget {
   const CharacterHitpoints({Key? key}) : super(key: key);
@@ -35,9 +34,9 @@ class CharacterHitpointsView extends State<CharacterHitpoints> {
         Text(
           '$hp / $maxhp',
           textAlign: TextAlign.left,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.redAccent,
-              fontSize: getFontSize(22),
+              fontSize: 22,
               fontWeight: FontWeight.w600),
         ),
       ]),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
-import '../utils/font.util.dart';
-
 class CreateProfileComponent extends StatefulWidget {
   const CreateProfileComponent({Key? key}) : super(key: key);
 
@@ -33,10 +31,9 @@ class CreateProfileComponentView extends State<CreateProfileComponent> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Write your name',
-                  style:
-                      TextStyle(fontSize: getFontSize(24), color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 // Container(
                 // margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),

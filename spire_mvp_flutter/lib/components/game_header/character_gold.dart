@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CharacterGold extends StatefulWidget {
   const CharacterGold({Key? key}) : super(key: key);
@@ -34,10 +33,8 @@ class CharacterGoldView extends State<CharacterGold> {
         Text(
           gold.toString(),
           textAlign: TextAlign.left,
-          style: TextStyle(
-              color: Colors.yellow,
-              fontSize: getFontSize(22),
-              fontWeight: FontWeight.w600),
+          style: const TextStyle(
+              color: Colors.yellow, fontSize: 22, fontWeight: FontWeight.w600),
         ),
       ]),
     );

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/classes/reward.dart';
 import 'package:mathpunk_cardgame/components/room/playable_card_reward.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CardReward extends StatefulWidget {
   final List<PlayableCard> cards;
@@ -38,12 +36,12 @@ class CardRewardView extends State<CardReward> {
               Container(
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.only(bottom: 32),
-                child: Text(
+                child: const Text(
                   'Choose a card',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: getFontSize(22),
+                      fontSize: 22,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -60,12 +58,12 @@ class CardRewardView extends State<CardReward> {
                 decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(20)),
-                child: Text(
+                child: const Text(
                   'Choose a card',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: getFontSize(22),
+                      fontSize: 22,
                       fontWeight: FontWeight.w600),
                 ),
               ),

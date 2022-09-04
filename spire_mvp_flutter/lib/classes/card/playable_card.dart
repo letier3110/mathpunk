@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../../components/highlight_text.dart';
-import '../../utils/font.util.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
@@ -64,7 +63,7 @@ class PlayableCard {
               : currentMana > mana
                   ? Colors.redAccent
                   : Colors.white,
-          fontSize: getFontSize(16)),
+          fontSize: 16),
     );
   }
 

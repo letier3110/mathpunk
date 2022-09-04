@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
-import 'package:mathpunk_cardgame/utils/font.util.dart';
-
 class RelicView extends StatefulWidget {
   final Relic relic;
   final Function? onTap;
@@ -46,9 +44,9 @@ class RelicViewView extends State<RelicView> {
             Text(
               widget.relic.name,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.greenAccent,
-                  fontSize: getFontSize(12),
+                  fontSize: 12,
                   fontWeight: FontWeight.w600),
             ),
           ],

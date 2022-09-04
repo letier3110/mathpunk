@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class PlayableCardReward extends StatefulWidget {
   final PlayableCard card;
@@ -46,9 +45,10 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                   // margin: const EdgeInsets.all(4),
                   height: 300,
                   width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent,
-                    borderRadius: BorderRadius.circular(20),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/card_front_full.png'),
+                        fit: BoxFit.fill),
                   ),
                   child: Stack(
                     children: [
@@ -62,9 +62,8 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
                               child: Text(
                                 widget.card.name,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: getFontSize(22)),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 22),
                               ),
                             ),
                             SizedBox(

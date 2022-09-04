@@ -4,7 +4,6 @@ import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class PauseScreen extends StatefulWidget {
   const PauseScreen({Key? key}) : super(key: key);

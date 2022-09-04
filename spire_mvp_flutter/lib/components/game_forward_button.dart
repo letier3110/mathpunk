@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:mathpunk_cardgame/utils/font.util.dart';
-
 class GameForwardButton extends StatefulWidget {
   final Function goForward;
 
@@ -38,10 +36,10 @@ class _GameForwardButtonState extends State<GameForwardButton> {
                           width: 300,
                           height: 50,
                           color: Colors.white,
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Proceed',
-                              style: TextStyle(fontSize: getFontSize(22)),
+                              style: TextStyle(fontSize: 22),
                             ),
                           )),
                     ]),

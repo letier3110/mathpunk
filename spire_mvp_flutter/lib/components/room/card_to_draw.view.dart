@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 import '../playable_card/playable_card.view.dart';
 
@@ -83,12 +82,12 @@ class CardToDrawView extends State<CardToDraw> {
                       borderRadius: BorderRadius.circular(50),
                       // border: Border.all(color: Colors.white, width: 2)
                     ),
-                    child: Text(
+                    child: const Text(
                       'Confirm',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: getFontSize(22),
+                          fontSize: 22,
                           fontWeight: FontWeight.w600),
                     ),
                   ),

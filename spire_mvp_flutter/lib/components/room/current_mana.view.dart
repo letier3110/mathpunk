@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CurrentManaView extends StatefulWidget {
   const CurrentManaView({Key? key}) : super(key: key);
@@ -41,9 +40,9 @@ class CurrentManaViewView extends State<CurrentManaView> {
               child: Text(
                 mana.toString(),
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
-                    fontSize: getFontSize(22),
+                    fontSize: 22,
                     fontWeight: FontWeight.w600),
               ),
             ),

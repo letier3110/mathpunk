@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CharacterRelics extends StatefulWidget {
   const CharacterRelics({Key? key}) : super(key: key);
@@ -40,9 +39,9 @@ class CharacterRelicsView extends State<CharacterRelics> {
                         Text(
                           e.name,
                           textAlign: TextAlign.left,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.greenAccent,
-                              fontSize: getFontSize(12),
+                              fontSize: 12,
                               fontWeight: FontWeight.w600),
                         ),
                       ],

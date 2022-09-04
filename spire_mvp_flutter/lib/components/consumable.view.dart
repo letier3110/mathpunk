@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 
-import 'package:mathpunk_cardgame/utils/font.util.dart';
-
 class ConsumableView extends StatefulWidget {
   final ConsumableItem item;
   final Function? onTap;
@@ -48,9 +46,9 @@ class ConsumableViewView extends State<ConsumableView> {
             Text(
               widget.item.name,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.pinkAccent,
-                  fontSize: getFontSize(12),
+                  fontSize: 12,
                   fontWeight: FontWeight.w600),
             ),
           ],

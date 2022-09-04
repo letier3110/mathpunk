@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 class CharacterName extends StatefulWidget {
   const CharacterName({Key? key}) : super(key: key);
@@ -34,9 +33,9 @@ class CharacterNameView extends State<CharacterName> {
               playerName,
               // '$height',
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
-                  fontSize: getFontSize(22),
+                  fontSize: 22,
                   fontWeight: FontWeight.w600),
             ),
             Container(

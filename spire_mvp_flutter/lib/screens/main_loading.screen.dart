@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
-
-import '../utils/font.util.dart';
 
 class MainLoadingScreen extends StatefulWidget {
   const MainLoadingScreen({Key? key}) : super(key: key);
@@ -37,9 +34,9 @@ class _MainLoadingScreenState extends State<MainLoadingScreen> {
           Center(
               child: Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
-            child: Text(
+            child: const Text(
               'Loading',
-              style: TextStyle(fontSize: getFontSize(34), color: Colors.white),
+              style: TextStyle(fontSize: 34, color: Colors.white),
             ),
           )),
         ],

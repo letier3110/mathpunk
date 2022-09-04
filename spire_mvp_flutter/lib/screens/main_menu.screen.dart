@@ -8,7 +8,6 @@ import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
-import '../utils/font.util.dart';
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
@@ -65,7 +64,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
               padding: const EdgeInsets.all(20),
               child: Text(
                 saves.saveSlots[saves.currentSaveSlot!],
-                style: TextStyle(fontSize: getFontSize(24)),
+                style: const TextStyle(fontSize: 24),
               ),
             ),
           if (saves.currentSaveSlot != null)

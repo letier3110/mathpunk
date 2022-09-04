@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
-import 'package:mathpunk_cardgame/utils/font.util.dart';
 
 import '../enums/screens.enum.dart';
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:mathpunk_cardgame/utils/font.util.dart';
-
 class TraderPawnView extends StatefulWidget {
   final Function callback;
   const TraderPawnView({required this.callback, Key? key}) : super(key: key);
@@ -39,12 +37,12 @@ class TraderPawnViewView extends State<TraderPawnView> {
           child: Container(
             height: width / 3,
             margin: EdgeInsets.fromLTRB(0, height - 120, 0, 0),
-            child: Text(
+            child: const Text(
               "Shopkeeper",
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: getFontSize(22),
+                  fontSize: 22,
                   fontWeight: FontWeight.w600),
             ),
           ),

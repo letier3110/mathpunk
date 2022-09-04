@@ -1,6 +1,6 @@
 {
-  "name": "spire_mvp_flutter",
-  "short_name": "spire_mvp_flutter",
+  "name": "mathpunk_card_game",
+  "short_name": "mathpunk_card_game",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#hexcode",

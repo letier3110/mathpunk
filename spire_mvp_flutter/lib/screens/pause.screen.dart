@@ -78,11 +78,10 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Return',
                                     style: TextStyle(
-                                        fontSize: getFontSize(40),
-                                        color: Colors.white)),
+                                        fontSize: 40, color: Colors.white)),
                               ),
                             ),
                           ),
@@ -96,11 +95,10 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Abandon Run',
                                     style: TextStyle(
-                                        fontSize: getFontSize(40),
-                                        color: Colors.white)),
+                                        fontSize: 40, color: Colors.white)),
                               ),
                             ),
                           ),
@@ -114,11 +112,10 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Save & quit',
                                     style: TextStyle(
-                                        fontSize: getFontSize(40),
-                                        color: Colors.white)),
+                                        fontSize: 40, color: Colors.white)),
                               ),
                             ),
                           )

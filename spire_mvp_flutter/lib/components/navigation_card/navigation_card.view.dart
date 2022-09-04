@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 
-import '../../utils/font.util.dart';
+import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 
 AssetImage pickImage(bool disabled) {
   if (disabled) {
@@ -31,12 +30,12 @@ class NavigationCardView extends State<INavigationCard> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text(
                     widget.heading,
-                    style: TextStyle(fontSize: getFontSize(34)),
+                    style: const TextStyle(fontSize: 34),
                   ),
                 ),
-                Text(
+                const Text(
                   "img.png",
-                  style: TextStyle(fontSize: getFontSize(16)),
+                  style: TextStyle(fontSize: 16),
                   // color: Colors.amber
                 ),
                 const Spacer(flex: 1),
@@ -44,7 +43,7 @@ class NavigationCardView extends State<INavigationCard> {
                   padding: const EdgeInsets.all(8),
                   child: Text(
                     widget.description,
-                    style: TextStyle(fontSize: getFontSize(20)),
+                    style: const TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                     // color: Colors.amber
                   ),

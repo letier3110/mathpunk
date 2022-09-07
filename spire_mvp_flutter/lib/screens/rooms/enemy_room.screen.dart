@@ -8,10 +8,10 @@ import 'package:mathpunk_cardgame/components/room/current_mana.view.dart';
 import 'package:mathpunk_cardgame/components/room/discardpile.view.dart';
 import 'package:mathpunk_cardgame/components/room/drawpile.view.dart';
 import 'package:mathpunk_cardgame/components/room/endturn.view.dart';
-import 'package:mathpunk_cardgame/components/room/enemy_pawn.view.dart';
+import 'package:mathpunk_cardgame/components/pawn/enemy_pawn.view.dart';
 import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
-import 'package:mathpunk_cardgame/components/room/player_pawn.view.dart';
+import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 

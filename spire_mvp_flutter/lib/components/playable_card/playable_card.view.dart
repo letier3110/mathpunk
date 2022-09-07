@@ -133,7 +133,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   playerMana >= widget.card.getMana() &&
                   widget.card.isCardPlayable())
                 Center(
-                  child: GlowEffect(
+                  child: GlowEffectCard(
                       child: SizedBox(
                     height: calcHeightByWidth(cardWidth),
                     width: cardWidth,

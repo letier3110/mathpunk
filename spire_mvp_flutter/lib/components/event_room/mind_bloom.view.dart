@@ -66,170 +66,147 @@ class _MindBloomViewView extends State<MindBloomView> {
       width: double.maxFinite,
       height: double.maxFinite,
       color: const Color(0xFF222222),
-      child: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(60),
-            color: Colors.amber,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: width / 3,
-                  height: width / 3,
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(10, 28, 10, 10),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/mind_bloom.png'),
-                          fit: BoxFit.fill),
-                    ),
-                  ),
+      child: Container(
+        margin: const EdgeInsets.all(60),
+        color: Colors.amber,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: width / 3,
+              height: width / 3,
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(10, 28, 10, 10),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/mind_bloom.png'),
+                      fit: BoxFit.fill),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(10, 28, 10, 10),
-                    child: ListView(
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 28, 10, 10),
+              width: (width / 2),
+              height: width / 3,
+              child: ListView(
+                children: [
+                  if (canLeave)
+                    const Text('Can it really be this easy?',
+                        style: TextStyle(color: Colors.black, fontSize: 24)),
+                  if (!canLeave)
+                    const Text(
+                        'While walking and traversing through the chaos of the Spire, your thoughts suddenly begin to feel very... real...',
+                        style: TextStyle(color: Colors.black, fontSize: 24)),
+                  if (!canLeave)
+                    RichText(
+                        textAlign: TextAlign.left,
+                        text: const TextSpan(children: [
+                          TextSpan(
+                              text: 'Imaginings of ',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
+                          TextSpan(
+                              text: 'monsters',
+                              style: TextStyle(
+                                  color: Colors.redAccent, fontSize: 24)),
+                          TextSpan(
+                              text: ' and ',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
+                          TextSpan(
+                              text: 'riches ',
+                              style: TextStyle(
+                                  color: Colors.deepPurple, fontSize: 24)),
+                          TextSpan(
+                              text:
+                                  'begin to manifest themselves into reality.',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
+                        ])),
+                  if (!canLeave)
+                    Row(
                       children: [
-                        if (canLeave)
-                          const Text('Can it really be this easy?',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 24)),
-                        if (!canLeave)
-                          const Text(
-                              'While walking and traversing through the chaos of the Spire, your thoughts suddenly begin to feel very... real...',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 24)),
-                        if (!canLeave)
-                          RichText(
-                              textAlign: TextAlign.left,
-                              text: const TextSpan(children: [
-                                TextSpan(
-                                    text: 'Imaginings of ',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 24)),
-                                TextSpan(
-                                    text: 'monsters',
-                                    style: TextStyle(
-                                        color: Colors.redAccent, fontSize: 24)),
-                                TextSpan(
-                                    text: ' and ',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 24)),
-                                TextSpan(
-                                    text: 'riches ',
-                                    style: TextStyle(
-                                        color: Colors.deepPurple,
-                                        fontSize: 24)),
-                                TextSpan(
-                                    text:
-                                        'begin to manifest themselves into reality.',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 24)),
-                              ])),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        if (!canLeave)
-                          Row(
-                            children: [
-                              Container(
+                        Container(
+                            padding: const EdgeInsets.all(12),
+                            child: ElevatedButton(
+                              onPressed: warTapHandler,
+                              // style: ElevatedButton.styleFrom(
+                              //     surfaceTintColor: Colors.greenAccent),
+                              child: Container(
                                   padding: const EdgeInsets.all(12),
-                                  child: ElevatedButton(
-                                    onPressed: warTapHandler,
-                                    // style: ElevatedButton.styleFrom(
-                                    //     surfaceTintColor: Colors.greenAccent),
-                                    child: Container(
-                                        padding: const EdgeInsets.all(12),
-                                        width: (width - 200) / 2,
-                                        child: const Text(
-                                          "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
-                                          style: TextStyle(fontSize: 24),
-                                        )),
+                                  width: (width - 200) / 2,
+                                  child: const Text(
+                                    "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
+                                    style: TextStyle(fontSize: 24),
                                   )),
-                            ],
-                          ),
-                        if (!canLeave)
-                          Row(
-                            children: [
-                              Container(
-                                  padding: const EdgeInsets.all(12),
-                                  child: ElevatedButton(
-                                    onPressed: richTapHandler,
-                                    // style: ElevatedButton.styleFrom(
-                                    //     surfaceTintColor: Colors.greenAccent),
-                                    child: Expanded(
-                                      child: Container(
-                                          padding: const EdgeInsets.all(12),
-                                          width: (width - 200) / 2,
-                                          child: const Text(
-                                            "[I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.",
-                                            style: TextStyle(fontSize: 24),
-                                          )),
-                                    ),
-                                  )),
-                            ],
-                          ),
-                        if (!canLeave)
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                child: ElevatedButton(
-                                  onPressed: onHealthyTap,
-                                  // style: ElevatedButton.styleFrom(
-                                  //     surfaceTintColor: Colors.greenAccent),
-                                  child: Container(
-                                      padding: const EdgeInsets.all(12),
-                                      width: (width - 200) / 2,
-                                      child: const Text(
-                                        "[I am Healthy] Heal to full HP. Become Cursed - Doubt.",
-                                        style: TextStyle(fontSize: 24),
-                                      )),
-                                ),
-                              ),
-                            ],
-                          ),
-                        if (canLeave)
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                child: ElevatedButton(
-                                  onPressed: onLeaveRoomTap,
-                                  // style: ElevatedButton.styleFrom(
-                                  //     surfaceTintColor: Colors.greenAccent),
-                                  child: Container(
-                                      padding: const EdgeInsets.all(12),
-                                      child: const Text(
-                                        "Continue",
-                                        style: TextStyle(fontSize: 24),
-                                      )),
-                                ),
-                              ),
-                            ],
-                          ),
+                            )),
                       ],
                     ),
-                  ),
-                ),
-              ],
+                  if (!canLeave)
+                    Row(
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(12),
+                            child: ElevatedButton(
+                              onPressed: richTapHandler,
+                              // style: ElevatedButton.styleFrom(
+                              //     surfaceTintColor: Colors.greenAccent),
+                              child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  width: (width - 200) / 2,
+                                  child: const Text(
+                                    "[I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.",
+                                    style: TextStyle(fontSize: 24),
+                                  )),
+                            )),
+                      ],
+                    ),
+                  if (!canLeave)
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          child: ElevatedButton(
+                            onPressed: onHealthyTap,
+                            // style: ElevatedButton.styleFrom(
+                            //     surfaceTintColor: Colors.greenAccent),
+                            child: Container(
+                                padding: const EdgeInsets.all(12),
+                                width: (width - 200) / 2,
+                                child: const Text(
+                                  "[I am Healthy] Heal to full HP. Become Cursed - Doubt.",
+                                  style: TextStyle(fontSize: 24),
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                  if (canLeave)
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          child: ElevatedButton(
+                            onPressed: onLeaveRoomTap,
+                            // style: ElevatedButton.styleFrom(
+                            //     surfaceTintColor: Colors.greenAccent),
+                            child: Container(
+                                padding: const EdgeInsets.all(12),
+                                width: (width - 200) / 2,
+                                child: const Text(
+                                  "Continue",
+                                  style: TextStyle(fontSize: 24),
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
             ),
-          ),
-          // Positioned(
-          //   top: 10,
-          //   left: 40,
-          //   child: Container(
-          //     padding: const EdgeInsets.fromLTRB(10, 10, 180, 10),
-          //     color: Colors.amberAccent,
-          //     child: Text('Mind Bloom',
-          //         style: TextStyle(
-          //             color: Colors.black, fontSize: getFontSize(24))),
-          //   ),
-          // ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ const int _nextRoomsConnectionsRandom = 1;
 const int _nextRoomsConnectionsFixed = 1;
 const int _roomConnectionProbability = 50;
 const int _tradeRoomProbability = 10;
-const int _eventRoomProbability = 5;
+const int _eventRoomProbability = 50;
 
 List<List<Room>> generateMap() {
   List<List<Room>> gameMap = [];

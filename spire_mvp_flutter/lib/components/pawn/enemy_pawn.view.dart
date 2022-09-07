@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/components/pawn/glow_effect.view.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
@@ -20,11 +21,6 @@ Future<ui.Image> loadImage(String imagePath, int width, int height) async {
 
   final ui.Codec codec = await ui.instantiateImageCodec(bytes,
       targetHeight: height, targetWidth: width);
-  //  final codec = await ui.instantiateImageCodec(
-  //   assetImageByteData.buffer.asUint8List(),
-  //   targetHeight: height,
-  //   targetWidth: width,
-  // );
 
   final ui.Image image = (await codec.getNextFrame()).image;
 
@@ -63,33 +59,15 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
       child: GestureDetector(
         onTap: onTapHandler,
         child: Stack(children: [
-          if (gameState.selectingTarget != null)
+          if (gameState.selectingTarget != null &&
+              gameState.selectingTarget!.mana <=
+                  gameState.playerCharacter!.mana)
             FutureBuilder(
               future:
                   loadImage('assets/goblin.png', width ~/ 3.9, width ~/ 3.9),
               builder: (BuildContext context, AsyncSnapshot<ui.Image> image) {
                 if (image.hasData) {
-                  return Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, width / 160),
-                    child: Center(
-                      child: ShaderMask(
-                        blendMode: BlendMode.dstATop,
-                        shaderCallback: (Rect bounds) {
-                          return ui.ImageShader(
-                            image.data!,
-                            TileMode.mirror,
-                            TileMode.mirror,
-                            Matrix4.identity().storage,
-                          );
-                        },
-                        child: Container(
-                          color: const Color.fromARGB(119, 52, 223, 46),
-                          height: width / 3.9,
-                          width: width / 3.9,
-                        ),
-                      ),
-                    ),
-                  ); // image is ready
+                  return GlowEffectPawn(image: image.data!); // image is ready
                 } else {
                   return Container(); // placeholder
                 }

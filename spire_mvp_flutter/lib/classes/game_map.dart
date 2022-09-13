@@ -13,10 +13,7 @@ import 'package:mathpunk_cardgame/utils/room.util.dart';
 const int _levelsRandomLength = 7;
 const int _levelsFixedLength = 12;
 const int _roomsCountPerSliceRandom = 3;
-const int _roomsCountPerSliceFixed = 2;
-const int _nextRoomsConnectionsRandom = 1;
-const int _nextRoomsConnectionsFixed = 1;
-const int _roomConnectionProbability = 50;
+const int _roomsCountPerSliceFixed = 3;
 const int _tradeRoomProbability = 10;
 const int _eventRoomProbability = 5;
 
@@ -55,16 +52,16 @@ List<List<Room>> generateMap() {
       roomSlice.add(room);
     }
     if (prevSlice.isNotEmpty) {
-      for (var room in prevSlice) {
-        var roomConnections = 0;
-        var maxRoomConnetions = rng.nextInt(_nextRoomsConnectionsRandom) +
-            _nextRoomsConnectionsFixed;
-        for (var j = 0; j < roomsCount; j++) {
-          if (roomConnections == maxRoomConnetions) continue;
-          if (getProbability(_roomConnectionProbability)) {
-            room.nextRooms.add(roomSlice[j]);
-            roomConnections++;
+      var roomSliceCopy = roomSlice.map((x) => x).toList();
+      var maxCount = roomSliceCopy.length / prevSlice.length;
+      for (var baseCount = 0; baseCount < maxCount.ceil(); baseCount++) {
+        for (var room in prevSlice) {
+          if (roomSliceCopy.isEmpty) {
+            roomSliceCopy = roomSlice.map((x) => x).toList();
           }
+          var randChoice = rng.nextInt(roomSliceCopy.length);
+          room.nextRooms.add(roomSliceCopy[randChoice]);
+          roomSliceCopy.removeAt(randChoice);
         }
       }
     }

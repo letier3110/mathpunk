@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class GlowEffect extends StatefulWidget {
+class GlowEffectCard extends StatefulWidget {
   final Widget child;
-  const GlowEffect({required this.child, Key? key}) : super(key: key);
+  const GlowEffectCard({required this.child, Key? key}) : super(key: key);
 
   @override
-  State<GlowEffect> createState() => GlowEffectView();
+  State<GlowEffectCard> createState() => GlowEffectCardView();
 }
 
 const double minAnimationValue = 1;
@@ -14,7 +14,7 @@ const double divider = 1;
 
 const wavecolor = Color.fromARGB(119, 52, 223, 46);
 
-class GlowEffectView extends State<GlowEffect>
+class GlowEffectCardView extends State<GlowEffectCard>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;

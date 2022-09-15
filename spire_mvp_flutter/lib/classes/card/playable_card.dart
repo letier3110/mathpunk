@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../../components/highlight_text.dart';
@@ -17,6 +18,7 @@ class PlayableCard {
   bool ethereal = false;
   int step = 1;
   int maxSteps = 1;
+  int precision = maxPrecisionChance;
   // possible place of bugs with selectedCards logic
   List<PlayableCard> selectedCards = [];
 
@@ -31,7 +33,8 @@ class PlayableCard {
       cardMaxSteps = 1,
       List<PlayableCard> cardSelectedCards = const [],
       cardEthereal = false,
-      cardExhaused = false}) {
+      cardExhaused = false,
+      cardPrecision = maxPrecisionChance}) {
     ethereal = cardEthereal;
     exhausted = cardExhaused;
     name = cardName;
@@ -42,6 +45,7 @@ class PlayableCard {
     type = cardType;
     targetType = cardTargetType;
     selectedCards = cardSelectedCards;
+    precision = cardPrecision;
   }
 
   String getCardName() {
@@ -120,6 +124,7 @@ class PlayableCard {
         cardMaxSteps: json['maxSteps'] as int,
         cardExhaused: json['exhausted'] as bool,
         cardEthereal: json['ethereal'] as bool,
+        cardPrecision: json(['precision']) as int,
         cardType: decodeCardTypeFromJson(json['type']),
         cardTargetType: decodeTargetEnumFromJson(json['targetType']));
   }
@@ -132,6 +137,7 @@ class PlayableCard {
         'maxSteps': maxSteps,
         'exhausted': exhausted,
         'ethereal': ethereal,
+        'precision': precision,
         'type': type.toString(),
         'targetType': targetType.toString(),
       };

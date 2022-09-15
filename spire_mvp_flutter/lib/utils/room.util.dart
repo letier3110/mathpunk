@@ -104,5 +104,3 @@ Widget getRoomComponent(Room room) {
     //   return 'DefaultRoom';
   }
 }
-
-bool getProbability(int probability) => Random().nextInt(100) <= probability;

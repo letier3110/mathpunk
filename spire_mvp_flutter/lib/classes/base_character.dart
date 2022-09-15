@@ -1,3 +1,5 @@
+import 'package:mathpunk_cardgame/classes/util.dart';
+
 import '../interfaces/character.interface.dart';
 
 class BaseCharacter implements ICharacter {
@@ -13,6 +15,8 @@ class BaseCharacter implements ICharacter {
   int strengthEmpower = 0;
   int strengthCurse = 0;
   int timesReceivedDamageInRound = 0;
+  int dodgeChance = 0;
+  int precisionChance = maxPrecisionChance;
 
   BaseCharacter() : super() {
     health = 10;
@@ -55,11 +59,22 @@ class BaseCharacter implements ICharacter {
     this.timesReceivedDamageInRound += timesReceivedDamageInRound;
   }
 
+  addDodgeChance(int dodgeChance) {
+    this.dodgeChance += dodgeChance;
+  }
+
+  addPrecisionChance(int precisionChance) {
+    this.precisionChance += precisionChance;
+  }
+
   void resetRoundStatuses() {
     timesReceivedDamageInRound = 0;
   }
 
   recieveDamage(int damage) {
+    if (getProbability(dodgeChance)) {
+      return;
+    }
     double localDamage = damage.toDouble();
     if (vulnerable > 1) {
       localDamage = damage * 1.5;
@@ -113,6 +128,14 @@ class BaseCharacter implements ICharacter {
     this.maxHealth = maxHealth;
   }
 
+  getDodgeChance() {
+    return dodgeChance;
+  }
+
+  getPrecisionChance() {
+    return precisionChance;
+  }
+
   factory BaseCharacter.fromJson(dynamic json) {
     BaseCharacter character = BaseCharacter();
     character.setHealth(json['health'] as int);
@@ -125,6 +148,8 @@ class BaseCharacter implements ICharacter {
     character.addStrengthEmpower(json['strengthEmpower'] as int);
     character.addTimesReceivedDamageInRound(
         json['timesReceivedDamageInRound'] as int);
+    character.addDodgeChance(json['dodgeChance'] as int);
+    character.addPrecisionChance(json['precisionChance'] as int);
 
     return character;
   }
@@ -140,5 +165,7 @@ class BaseCharacter implements ICharacter {
         'strengthCurse': strengthCurse,
         'strengthEmpower': strengthEmpower,
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
+        'dodgeChance': dodgeChance,
+        'precisionChance': precisionChance,
       };
 }

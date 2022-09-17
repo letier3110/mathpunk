@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/resources/resources.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -19,6 +20,7 @@ class PlayableCard {
   int step = 1;
   int maxSteps = 1;
   int precision = maxPrecisionChance;
+  ResourcesEnum resourceType = ResourcesEnum.mana;
   // possible place of bugs with selectedCards logic
   List<PlayableCard> selectedCards = [];
 
@@ -34,7 +36,8 @@ class PlayableCard {
       List<PlayableCard> cardSelectedCards = const [],
       cardEthereal = false,
       cardExhaused = false,
-      cardPrecision = maxPrecisionChance}) {
+      cardPrecision = maxPrecisionChance,
+      cardResource = ResourcesEnum.mana}) {
     ethereal = cardEthereal;
     exhausted = cardExhaused;
     name = cardName;
@@ -46,6 +49,7 @@ class PlayableCard {
     targetType = cardTargetType;
     selectedCards = cardSelectedCards;
     precision = cardPrecision;
+    resourceType = cardResource;
   }
 
   String getCardName() {

@@ -1,5 +1,6 @@
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/math/mathfunction.dart';
 import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
 import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
@@ -18,6 +19,7 @@ class PlayerCharacter extends BaseCharacter {
   late int drawPower = 3;
   late int gold = 100;
   late int cardsPlayedInRound = 0;
+  late Mathfunction? mathfunction;
 
   PlayerCharacter({playerGold = 100}) : super() {
     deck = Deck([]);
@@ -61,6 +63,18 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(ConsumableItem item) {
     items.add(item);
+  }
+
+  void addMathFunction(Mathfunction mathfunction) {
+    this.mathfunction = mathfunction;
+  }
+
+  bool isMathfunctionDefined() {
+    return mathfunction != null;
+  }
+
+  Mathfunction? getMathfunction() {
+    return mathfunction;
   }
 
   playCard(PlayableCard card, List<Enemy> targets) {

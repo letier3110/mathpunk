@@ -28,7 +28,7 @@ class HeadbuttCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

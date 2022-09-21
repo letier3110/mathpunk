@@ -27,7 +27,7 @@ class IronWaveCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localBlock = block;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
 
     return Container(
       child: Column(

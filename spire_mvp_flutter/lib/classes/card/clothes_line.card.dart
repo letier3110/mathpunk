@@ -24,7 +24,7 @@ class ClothesLineCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localWeak = weak;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
 
     return Container(
       child: Column(

@@ -25,7 +25,7 @@ class ThunderclapCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localVulnerable = vulnerable;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [

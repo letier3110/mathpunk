@@ -82,7 +82,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       if (widget.disabled) {
         return;
       }
-      if (widget.card.targetType == TargetEnum.unplayable) {
+      if (!widget.card.isCardPlayable()) {
         return;
       }
       if (widget.onTap != null) {
@@ -128,7 +128,6 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
           child: Center(
             child: Stack(children: [
               if (widget.disabled == false &&
-                  widget.card.targetType != TargetEnum.unplayable &&
                   widget.glow &&
                   playerMana >= widget.card.getMana() &&
                   widget.card.isCardPlayable())
@@ -162,13 +161,6 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                         image: AssetImage('assets/card_front_full.png'),
                         fit: BoxFit.fill),
                   ),
-                  // decoration: BoxDecoration(
-                  //   color: widget.disabled ||
-                  //           widget.card.targetType == TargetEnum.unplayable
-                  //       ? Colors.grey
-                  //       : Colors.deepPurpleAccent,
-                  //   borderRadius: BorderRadius.circular(20),
-                  // ),
                   child: Stack(
                     children: [
                       SizedBox(
@@ -201,7 +193,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                           ],
                         ),
                       ),
-                      if (widget.card.targetType != TargetEnum.unplayable)
+                      if (widget.card.isCardPlayable())
                         Positioned(
                           top: 8,
                           left: cardWidth / 24,

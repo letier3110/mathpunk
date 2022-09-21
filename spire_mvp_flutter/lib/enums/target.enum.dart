@@ -1,4 +1,4 @@
-enum TargetEnum { singleTarget, allTargets, cardTarget, unplayable }
+enum TargetEnum { singleTarget, allTargets, cardTarget }
 
 TargetEnum decodeTargetEnumFromJson(dynamic json) {
   switch (json) {
@@ -6,8 +6,6 @@ TargetEnum decodeTargetEnumFromJson(dynamic json) {
       return TargetEnum.allTargets;
     case 'TargetEnum.cardTarget':
       return TargetEnum.cardTarget;
-    case 'TargetEnum.unplayable':
-      return TargetEnum.unplayable;
 
     case 'TargetEnum.singleTarget':
     default:

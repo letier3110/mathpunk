@@ -144,7 +144,6 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom == null) return false;
     if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
-    if (card.targetType == TargetEnum.unplayable) return false;
     if (playerCharacter!
         .getDeck()
         .getHand()

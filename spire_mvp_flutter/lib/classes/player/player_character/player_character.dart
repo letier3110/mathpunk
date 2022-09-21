@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card_target_queue.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/math/mathfunction.dart';
 import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
@@ -20,12 +23,14 @@ class PlayerCharacter extends BaseCharacter {
   late int gold = 100;
   late int cardsPlayedInRound = 0;
   late Mathfunction? mathfunction;
+  late Queue<CardTargetQueue> playableCardQueue;
 
   PlayerCharacter({playerGold = 100}) : super() {
     deck = Deck([]);
     relics = [];
     items = [];
     gold = playerGold;
+    playableCardQueue = Queue<CardTargetQueue>();
   }
 
   attachDeck(Deck deck) {
@@ -63,6 +68,10 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(ConsumableItem item) {
     items.add(item);
+  }
+
+  void addToQueue(CardTargetQueue item) {
+    playableCardQueue.add(item);
   }
 
   void addMathFunction(Mathfunction mathfunction) {
@@ -155,6 +164,13 @@ class PlayerCharacter extends BaseCharacter {
 
     character.addCardsPlayedInRound(json['cardsPlayedInRound'] as int);
 
+    var list = (json['playableCardQueue'] as List<CardTargetQueue>);
+    var q = Queue<CardTargetQueue>();
+    for (int i = 0; i < list.length; i++) {
+      q.add(list[i]);
+    }
+    character.playableCardQueue = q;
+
     return character;
   }
 
@@ -169,5 +185,6 @@ class PlayerCharacter extends BaseCharacter {
         'drawPower': drawPower,
         'gold': gold,
         'cardsPlayedInRound': cardsPlayedInRound,
+        'playableCardQueue': playableCardQueue.map((e) => e).toList()
       };
 }

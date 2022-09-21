@@ -20,8 +20,11 @@ class NormalityCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardTargetType: TargetEnum.unplayable,
+            cardTargetType: TargetEnum.allTargets,
             cardType: CardType.curse);
+
+  @override
+  bool isCardPlayable() => false;
 
   @override
   StatelessWidget getCardDescription() {

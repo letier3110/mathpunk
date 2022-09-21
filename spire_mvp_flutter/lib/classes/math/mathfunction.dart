@@ -49,6 +49,12 @@ class Mathfunction {
     }
     return slots[slotNumber] != null;
   }
+
+  double apply() {
+    if (slots.isEmpty) return 0;
+    for (var slot in slots) {}
+    return 1;
+  }
 }
 
 class Mathslot {

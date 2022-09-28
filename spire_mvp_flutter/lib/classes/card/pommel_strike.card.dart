@@ -16,8 +16,7 @@ class PommelStrikeCard extends PlayableCard {
   PommelStrikeCard(
       {cardName = 'Pommel Strike',
       cardDescription = 'Deal 9(10) damage. Draw 1(2) card(s).',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

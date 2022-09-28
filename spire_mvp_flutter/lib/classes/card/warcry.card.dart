@@ -17,8 +17,7 @@ class WarCryCard extends PlayableCard {
       {cardName = 'Warcry',
       cardDescription =
           'Draw 1(2) card(s). Place a card from your hand on top of your draw pile. Exhaust.',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardSteps: 1,
             cardMaxSteps: 3,

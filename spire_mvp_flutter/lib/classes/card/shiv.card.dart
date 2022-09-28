@@ -13,8 +13,7 @@ class ShivCard extends PlayableCard {
   ShivCard(
       {cardName = 'Shiv',
       cardDescription = 'Deal 4 damage.Exhaust.',
-      cardMana = 1,
-      cardDamage = 4})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

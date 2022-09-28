@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
-import 'package:mathpunk_cardgame/storage/gamestate.storage.dart';
 
 import '../controllers/navigation.controller.dart';
 
@@ -33,9 +32,6 @@ class SavesStorage {
       saves.loading = false;
 
       // if save exist
-      saves.notifyListeners();
-
-      GameStateStorage gameStorage;
 
       navigation.changeScreen(ScreenEnum.mainMenu);
 
@@ -43,8 +39,6 @@ class SavesStorage {
     } catch (e) {
       // if save not exist
       saves.loading = false;
-      saves.notifyListeners();
-
       navigation.changeScreen(ScreenEnum.mainMenu);
       return 0;
     }

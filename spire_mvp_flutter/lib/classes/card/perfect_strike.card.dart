@@ -17,8 +17,7 @@ class PerfectStrikeCard extends PlayableCard {
       {cardName = 'Perfect Strike',
       cardDescription =
           'Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".',
-      cardMana = 2,
-      cardDamage = 5})
+      cardMana = 2})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

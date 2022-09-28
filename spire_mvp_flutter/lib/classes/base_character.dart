@@ -17,6 +17,8 @@ class BaseCharacter implements ICharacter {
   int timesReceivedDamageInRound = 0;
   int dodgeChance = 0;
   int precisionChance = maxPrecisionChance;
+  double mathMultiplierScore = 0;
+  int mathMultiplierTime = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -65,6 +67,14 @@ class BaseCharacter implements ICharacter {
 
   addPrecisionChance(int precisionChance) {
     this.precisionChance += precisionChance;
+  }
+
+  addMathMultiplierScore(double mathMultiplierScore) {
+    this.mathMultiplierScore += mathMultiplierScore;
+  }
+
+  addMathMultiplierTime(int mathMultiplierTime) {
+    this.mathMultiplierTime += mathMultiplierTime;
   }
 
   void resetRoundStatuses() {
@@ -150,6 +160,8 @@ class BaseCharacter implements ICharacter {
         json['timesReceivedDamageInRound'] as int);
     character.addDodgeChance(json['dodgeChance'] as int);
     character.addPrecisionChance(json['precisionChance'] as int);
+    character.addMathMultiplierScore(json['mathMultiplierScore'] as double);
+    character.addMathMultiplierTime(json['mathMultiplierTime'] as int);
 
     return character;
   }
@@ -167,5 +179,7 @@ class BaseCharacter implements ICharacter {
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
         'dodgeChance': dodgeChance,
         'precisionChance': precisionChance,
+        'mathMultiplierScore': mathMultiplierScore,
+        'mathMultiplierTime': mathMultiplierTime,
       };
 }

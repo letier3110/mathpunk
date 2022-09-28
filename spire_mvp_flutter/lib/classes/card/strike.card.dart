@@ -10,10 +10,7 @@ int damage = 5;
 
 class StrikeCard extends PlayableCard {
   StrikeCard(
-      {cardName = 'Strike',
-      cardDescription = 'Deal 5 damage.',
-      cardMana = 1,
-      cardDamage = 5})
+      {cardName = 'Strike', cardDescription = 'Deal 5 damage.', cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -23,10 +20,6 @@ class StrikeCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int finalDamage = predictDamage(damage: damage, mana: mana);
-    // TODO: recursive apply from root to undefined.
-    // TODO: on undefined begin to recursevly call apply
-    // finalDamage = character.mathfunction?.
-    // getFirstUndefinedSlot.apply(predictDamage)
     return Container(
       child: Column(
         children: [

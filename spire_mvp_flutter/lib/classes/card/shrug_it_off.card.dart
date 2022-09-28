@@ -16,8 +16,7 @@ class ShrugItOffCard extends PlayableCard {
   ShrugItOffCard(
       {cardName = 'Shrug it Off',
       cardDescription = 'Gain 8(11) Block. Draw 1 card.',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

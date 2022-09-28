@@ -14,8 +14,7 @@ class NormalityCard extends PlayableCard {
       {cardName = 'Normality',
       cardDescription =
           'Unplayable.You cannot play more than 3 cards this turn.',
-      cardMana = 1,
-      cardDamage = 6})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

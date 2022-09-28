@@ -16,8 +16,7 @@ class IronWaveCard extends PlayableCard {
   IronWaveCard(
       {cardName = 'Iron Wave',
       cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

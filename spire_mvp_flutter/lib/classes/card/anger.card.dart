@@ -11,12 +11,11 @@ import 'playable_card.dart';
 int damage = 6;
 
 class AngerCard extends PlayableCard {
-  AngerCard(
-      {cardName = 'Anger',
-      cardDescription = 'Deal 6 damage.',
-      cardMana = 1,
-      cardDamage = 6})
-      : super(
+  AngerCard({
+    cardName = 'Anger',
+    cardDescription = 'Deal 6 damage.',
+    cardMana = 1,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,

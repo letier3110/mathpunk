@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+const wavecolor = Color.fromARGB(119, 52, 223, 46);
+
 class GlowEffectCard extends StatefulWidget {
   final Widget child;
-  const GlowEffectCard({required this.child, Key? key}) : super(key: key);
+  final Color waveColor;
+  const GlowEffectCard(
+      {required this.child, this.waveColor = wavecolor, Key? key})
+      : super(key: key);
 
   @override
   State<GlowEffectCard> createState() => GlowEffectCardView();
@@ -11,8 +16,6 @@ class GlowEffectCard extends StatefulWidget {
 const double minAnimationValue = 1;
 const double maxAnimationValue = 8;
 const double divider = 1;
-
-const wavecolor = Color.fromARGB(119, 52, 223, 46);
 
 class GlowEffectCardView extends State<GlowEffectCard>
     with SingleTickerProviderStateMixin {
@@ -47,17 +50,17 @@ class GlowEffectCardView extends State<GlowEffectCard>
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: wavecolor,
+            color: widget.waveColor,
             blurRadius: 1,
             spreadRadius: values[0] / divider,
           ),
           BoxShadow(
-            color: wavecolor,
+            color: widget.waveColor,
             blurRadius: 1,
             spreadRadius: values[1] / divider,
           ),
           BoxShadow(
-            color: wavecolor,
+            color: widget.waveColor,
             blurRadius: 1,
             spreadRadius: values[2] / divider,
           ),

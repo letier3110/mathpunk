@@ -7,11 +7,11 @@ import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/card_type.enum.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-class DoubleMathCard extends PlayableCard {
-  DoubleMathCard(
-      {cardName = '2x',
-      cardDescription = 'Function. Doubles next value',
-      cardMana = 5})
+class TripleMathCard extends PlayableCard {
+  TripleMathCard(
+      {cardName = '3x',
+      cardDescription = 'Function. Triples next value',
+      cardMana = 25})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -24,7 +24,7 @@ class DoubleMathCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Function. Doubles next value.'),
+          HighlightDescriptionText(text: 'Function. Triples next value.'),
         ],
       ),
     );
@@ -33,7 +33,7 @@ class DoubleMathCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addMathMultiplierScore(2);
+    character.addMathMultiplierScore(3);
     if (character.mathMultiplierTime == 0) {
       character.addMathMultiplierTime(1);
     }

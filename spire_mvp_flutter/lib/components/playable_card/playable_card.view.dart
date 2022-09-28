@@ -11,6 +11,8 @@ import 'package:mathpunk_cardgame/enums/target.enum.dart';
 const double defaultHeight = 300;
 const double defaultWidth = 200;
 
+const wavecolor = Color.fromARGB(119, 179, 223, 46);
+
 class PlayableCardComponent extends StatefulWidget {
   final PlayableCard card;
   final bool glow;
@@ -137,6 +139,15 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                     height: calcHeightByWidth(cardWidth),
                     width: cardWidth,
                   )),
+                ),
+              if (widget.glow && widget.card.isCardBoosted())
+                Center(
+                  child: GlowEffectCard(
+                      waveColor: wavecolor,
+                      child: SizedBox(
+                        height: calcHeightByWidth(cardWidth),
+                        width: cardWidth,
+                      )),
                 ),
               Center(
                   child: Container(

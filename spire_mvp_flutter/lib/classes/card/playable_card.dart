@@ -52,6 +52,8 @@ class PlayableCard {
     resourceType = cardResource;
   }
 
+  bool isCardBoosted() => false;
+
   String getCardName() {
     return name;
   }
@@ -111,13 +113,6 @@ class PlayableCard {
   }
 
   bool isCardPlayable() => true;
-
-  execute(List<BaseCharacter> target) {
-    // can be failed,
-    // because of not correctly loaded from memory state or wrongly casted.
-    // PlayableCard class in not used directly, only as Generic Type
-    throw UnimplementedError();
-  }
 
   play(List<BaseCharacter> target) {
     // can be failed,

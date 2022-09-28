@@ -12,8 +12,7 @@ class TwinStrikeCard extends PlayableCard {
   TwinStrikeCard(
       {cardName = 'Twin Strike',
       cardDescription = 'Deal 5(7) damage twice.',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,

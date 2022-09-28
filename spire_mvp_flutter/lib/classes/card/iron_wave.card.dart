@@ -51,6 +51,12 @@ class IronWaveCard extends PlayableCard {
   }
 
   @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       PlayerCharacter character = Player.getPlayerInstance().getCharacter();

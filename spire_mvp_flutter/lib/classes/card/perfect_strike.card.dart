@@ -73,6 +73,12 @@ class PerfectStrikeCard extends PlayableCard {
   }
 
   @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localDamage = calculateDamage(damage: damage);

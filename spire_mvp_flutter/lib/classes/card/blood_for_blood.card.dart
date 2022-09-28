@@ -61,6 +61,12 @@ class BloodForBloodCard extends PlayableCard {
   }
 
   @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));

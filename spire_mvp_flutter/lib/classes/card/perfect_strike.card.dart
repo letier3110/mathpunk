@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
@@ -16,21 +17,16 @@ class PerfectStrikeCard extends PlayableCard {
       {cardName = 'Perfect Strike',
       cardDescription =
           'Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".',
-      cardMana = 2,
-      cardDamage = 5})
+      cardMana = 2})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack);
-
-  int calculateDamage() {
+  @override
+  StatelessWidget getCardDescription() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + character.strength;
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
+    int localDamage = predictDamage(damage: damage);
     Deck deck = character.getDeck();
     List<PlayableCard> drawPile = deck.getDrawPile();
     List<PlayableCard> hand = deck.getHand();
@@ -51,12 +47,7 @@ class PerfectStrikeCard extends PlayableCard {
         bonusDamage += 2;
       }
     }
-    return localDamage + bonusDamage;
-  }
-
-  @override
-  StatelessWidget getCardDescription() {
-    int finalDamage = calculateDamage();
+    int finalDamage = localDamage + bonusDamage;
     return Container(
       child: Column(
         children: [
@@ -82,9 +73,38 @@ class PerfectStrikeCard extends PlayableCard {
   }
 
   @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    int localDamage = calculateDamage(damage: damage);
+    Deck deck = character.getDeck();
+    List<PlayableCard> drawPile = deck.getDrawPile();
+    List<PlayableCard> hand = deck.getHand();
+    List<PlayableCard> discardPile = deck.getDiscardPile();
+    int bonusDamage = 0;
+    for (PlayableCard card in drawPile) {
+      if (card.name.contains('Strike')) {
+        bonusDamage += 2;
+      }
+    }
+    for (PlayableCard card in hand) {
+      if (card.name.contains('Strike')) {
+        bonusDamage += 2;
+      }
+    }
+    for (PlayableCard card in discardPile) {
+      if (card.name.contains('Strike')) {
+        bonusDamage += 2;
+      }
+    }
+    int finalDamage = localDamage + bonusDamage;
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(finalDamage);
     }
   }
 }

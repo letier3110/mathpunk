@@ -34,6 +34,9 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   int jsonTimesReceivedDamageInRound =
       json['timesReceivedDamageInRound'] as int;
 
+  int jsonDodgeChance = json['dodgeChance'] as int;
+  int jsonPrecisionChance = json['precisionChance'] as int;
+
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
 
   String jsonRuntime = json['_runtime'] as String;
@@ -79,6 +82,8 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
 
+  character.addDodgeChance(jsonDodgeChance);
+  character.addPrecisionChance(jsonPrecisionChance);
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 
   return character;

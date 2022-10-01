@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -23,7 +25,7 @@ class CleaveCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [
@@ -43,6 +45,12 @@ class CleaveCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
   }
 
   @override

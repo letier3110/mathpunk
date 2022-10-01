@@ -16,8 +16,7 @@ class IronWaveCard extends PlayableCard {
   IronWaveCard(
       {cardName = 'Iron Wave',
       cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -27,7 +26,7 @@ class IronWaveCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localBlock = block;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
 
     return Container(
       child: Column(
@@ -49,6 +48,12 @@ class IronWaveCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
   }
 
   @override

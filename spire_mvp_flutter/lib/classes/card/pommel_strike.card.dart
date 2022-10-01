@@ -16,8 +16,7 @@ class PommelStrikeCard extends PlayableCard {
   PommelStrikeCard(
       {cardName = 'Pommel Strike',
       cardDescription = 'Deal 9(10) damage. Draw 1(2) card(s).',
-      cardMana = 1,
-      cardDamage = 5})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -27,7 +26,7 @@ class PommelStrikeCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int localDraw = draw;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [
@@ -48,6 +47,12 @@ class PommelStrikeCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
   }
 
   @override

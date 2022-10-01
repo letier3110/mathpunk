@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
@@ -13,8 +15,7 @@ class ShivCard extends PlayableCard {
   ShivCard(
       {cardName = 'Shiv',
       cardDescription = 'Deal 4 damage.Exhaust.',
-      cardMana = 1,
-      cardDamage = 4})
+      cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -24,7 +25,7 @@ class ShivCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [
@@ -45,6 +46,12 @@ class ShivCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
   }
 
   @override

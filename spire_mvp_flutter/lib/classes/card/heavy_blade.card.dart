@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
 int damage = 14;
+int strengthModifier = 3;
 
 class HeavyBladeCard extends PlayableCard {
   HeavyBladeCard({
@@ -22,19 +24,10 @@ class HeavyBladeCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack);
 
-  int calculateDamage() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = damage + (character.strength * 3);
-    int weak = character.weak;
-    if (weak > 0) {
-      localDamage = (localDamage * 0.75).floor();
-    }
-    return localDamage;
-  }
-
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = calculateDamage();
+    int finalDamage = predictDamage(
+        damage: damage, mana: mana, strengthModifier: strengthModifier);
     return Container(
       child: Column(
         children: [
@@ -52,16 +45,23 @@ class HeavyBladeCard extends PlayableCard {
             const TextSpan(text: ' damage.')
           ])),
           HighlightDescriptionText(
-              text: 'Strength affects Heavy Blade 3 times.'),
+              text: 'Strength affects Heavy Blade $strengthModifier times.'),
         ],
       ),
     );
   }
 
   @override
+  bool isCardBoosted() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    return character.mathMultiplierScore > 0;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage());
+      target[0].recieveDamage(calculateDamage(
+          damage: damage, mana: mana, strengthModifier: strengthModifier));
     }
   }
 }

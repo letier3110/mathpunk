@@ -154,6 +154,6 @@ class PlayerCharacter extends BaseCharacter {
         'manaPower': manaPower,
         'drawPower': drawPower,
         'gold': gold,
-        'cardsPlayedInRound': cardsPlayedInRound,
+        'cardsPlayedInRound': cardsPlayedInRound
       };
 }

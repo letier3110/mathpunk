@@ -1,9 +1,11 @@
-enum CardType { attack, skill, power, status, curse }
+enum CardType { attack, skill, function, power, status, curse }
 
 CardType decodeCardTypeFromJson(dynamic json) {
   switch (json) {
     case 'CardType.attack':
       return CardType.attack;
+    case 'CardType.function':
+      return CardType.function;
     case 'CardType.curse':
       return CardType.curse;
 

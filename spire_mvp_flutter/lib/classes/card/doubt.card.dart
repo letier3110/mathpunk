@@ -13,14 +13,16 @@ class DoubtCard extends PlayableCard {
   DoubtCard(
       {cardName = 'Doubt',
       cardDescription = 'Unplayable.At the end of your turn, gain 1 Weak.',
-      cardMana = 0,
-      cardDamage = 0})
+      cardMana = 0})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardTargetType: TargetEnum.unplayable,
+            cardTargetType: TargetEnum.allTargets,
             cardType: CardType.curse);
+
+  @override
+  bool isCardPlayable() => false;
 
   @override
   StatelessWidget getCardDescription() {

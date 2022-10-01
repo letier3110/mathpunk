@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/iron_wave.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
@@ -10,20 +9,27 @@ import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 5;
-int block = 5;
+int damage = 7;
+int block = 7;
 
-class IronWaveCard extends PlayableCard {
-  IronWaveCard(
-      {cardName = 'Iron Wave',
+class IronWaveUpgradeCard extends PlayableCard {
+  IronWaveUpgradeCard(
+      {cardName = 'Iron Wave+',
       cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
       cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: IronWaveUpgradeCard());
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {

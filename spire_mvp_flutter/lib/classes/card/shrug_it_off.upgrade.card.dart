@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/shrug_it_off.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -10,12 +10,12 @@ import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
 import 'playable_card.dart';
 
-int block = 8;
+int block = 11;
 int draw = 1;
 
-class ShrugItOffCard extends PlayableCard {
-  ShrugItOffCard(
-      {cardName = 'Shrug it Off',
+class ShrugItOffUpgradeCard extends PlayableCard {
+  ShrugItOffUpgradeCard(
+      {cardName = 'Shrug it Off+',
       cardDescription = 'Gain 8(11) Block. Draw 1 card.',
       cardMana = 1})
       : super(
@@ -23,8 +23,15 @@ class ShrugItOffCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill,
-            cardUpgrageLink: ShrugItOffUpgradeCard());
+            cardType: CardType.skill);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {

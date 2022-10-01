@@ -1,46 +1,54 @@
-import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/warcry.upgrade.card.dart';
-import 'package:mathpunk_cardgame/classes/player/player.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'dart:math';
 
-import '../../enums/target.enum.dart';
+import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/deck.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
+
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
+import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-int draw = 1;
+int block = 9;
 int maxSelectableCards = 1;
 
-class WarCryCard extends PlayableCard {
-  WarCryCard(
-      {cardName = 'Warcry',
-      cardDescription =
-          'Draw 1(2) card(s). Place a card from your hand on top of your draw pile. Exhaust.',
-      cardMana = 1})
-      : super(
+class TrueGiftUpgradeCard extends PlayableCard {
+  TrueGiftUpgradeCard({
+    cardName = 'True Grit+',
+    cardDescription =
+        'Gain 7(9) Block. Exhaust a selected card from your hand.',
+    cardMana = 1,
+  }) : super(
+            cardName: cardName,
             cardSteps: 1,
             cardMaxSteps: 3,
-            cardExhaused: true,
-            cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill,
-            cardUpgrageLink: WarCryUpgradeCard());
+            cardType: CardType.skill);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {
-    int localDraw = draw;
+    int localBlock = block;
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Draw $localDraw card.'),
+          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           HighlightDescriptionText(
-              text: 'Place a card from your hand on top of your draw pile.'),
-          HighlightDescriptionText(text: 'Exhaust.')
+              text: 'Exhaust a selected card from your hand.'),
         ],
       ),
     );
@@ -61,17 +69,19 @@ class WarCryCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     if (step == 1) {
-      int localDraw = draw;
-      character.deck.draw(localDraw);
+      int localBlock = block;
+      character.addBlock(localBlock);
       step++;
       targetType = TargetEnum.cardTarget;
     } else {
       if (selectedCards.isNotEmpty) {
-        List<PlayableCard> hand = character.deck.getHand();
-        List<PlayableCard> drawPile = character.deck.getDrawPile();
+        List<PlayableCard> hand = character.getDeck().getHand();
+        // List<PlayableCard> discardPile = deck.getHand();
+        // List<PlayableCard> drawPile = deck.getDrawPile();
 
-        drawPile.insert(0, selectedCards[0]);
-        hand.remove(selectedCards[0]);
+        selectedCards[0].exhausted = true;
+        selectedCards[0]
+            .disposeToDiscard(hand, character.getDeck().exhaustPile);
         setSelectedCards([]);
       }
       targetType = TargetEnum.allTargets;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/thunderclap.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -22,7 +23,8 @@ class ThunderclapCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: ThunderclapUpgradeCard());
 
   @override
   StatelessWidget getCardDescription() {

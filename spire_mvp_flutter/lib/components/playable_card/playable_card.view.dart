@@ -183,13 +183,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, cardWidth / 40, 0, 0),
-                              child: Text(
-                                widget.card.name,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        16 * (widget.size! / defaultWidth)),
-                              ),
+                              child: widget.card.getCardName(),
                             ),
                             Container(
                               height: calcHeightByWidth(cardWidth) * 0.3,

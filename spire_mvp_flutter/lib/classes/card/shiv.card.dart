@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/shiv.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
@@ -14,14 +15,15 @@ int damage = 4;
 class ShivCard extends PlayableCard {
   ShivCard(
       {cardName = 'Shiv',
-      cardDescription = 'Deal 4 damage.Exhaust.',
+      cardDescription = 'Deal 4 damage. Exhaust.',
       cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardExhaused: true,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: ShivUpgradeCard());
 
   @override
   StatelessWidget getCardDescription() {

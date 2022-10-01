@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/flex.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -10,12 +10,12 @@ import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-const int strength = 2;
-const int strengthCurse = 2;
+const int strength = 4;
+const int strengthCurse = 4;
 
-class FlexCard extends PlayableCard {
-  FlexCard({
-    cardName = 'Flex',
+class FlexUpgradeCard extends PlayableCard {
+  FlexUpgradeCard({
+    cardName = 'Flex+',
     cardDescription =
         'Gain 2(4) Strength. At the end of your turn, lose 2(4) Strength.',
     cardMana = 0,
@@ -24,8 +24,15 @@ class FlexCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill,
-            cardUpgrageLink: FlexUpgradeCard());
+            cardType: CardType.skill);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {

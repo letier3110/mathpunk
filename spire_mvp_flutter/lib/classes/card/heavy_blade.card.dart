@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/heavy_blade.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
@@ -22,7 +23,8 @@ class HeavyBladeCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: HeavyBladeUpgradeCard());
 
   @override
   StatelessWidget getCardDescription() {

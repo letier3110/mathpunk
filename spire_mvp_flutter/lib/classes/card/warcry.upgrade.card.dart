@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/warcry.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../../enums/target.enum.dart';
@@ -10,12 +10,12 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int draw = 1;
+int draw = 2;
 int maxSelectableCards = 1;
 
-class WarCryCard extends PlayableCard {
-  WarCryCard(
-      {cardName = 'Warcry',
+class WarCryUpgradeCard extends PlayableCard {
+  WarCryUpgradeCard(
+      {cardName = 'Warcry+',
       cardDescription =
           'Draw 1(2) card(s). Place a card from your hand on top of your draw pile. Exhaust.',
       cardMana = 1})
@@ -27,8 +27,15 @@ class WarCryCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill,
-            cardUpgrageLink: WarCryUpgradeCard());
+            cardType: CardType.skill);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {
@@ -37,7 +44,7 @@ class WarCryCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Draw $localDraw card.'),
+          HighlightDescriptionText(text: 'Draw $localDraw cards.'),
           HighlightDescriptionText(
               text: 'Place a card from your hand on top of your draw pile.'),
           HighlightDescriptionText(text: 'Exhaust.')

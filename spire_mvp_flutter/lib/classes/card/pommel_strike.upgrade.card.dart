@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/iron_wave.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
@@ -10,30 +9,35 @@ import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 5;
-int block = 5;
+int damage = 10;
+int draw = 2;
 
-class IronWaveCard extends PlayableCard {
-  IronWaveCard(
-      {cardName = 'Iron Wave',
-      cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
+class PommelStrikeUpgradeCard extends PlayableCard {
+  PommelStrikeUpgradeCard(
+      {cardName = 'Pommel Strike+',
+      cardDescription = 'Deal 9(10) damage. Draw 1(2) card(s).',
       cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: IronWaveUpgradeCard());
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {
-    int localBlock = block;
+    int localDraw = draw;
     int finalDamage = predictDamage(damage: damage, mana: mana);
-
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           RichText(
               text: TextSpan(children: [
             const TextSpan(text: 'Deal '),
@@ -46,7 +50,8 @@ class IronWaveCard extends PlayableCard {
                             ? Colors.redAccent
                             : Colors.white)),
             const TextSpan(text: ' damage.')
-          ]))
+          ])),
+          HighlightDescriptionText(text: 'Draw $localDraw card.'),
         ],
       ),
     );
@@ -61,10 +66,10 @@ class IronWaveCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-      int localBlock = block;
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
-      character.addBlock(localBlock);
+      int localDraw = draw;
+      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+      character.deck.draw(localDraw);
     }
   }
 }

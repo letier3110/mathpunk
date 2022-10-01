@@ -21,7 +21,8 @@ class CleaveCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: CleaveCard());
 
   @override
   StatelessWidget getCardDescription() {

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
@@ -11,6 +12,8 @@ import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
 
 const maxPrecisionChance = 100;
 const minDodgeChance = 0;
+
+Color getUpgradedCardColor() => Colors.greenAccent;
 
 int calculateDamage(
     {required int damage, int mana = 2, int strengthModifier = 1}) {

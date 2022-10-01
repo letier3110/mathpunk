@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/headbutt.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -11,12 +10,12 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 9;
+int damage = 12;
 int maxSelectableCards = 1;
 
-class HeadbuttCard extends PlayableCard {
-  HeadbuttCard({
-    cardName = 'Headbutt',
+class HeadbuttUpgradeCard extends PlayableCard {
+  HeadbuttUpgradeCard({
+    cardName = 'Headbutt+',
     cardDescription =
         'Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.',
     cardMana = 1,
@@ -26,8 +25,15 @@ class HeadbuttCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: HeadbuttUpgradeCard());
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {

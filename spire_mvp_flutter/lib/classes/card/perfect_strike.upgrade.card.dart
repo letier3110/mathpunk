@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/perfect_strike.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
@@ -14,9 +13,9 @@ import 'playable_card.dart';
 int damage = 6;
 int damageAddition = 3;
 
-class PerfectStrikeCard extends PlayableCard {
-  PerfectStrikeCard(
-      {cardName = 'Perfect Strike',
+class PerfectStrikeUpgradeCard extends PlayableCard {
+  PerfectStrikeUpgradeCard(
+      {cardName = 'Perfect Strike+',
       cardDescription =
           'Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".',
       cardMana = 2})
@@ -24,8 +23,16 @@ class PerfectStrikeCard extends PlayableCard {
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: PerfectStrikeUpgradeCard());
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
+
   @override
   StatelessWidget getCardDescription() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();

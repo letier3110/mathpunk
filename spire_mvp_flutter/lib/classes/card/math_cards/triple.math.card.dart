@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
+import 'package:mathpunk_cardgame/classes/card/math_cards/triple.upgrade.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -17,7 +18,8 @@ class TripleMathCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.function);
+            cardType: CardType.function,
+            cardUpgrageLink: TripleMathUpgradeCard());
 
   @override
   StatelessWidget getCardDescription() {

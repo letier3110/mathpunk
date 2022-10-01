@@ -57,8 +57,11 @@ class PlayableCard {
 
   bool isCardBoosted() => false;
 
-  String getCardName() {
-    return name;
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
   }
 
   StatelessWidget getCardDescription() {

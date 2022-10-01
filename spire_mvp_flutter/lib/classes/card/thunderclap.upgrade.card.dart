@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/iron_wave.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 5;
-int block = 5;
+int damage = 7;
+int vulnerable = 1;
 
-class IronWaveCard extends PlayableCard {
-  IronWaveCard(
-      {cardName = 'Iron Wave',
-      cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
-      cardMana = 1})
-      : super(
+class ThunderclapUpgradeCard extends PlayableCard {
+  ThunderclapUpgradeCard({
+    cardName = 'Thunderclap+',
+    cardDescription = 'Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.',
+    cardMana = 1,
+  }) : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: IronWaveUpgradeCard());
+            cardTargetType: TargetEnum.allTargets,
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {
-    int localBlock = block;
+    int localVulnerable = vulnerable;
     int finalDamage = predictDamage(damage: damage, mana: mana);
-
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           RichText(
               text: TextSpan(children: [
             const TextSpan(text: 'Deal '),
@@ -45,7 +50,9 @@ class IronWaveCard extends PlayableCard {
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text:
+                    ' damage and apply $localVulnerable Vulnerable to ALL enemies.')
           ]))
         ],
       ),
@@ -60,11 +67,10 @@ class IronWaveCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
-    if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-      int localBlock = block;
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
-      character.addBlock(localBlock);
+    for (var t in target) {
+      t.recieveDamage(calculateDamage(damage: damage, mana: mana));
+      int localVulnerable = vulnerable;
+      target[0].addVulnerable(localVulnerable);
     }
   }
 }

@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/iron_wave.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
-import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 5;
-int block = 5;
+int damage = 6;
 
-class IronWaveCard extends PlayableCard {
-  IronWaveCard(
-      {cardName = 'Iron Wave',
-      cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
+class ShivUpgradeCard extends PlayableCard {
+  ShivUpgradeCard(
+      {cardName = 'Shiv+',
+      cardDescription = 'Deal 6 damage. Exhaust.',
       cardMana = 1})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack,
-            cardUpgrageLink: IronWaveUpgradeCard());
+            cardExhaused: true,
+            cardType: CardType.attack);
+
+  @override
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
 
   @override
   StatelessWidget getCardDescription() {
-    int localBlock = block;
     int finalDamage = predictDamage(damage: damage, mana: mana);
-
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           RichText(
               text: TextSpan(children: [
             const TextSpan(text: 'Deal '),
@@ -46,7 +49,8 @@ class IronWaveCard extends PlayableCard {
                             ? Colors.redAccent
                             : Colors.white)),
             const TextSpan(text: ' damage.')
-          ]))
+          ])),
+          HighlightDescriptionText(text: 'Exhaust.'),
         ],
       ),
     );
@@ -61,10 +65,7 @@ class IronWaveCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-      int localBlock = block;
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
-      character.addBlock(localBlock);
     }
   }
 }

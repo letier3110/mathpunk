@@ -21,6 +21,7 @@ class PlayableCard {
   int maxSteps = 1;
   int precision = maxPrecisionChance;
   ResourcesEnum resourceType = ResourcesEnum.mana;
+  PlayableCard? upgradeCardLink;
   // possible place of bugs with selectedCards logic
   List<PlayableCard> selectedCards = [];
 
@@ -37,7 +38,8 @@ class PlayableCard {
       cardEthereal = false,
       cardExhaused = false,
       cardPrecision = maxPrecisionChance,
-      cardResource = ResourcesEnum.mana}) {
+      cardResource = ResourcesEnum.mana,
+      cardUpgrageLink}) {
     ethereal = cardEthereal;
     exhausted = cardExhaused;
     name = cardName;
@@ -50,6 +52,7 @@ class PlayableCard {
     selectedCards = cardSelectedCards;
     precision = cardPrecision;
     resourceType = cardResource;
+    upgradeCardLink = cardUpgrageLink;
   }
 
   bool isCardBoosted() => false;
@@ -122,6 +125,7 @@ class PlayableCard {
   }
 
   factory PlayableCard.fromJson(dynamic json) {
+    var card = json['upgradeCardLink'];
     return PlayableCard(
         cardName: json['name'] as String,
         cardDescription: json['description'] as String,
@@ -132,7 +136,10 @@ class PlayableCard {
         cardEthereal: json['ethereal'] as bool,
         cardPrecision: json(['precision']) as int,
         cardType: decodeCardTypeFromJson(json['type']),
-        cardTargetType: decodeTargetEnumFromJson(json['targetType']));
+        cardTargetType: decodeTargetEnumFromJson(json['targetType']),
+        cardUpgrageLink: card == null
+            ? null
+            : PlayableCard.fromJson(json['upgradeCardLink']));
   }
 
   Map toJson() => {
@@ -146,5 +153,7 @@ class PlayableCard {
         'precision': precision,
         'type': type.toString(),
         'targetType': targetType.toString(),
+        'upgradeCardLink':
+            upgradeCardLink == null ? null : upgradeCardLink!.toJson(),
       };
 }

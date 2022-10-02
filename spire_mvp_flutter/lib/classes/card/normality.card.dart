@@ -7,8 +7,6 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class NormalityCard extends PlayableCard {
   NormalityCard(
       {cardName = 'Normality',

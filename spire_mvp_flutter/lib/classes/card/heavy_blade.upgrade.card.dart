@@ -9,10 +9,10 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 14;
-int strengthModifier = 5;
-
 class HeavyBladeUpgradeCard extends PlayableCard {
+  int damage = 14;
+  int strengthModifier = 5;
+
   HeavyBladeUpgradeCard({
     cardName = 'Heavy Blade+',
     cardDescription =

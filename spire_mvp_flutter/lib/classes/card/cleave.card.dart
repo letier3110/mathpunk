@@ -9,9 +9,9 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 8;
-
 class CleaveCard extends PlayableCard {
+  int damage = 8;
+
   CleaveCard({
     cardName = 'Cleave',
     cardDescription = 'Deal 8(11) damage to ALL enemies.',

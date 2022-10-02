@@ -9,10 +9,10 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 14;
-int weak = 3;
-
 class ClothesLineUpgradeCard extends PlayableCard {
+  int damage = 14;
+  int weak = 3;
+
   ClothesLineUpgradeCard({
     cardName = 'Clothesline+',
     cardDescription = 'Deal 12(14) damage. Apply 2(3) Weak.',

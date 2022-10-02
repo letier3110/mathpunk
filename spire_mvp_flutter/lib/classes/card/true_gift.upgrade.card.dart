@@ -13,10 +13,10 @@ import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-int block = 9;
-int maxSelectableCards = 1;
-
 class TrueGiftUpgradeCard extends PlayableCard {
+  int block = 9;
+  int maxSelectableCards = 1;
+
   TrueGiftUpgradeCard({
     cardName = 'True Grit+',
     cardDescription =
@@ -85,7 +85,7 @@ class TrueGiftUpgradeCard extends PlayableCard {
         setSelectedCards([]);
       }
       targetType = TargetEnum.allTargets;
-      step++;
+      step = 1;
     }
   }
 }

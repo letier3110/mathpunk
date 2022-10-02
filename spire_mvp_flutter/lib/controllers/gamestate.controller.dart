@@ -49,7 +49,7 @@ class GamestateController extends ChangeNotifier {
   }
 
   void setSelectedCards(List<PlayableCard> selectedCards) {
-    if (selectedTarget == null) return;
+    if (selectingTarget == null) return;
     selectingTarget!.setSelectedCards(selectedCards);
   }
 

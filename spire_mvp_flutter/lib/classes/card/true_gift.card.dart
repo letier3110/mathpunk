@@ -12,9 +12,9 @@ import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-int block = 7;
-
 class TrueGiftCard extends PlayableCard {
+  int block = 7;
+
   TrueGiftCard({
     cardName = 'True Grit',
     cardDescription =

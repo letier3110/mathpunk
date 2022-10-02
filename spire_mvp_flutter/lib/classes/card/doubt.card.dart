@@ -7,9 +7,9 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class DoubtCard extends PlayableCard {
+  int damage = 6;
+
   DoubtCard(
       {cardName = 'Doubt',
       cardDescription = 'Unplayable.At the end of your turn, gain 1 Weak.',

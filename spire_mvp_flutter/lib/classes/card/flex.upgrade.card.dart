@@ -10,10 +10,10 @@ import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-const int strength = 4;
-const int strengthCurse = 4;
-
 class FlexUpgradeCard extends PlayableCard {
+  int strength = 4;
+  int strengthCurse = 4;
+
   FlexUpgradeCard({
     cardName = 'Flex+',
     cardDescription =

@@ -10,10 +10,10 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int draw = 2;
-int maxSelectableCards = 1;
-
 class WarCryUpgradeCard extends PlayableCard {
+  int draw = 2;
+  int maxSelectableCards = 1;
+
   WarCryUpgradeCard(
       {cardName = 'Warcry+',
       cardDescription =
@@ -82,7 +82,7 @@ class WarCryUpgradeCard extends PlayableCard {
         setSelectedCards([]);
       }
       targetType = TargetEnum.allTargets;
-      step++;
+      step = 1;
     }
   }
 }

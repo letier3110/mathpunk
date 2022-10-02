@@ -10,10 +10,10 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 12;
-int maxSelectableCards = 1;
-
 class HeadbuttUpgradeCard extends PlayableCard {
+  int damage = 12;
+  int maxSelectableCards = 1;
+
   HeadbuttUpgradeCard({
     cardName = 'Headbutt+',
     cardDescription =
@@ -100,7 +100,7 @@ class HeadbuttUpgradeCard extends PlayableCard {
         setSelectedCards([]);
       }
       targetType = TargetEnum.singleTarget;
-      step++;
+      step = 1;
     }
   }
 }

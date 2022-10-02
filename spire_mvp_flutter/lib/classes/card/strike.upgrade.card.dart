@@ -8,9 +8,9 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 9;
-
 class StrikeUpgradeCard extends PlayableCard {
+  int damage = 9;
+
   StrikeUpgradeCard(
       {cardName = 'Strike+', cardDescription = 'Deal 5 damage.', cardMana = 1})
       : super(

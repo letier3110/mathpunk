@@ -57,6 +57,15 @@ class PlayableCard {
 
   bool isCardBoosted() => false;
 
+  bool isCardCanBeUpgraded() => upgradeCardLink != null;
+
+  PlayableCard upgradeCard() {
+    if (upgradeCardLink != null) {
+      return upgradeCardLink!;
+    }
+    return this;
+  }
+
   StatelessWidget getCardName() {
     return Text(
       name,

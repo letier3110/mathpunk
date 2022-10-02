@@ -9,10 +9,10 @@ import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 7;
-int block = 7;
-
 class IronWaveUpgradeCard extends PlayableCard {
+  int damage = 7;
+  int block = 7;
+
   IronWaveUpgradeCard(
       {cardName = 'Iron Wave+',
       cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',

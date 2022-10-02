@@ -10,9 +10,9 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class AngerCard extends PlayableCard {
+  int damage = 6;
+
   AngerCard({
     cardName = 'Anger',
     cardDescription = 'Deal 6 damage.',

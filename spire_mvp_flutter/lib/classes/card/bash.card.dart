@@ -10,10 +10,10 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 8;
-int vulnerable = 2;
-
 class BashCard extends PlayableCard {
+  int damage = 8;
+  int vulnerable = 2;
+
   BashCard({
     cardName = 'Bash',
     cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',

@@ -10,9 +10,9 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 4;
-
 class ShivCard extends PlayableCard {
+  int damage = 4;
+
   ShivCard(
       {cardName = 'Shiv',
       cardDescription = 'Deal 4 damage. Exhaust.',

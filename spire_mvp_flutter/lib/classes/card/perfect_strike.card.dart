@@ -11,10 +11,10 @@ import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-int damageAddition = 3;
-
 class PerfectStrikeCard extends PlayableCard {
+  int damage = 6;
+  int damageAddition = 3;
+
   PerfectStrikeCard(
       {cardName = 'Perfect Strike',
       cardDescription =

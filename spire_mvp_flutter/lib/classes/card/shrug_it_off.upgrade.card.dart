@@ -10,10 +10,10 @@ import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
 import 'playable_card.dart';
 
-int block = 11;
-int draw = 1;
-
 class ShrugItOffUpgradeCard extends PlayableCard {
+  int block = 11;
+  int draw = 1;
+
   ShrugItOffUpgradeCard(
       {cardName = 'Shrug it Off+',
       cardDescription = 'Gain 8(11) Block. Draw 1 card.',

@@ -10,9 +10,9 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int block = 5;
-
 class DefendCard extends PlayableCard {
+  int block = 5;
+
   DefendCard({
     cardName = 'Defend',
     cardDescription = 'Gain 5 Block.',

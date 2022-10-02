@@ -129,10 +129,10 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   : animation.value),
           child: Center(
             child: Stack(children: [
-              if (widget.disabled == false &&
-                  widget.glow &&
-                  playerMana >= widget.card.getMana() &&
-                  widget.card.isCardPlayable())
+              if ((widget.disabled == false &&
+                      playerMana >= widget.card.getMana() &&
+                      widget.card.isCardPlayable()) ||
+                  widget.glow)
                 Center(
                   child: GlowEffectCard(
                       child: SizedBox(

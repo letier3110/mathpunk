@@ -1,14 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-import 'package:mathpunk_cardgame/classes/base_character.dart';
-import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/classes/card_target_queue.dart';
-import 'package:mathpunk_cardgame/classes/math/mathfunction.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/relic/wrist_blade.relic.dart';
-import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
 
 const maxPrecisionChance = 100;
 const minDodgeChance = 0;
@@ -53,6 +48,19 @@ int predictDamage(
     character.mathMultiplierScore = 0;
   }
   return localDamage;
+}
+
+int calculateBlock({required int block, int mana = 2}) {
+  PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  return predictBlock(block: block, mana: mana);
+}
+
+int predictBlock({required int block, int mana = 2}) {
+  // PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+
+  int localBlock = block;
+  // localBlock
+  return localBlock;
 }
 
 bool getProbability(int probability) => Random().nextInt(100) <= probability;

@@ -9,10 +9,10 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 7;
-int vulnerable = 1;
-
 class ThunderclapUpgradeCard extends PlayableCard {
+  int damage = 7;
+  int vulnerable = 1;
+
   ThunderclapUpgradeCard({
     cardName = 'Thunderclap+',
     cardDescription = 'Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.',

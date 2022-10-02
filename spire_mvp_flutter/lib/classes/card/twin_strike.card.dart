@@ -9,9 +9,9 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 5;
-
 class TwinStrikeCard extends PlayableCard {
+  int damage = 5;
+
   TwinStrikeCard(
       {cardName = 'Twin Strike',
       cardDescription = 'Deal 5(7) damage twice.',

@@ -1,3 +1,5 @@
+import 'package:mathpunk_cardgame/classes/card/armaments.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/double.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/triple.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
@@ -14,7 +16,13 @@ class Priest extends PlayerCharacter {
 
     relics = [BurningBloodRelic()];
 
-    final cards = [DoubleMathCard(), DoubleMathCard(), TripleMathCard()];
+    final cards = [
+      DoubleMathCard(),
+      DoubleMathCard(),
+      TripleMathCard(),
+      ArmamentsCard(),
+      ArmamentsUpgradeCard()
+    ];
     deck = Deck(cards);
   }
 }

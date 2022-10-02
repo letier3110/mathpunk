@@ -9,10 +9,10 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 22;
-int mana = 3;
-
 class BloodForBloodUpgradeCard extends PlayableCard {
+  int damage = 22;
+  int baseManaCost = 3;
+
   BloodForBloodUpgradeCard({
     cardName = 'Blood for Blood+',
     cardDescription =
@@ -35,13 +35,13 @@ class BloodForBloodUpgradeCard extends PlayableCard {
   @override
   int getMana() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int delta = mana - character.timesReceivedDamageInRound;
+    int delta = baseManaCost - character.timesReceivedDamageInRound;
     return delta > 0 ? delta : 0;
   }
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = predictDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: baseManaCost);
     return Container(
       child: Column(
         children: [
@@ -77,7 +77,8 @@ class BloodForBloodUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0]
+          .recieveDamage(calculateDamage(damage: damage, mana: baseManaCost));
     }
   }
 }

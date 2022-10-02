@@ -10,10 +10,10 @@ import '../player/player.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 9;
-int draw = 1;
-
 class PommelStrikeCard extends PlayableCard {
+  int damage = 9;
+  int draw = 1;
+
   PommelStrikeCard(
       {cardName = 'Pommel Strike',
       cardDescription = 'Deal 9(10) damage. Draw 1(2) card(s).',

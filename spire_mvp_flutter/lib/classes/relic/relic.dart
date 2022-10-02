@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Relic {
   late String name;
   late String description;
@@ -12,6 +14,11 @@ class Relic {
     // because of not correctly loaded from memory state or wrongly casted.
     // Relic class in not used directly, only as Generic Type
     throw UnimplementedError();
+  }
+
+  @override
+  String getAssetImage() {
+    return 'assets/gray_potion.png';
   }
 
   factory Relic.fromJson(dynamic json) {

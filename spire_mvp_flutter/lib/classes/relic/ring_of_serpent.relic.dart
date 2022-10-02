@@ -16,6 +16,11 @@ class RingOfSerpent extends Relic {
     return relic.runtimeType == RingOfSerpent;
   }
 
+  @override
+  String getAssetImage() {
+    return 'assets/relics/ring_of_serpent.png';
+  }
+
   factory RingOfSerpent.fromJson(dynamic json) {
     return RingOfSerpent(
       relicName: json['name'] as String,

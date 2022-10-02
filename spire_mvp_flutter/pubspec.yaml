@@ -121,3 +121,4 @@ flutter:
   assets: 
     - assets/
     - assets/cards/
+    - assets/relics/

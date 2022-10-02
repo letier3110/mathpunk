@@ -30,10 +30,13 @@ class CharacterRelicsView extends State<CharacterRelics> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
+                          width: 84,
+                          height: 84,
                           padding: const EdgeInsets.only(bottom: 8),
-                          child: const Icon(
-                            Icons.sports_mma,
-                            color: Colors.greenAccent,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(e.getAssetImage()),
+                                fit: BoxFit.fill),
                           ),
                         ),
                         Text(

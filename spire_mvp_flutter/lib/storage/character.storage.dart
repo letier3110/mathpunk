@@ -31,11 +31,18 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   int jsonStrengthCurse = json['strengthCurse'] as int;
   int jsonStrengthEmpower = json['strengthEmpower'] as int;
 
+  int jsonDexterity = json['dexterity'] as int;
+  int jsonDexterityCurse = json['dexterityCurse'] as int;
+  int jsonDexterityEmpower = json['dexterityEmpower'] as int;
+
   int jsonTimesReceivedDamageInRound =
       json['timesReceivedDamageInRound'] as int;
 
   int jsonDodgeChance = json['dodgeChance'] as int;
   int jsonPrecisionChance = json['precisionChance'] as int;
+
+  double jsonMathMultiplierScore = json['mathMultiplierScore'] as double;
+  int jsonMathMultiplierTime = json['mathMultiplierTime'] as int;
 
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
 
@@ -80,10 +87,18 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   character.addStrengthCurse(jsonStrengthCurse);
   character.addStrengthEmpower(jsonStrengthEmpower);
 
+  character.addDexterity(jsonDexterity);
+  character.addDexterityCurse(jsonDexterityCurse);
+  character.addDexterityEmpower(jsonDexterityEmpower);
+
   character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
 
   character.addDodgeChance(jsonDodgeChance);
   character.addPrecisionChance(jsonPrecisionChance);
+
+  character.addMathMultiplierScore(jsonMathMultiplierScore);
+  character.addMathMultiplierTime(jsonMathMultiplierTime);
+
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 
   return character;

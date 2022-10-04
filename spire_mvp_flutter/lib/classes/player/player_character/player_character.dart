@@ -79,8 +79,11 @@ class PlayerCharacter extends BaseCharacter {
     }
     block = 0;
     strength -= strengthCurse;
+    dexterity -= dexterityCurse;
     strengthCurse = 0;
+    dexterityCurse = 0;
     strength += strengthEmpower;
+    dexterity += dexterityEmpower;
     if (vulnerable > 0) {
       vulnerable -= 1;
     }

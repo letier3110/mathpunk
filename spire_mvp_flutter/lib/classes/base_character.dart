@@ -12,8 +12,11 @@ class BaseCharacter implements ICharacter {
   int vulnerable = 0;
   int weak = 0;
   int strength = 0;
+  int dexterity = 0;
   int strengthEmpower = 0;
+  int dexterityEmpower = 0;
   int strengthCurse = 0;
+  int dexterityCurse = 0;
   int timesReceivedDamageInRound = 0;
   int dodgeChance = 0;
   int precisionChance = maxPrecisionChance;
@@ -55,6 +58,18 @@ class BaseCharacter implements ICharacter {
 
   addStrengthEmpower(int strengthEmpower) {
     this.strengthEmpower += strengthEmpower;
+  }
+
+  addDexterity(int dexterity) {
+    this.dexterity += dexterity;
+  }
+
+  addDexterityCurse(int dexterityCurse) {
+    this.dexterityCurse += dexterityCurse;
+  }
+
+  addDexterityEmpower(int dexterityEmpower) {
+    this.dexterityEmpower += dexterityEmpower;
   }
 
   addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
@@ -156,6 +171,9 @@ class BaseCharacter implements ICharacter {
     character.addStrength(json['strength'] as int);
     character.addStrengthCurse(json['strengthCurse'] as int);
     character.addStrengthEmpower(json['strengthEmpower'] as int);
+    character.addDexterity(json['dexterity'] as int);
+    character.addDexterityCurse(json['dexterityCurse'] as int);
+    character.addDexterityEmpower(json['dexterityEmpower'] as int);
     character.addTimesReceivedDamageInRound(
         json['timesReceivedDamageInRound'] as int);
     character.addDodgeChance(json['dodgeChance'] as int);
@@ -176,6 +194,9 @@ class BaseCharacter implements ICharacter {
         'strength': strength,
         'strengthCurse': strengthCurse,
         'strengthEmpower': strengthEmpower,
+        'dexterity': dexterity,
+        'dexterityCurse': dexterityCurse,
+        'dexterityEmpower': dexterityEmpower,
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
         'dodgeChance': dodgeChance,
         'precisionChance': precisionChance,

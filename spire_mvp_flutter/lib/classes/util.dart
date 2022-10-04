@@ -56,9 +56,9 @@ int calculateBlock({required int block, int mana = 2}) {
 }
 
 int predictBlock({required int block, int mana = 2}) {
-  // PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  PlayerCharacter character = Player.getPlayerInstance().getCharacter();
 
-  int localBlock = block;
+  int localBlock = block + character.dexterity;
   // localBlock
   return localBlock;
 }

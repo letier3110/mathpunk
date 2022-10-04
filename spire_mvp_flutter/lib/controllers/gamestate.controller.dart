@@ -460,8 +460,11 @@ class GamestateController extends ChangeNotifier {
         enemy.weak -= 1;
       }
       enemy.strength -= enemy.strengthCurse;
+      enemy.dexterity -= enemy.dexterityCurse;
       enemy.strengthCurse = 0;
+      enemy.dexterityCurse = 0;
       enemy.strength += enemy.strengthEmpower;
+      enemy.dexterity += enemy.dexterityEmpower;
     }
     playerCharacter!.endTurn();
     // if there are ring of snake => draw 1 cards at the start of round

@@ -2,21 +2,21 @@ import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 int count = 3;
 
-class WristBlade extends Relic {
-  WristBlade(
-      {relicName = 'Wrist Blade',
-      relicDescription = 'Attacks that cost 0 deal 4 additional damage.'})
+class ChessPyramid extends Relic {
+  ChessPyramid(
+      {relicName = 'Chess pyramid',
+      relicDescription = 'Summon powerful chess piece to help you.'})
       : super(relicDescription: relicDescription, relicName: relicName);
 
   @override
   void play() {}
 
-  static bool isRelicWristBlade(Relic relic) {
-    return relic.runtimeType == WristBlade;
+  static bool isRelicChessPyramid(Relic relic) {
+    return relic.runtimeType == ChessPyramid;
   }
 
-  factory WristBlade.fromJson(dynamic json) {
-    return WristBlade(
+  factory ChessPyramid.fromJson(dynamic json) {
+    return ChessPyramid(
       relicName: json['name'] as String,
       relicDescription: json['description'] as String,
     );
@@ -24,7 +24,7 @@ class WristBlade extends Relic {
 
   @override
   String getAssetImage() {
-    return 'assets/relics/wrist_blade.png';
+    return 'assets/relics/chess_pyramid.png';
   }
 
   @override

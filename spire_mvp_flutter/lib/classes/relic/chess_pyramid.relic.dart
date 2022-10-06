@@ -1,6 +1,13 @@
+import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/probability.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
+import 'package:mathpunk_cardgame/pools/utils.dart';
 
-int count = 3;
+List<Probability<Status>> _piecesPool = [
+  Probability(obj: StrengthStatus(), weight: 500)
+];
 
 class ChessPyramid extends Relic {
   ChessPyramid(
@@ -9,7 +16,10 @@ class ChessPyramid extends Relic {
       : super(relicDescription: relicDescription, relicName: relicName);
 
   @override
-  void play() {}
+  void play() {
+    // weightedRandomPick(_piecesPool);
+    // Player.getPlayerInstance().getCharacter()
+  }
 
   static bool isRelicChessPyramid(Relic relic) {
     return relic.runtimeType == ChessPyramid;

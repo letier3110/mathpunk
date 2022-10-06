@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/wrist_blade.relic.dart';
 
 const maxPrecisionChance = 100;
@@ -30,15 +31,14 @@ int predictDamage(
   if (weak > 0) {
     localDamage = (localDamage * 0.75).floor();
   }
-  try {
-    character.relics
-        .firstWhere((element) => WristBlade.isRelicWristBlade(element))
-        .play();
+  List<Relic> wristBlade = character.relics
+      .where((element) => WristBlade.isRelicWristBlade(element))
+      .toList();
+  if (wristBlade.isNotEmpty) {
+    wristBlade[0].play();
     if (mana == 0) {
       localDamage += 4;
     }
-  } catch (e) {
-    // print(e);
   }
   if (character.mathMultiplierTime > 0) {
     localDamage = (localDamage * character.mathMultiplierScore).toInt();

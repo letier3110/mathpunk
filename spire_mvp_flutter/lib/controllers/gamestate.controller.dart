@@ -7,7 +7,9 @@ import 'package:mathpunk_cardgame/classes/game_map.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/chess_pyramid.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
@@ -224,12 +226,12 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
       // if (currentRoom!.enemies.isEmpty) {
       // if there are burning blood => add player hp
-      try {
-        playerCharacter!.relics
-            .firstWhere(
-                (element) => BurningBloodRelic.isRelicBurningBlood(element))
-            .play();
-      } catch (e) {}
+      List<Relic> burningBlood = playerCharacter!.relics
+          .where((element) => BurningBloodRelic.isRelicBurningBlood(element))
+          .toList();
+      if (burningBlood.isNotEmpty) {
+        burningBlood[0].play();
+      }
       endTheRoom();
     }
 
@@ -404,25 +406,40 @@ class GamestateController extends ChangeNotifier {
       // playerCharacter!.weak = 5;
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
+      // if there are chess pyramid => add one of effects:
+      // black pawn,
+      // black rook,
+      // black knight,
+      // black bishop,
+      // black queen,
+      // or black king
+      List<Relic> chessPyramid = playerCharacter!.relics
+          .where((element) => ChessPyramid.isRelicChessPyramid(element))
+          .toList();
+      if (chessPyramid.isNotEmpty) {
+        chessPyramid[0].play();
+      }
       // if there are ring of snake => draw 2 cards at the start of combat
-      try {
-        playerCharacter!.relics
-            .firstWhere((element) => RingOfSnake.isRelicRingOfSnake(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ringOfSnake = playerCharacter!.relics
+          .where((element) => RingOfSnake.isRelicRingOfSnake(element))
+          .toList();
+      if (ringOfSnake.isNotEmpty) {
+        ringOfSnake[0].play();
+      }
       // if there are ring of snake => draw 1 cards at the start of combat
-      try {
-        playerCharacter!.relics
-            .firstWhere(
-                (element) => RingOfSerpent.isRelicRingOfSerpent(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ringOfSerpent = playerCharacter!.relics
+          .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
+          .toList();
+      if (ringOfSerpent.isNotEmpty) {
+        ringOfSerpent[0].play();
+      }
       // if there are ninja scroll => add 3 shivs
-      try {
-        playerCharacter!.relics
-            .firstWhere((element) => NinjaScroll.isRelicNinjaScroll(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ninjaScroll = playerCharacter!.relics
+          .where((element) => NinjaScroll.isRelicNinjaScroll(element))
+          .toList();
+      if (ninjaScroll.isNotEmpty) {
+        ninjaScroll[0].play();
+      }
       playerCharacter!.startTurn();
       // this.currentRoom.getEnemies().forEach(enemy => {
       //   enemy.moveset.getNextMove();
@@ -468,11 +485,12 @@ class GamestateController extends ChangeNotifier {
     }
     playerCharacter!.endTurn();
     // if there are ring of snake => draw 1 cards at the start of round
-    try {
-      playerCharacter!.relics
-          .firstWhere((element) => RingOfSerpent.isRelicRingOfSerpent(element))
-          .play();
-    } catch (e) {}
+    List<Relic> ringOfSerpent = playerCharacter!.relics
+        .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
+        .toList();
+    if (ringOfSerpent.isNotEmpty) {
+      ringOfSerpent[0].play();
+    }
     notifyListeners();
   }
 

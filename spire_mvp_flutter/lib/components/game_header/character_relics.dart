@@ -24,6 +24,7 @@ class CharacterRelicsView extends State<CharacterRelics> {
       child: ListView(
           scrollDirection: Axis.horizontal,
           children: relics
+              .where((element) => element.isVisible())
               .map((e) => SizedBox(
                     width: 120,
                     child: Column(

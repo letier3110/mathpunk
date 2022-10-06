@@ -1,6 +1,6 @@
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
-
-import '../interfaces/character.interface.dart';
+import 'package:mathpunk_cardgame/interfaces/character.interface.dart';
 
 class BaseCharacter implements ICharacter {
   late String name;
@@ -8,20 +8,30 @@ class BaseCharacter implements ICharacter {
   late int health;
   @override
   late int maxHealth;
-  int block = 0;
-  int vulnerable = 0;
-  int weak = 0;
-  int strength = 0;
-  int dexterity = 0;
-  int strengthEmpower = 0;
-  int dexterityEmpower = 0;
-  int strengthCurse = 0;
-  int dexterityCurse = 0;
+  List<Status> statuses = [];
+
+  // int block = 0;
+  // int vulnerable = 0;
+  // int weak = 0;
+  // int strength = 0;
+  // int dexterity = 0;
+  // int strengthEmpower = 0;
+  // int dexterityEmpower = 0;
+  // int strengthCurse = 0;
+  // int dexterityCurse = 0;
+
   int timesReceivedDamageInRound = 0;
-  int dodgeChance = 0;
-  int precisionChance = maxPrecisionChance;
-  double mathMultiplierScore = 0;
-  int mathMultiplierTime = 0;
+  // int dodgeChance = 0;
+  // int precisionChance = maxPrecisionChance;
+  // double mathMultiplierScore = 0;
+  // int mathMultiplierTime = 0;
+
+  // bool blackPawn = false;
+  // bool blackRook = false;
+  // bool blackKnight = false;
+  // bool blackBishop = false;
+  // bool blackQueen = false;
+  // bool blackKing = false;
 
   BaseCharacter() : super() {
     health = 10;
@@ -29,71 +39,8 @@ class BaseCharacter implements ICharacter {
     name = '';
   }
 
-  statusUpdate() {
-    block = 0;
-    if (vulnerable >= 1) {
-      vulnerable -= 1;
-    }
-  }
-
-  addBlock(int block) {
-    this.block += block;
-  }
-
-  addVulnerable(int vulnerable) {
-    this.vulnerable += vulnerable;
-  }
-
-  addWeak(int weak) {
-    this.weak += weak;
-  }
-
-  addStrength(int strength) {
-    this.strength += strength;
-  }
-
-  addStrengthCurse(int strengthCurse) {
-    this.strengthCurse += strengthCurse;
-  }
-
-  addStrengthEmpower(int strengthEmpower) {
-    this.strengthEmpower += strengthEmpower;
-  }
-
-  addDexterity(int dexterity) {
-    this.dexterity += dexterity;
-  }
-
-  addDexterityCurse(int dexterityCurse) {
-    this.dexterityCurse += dexterityCurse;
-  }
-
-  addDexterityEmpower(int dexterityEmpower) {
-    this.dexterityEmpower += dexterityEmpower;
-  }
-
-  addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
-    this.timesReceivedDamageInRound += timesReceivedDamageInRound;
-  }
-
-  addDodgeChance(int dodgeChance) {
-    this.dodgeChance += dodgeChance;
-  }
-
-  addPrecisionChance(int precisionChance) {
-    this.precisionChance += precisionChance;
-  }
-
-  addMathMultiplierScore(double mathMultiplierScore) {
-    this.mathMultiplierScore += mathMultiplierScore;
-  }
-
-  addMathMultiplierTime(int mathMultiplierTime) {
-    this.mathMultiplierTime += mathMultiplierTime;
-  }
-
-  void resetRoundStatuses() {
-    timesReceivedDamageInRound = 0;
+  void addStatus(Status status) {
+    statuses.add(status);
   }
 
   recieveDamage(int damage) {
@@ -153,12 +100,8 @@ class BaseCharacter implements ICharacter {
     this.maxHealth = maxHealth;
   }
 
-  getDodgeChance() {
-    return dodgeChance;
-  }
-
-  getPrecisionChance() {
-    return precisionChance;
+  addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
+    this.timesReceivedDamageInRound += timesReceivedDamageInRound;
   }
 
   factory BaseCharacter.fromJson(dynamic json) {
@@ -181,6 +124,13 @@ class BaseCharacter implements ICharacter {
     character.addMathMultiplierScore(json['mathMultiplierScore'] as double);
     character.addMathMultiplierTime(json['mathMultiplierTime'] as int);
 
+    character.setBlackPawn(json['blackPawn'] as bool);
+    character.setBlackRook(json['blackRook'] as bool);
+    character.setBlackKnight(json['blackKnight'] as bool);
+    character.setBlackBishop(json['blackBishop'] as bool);
+    character.setBlackQueen(json['blackQueen'] as bool);
+    character.setBlackKing(json['blackKing'] as bool);
+
     return character;
   }
 
@@ -202,5 +152,11 @@ class BaseCharacter implements ICharacter {
         'precisionChance': precisionChance,
         'mathMultiplierScore': mathMultiplierScore,
         'mathMultiplierTime': mathMultiplierTime,
+        'blackPawn': blackPawn,
+        'blackRook': blackRook,
+        'blackKnight': blackKnight,
+        'blackBishop': blackBishop,
+        'blackQueen': blackQueen,
+        'blackKing': blackKing,
       };
 }

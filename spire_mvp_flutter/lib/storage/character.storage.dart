@@ -46,6 +46,13 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
 
+  bool jsonBlackPawn = json['blackPawn'] as bool;
+  bool jsonBlackRook = json['blackRook'] as bool;
+  bool jsonBlackKnight = json['blackKnight'] as bool;
+  bool jsonBlackBishop = json['blackBishop'] as bool;
+  bool jsonBlackQueen = json['blackQueen'] as bool;
+  bool jsonBlackKing = json['blackKing'] as bool;
+
   String jsonRuntime = json['_runtime'] as String;
 
   PlayerCharacter character;
@@ -98,6 +105,13 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   character.addMathMultiplierScore(jsonMathMultiplierScore);
   character.addMathMultiplierTime(jsonMathMultiplierTime);
+
+  character.setBlackPawn(jsonBlackPawn);
+  character.setBlackRook(jsonBlackRook);
+  character.setBlackKnight(jsonBlackKnight);
+  character.setBlackBishop(jsonBlackBishop);
+  character.setBlackQueen(jsonBlackQueen);
+  character.setBlackKing(jsonBlackKing);
 
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 

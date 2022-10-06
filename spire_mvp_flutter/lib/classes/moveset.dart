@@ -33,10 +33,10 @@ class Moveset {
       var player = Player.getPlayerInstance();
       var character = player.getCharacter();
       double localDamage = currentMove!.baseDamage.toDouble();
-      localDamage += character.strength;
-      if (character.weak > 1) {
-        localDamage = localDamage * 0.75;
-      }
+      // localDamage += character.strength;
+      // if (character.weak > 1) {
+      //   localDamage = localDamage * 0.75;
+      // }
       for (var i = 0; i < currentMove!.count; i++) {
         character.recieveDamage(localDamage.floor());
       }

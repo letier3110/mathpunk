@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Relic {
   late String name;
   late String description;
@@ -16,7 +14,8 @@ class Relic {
     throw UnimplementedError();
   }
 
-  @override
+  bool isVisible() => true;
+
   String getAssetImage() {
     return 'assets/gray_potion.png';
   }

@@ -1,7 +1,5 @@
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
-int count = 3;
-
 class WristBlade extends Relic {
   WristBlade(
       {relicName = 'Wrist Blade',

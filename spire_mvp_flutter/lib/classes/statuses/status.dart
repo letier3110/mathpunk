@@ -4,7 +4,7 @@ import 'package:mathpunk_cardgame/components/highlight_text.dart';
 class Status {
   late String name;
   late String description;
-  int stack = 0;
+  double stack = 0;
   String asset;
 
   Status({

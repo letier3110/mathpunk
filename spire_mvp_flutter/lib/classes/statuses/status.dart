@@ -25,8 +25,12 @@ class Status {
     );
   }
 
-  void addStack(int stack) {
+  void addStack(double stack) {
     this.stack += stack;
+  }
+
+  void setStack(double stack) {
+    this.stack = stack;
   }
 
   StatelessWidget getStatusDescription() {
@@ -36,7 +40,7 @@ class Status {
   factory Status.fromJson(dynamic json) {
     return Status(
       statusName: json['name'] as String,
-      statusStack: json['stack'] as int,
+      statusStack: json['stack'] as double,
       statusDescription: json['description'] as String,
     );
   }

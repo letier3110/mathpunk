@@ -1,16 +1,16 @@
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 
-class DexterityEmpowerStatus extends Status {
-  DexterityEmpowerStatus()
+class DexterityCurseStatus extends Status {
+  DexterityCurseStatus()
       : super(
             asset: 'assets/relics/chess_pyramid.png',
-            statusName: 'Dexterity Empower',
+            statusName: 'Dexterity Curse',
             statusDescription: "Decrease Dexterity by X.");
 
-  factory DexterityEmpowerStatus.fromJson(dynamic json) {
-    return DexterityEmpowerStatus();
+  factory DexterityCurseStatus.fromJson(dynamic json) {
+    return DexterityCurseStatus();
   }
 
   @override
-  Map toJson() => {...super.toJson(), '_runtime': 'DexterityEmpowerStatus'};
+  Map toJson() => {...super.toJson(), '_runtime': 'DexterityCurseStatus'};
 }

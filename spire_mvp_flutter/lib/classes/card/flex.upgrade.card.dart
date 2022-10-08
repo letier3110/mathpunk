@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -56,7 +58,13 @@ class FlexUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
-    character.addStrength(localStrength);
-    character.addStrengthCurse(localStrengthCurse);
+
+    StrengthStatus ss = StrengthStatus();
+    ss.addStack(localStrength.toDouble());
+    character.addStatus(ss);
+
+    StrengthCurseStatus scs = StrengthCurseStatus();
+    scs.addStack(localStrengthCurse.toDouble());
+    character.addStatus(scs);
   }
 }

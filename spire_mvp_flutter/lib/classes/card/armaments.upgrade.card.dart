@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -64,7 +65,9 @@ class ArmamentsUpgradeCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int finalBlock = calculateBlock(block: block, mana: mana);
-    character.addBlock(finalBlock);
+    BlockStatus bs = BlockStatus();
+    bs.addStack(finalBlock.toDouble());
+    character.addStatus(bs);
     List<PlayableCard> hand = character
         .getDeck()
         .getHand()

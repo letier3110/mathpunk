@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -70,7 +71,11 @@ class TrueGiftUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     if (step == 1) {
       int localBlock = block;
-      character.addBlock(localBlock);
+
+      BlockStatus bs = BlockStatus();
+      bs.addStack(localBlock.toDouble());
+      character.addStatus(bs);
+
       step++;
       targetType = TargetEnum.cardTarget;
     } else {

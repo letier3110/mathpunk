@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -52,7 +53,11 @@ class ShrugItOffUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localBlock = block;
     int localDraw = draw;
-    character.addBlock(localBlock);
+
+    BlockStatus bs = BlockStatus();
+    bs.addStack(localBlock.toDouble());
+    character.addStatus(bs);
+
     character.deck.draw(localDraw);
   }
 }

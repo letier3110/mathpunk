@@ -1,6 +1,10 @@
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dodge.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/interfaces/character.interface.dart';
+import 'package:mathpunk_cardgame/storage/status.storage.dart';
 
 class BaseCharacter implements ICharacter {
   late String name;
@@ -10,28 +14,7 @@ class BaseCharacter implements ICharacter {
   late int maxHealth;
   List<Status> statuses = [];
 
-  // int block = 0;
-  // int vulnerable = 0;
-  // int weak = 0;
-  // int strength = 0;
-  // int dexterity = 0;
-  // int strengthEmpower = 0;
-  // int dexterityEmpower = 0;
-  // int strengthCurse = 0;
-  // int dexterityCurse = 0;
-
   int timesReceivedDamageInRound = 0;
-  // int dodgeChance = 0;
-  // int precisionChance = maxPrecisionChance;
-  // double mathMultiplierScore = 0;
-  // int mathMultiplierTime = 0;
-
-  // bool blackPawn = false;
-  // bool blackRook = false;
-  // bool blackKnight = false;
-  // bool blackBishop = false;
-  // bool blackQueen = false;
-  // bool blackKing = false;
 
   BaseCharacter() : super() {
     health = 10;
@@ -40,10 +23,32 @@ class BaseCharacter implements ICharacter {
   }
 
   void addStatus(Status status) {
-    statuses.add(status);
+    List<Status> findStatus = statuses
+        .where((element) => element.runtimeType == status.runtimeType)
+        .toList();
+    if (findStatus.isNotEmpty) {
+      findStatus[0].addStack(status.stack);
+    } else {
+      statuses.add(status);
+    }
+  }
+
+  void setStatus(Status status) {
+    List<Status> findStatus = statuses
+        .where((element) => element.runtimeType == status.runtimeType)
+        .toList();
+    if (findStatus.isNotEmpty) {
+      findStatus[0].setStack(status.stack);
+    } else {
+      statuses.add(status);
+    }
   }
 
   recieveDamage(int damage) {
+    int dodgeChance = castStatusToInt(statuses, DodgeStatus);
+    int vulnerable = castStatusToInt(statuses, VulnerableStatus);
+    int block = castStatusToInt(statuses, BlockStatus);
+
     if (getProbability(dodgeChance)) {
       return;
     }
@@ -100,6 +105,12 @@ class BaseCharacter implements ICharacter {
     this.maxHealth = maxHealth;
   }
 
+  List<Status> getStatuses() => statuses;
+
+  void resetRoundStatuses() {
+    timesReceivedDamageInRound = 0;
+  }
+
   addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
     this.timesReceivedDamageInRound += timesReceivedDamageInRound;
   }
@@ -108,29 +119,12 @@ class BaseCharacter implements ICharacter {
     BaseCharacter character = BaseCharacter();
     character.setHealth(json['health'] as int);
     character.setMaxHealth(json['maxHealth'] as int);
-    character.addBlock(json['block'] as int);
-    character.addVulnerable(json['vulnerable'] as int);
-    character.addWeak(json['weak'] as int);
-    character.addStrength(json['strength'] as int);
-    character.addStrengthCurse(json['strengthCurse'] as int);
-    character.addStrengthEmpower(json['strengthEmpower'] as int);
-    character.addDexterity(json['dexterity'] as int);
-    character.addDexterityCurse(json['dexterityCurse'] as int);
-    character.addDexterityEmpower(json['dexterityEmpower'] as int);
     character.addTimesReceivedDamageInRound(
         json['timesReceivedDamageInRound'] as int);
-    character.addDodgeChance(json['dodgeChance'] as int);
-    character.addPrecisionChance(json['precisionChance'] as int);
-    character.addMathMultiplierScore(json['mathMultiplierScore'] as double);
-    character.addMathMultiplierTime(json['mathMultiplierTime'] as int);
 
-    character.setBlackPawn(json['blackPawn'] as bool);
-    character.setBlackRook(json['blackRook'] as bool);
-    character.setBlackKnight(json['blackKnight'] as bool);
-    character.setBlackBishop(json['blackBishop'] as bool);
-    character.setBlackQueen(json['blackQueen'] as bool);
-    character.setBlackKing(json['blackKing'] as bool);
-
+    character.statuses.addAll((json['statuses'] as List<Status>)
+        .map((e) => statusFromJson(e))
+        .toList());
     return character;
   }
 
@@ -138,25 +132,7 @@ class BaseCharacter implements ICharacter {
         'name': name,
         'health': health,
         'maxHealth': maxHealth,
-        'block': block,
-        'vulnerable': vulnerable,
-        'weak': weak,
-        'strength': strength,
-        'strengthCurse': strengthCurse,
-        'strengthEmpower': strengthEmpower,
-        'dexterity': dexterity,
-        'dexterityCurse': dexterityCurse,
-        'dexterityEmpower': dexterityEmpower,
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
-        'dodgeChance': dodgeChance,
-        'precisionChance': precisionChance,
-        'mathMultiplierScore': mathMultiplierScore,
-        'mathMultiplierTime': mathMultiplierTime,
-        'blackPawn': blackPawn,
-        'blackRook': blackRook,
-        'blackKnight': blackKnight,
-        'blackBishop': blackBishop,
-        'blackQueen': blackQueen,
-        'blackKing': blackKing,
+        'statuses': statuses.map((e) => statusToJson(e)).toList()
       };
 }

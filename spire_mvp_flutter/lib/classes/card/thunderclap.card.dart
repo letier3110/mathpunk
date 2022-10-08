@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/thunderclap.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -56,7 +59,10 @@ class ThunderclapCard extends PlayableCard {
   @override
   bool isCardBoosted() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    return character.mathMultiplierScore > 0;
+    List<Status> statuses = character.getStatuses();
+    double mathMultiplierScore =
+        castStatusToDouble(statuses, MathMultiplierScoreStatus);
+    return mathMultiplierScore > 0;
   }
 
   @override
@@ -64,7 +70,9 @@ class ThunderclapCard extends PlayableCard {
     for (var t in target) {
       t.recieveDamage(calculateDamage(damage: damage, mana: mana));
       int localVulnerable = vulnerable;
-      target[0].addVulnerable(localVulnerable);
+      VulnerableStatus vs = VulnerableStatus();
+      vs.addStack(localVulnerable.toDouble());
+      target[0].addStatus(vs);
     }
   }
 }

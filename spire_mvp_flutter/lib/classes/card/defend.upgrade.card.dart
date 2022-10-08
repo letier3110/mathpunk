@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -41,6 +42,8 @@ class DefendUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addBlock(block);
+    BlockStatus bs = BlockStatus();
+    bs.addStack(block.toDouble());
+    character.addStatus(bs);
   }
 }

@@ -23,35 +23,11 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   int jsonHealth = json['health'] as int;
   int jsonMaxHealth = json['maxHealth'] as int;
-  int jsonBlock = json['block'] as int;
-  int jsonVulnerable = json['vulnerable'] as int;
-
-  int jsonWeak = json['weak'] as int;
-  int jsonStrength = json['strength'] as int;
-  int jsonStrengthCurse = json['strengthCurse'] as int;
-  int jsonStrengthEmpower = json['strengthEmpower'] as int;
-
-  int jsonDexterity = json['dexterity'] as int;
-  int jsonDexterityCurse = json['dexterityCurse'] as int;
-  int jsonDexterityEmpower = json['dexterityEmpower'] as int;
 
   int jsonTimesReceivedDamageInRound =
       json['timesReceivedDamageInRound'] as int;
 
-  int jsonDodgeChance = json['dodgeChance'] as int;
-  int jsonPrecisionChance = json['precisionChance'] as int;
-
-  double jsonMathMultiplierScore = json['mathMultiplierScore'] as double;
-  int jsonMathMultiplierTime = json['mathMultiplierTime'] as int;
-
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
-
-  bool jsonBlackPawn = json['blackPawn'] as bool;
-  bool jsonBlackRook = json['blackRook'] as bool;
-  bool jsonBlackKnight = json['blackKnight'] as bool;
-  bool jsonBlackBishop = json['blackBishop'] as bool;
-  bool jsonBlackQueen = json['blackQueen'] as bool;
-  bool jsonBlackKing = json['blackKing'] as bool;
 
   String jsonRuntime = json['_runtime'] as String;
 
@@ -86,32 +62,8 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   character.setHealth(jsonHealth);
   character.setMaxHealth(jsonMaxHealth);
-  character.addBlock(jsonBlock);
-  character.addVulnerable(jsonVulnerable);
-
-  character.addWeak(jsonWeak);
-  character.addStrength(jsonStrength);
-  character.addStrengthCurse(jsonStrengthCurse);
-  character.addStrengthEmpower(jsonStrengthEmpower);
-
-  character.addDexterity(jsonDexterity);
-  character.addDexterityCurse(jsonDexterityCurse);
-  character.addDexterityEmpower(jsonDexterityEmpower);
 
   character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
-
-  character.addDodgeChance(jsonDodgeChance);
-  character.addPrecisionChance(jsonPrecisionChance);
-
-  character.addMathMultiplierScore(jsonMathMultiplierScore);
-  character.addMathMultiplierTime(jsonMathMultiplierTime);
-
-  character.setBlackPawn(jsonBlackPawn);
-  character.setBlackRook(jsonBlackRook);
-  character.setBlackKnight(jsonBlackKnight);
-  character.setBlackBishop(jsonBlackBishop);
-  character.setBlackQueen(jsonBlackQueen);
-  character.setBlackKing(jsonBlackKing);
 
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 

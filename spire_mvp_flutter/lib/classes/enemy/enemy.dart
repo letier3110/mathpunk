@@ -4,16 +4,11 @@ import '../moveset.dart';
 class Enemy extends BaseCharacter {
   late Moveset moveset;
 
-  Enemy(
-      {String enemyName = '',
-      int enemyHealth = 5,
-      int enemyMaxHealth = 5,
-      int enemyArmor = 0})
+  Enemy({String enemyName = '', int enemyHealth = 5, int enemyMaxHealth = 5})
       : super() {
     name = enemyName;
     health = enemyHealth;
     maxHealth = enemyMaxHealth;
-    block = enemyArmor;
     moveset = Moveset();
   }
 

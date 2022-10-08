@@ -3,6 +3,7 @@ import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_time.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/card_type.enum.dart';
@@ -12,7 +13,7 @@ class PlusMathUpgradeCard extends PlayableCard {
   PlusMathUpgradeCard(
       {cardName = 'f(+)+',
       cardDescription = 'Extending Function multiplier for another card.',
-      cardMana = 5})
+      cardMana = 10})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
@@ -43,6 +44,8 @@ class PlusMathUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addMathMultiplierTime(1);
+    MathMultiplierTimeStatus mts = MathMultiplierTimeStatus();
+    mts.addStack(2);
+    character.addStatus(mts);
   }
 }

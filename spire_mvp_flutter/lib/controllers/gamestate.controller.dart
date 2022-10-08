@@ -16,8 +16,18 @@ import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/classes/room/room.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/classes/sellable.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
-import 'package:mathpunk_cardgame/enums/target.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 
 import '../classes/deck.dart';
@@ -465,23 +475,55 @@ class GamestateController extends ChangeNotifier {
         .getHand()
         .where((x) => x.runtimeType == DoubtCard)
         .isNotEmpty) {
-      playerCharacter!.addWeak(1);
+      WeakStatus ws = WeakStatus();
+      ws.addStack(1);
+      playerCharacter!.addStatus(ws);
     }
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
-      enemy.block = 0;
-      if (enemy.vulnerable > 0) {
-        enemy.vulnerable -= 1;
+
+      BlockStatus block = BlockStatus();
+      enemy.setStatus(block);
+
+      List<Status> statuses = enemy.getStatuses();
+      int weak = castStatusToInt(statuses, WeakStatus);
+      int vulnerable = castStatusToInt(statuses, VulnerableStatus);
+
+      if (vulnerable > 0) {
+        VulnerableStatus vs = VulnerableStatus();
+        vs.addStack(-1);
+        enemy.addStatus(vs);
       }
-      if (enemy.weak > 0) {
-        enemy.weak -= 1;
+      if (weak > 0) {
+        WeakStatus ws = WeakStatus();
+        ws.addStack(-1);
+        enemy.addStatus(ws);
       }
-      enemy.strength -= enemy.strengthCurse;
-      enemy.dexterity -= enemy.dexterityCurse;
-      enemy.strengthCurse = 0;
-      enemy.dexterityCurse = 0;
-      enemy.strength += enemy.strengthEmpower;
-      enemy.dexterity += enemy.dexterityEmpower;
+      int strengthCurse = castStatusToInt(statuses, StrengthCurseStatus);
+      int strengthEmpower = castStatusToInt(statuses, StrengthEmpowerStatus);
+      StrengthStatus ss = StrengthStatus();
+      ss.addStack(-strengthCurse.toDouble());
+      ss.addStack(strengthEmpower.toDouble());
+      enemy.addStatus(ss);
+
+      int dexterityCurse = castStatusToInt(statuses, DexterityCurseStatus);
+      int dexterityEmpower = castStatusToInt(statuses, DexterityEmpowerStatus);
+      DexterityStatus ds = DexterityStatus();
+      ds.addStack(-dexterityCurse.toDouble());
+      ds.addStack(dexterityEmpower.toDouble());
+      enemy.addStatus(ds);
+
+      StrengthCurseStatus scs = StrengthCurseStatus();
+      enemy.setStatus(scs);
+
+      DexterityCurseStatus dcs = DexterityCurseStatus();
+      enemy.setStatus(dcs);
+
+      StrengthEmpowerStatus ses = StrengthEmpowerStatus();
+      enemy.setStatus(ses);
+
+      DexterityEmpowerStatus des = DexterityEmpowerStatus();
+      enemy.setStatus(des);
     }
     playerCharacter!.endTurn();
     // if there are ring of snake => draw 1 cards at the start of round

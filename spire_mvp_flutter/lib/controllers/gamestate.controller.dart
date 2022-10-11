@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
@@ -20,6 +22,8 @@ import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/pawn.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/rook.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
@@ -416,19 +420,36 @@ class GamestateController extends ChangeNotifier {
       // playerCharacter!.weak = 5;
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
-      // if there are chess pyramid => add one of effects:
-      // black pawn,
-      // black rook,
-      // black knight,
-      // black bishop,
-      // black queen,
-      // or black king
+
       List<Relic> chessPyramid = playerCharacter!.relics
           .where((element) => ChessPyramid.isRelicChessPyramid(element))
           .toList();
       if (chessPyramid.isNotEmpty) {
         chessPyramid[0].play();
       }
+
+      List<Status> statuses = playerCharacter!.getStatuses();
+
+      // if pawn status => upgrade random card from deck forever
+      bool isPawnStatus = castStatusToBool(statuses, PawnStatus);
+      if (isPawnStatus == true) {
+        final random = Random();
+        int randomElement =
+            random.nextInt(playerCharacter!.getDeck().cards.length);
+        while (playerCharacter!
+                .getDeck()
+                .cards[randomElement]
+                .isCardCanBeUpgraded() ==
+            false) {
+          randomElement =
+              random.nextInt(playerCharacter!.getDeck().cards.length);
+        }
+        playerCharacter!.getDeck().cards[randomElement] =
+            playerCharacter!.getDeck().cards[randomElement].upgradeCard();
+      }
+
+      // bool isRookStatus = castStatusToBool(statuses, RookStatus);
+
       // if there are ring of snake => draw 2 cards at the start of combat
       List<Relic> ringOfSnake = playerCharacter!.relics
           .where((element) => RingOfSnake.isRelicRingOfSnake(element))
@@ -526,6 +547,10 @@ class GamestateController extends ChangeNotifier {
       enemy.setStatus(des);
     }
     playerCharacter!.endTurn();
+    // List<Status> statuses = playerCharacter!.getStatuses();
+
+    // bool isRookStatus = castStatusToBool(statuses, RookStatus);
+
     // if there are ring of snake => draw 1 cards at the start of round
     List<Relic> ringOfSerpent = playerCharacter!.relics
         .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))

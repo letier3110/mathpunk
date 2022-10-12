@@ -15,16 +15,18 @@ import 'playable_card.dart';
 class AngerCard extends PlayableCard {
   int damage = 6;
 
-  AngerCard({
-    cardName = 'Anger',
-    cardDescription = 'Deal 6 damage.',
-    cardMana = 1,
-  }) : super(
+  AngerCard(
+      {cardName = 'Anger',
+      cardDescription = 'Deal 6 damage.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardUpgrageLink: AngerUpgradeCard());
+            cardUpgrageLink: AngerUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -63,9 +65,11 @@ class AngerCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }
-    Player.getPlayerInstance().getCharacter().getDeck().addToDiscardPile(this);
+    character.getDeck().addToDiscardPile(this);
   }
 }

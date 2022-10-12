@@ -14,9 +14,13 @@ class StrikeUpgradeCard extends PlayableCard {
   int damage = 9;
 
   StrikeUpgradeCard(
-      {cardName = 'Strike+', cardDescription = 'Deal 5 damage.', cardMana = 1})
+      {cardName = 'Strike+',
+      cardDescription = 'Deal 5 damage.',
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack);
@@ -64,6 +68,8 @@ class StrikeUpgradeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }

@@ -15,17 +15,19 @@ import 'playable_card.dart';
 class ArmamentsUpgradeCard extends PlayableCard {
   int block = 5;
 
-  ArmamentsUpgradeCard({
-    cardName = 'Armaments+',
-    cardDescription =
-        'Gain 5 Icon Block.png Block.Upgrade a card in your hand for the rest of combat.',
-    cardMana = 1,
-  }) : super(
+  ArmamentsUpgradeCard(
+      {cardName = 'Armaments+',
+      cardDescription =
+          'Gain 5 Icon Block.png Block.Upgrade a card in your hand for the rest of combat.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.skill,
-            cardTargetType: TargetEnum.allTargets);
+            cardTargetType: TargetEnum.allTargets,
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardName() {
@@ -64,6 +66,7 @@ class ArmamentsUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int finalBlock = calculateBlock(block: block, mana: mana);
     BlockStatus bs = BlockStatus();
     bs.addStack(finalBlock.toDouble());

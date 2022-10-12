@@ -17,16 +17,18 @@ class BashCard extends PlayableCard {
   int damage = 8;
   int vulnerable = 2;
 
-  BashCard({
-    cardName = 'Bash',
-    cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',
-    cardMana = 2,
-  }) : super(
+  BashCard(
+      {cardName = 'Bash',
+      cardDescription = 'Deal 8 damage.\nApply 2 Vulnerable.',
+      cardMana = 2,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardUpgrageLink: BashUpgradeCard());
+            cardUpgrageLink: BashUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -65,6 +67,8 @@ class BashCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
       int localVulnerable = vulnerable;

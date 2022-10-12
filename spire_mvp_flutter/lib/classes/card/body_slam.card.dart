@@ -13,16 +13,18 @@ import '../util.dart';
 import 'playable_card.dart';
 
 class BodySlamCard extends PlayableCard {
-  BodySlamCard({
-    cardName = 'Body Slam',
-    cardDescription = 'Deal damage equal to your current Block.',
-    cardMana = 1,
-  }) : super(
+  BodySlamCard(
+      {cardName = 'Body Slam',
+      cardDescription = 'Deal damage equal to your current Block.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardUpgrageLink: BodySlamUpgradeCard());
+            cardUpgrageLink: BodySlamUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -32,8 +34,9 @@ class BodySlamCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
       List<Status> statuses = character.getStatuses();
       int block = castStatusToInt(statuses, BlockStatus);
       target[0].recieveDamage(calculateDamage(damage: block, mana: mana));

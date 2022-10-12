@@ -14,16 +14,18 @@ import 'playable_card.dart';
 class ClashUpgradeCard extends PlayableCard {
   int damage = 18;
 
-  ClashUpgradeCard({
-    cardName = 'Clash+',
-    cardDescription =
-        'Can only be played if every card in your hand is an Attack. Deal 14(18) damage.',
-    cardMana = 0,
-  }) : super(
+  ClashUpgradeCard(
+      {cardName = 'Clash+',
+      cardDescription =
+          'Can only be played if every card in your hand is an Attack. Deal 14(18) damage.',
+      cardMana = 0,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardName() {
@@ -78,6 +80,8 @@ class ClashUpgradeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }

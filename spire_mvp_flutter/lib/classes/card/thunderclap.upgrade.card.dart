@@ -16,12 +16,15 @@ class ThunderclapUpgradeCard extends PlayableCard {
   int damage = 7;
   int vulnerable = 1;
 
-  ThunderclapUpgradeCard({
-    cardName = 'Thunderclap+',
-    cardDescription = 'Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.',
-    cardMana = 1,
-  }) : super(
+  ThunderclapUpgradeCard(
+      {cardName = 'Thunderclap+',
+      cardDescription =
+          'Deal 4(7) damage and apply 1 Vulnerable to ALL enemies.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
@@ -73,6 +76,8 @@ class ThunderclapUpgradeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     for (var t in target) {
       t.recieveDamage(calculateDamage(damage: damage, mana: mana));
       int localVulnerable = vulnerable;

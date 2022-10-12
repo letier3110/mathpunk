@@ -17,14 +17,16 @@ class HeadbuttCard extends PlayableCard {
   int damage = 9;
   int maxSelectableCards = 1;
 
-  HeadbuttCard({
-    cardName = 'Headbutt',
-    cardDescription =
-        'Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.',
-    cardMana = 1,
-  }) : super(
+  HeadbuttCard(
+      {cardName = 'Headbutt',
+      cardDescription =
+          'Deal 9(12) damage. Place a card from your discard pile on top of your draw pile.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardSteps: 1,
             cardMaxSteps: 3,
+            cardTemporary: cardTemporary,
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
@@ -82,6 +84,8 @@ class HeadbuttCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (step == 1) {
       if (target.length == 1) {
         target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
@@ -90,7 +94,7 @@ class HeadbuttCard extends PlayableCard {
       }
     } else {
       if (selectedCards.isNotEmpty) {
-        Deck deck = Player.getPlayerInstance().getCharacter().getDeck();
+        Deck deck = character.getDeck();
         List<PlayableCard> discardPile = deck.getDiscardPile();
         List<PlayableCard> drawPile = deck.getDrawPile();
 

@@ -12,9 +12,11 @@ class NormalityCard extends PlayableCard {
       {cardName = 'Normality',
       cardDescription =
           'Unplayable.You cannot play more than 3 cards this turn.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,

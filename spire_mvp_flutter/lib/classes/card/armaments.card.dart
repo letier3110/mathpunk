@@ -16,18 +16,20 @@ class ArmamentsCard extends PlayableCard {
   int block = 5;
   int maxSelectableCards = 1;
 
-  ArmamentsCard({
-    cardName = 'Armaments',
-    cardDescription =
-        'Gain 5 Icon Block.png Block.Upgrade a card in your hand for the rest of combat.',
-    cardMana = 1,
-  }) : super(
+  ArmamentsCard(
+      {cardName = 'Armaments',
+      cardDescription =
+          'Gain 5 Icon Block.png Block.Upgrade a card in your hand for the rest of combat.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.skill,
             cardTargetType: TargetEnum.cardTarget,
-            cardUpgrageLink: AngerUpgradeCard());
+            cardUpgrageLink: AngerUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -73,9 +75,9 @@ class ArmamentsCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (selectedCards.isNotEmpty) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-
       int finalBlock = calculateBlock(block: block, mana: mana);
 
       BlockStatus bs = BlockStatus();

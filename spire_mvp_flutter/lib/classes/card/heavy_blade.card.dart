@@ -16,13 +16,15 @@ class HeavyBladeCard extends PlayableCard {
   int damage = 14;
   int strengthModifier = 3;
 
-  HeavyBladeCard({
-    cardName = 'Heavy Blade',
-    cardDescription =
-        'Deal 14 damage. Strength affects Heavy Blade 3(5) times.',
-    cardMana = 2,
-  }) : super(
+  HeavyBladeCard(
+      {cardName = 'Heavy Blade',
+      cardDescription =
+          'Deal 14 damage. Strength affects Heavy Blade 3(5) times.',
+      cardMana = 2,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
@@ -66,6 +68,8 @@ class HeavyBladeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(
           damage: damage, mana: mana, strengthModifier: strengthModifier));

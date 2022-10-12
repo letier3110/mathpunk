@@ -18,13 +18,15 @@ class TrueGiftUpgradeCard extends PlayableCard {
   int block = 9;
   int maxSelectableCards = 1;
 
-  TrueGiftUpgradeCard({
-    cardName = 'True Grit+',
-    cardDescription =
-        'Gain 7(9) Block. Exhaust a selected card from your hand.',
-    cardMana = 1,
-  }) : super(
+  TrueGiftUpgradeCard(
+      {cardName = 'True Grit+',
+      cardDescription =
+          'Gain 7(9) Block. Exhaust a selected card from your hand.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardSteps: 1,
             cardMaxSteps: 3,
             cardDescription: cardDescription,
@@ -69,6 +71,7 @@ class TrueGiftUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (step == 1) {
       int localBlock = block;
 

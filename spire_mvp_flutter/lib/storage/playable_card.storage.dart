@@ -28,75 +28,77 @@ PlayableCard playableCardFromJson(dynamic json) {
 
   PlayableCard card;
 
+  bool temporary = json(['temporary']) as bool;
+
   switch (jsonRuntime) {
     case 'StrikeCard':
-      card = StrikeCard();
+      card = StrikeCard(cardTemporary: temporary);
       break;
     case 'DefendCard':
-      card = DefendCard();
+      card = DefendCard(cardTemporary: temporary);
       break;
     case 'BashCard':
-      card = BashCard();
+      card = BashCard(cardTemporary: temporary);
       break;
     case 'AngerCard':
-      card = AngerCard();
+      card = AngerCard(cardTemporary: temporary);
       break;
     case 'BodySlamCard':
-      card = BodySlamCard();
+      card = BodySlamCard(cardTemporary: temporary);
       break;
     case 'ClashCard':
-      card = ClashCard();
+      card = ClashCard(cardTemporary: temporary);
       break;
     case 'CleaveCard':
-      card = CleaveCard();
+      card = CleaveCard(cardTemporary: temporary);
       break;
     case 'ClothesLineCard':
-      card = ClothesLineCard();
+      card = ClothesLineCard(cardTemporary: temporary);
       break;
     case 'FlexCard':
-      card = FlexCard();
+      card = FlexCard(cardTemporary: temporary);
       break;
     case 'HeadbuttCard':
-      card = HeadbuttCard();
+      card = HeadbuttCard(cardTemporary: temporary);
       break;
     case 'HeavyBladeCard':
-      card = HeavyBladeCard();
+      card = HeavyBladeCard(cardTemporary: temporary);
       break;
     case 'IronWaveCard':
-      card = IronWaveCard();
+      card = IronWaveCard(cardTemporary: temporary);
       break;
     case 'PerfectStrikeCard':
-      card = PerfectStrikeCard();
+      card = PerfectStrikeCard(cardTemporary: temporary);
       break;
     case 'PommelStrikeCard':
-      card = PommelStrikeCard();
+      card = PommelStrikeCard(cardTemporary: temporary);
       break;
     case 'ThunderclapCard':
-      card = ThunderclapCard();
+      card = ThunderclapCard(cardTemporary: temporary);
       break;
     case 'TrueGiftCard':
-      card = TrueGiftCard();
+      card = TrueGiftCard(cardTemporary: temporary);
       break;
     case 'TwinStrikeCard':
-      card = TwinStrikeCard();
+      card = TwinStrikeCard(cardTemporary: temporary);
       break;
     case 'WarCryCard':
-      card = WarCryCard();
+      card = WarCryCard(cardTemporary: temporary);
       break;
     case 'ShivCard':
-      card = ShivCard();
+      card = ShivCard(cardTemporary: temporary);
       break;
     case 'BloodForBloodCard':
-      card = BloodForBloodCard();
+      card = BloodForBloodCard(cardTemporary: temporary);
       break;
     case 'NormalityCard':
-      card = NormalityCard();
+      card = NormalityCard(cardTemporary: temporary);
       break;
     case 'DoubtCard':
-      card = DoubtCard();
+      card = DoubtCard(cardTemporary: temporary);
       break;
     default:
-      card = StrikeCard();
+      card = StrikeCard(cardTemporary: temporary);
       break;
   }
 

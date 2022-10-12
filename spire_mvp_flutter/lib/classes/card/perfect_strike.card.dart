@@ -21,9 +21,11 @@ class PerfectStrikeCard extends PlayableCard {
       {cardName = 'Perfect Strike',
       cardDescription =
           'Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".',
-      cardMana = 2})
+      cardMana = 2,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
@@ -89,6 +91,7 @@ class PerfectStrikeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int localDamage = calculateDamage(damage: damage);
     Deck deck = character.getDeck();
     List<PlayableCard> drawPile = deck.getDrawPile();

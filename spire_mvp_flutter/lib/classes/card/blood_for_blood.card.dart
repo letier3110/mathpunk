@@ -16,17 +16,19 @@ class BloodForBloodCard extends PlayableCard {
   int damage = 18;
   int baseManaCost = 4;
 
-  BloodForBloodCard({
-    cardName = 'Blood for Blood',
-    cardDescription =
-        'Costs 1 less mana for each time you lose HP this combat.Deal 18 damage.',
-    cardMana = 4,
-  }) : super(
+  BloodForBloodCard(
+      {cardName = 'Blood for Blood',
+      cardDescription =
+          'Costs 1 less mana for each time you lose HP this combat.Deal 18 damage.',
+      cardMana = 4,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardUpgrageLink: BloodForBloodUpgradeCard());
+            cardUpgrageLink: BloodForBloodUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   int getMana() {
@@ -75,6 +77,8 @@ class BloodForBloodCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0]
           .recieveDamage(calculateDamage(damage: damage, mana: baseManaCost));

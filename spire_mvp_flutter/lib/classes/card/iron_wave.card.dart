@@ -20,9 +20,11 @@ class IronWaveCard extends PlayableCard {
   IronWaveCard(
       {cardName = 'Iron Wave',
       cardDescription = 'Gain 5(7) Block. Deal 5(7) damage.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
@@ -66,8 +68,9 @@ class IronWaveCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      PlayerCharacter character = Player.getPlayerInstance().getCharacter();
       int localBlock = block;
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
 

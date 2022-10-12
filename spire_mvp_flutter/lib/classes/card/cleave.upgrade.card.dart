@@ -14,14 +14,16 @@ import 'playable_card.dart';
 class CleaveUpgradeCard extends PlayableCard {
   int damage = 11;
 
-  CleaveUpgradeCard({
-    cardName = 'Cleave+',
-    cardDescription = 'Deal 8(11) damage to ALL enemies.',
-    cardMana = 1,
-  }) : super(
+  CleaveUpgradeCard(
+      {cardName = 'Cleave+',
+      cardDescription = 'Deal 8(11) damage to ALL enemies.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
+            cardTemporary: cardTemporary,
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.attack);
 
@@ -68,6 +70,8 @@ class CleaveUpgradeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     for (var t in target) {
       t.recieveDamage(calculateDamage(damage: damage, mana: mana));
     }

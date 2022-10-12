@@ -14,17 +14,19 @@ import 'playable_card.dart';
 class CleaveCard extends PlayableCard {
   int damage = 8;
 
-  CleaveCard({
-    cardName = 'Cleave',
-    cardDescription = 'Deal 8(11) damage to ALL enemies.',
-    cardMana = 1,
-  }) : super(
+  CleaveCard(
+      {cardName = 'Cleave',
+      cardDescription = 'Deal 8(11) damage to ALL enemies.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.attack,
-            cardUpgrageLink: CleaveCard());
+            cardUpgrageLink: CleaveCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -61,6 +63,8 @@ class CleaveCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     for (var t in target) {
       t.recieveDamage(calculateDamage(damage: damage, mana: mana));
     }

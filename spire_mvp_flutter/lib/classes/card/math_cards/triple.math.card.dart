@@ -6,6 +6,7 @@ import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_time.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/rook.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
@@ -16,14 +17,16 @@ class TripleMathCard extends PlayableCard {
   TripleMathCard(
       {cardName = '3x',
       cardDescription = 'Function. Triples next value',
-      cardMana = 25})
+      cardMana = 25,
+      cardTemporary = false})
       : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.function,
-            cardUpgrageLink: TripleMathUpgradeCard());
+            cardUpgrageLink: TripleMathUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -37,8 +40,19 @@ class TripleMathCard extends PlayableCard {
   }
 
   @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+    bool isRookStatus = castStatusToBool(statuses, RookStatus);
+
+    if (isRookStatus && character.timesReceivedDamageInRound == 0) return 0;
+    return mana;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     List<Status> statuses = character.getStatuses();
     int mathMultiplierTime =
         castStatusToInt(statuses, MathMultiplierTimeStatus);

@@ -14,12 +14,14 @@ import 'playable_card.dart';
 class DefendUpgradeCard extends PlayableCard {
   int block = 8;
 
-  DefendUpgradeCard({
-    cardName = 'Defend+',
-    cardDescription = 'Gain 8 Block.',
-    cardMana = 1,
-  }) : super(
+  DefendUpgradeCard(
+      {cardName = 'Defend+',
+      cardDescription = 'Gain 8 Block.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.skill,
@@ -42,6 +44,7 @@ class DefendUpgradeCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     BlockStatus bs = BlockStatus();
     bs.addStack(block.toDouble());
     character.addStatus(bs);

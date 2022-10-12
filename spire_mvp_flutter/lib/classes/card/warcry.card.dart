@@ -18,12 +18,14 @@ class WarCryCard extends PlayableCard {
       {cardName = 'Warcry',
       cardDescription =
           'Draw 1(2) card(s). Place a card from your hand on top of your draw pile. Exhaust.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardSteps: 1,
             cardMaxSteps: 3,
             cardExhaused: true,
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
@@ -60,6 +62,7 @@ class WarCryCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (step == 1) {
       int localDraw = draw;
       character.deck.draw(localDraw);

@@ -13,9 +13,11 @@ class DoubtCard extends PlayableCard {
   DoubtCard(
       {cardName = 'Doubt',
       cardDescription = 'Unplayable.At the end of your turn, gain 1 Weak.',
-      cardMana = 0})
+      cardMana = 0,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,

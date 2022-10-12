@@ -15,6 +15,7 @@ class BaseCharacter implements ICharacter {
   List<Status> statuses = [];
 
   int timesReceivedDamageInRound = 0;
+  int timesPlayedCardsInRound = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -109,10 +110,15 @@ class BaseCharacter implements ICharacter {
 
   void resetRoundStatuses() {
     timesReceivedDamageInRound = 0;
+    timesPlayedCardsInRound = 0;
   }
 
   addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
     this.timesReceivedDamageInRound += timesReceivedDamageInRound;
+  }
+
+  addTimesPlayedCardsInRound(int timesPlayedCardsInRound) {
+    this.timesPlayedCardsInRound += timesPlayedCardsInRound;
   }
 
   factory BaseCharacter.fromJson(dynamic json) {
@@ -121,6 +127,8 @@ class BaseCharacter implements ICharacter {
     character.setMaxHealth(json['maxHealth'] as int);
     character.addTimesReceivedDamageInRound(
         json['timesReceivedDamageInRound'] as int);
+    character
+        .addTimesPlayedCardsInRound(json['timesPlayedCardsInRound'] as int);
 
     character.statuses.addAll((json['statuses'] as List<Status>)
         .map((e) => statusFromJson(e))
@@ -133,6 +141,7 @@ class BaseCharacter implements ICharacter {
         'health': health,
         'maxHealth': maxHealth,
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
+        'timesPlayedCardsInRound': timesPlayedCardsInRound,
         'statuses': statuses.map((e) => statusToJson(e)).toList()
       };
 }

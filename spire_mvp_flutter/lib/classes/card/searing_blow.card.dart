@@ -17,13 +17,15 @@ class SearingBlow extends PlayableCard {
   int baseDamage = 12;
   int damageIncrease = 0;
 
-  SearingBlow({
-    cardName = 'Searing Blow',
-    cardDescription = 'Deal 12 damage.Can be Upgraded any number of times.',
-    cardMana = 2,
-    cardDamage = 0,
-  }) : super(
+  SearingBlow(
+      {cardName = 'Searing Blow',
+      cardDescription = 'Deal 12 damage.Can be Upgraded any number of times.',
+      cardMana = 2,
+      cardDamage = 0,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack) {
@@ -75,6 +77,8 @@ class SearingBlow extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int damage = baseDamage + damageIncrease;
     int finalDamage = calculateDamage(damage: damage, mana: mana);
     if (target.length == 1) {

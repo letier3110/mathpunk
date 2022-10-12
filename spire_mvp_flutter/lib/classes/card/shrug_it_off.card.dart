@@ -18,9 +18,11 @@ class ShrugItOffCard extends PlayableCard {
   ShrugItOffCard(
       {cardName = 'Shrug it Off',
       cardDescription = 'Gain 8(11) Block. Draw 1 card.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
@@ -44,6 +46,7 @@ class ShrugItOffCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int localBlock = block;
     int localDraw = draw;
 

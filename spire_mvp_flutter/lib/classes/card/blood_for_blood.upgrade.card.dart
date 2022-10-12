@@ -15,16 +15,18 @@ class BloodForBloodUpgradeCard extends PlayableCard {
   int damage = 22;
   int baseManaCost = 3;
 
-  BloodForBloodUpgradeCard({
-    cardName = 'Blood for Blood+',
-    cardDescription =
-        'Costs 1 less mana for each time you lose HP this combat.Deal 22 damage.',
-    cardMana = 3,
-  }) : super(
+  BloodForBloodUpgradeCard(
+      {cardName = 'Blood for Blood+',
+      cardDescription =
+          'Costs 1 less mana for each time you lose HP this combat.Deal 22 damage.',
+      cardMana = 3,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardName() {
@@ -81,6 +83,8 @@ class BloodForBloodUpgradeCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0]
           .recieveDamage(calculateDamage(damage: damage, mana: baseManaCost));

@@ -18,9 +18,11 @@ class ShivCard extends PlayableCard {
   ShivCard(
       {cardName = 'Shiv',
       cardDescription = 'Deal 4 damage. Exhaust.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardExhaused: true,
@@ -63,6 +65,8 @@ class ShivCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
     }

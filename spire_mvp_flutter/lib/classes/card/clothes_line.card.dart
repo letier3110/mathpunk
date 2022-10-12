@@ -17,12 +17,14 @@ class ClothesLineCard extends PlayableCard {
   int damage = 12;
   int weak = 2;
 
-  ClothesLineCard({
-    cardName = 'Clothesline',
-    cardDescription = 'Deal 12(14) damage. Apply 2(3) Weak.',
-    cardMana = 2,
-  }) : super(
+  ClothesLineCard(
+      {cardName = 'Clothesline',
+      cardDescription = 'Deal 12(14) damage. Apply 2(3) Weak.',
+      cardMana = 2,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
@@ -66,6 +68,8 @@ class ClothesLineCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
       WeakStatus ws = WeakStatus();

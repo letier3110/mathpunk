@@ -16,13 +16,15 @@ import 'playable_card.dart';
 class TrueGiftCard extends PlayableCard {
   int block = 7;
 
-  TrueGiftCard({
-    cardName = 'True Grit',
-    cardDescription =
-        'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
-    cardMana = 1,
-  }) : super(
+  TrueGiftCard(
+      {cardName = 'True Grit',
+      cardDescription =
+          'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
@@ -47,6 +49,7 @@ class TrueGiftCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int localBlock = block;
 
     BlockStatus bs = BlockStatus();

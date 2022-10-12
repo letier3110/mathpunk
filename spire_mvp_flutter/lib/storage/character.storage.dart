@@ -27,6 +27,8 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   int jsonTimesReceivedDamageInRound =
       json['timesReceivedDamageInRound'] as int;
 
+  int jsonTimesPlayedCardsInRound = json['timesPlayedCardsInRound'] as int;
+
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
 
   String jsonRuntime = json['_runtime'] as String;
@@ -64,6 +66,7 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
   character.setMaxHealth(jsonMaxHealth);
 
   character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
+  character.addTimesPlayedCardsInRound(jsonTimesPlayedCardsInRound);
 
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 

@@ -448,8 +448,6 @@ class GamestateController extends ChangeNotifier {
             playerCharacter!.getDeck().cards[randomElement].upgradeCard();
       }
 
-      // bool isRookStatus = castStatusToBool(statuses, RookStatus);
-
       // if there are ring of snake => draw 2 cards at the start of combat
       List<Relic> ringOfSnake = playerCharacter!.relics
           .where((element) => RingOfSnake.isRelicRingOfSnake(element))

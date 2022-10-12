@@ -16,13 +16,15 @@ class FlexCard extends PlayableCard {
   int strength = 2;
   int strengthCurse = 2;
 
-  FlexCard({
-    cardName = 'Flex',
-    cardDescription =
-        'Gain 2(4) Strength. At the end of your turn, lose 2(4) Strength.',
-    cardMana = 0,
-  }) : super(
+  FlexCard(
+      {cardName = 'Flex',
+      cardDescription =
+          'Gain 2(4) Strength. At the end of your turn, lose 2(4) Strength.',
+      cardMana = 0,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
@@ -49,6 +51,7 @@ class FlexCard extends PlayableCard {
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
 

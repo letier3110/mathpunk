@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/game_map.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
@@ -22,8 +23,8 @@ import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/knight.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/pawn.status.dart';
-import 'package:mathpunk_cardgame/classes/statuses/rook.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
@@ -33,6 +34,8 @@ import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
+import 'package:mathpunk_cardgame/pools/cards.pool.dart';
+import 'package:mathpunk_cardgame/pools/utils.dart';
 
 import '../classes/deck.dart';
 
@@ -448,6 +451,11 @@ class GamestateController extends ChangeNotifier {
             playerCharacter!.getDeck().cards[randomElement].upgradeCard();
       }
 
+      bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
+      if (isKnightStatus == true) {
+        playerCharacter!.getDeck().getHand().add(ShivCard());
+      }
+
       // if there are ring of snake => draw 2 cards at the start of combat
       List<Relic> ringOfSnake = playerCharacter!.relics
           .where((element) => RingOfSnake.isRelicRingOfSnake(element))
@@ -545,9 +553,16 @@ class GamestateController extends ChangeNotifier {
       enemy.setStatus(des);
     }
     playerCharacter!.endTurn();
-    // List<Status> statuses = playerCharacter!.getStatuses();
 
-    // bool isRookStatus = castStatusToBool(statuses, RookStatus);
+    List<Status> statuses = playerCharacter!.getStatuses();
+
+    bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
+    if (isKnightStatus == true) {
+      playerCharacter!
+          .getDeck()
+          .getHand()
+          .add(weightedRandomPick(poolAllCards).obj);
+    }
 
     // if there are ring of snake => draw 1 cards at the start of round
     List<Relic> ringOfSerpent = playerCharacter!.relics

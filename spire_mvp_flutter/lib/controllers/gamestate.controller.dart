@@ -25,6 +25,8 @@ import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/knight.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/pawn.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/precision.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/queen.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
@@ -454,6 +456,19 @@ class GamestateController extends ChangeNotifier {
       bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
       if (isKnightStatus == true) {
         playerCharacter!.getDeck().getHand().add(ShivCard());
+      }
+
+      bool isQueenStatus = castStatusToBool(statuses, QueenStatus);
+      if (isQueenStatus == true) {
+        StrengthStatus ss = StrengthStatus();
+        DexterityStatus ds = DexterityStatus();
+        PrecisionStatus ps = PrecisionStatus();
+        ss.addStack(2);
+        ds.addStack(2);
+        ps.addStack(15);
+        playerCharacter!.addStatus(ss);
+        playerCharacter!.addStatus(ds);
+        playerCharacter!.addStatus(ps);
       }
 
       // if there are ring of snake => draw 2 cards at the start of combat

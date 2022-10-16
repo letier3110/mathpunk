@@ -111,6 +111,7 @@ class BaseCharacter implements ICharacter {
   void resetRoundStatuses() {
     timesReceivedDamageInRound = 0;
     timesPlayedCardsInRound = 0;
+    statuses = [];
   }
 
   addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {

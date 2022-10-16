@@ -131,7 +131,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
             child: Stack(children: [
               if ((widget.disabled == false &&
                       playerMana >= widget.card.getMana() &&
-                      widget.card.isCardPlayable()) ||
+                      widget.card.isCardPlayable()) &&
                   widget.glow)
                 Center(
                   child: GlowEffectCard(
@@ -203,9 +203,18 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                           top: 8,
                           left: cardWidth / 24,
                           child: Container(
-                            width: 24 * (cardWidth / defaultWidth),
-                            height: 24 *
-                                (calcHeightByWidth(cardWidth) / defaultHeight),
+                            // width: 24 * (cardWidth / defaultWidth),
+                            // height: 24 *
+                            //     (calcHeightByWidth(cardWidth) / defaultHeight)
+                            padding: EdgeInsets.fromLTRB(
+                                6 * (cardWidth / defaultWidth),
+                                6 *
+                                    (calcHeightByWidth(cardWidth) /
+                                        defaultHeight),
+                                6 * (cardWidth / defaultWidth),
+                                6 *
+                                    (calcHeightByWidth(cardWidth) /
+                                        defaultHeight)),
                             // padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 color: const Color(0xFFC99C66),

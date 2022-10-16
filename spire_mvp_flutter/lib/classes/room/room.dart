@@ -39,6 +39,10 @@ class Room implements IRoom {
     rewards = newRewards;
   }
 
+  addRewards(List<Reward> newRewards) {
+    rewards.addAll(newRewards);
+  }
+
   List<Enemy> getEnemies() {
     return enemies;
   }

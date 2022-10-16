@@ -149,8 +149,8 @@ class PlayableCard {
         cardMaxSteps: json['maxSteps'] as int,
         cardExhaused: json['exhausted'] as bool,
         cardEthereal: json['ethereal'] as bool,
-        cardPrecision: json(['precision']) as int,
-        cardTemporary: json(['temporary']) as bool,
+        cardPrecision: json['precision'] as int,
+        cardTemporary: json['temporary'] as bool,
         cardType: decodeCardTypeFromJson(json['type']),
         cardTargetType: decodeTargetEnumFromJson(json['targetType']),
         cardUpgrageLink: card == null

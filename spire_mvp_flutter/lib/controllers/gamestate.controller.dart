@@ -298,9 +298,15 @@ class GamestateController extends ChangeNotifier {
   void pickReward(int rewardIndex, String fieldType) {
     if (currentRoom == null) return;
     if (playerCharacter == null) return;
+    // List<Status> statuses = playerCharacter!.getStatuses();
     switch (fieldType) {
       case 'gold':
-        playerCharacter!.gold += currentRoom!.rewards[rewardIndex].gold ?? 0;
+        int goldReward = currentRoom!.rewards[rewardIndex].gold ?? 0;
+        // bool isKingStatus = castStatusToBool(statuses, KingStatus);
+        // if (isKingStatus) {
+        //   goldReward = goldReward * 2;
+        // }
+        playerCharacter!.gold += goldReward;
         currentRoom!.rewards[rewardIndex].gold = null;
         break;
       case 'item':

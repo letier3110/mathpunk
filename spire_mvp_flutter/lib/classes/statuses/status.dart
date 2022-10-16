@@ -10,10 +10,11 @@ class Status {
   Status({
     this.asset = 'assets/relics/chess_pyramid.png',
     statusName = '',
-    statusStack = 0,
+    statusStack = 0.0,
     statusDescription = '',
   }) {
     name = statusName;
+    description = statusDescription;
     stack = statusStack;
     description = description;
   }

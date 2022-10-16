@@ -50,7 +50,13 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
             );
           }),
           if (!isSelectingCardReward && isNoEnemies)
-            ChestView(rewards: widget.room.rewards),
+            Row(
+                children: widget.room.rewards
+                    .asMap()
+                    .entries
+                    .map((entry) =>
+                        ChestView(rewardIndex: entry.key, reward: entry.value))
+                    .toList()),
           if (isSelectingCardReward)
             CardReward(cards: gameState.selectingCardReward),
           if (isPlayerAlive && !isNoEnemies) const PlayerPawnView(),

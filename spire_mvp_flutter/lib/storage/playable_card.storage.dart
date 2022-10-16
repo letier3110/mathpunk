@@ -28,7 +28,7 @@ PlayableCard playableCardFromJson(dynamic json) {
 
   PlayableCard card;
 
-  bool temporary = json(['temporary']) as bool;
+  bool temporary = json['temporary'] as bool;
 
   switch (jsonRuntime) {
     case 'StrikeCard':

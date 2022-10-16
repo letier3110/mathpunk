@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/shrug_it_off.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -41,6 +44,18 @@ class ShrugItOffCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override

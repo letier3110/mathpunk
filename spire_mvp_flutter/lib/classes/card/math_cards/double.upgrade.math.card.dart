@@ -3,6 +3,7 @@ import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_time.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/rook.status.dart';
@@ -52,6 +53,11 @@ class DoubleMathUpgradeCard extends PlayableCard {
     bool isRookStatus = castStatusToBool(statuses, RookStatus);
 
     if (isRookStatus && character.timesReceivedDamageInRound == 0) return 0;
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
     return mana;
   }
 

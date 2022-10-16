@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/body_slam.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
@@ -30,6 +31,18 @@ class BodySlamCard extends PlayableCard {
   StatelessWidget getCardDescription() {
     return HighlightDescriptionText(
         text: 'Deal damage equal to your current Block.');
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override

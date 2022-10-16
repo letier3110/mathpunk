@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/iron_wave.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
@@ -64,6 +65,18 @@ class IronWaveCard extends PlayableCard {
     double mathMultiplierScore =
         castStatusToDouble(statuses, MathMultiplierScoreStatus);
     return mathMultiplierScore > 0;
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override

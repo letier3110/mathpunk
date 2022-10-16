@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
@@ -53,6 +55,18 @@ class FlexUpgradeCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override

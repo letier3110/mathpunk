@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -61,6 +63,18 @@ class ArmamentsUpgradeCard extends PlayableCard {
         ],
       ),
     );
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -30,7 +30,7 @@ class ArmamentsCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.skill,
             cardTargetType: TargetEnum.cardTarget,
-            cardUpgrageLink: AngerUpgradeCard(),
+            cardUpgrageLink: ArmamentsUpgradeCard(),
             cardTemporary: cardTemporary);
 
   @override

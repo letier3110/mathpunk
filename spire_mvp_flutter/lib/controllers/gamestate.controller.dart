@@ -15,6 +15,7 @@ import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/classes/room/room.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
@@ -60,6 +61,7 @@ class GamestateController extends ChangeNotifier {
   Room? currentRoom;
   PlayableCard? selectingTarget;
   List<PlayableCard> selectingCardReward = [];
+  Reward? isOpenedChest;
   int? selectingTargetCardId;
   Enemy? selectedTarget;
   String? playerName;
@@ -267,6 +269,18 @@ class GamestateController extends ChangeNotifier {
     _generateMap();
   }
 
+  void selectChest(Reward reward) {
+    isOpenedChest = reward;
+
+    notifyListeners();
+  }
+
+  void stopSelectingChest() {
+    isOpenedChest = null;
+
+    notifyListeners();
+  }
+
   void selectCardReward(List<PlayableCard> cards) {
     selectingCardReward = cards;
 
@@ -425,6 +439,8 @@ class GamestateController extends ChangeNotifier {
       currentRoom = room;
       visitedRooms.add(room);
     }
+
+    isOpenedChest = null;
 
     if (currentRoom.runtimeType == EnemyRoom) {
       // playerCharacter!.strength = 5;

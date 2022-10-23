@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/components/room/chest.view.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/components/room/card_reward.view.dart';
 import 'package:mathpunk_cardgame/components/room/card_to_draw.view.dart';
-import 'package:mathpunk_cardgame/components/room/chest.view.dart';
+import 'package:mathpunk_cardgame/components/room/rewards.screen.dart';
 import 'package:mathpunk_cardgame/components/room/current_mana.view.dart';
 import 'package:mathpunk_cardgame/components/room/discardpile.view.dart';
 import 'package:mathpunk_cardgame/components/room/drawpile.view.dart';
@@ -34,6 +35,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
     bool isSelectingCard = gameState.selectingTarget != null &&
         gameState.selectingTarget!.targetType == TargetEnum.cardTarget;
     bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
+    bool isOpenedChest = gameState.isOpenedChest != null;
 
     return Container(
         // color: const Color(0xFF222222),
@@ -49,13 +51,18 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
               enemy: enemy,
             );
           }),
-          if (!isSelectingCardReward && isNoEnemies)
-            Row(
+          if (!isOpenedChest && isNoEnemies)
+            Stack(
+                children: widget.room.rewards
+                    .map((entry) => ChestView(reward: entry))
+                    .toList()),
+          if (isOpenedChest && !isSelectingCardReward && isNoEnemies)
+            Stack(
                 children: widget.room.rewards
                     .asMap()
                     .entries
-                    .map((entry) =>
-                        ChestView(rewardIndex: entry.key, reward: entry.value))
+                    .map((entry) => RewardsScreen(
+                        rewardIndex: entry.key, reward: entry.value))
                     .toList()),
           if (isSelectingCardReward)
             CardReward(cards: gameState.selectingCardReward),

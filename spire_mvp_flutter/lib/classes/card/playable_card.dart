@@ -17,6 +17,7 @@ class PlayableCard {
   String asset;
   bool exhausted = false;
   bool ethereal = false;
+  bool temporary = false;
   int step = 1;
   int maxSteps = 1;
   int precision = maxPrecisionChance;
@@ -39,7 +40,8 @@ class PlayableCard {
       cardExhaused = false,
       cardPrecision = maxPrecisionChance,
       cardResource = ResourcesEnum.mana,
-      cardUpgrageLink}) {
+      cardUpgrageLink,
+      cardTemporary = false}) {
     ethereal = cardEthereal;
     exhausted = cardExhaused;
     name = cardName;
@@ -53,12 +55,25 @@ class PlayableCard {
     precision = cardPrecision;
     resourceType = cardResource;
     upgradeCardLink = cardUpgrageLink;
+    temporary = cardTemporary;
   }
 
   bool isCardBoosted() => false;
 
-  String getCardName() {
-    return name;
+  bool isCardCanBeUpgraded() => upgradeCardLink != null;
+
+  PlayableCard upgradeCard() {
+    if (upgradeCardLink != null) {
+      return upgradeCardLink!;
+    }
+    return this;
+  }
+
+  StatelessWidget getCardName() {
+    return Text(
+      name,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
   }
 
   StatelessWidget getCardDescription() {
@@ -134,7 +149,8 @@ class PlayableCard {
         cardMaxSteps: json['maxSteps'] as int,
         cardExhaused: json['exhausted'] as bool,
         cardEthereal: json['ethereal'] as bool,
-        cardPrecision: json(['precision']) as int,
+        cardPrecision: json['precision'] as int,
+        cardTemporary: json['temporary'] as bool,
         cardType: decodeCardTypeFromJson(json['type']),
         cardTargetType: decodeTargetEnumFromJson(json['targetType']),
         cardUpgrageLink: card == null
@@ -151,6 +167,7 @@ class PlayableCard {
         'exhausted': exhausted,
         'ethereal': ethereal,
         'precision': precision,
+        'temporary': temporary,
         'type': type.toString(),
         'targetType': targetType.toString(),
         'upgradeCardLink':

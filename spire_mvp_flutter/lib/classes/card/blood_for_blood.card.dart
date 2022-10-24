@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/blood_for_blood.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
@@ -9,31 +13,41 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 18;
-int mana = 4;
-
 class BloodForBloodCard extends PlayableCard {
-  BloodForBloodCard({
-    cardName = 'Blood for Blood',
-    cardDescription =
-        'Costs 1 less mana for each time you lose HP this combat.Deal 18 damage.',
-    cardMana = 4,
-  }) : super(
+  int damage = 18;
+  int baseManaCost = 4;
+
+  BloodForBloodCard(
+      {cardName = 'Blood for Blood',
+      cardDescription =
+          'Costs 1 less mana for each time you lose HP this combat.Deal 18 damage.',
+      cardMana = 4,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: BloodForBloodUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   int getMana() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int delta = mana - character.timesReceivedDamageInRound;
+    int delta = baseManaCost - character.timesReceivedDamageInRound;
+
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && delta == 1) return 0;
+
     return delta > 0 ? delta : 0;
   }
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = predictDamage(damage: damage, mana: mana);
+    int finalDamage = predictDamage(damage: damage, mana: baseManaCost);
     return Container(
       child: Column(
         children: [
@@ -63,13 +77,19 @@ class BloodForBloodCard extends PlayableCard {
   @override
   bool isCardBoosted() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    return character.mathMultiplierScore > 0;
+    List<Status> statuses = character.getStatuses();
+    double mathMultiplierScore =
+        castStatusToDouble(statuses, MathMultiplierScoreStatus);
+    return mathMultiplierScore > 0;
   }
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0].recieveDamage(calculateDamage(
+          damage: damage, precision: precision, mana: baseManaCost));
     }
   }
 }

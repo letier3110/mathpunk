@@ -14,6 +14,12 @@ class Relic {
     throw UnimplementedError();
   }
 
+  bool isVisible() => true;
+
+  String getAssetImage() {
+    return 'assets/gray_potion.png';
+  }
+
   factory Relic.fromJson(dynamic json) {
     return Relic(
       relicName: json['name'] as String,

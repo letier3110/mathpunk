@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
 import '../base_character.dart';
@@ -9,18 +13,21 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class AngerCard extends PlayableCard {
-  AngerCard({
-    cardName = 'Anger',
-    cardDescription = 'Deal 6 damage.',
-    cardMana = 1,
-  }) : super(
+  int damage = 6;
+
+  AngerCard(
+      {cardName = 'Anger',
+      cardDescription = 'Deal 6 damage.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: AngerUpgradeCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -49,16 +56,34 @@ class AngerCard extends PlayableCard {
   }
 
   @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
+  }
+
+  @override
   bool isCardBoosted() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    return character.mathMultiplierScore > 0;
+    List<Status> statuses = character.getStatuses();
+    double mathMultiplierScore =
+        castStatusToDouble(statuses, MathMultiplierScoreStatus);
+    return mathMultiplierScore > 0;
   }
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0].recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
     }
-    Player.getPlayerInstance().getCharacter().getDeck().addToDiscardPile(this);
+    character.getDeck().addToDiscardPile(this);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 int vulnerable = 3;
@@ -28,7 +29,10 @@ class FearPotion extends ConsumableItem {
   play(List<BaseCharacter> target) {
     if (target.length == 1) {
       int localVulnerable = vulnerable;
-      target[0].addVulnerable(localVulnerable);
+
+      VulnerableStatus vs = VulnerableStatus();
+      vs.addStack(localVulnerable.toDouble());
+      target[0].addStatus(vs);
     }
   }
 }

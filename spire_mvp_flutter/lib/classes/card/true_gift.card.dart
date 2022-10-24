@@ -1,7 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/true_gift.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -11,20 +16,23 @@ import '../../enums/card_type.enum.dart';
 import '../player/player_character/player_character.dart';
 import 'playable_card.dart';
 
-int block = 7;
-
 class TrueGiftCard extends PlayableCard {
-  TrueGiftCard({
-    cardName = 'True Grit',
-    cardDescription =
-        'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
-    cardMana = 1,
-  }) : super(
+  int block = 7;
+
+  TrueGiftCard(
+      {cardName = 'True Grit',
+      cardDescription =
+          'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill);
+            cardType: CardType.skill,
+            cardUpgrageLink: TrueGiftUpgradeCard());
 
   @override
   StatelessWidget getCardDescription() {
@@ -42,10 +50,27 @@ class TrueGiftCard extends PlayableCard {
   }
 
   @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
+  }
+
+  @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     int localBlock = block;
-    character.addBlock(localBlock);
+
+    BlockStatus bs = BlockStatus();
+    bs.addStack(localBlock.toDouble());
+    character.addStatus(bs);
+
     List<PlayableCard> hand = character.getDeck().getHand();
     int cardIndex = Random().nextInt(hand.length - 1);
     hand[cardIndex].exhausted = true;

@@ -1,3 +1,5 @@
+import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
 import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
 import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
@@ -22,7 +24,9 @@ class Barbarian extends PlayerCharacter {
       StrikeCard(),
       StrikeCard(),
       StrikeCard(),
-      BloodForBloodCard()
+      BloodForBloodCard(),
+      AngerCard(),
+      AngerUpgradeCard()
     ];
 
     deck = Deck(cards);

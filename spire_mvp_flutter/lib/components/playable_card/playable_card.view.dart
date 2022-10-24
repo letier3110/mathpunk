@@ -129,10 +129,10 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                   : animation.value),
           child: Center(
             child: Stack(children: [
-              if (widget.disabled == false &&
-                  widget.glow &&
-                  playerMana >= widget.card.getMana() &&
-                  widget.card.isCardPlayable())
+              if ((widget.disabled == false &&
+                      playerMana >= widget.card.getMana() &&
+                      widget.card.isCardPlayable()) &&
+                  widget.glow)
                 Center(
                   child: GlowEffectCard(
                       child: SizedBox(
@@ -183,13 +183,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, cardWidth / 40, 0, 0),
-                              child: Text(
-                                widget.card.name,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        16 * (widget.size! / defaultWidth)),
-                              ),
+                              child: widget.card.getCardName(),
                             ),
                             Container(
                               height: calcHeightByWidth(cardWidth) * 0.3,
@@ -209,9 +203,18 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                           top: 8,
                           left: cardWidth / 24,
                           child: Container(
-                            width: 24 * (cardWidth / defaultWidth),
-                            height: 24 *
-                                (calcHeightByWidth(cardWidth) / defaultHeight),
+                            // width: 24 * (cardWidth / defaultWidth),
+                            // height: 24 *
+                            //     (calcHeightByWidth(cardWidth) / defaultHeight)
+                            padding: EdgeInsets.fromLTRB(
+                                6 * (cardWidth / defaultWidth),
+                                6 *
+                                    (calcHeightByWidth(cardWidth) /
+                                        defaultHeight),
+                                6 * (cardWidth / defaultWidth),
+                                6 *
+                                    (calcHeightByWidth(cardWidth) /
+                                        defaultHeight)),
                             // padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 color: const Color(0xFFC99C66),

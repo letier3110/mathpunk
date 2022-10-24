@@ -1,22 +1,44 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/game_map.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/chess_pyramid.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
+import 'package:mathpunk_cardgame/classes/reward.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/classes/room/room.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/classes/sellable.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/knight.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/pawn.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/precision.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/queen.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
-import 'package:mathpunk_cardgame/enums/target.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
+import 'package:mathpunk_cardgame/pools/cards.pool.dart';
+import 'package:mathpunk_cardgame/pools/utils.dart';
 
 import '../classes/deck.dart';
 
@@ -39,6 +61,7 @@ class GamestateController extends ChangeNotifier {
   Room? currentRoom;
   PlayableCard? selectingTarget;
   List<PlayableCard> selectingCardReward = [];
+  Reward? isOpenedChest;
   int? selectingTargetCardId;
   Enemy? selectedTarget;
   String? playerName;
@@ -49,7 +72,7 @@ class GamestateController extends ChangeNotifier {
   }
 
   void setSelectedCards(List<PlayableCard> selectedCards) {
-    if (selectedTarget == null) return;
+    if (selectingTarget == null) return;
     selectingTarget!.setSelectedCards(selectedCards);
   }
 
@@ -224,12 +247,12 @@ class GamestateController extends ChangeNotifier {
     if (currentRoom!.enemies.isEmpty && currentRoom!.getCanLeaveRoom()) {
       // if (currentRoom!.enemies.isEmpty) {
       // if there are burning blood => add player hp
-      try {
-        playerCharacter!.relics
-            .firstWhere(
-                (element) => BurningBloodRelic.isRelicBurningBlood(element))
-            .play();
-      } catch (e) {}
+      List<Relic> burningBlood = playerCharacter!.relics
+          .where((element) => BurningBloodRelic.isRelicBurningBlood(element))
+          .toList();
+      if (burningBlood.isNotEmpty) {
+        burningBlood[0].play();
+      }
       endTheRoom();
     }
 
@@ -244,6 +267,18 @@ class GamestateController extends ChangeNotifier {
 
   void startGame() {
     _generateMap();
+  }
+
+  void selectChest(Reward reward) {
+    isOpenedChest = reward;
+
+    notifyListeners();
+  }
+
+  void stopSelectingChest() {
+    isOpenedChest = null;
+
+    notifyListeners();
   }
 
   void selectCardReward(List<PlayableCard> cards) {
@@ -277,9 +312,15 @@ class GamestateController extends ChangeNotifier {
   void pickReward(int rewardIndex, String fieldType) {
     if (currentRoom == null) return;
     if (playerCharacter == null) return;
+    // List<Status> statuses = playerCharacter!.getStatuses();
     switch (fieldType) {
       case 'gold':
-        playerCharacter!.gold += currentRoom!.rewards[rewardIndex].gold ?? 0;
+        int goldReward = currentRoom!.rewards[rewardIndex].gold ?? 0;
+        // bool isKingStatus = castStatusToBool(statuses, KingStatus);
+        // if (isKingStatus) {
+        //   goldReward = goldReward * 2;
+        // }
+        playerCharacter!.gold += goldReward;
         currentRoom!.rewards[rewardIndex].gold = null;
         break;
       case 'item':
@@ -399,30 +440,80 @@ class GamestateController extends ChangeNotifier {
       visitedRooms.add(room);
     }
 
+    isOpenedChest = null;
+
     if (currentRoom.runtimeType == EnemyRoom) {
       // playerCharacter!.strength = 5;
       // playerCharacter!.weak = 5;
       var deck = playerCharacter!.getDeck();
       deck.initialLoadDrawPile();
+
+      List<Relic> chessPyramid = playerCharacter!.relics
+          .where((element) => ChessPyramid.isRelicChessPyramid(element))
+          .toList();
+      if (chessPyramid.isNotEmpty) {
+        chessPyramid[0].play();
+      }
+
+      List<Status> statuses = playerCharacter!.getStatuses();
+
+      // if pawn status => upgrade random card from deck forever
+      bool isPawnStatus = castStatusToBool(statuses, PawnStatus);
+      if (isPawnStatus == true) {
+        final random = Random();
+        int randomElement =
+            random.nextInt(playerCharacter!.getDeck().cards.length);
+        while (playerCharacter!
+                .getDeck()
+                .cards[randomElement]
+                .isCardCanBeUpgraded() ==
+            false) {
+          randomElement =
+              random.nextInt(playerCharacter!.getDeck().cards.length);
+        }
+        playerCharacter!.getDeck().cards[randomElement] =
+            playerCharacter!.getDeck().cards[randomElement].upgradeCard();
+      }
+
+      bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
+      if (isKnightStatus == true) {
+        playerCharacter!.getDeck().getHand().add(ShivCard());
+      }
+
+      bool isQueenStatus = castStatusToBool(statuses, QueenStatus);
+      if (isQueenStatus == true) {
+        StrengthStatus ss = StrengthStatus();
+        DexterityStatus ds = DexterityStatus();
+        PrecisionStatus ps = PrecisionStatus();
+        ss.addStack(2);
+        ds.addStack(2);
+        ps.addStack(15);
+        playerCharacter!.addStatus(ss);
+        playerCharacter!.addStatus(ds);
+        playerCharacter!.addStatus(ps);
+      }
+
       // if there are ring of snake => draw 2 cards at the start of combat
-      try {
-        playerCharacter!.relics
-            .firstWhere((element) => RingOfSnake.isRelicRingOfSnake(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ringOfSnake = playerCharacter!.relics
+          .where((element) => RingOfSnake.isRelicRingOfSnake(element))
+          .toList();
+      if (ringOfSnake.isNotEmpty) {
+        ringOfSnake[0].play();
+      }
       // if there are ring of snake => draw 1 cards at the start of combat
-      try {
-        playerCharacter!.relics
-            .firstWhere(
-                (element) => RingOfSerpent.isRelicRingOfSerpent(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ringOfSerpent = playerCharacter!.relics
+          .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
+          .toList();
+      if (ringOfSerpent.isNotEmpty) {
+        ringOfSerpent[0].play();
+      }
       // if there are ninja scroll => add 3 shivs
-      try {
-        playerCharacter!.relics
-            .firstWhere((element) => NinjaScroll.isRelicNinjaScroll(element))
-            .play();
-      } catch (e) {}
+      List<Relic> ninjaScroll = playerCharacter!.relics
+          .where((element) => NinjaScroll.isRelicNinjaScroll(element))
+          .toList();
+      if (ninjaScroll.isNotEmpty) {
+        ninjaScroll[0].play();
+      }
       playerCharacter!.startTurn();
       // this.currentRoom.getEnemies().forEach(enemy => {
       //   enemy.moveset.getNextMove();
@@ -448,28 +539,75 @@ class GamestateController extends ChangeNotifier {
         .getHand()
         .where((x) => x.runtimeType == DoubtCard)
         .isNotEmpty) {
-      playerCharacter!.addWeak(1);
+      WeakStatus ws = WeakStatus();
+      ws.addStack(1);
+      playerCharacter!.addStatus(ws);
     }
     for (var enemy in currentRoom!.getEnemies()) {
       enemy.makeMove();
-      enemy.block = 0;
-      if (enemy.vulnerable > 0) {
-        enemy.vulnerable -= 1;
+
+      BlockStatus block = BlockStatus();
+      enemy.setStatus(block);
+
+      List<Status> statuses = enemy.getStatuses();
+      int weak = castStatusToInt(statuses, WeakStatus);
+      int vulnerable = castStatusToInt(statuses, VulnerableStatus);
+
+      if (vulnerable > 0) {
+        VulnerableStatus vs = VulnerableStatus();
+        vs.addStack(-1);
+        enemy.addStatus(vs);
       }
-      if (enemy.weak > 0) {
-        enemy.weak -= 1;
+      if (weak > 0) {
+        WeakStatus ws = WeakStatus();
+        ws.addStack(-1);
+        enemy.addStatus(ws);
       }
-      enemy.strength -= enemy.strengthCurse;
-      enemy.strengthCurse = 0;
-      enemy.strength += enemy.strengthEmpower;
+      int strengthCurse = castStatusToInt(statuses, StrengthCurseStatus);
+      int strengthEmpower = castStatusToInt(statuses, StrengthEmpowerStatus);
+      StrengthStatus ss = StrengthStatus();
+      ss.addStack(-strengthCurse.toDouble());
+      ss.addStack(strengthEmpower.toDouble());
+      enemy.addStatus(ss);
+
+      int dexterityCurse = castStatusToInt(statuses, DexterityCurseStatus);
+      int dexterityEmpower = castStatusToInt(statuses, DexterityEmpowerStatus);
+      DexterityStatus ds = DexterityStatus();
+      ds.addStack(-dexterityCurse.toDouble());
+      ds.addStack(dexterityEmpower.toDouble());
+      enemy.addStatus(ds);
+
+      StrengthCurseStatus scs = StrengthCurseStatus();
+      enemy.setStatus(scs);
+
+      DexterityCurseStatus dcs = DexterityCurseStatus();
+      enemy.setStatus(dcs);
+
+      StrengthEmpowerStatus ses = StrengthEmpowerStatus();
+      enemy.setStatus(ses);
+
+      DexterityEmpowerStatus des = DexterityEmpowerStatus();
+      enemy.setStatus(des);
     }
     playerCharacter!.endTurn();
+
+    List<Status> statuses = playerCharacter!.getStatuses();
+
+    bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
+    if (isKnightStatus == true) {
+      playerCharacter!
+          .getDeck()
+          .getHand()
+          .add(weightedRandomPick(poolAllCards).obj);
+    }
+
     // if there are ring of snake => draw 1 cards at the start of round
-    try {
-      playerCharacter!.relics
-          .firstWhere((element) => RingOfSerpent.isRelicRingOfSerpent(element))
-          .play();
-    } catch (e) {}
+    List<Relic> ringOfSerpent = playerCharacter!.relics
+        .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
+        .toList();
+    if (ringOfSerpent.isNotEmpty) {
+      ringOfSerpent[0].play();
+    }
     notifyListeners();
   }
 

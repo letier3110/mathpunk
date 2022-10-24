@@ -63,7 +63,7 @@ class CardToDrawView extends State<CardToDraw> {
                           child: PlayableCardComponent(
                             card: e,
                             animate: false,
-                            glow: choice.contains(e),
+                            glow: choice.contains(e) == false,
                           ),
                         ),
                       ))

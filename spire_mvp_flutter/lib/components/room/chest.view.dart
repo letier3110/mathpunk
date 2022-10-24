@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/reward.dart';
-import 'package:mathpunk_cardgame/components/room/reward.view.dart';
-
+import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
+const double hpBarHeight = 20;
+
 class ChestView extends StatefulWidget {
-  final List<Reward> rewards;
-  const ChestView({required this.rewards, Key? key}) : super(key: key);
+  final Reward reward;
+  const ChestView({required this.reward, Key? key}) : super(key: key);
 
   @override
   State<ChestView> createState() => ChestViewView();
@@ -20,45 +20,28 @@ class ChestViewView extends State<ChestView> {
         Provider.of<GamestateController>(context, listen: false);
 
     void onTapHandler() {
-      // gameState.nextTurn();
+      gameState.selectChest(widget.reward);
     }
 
-    int goldReward = widget.rewards
-            .reduce((value, element) =>
-                Reward(rewardGold: (value.gold ?? 0) + (element.gold ?? 0)))
-            .gold ??
-        0;
+    double width = MediaQuery.of(context).size.width;
 
-    return Center(
-      child: Row(
-        children: [
-          const Spacer(
-            flex: 1,
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/pause_bg.png'), fit: BoxFit.fill),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: widget.rewards
-                    .asMap()
-                    .entries
-                    .map((entry) =>
-                        RewardView(rewardIndex: entry.key, reward: entry.value))
-                    .toList(),
-              ),
+    return Positioned(
+      top: 200,
+      right: width / 3,
+      child: GestureDetector(
+        onTap: onTapHandler,
+        child: Stack(children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            height: width / 6,
+            width: width / 6,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/cards/chest.png'),
+                  fit: BoxFit.cover),
             ),
           ),
-          const Spacer(
-            flex: 1,
-          ),
-        ],
+        ]),
       ),
     );
   }

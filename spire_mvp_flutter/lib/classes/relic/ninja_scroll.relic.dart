@@ -2,9 +2,8 @@ import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
-int count = 3;
-
 class NinjaScroll extends Relic {
+  int count = 3;
   NinjaScroll(
       {relicName = 'Ninja Scroll',
       relicDescription = 'Start each combat with 3 Shivs in hand.'})
@@ -12,7 +11,7 @@ class NinjaScroll extends Relic {
 
   @override
   void play() {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < count; i++) {
       Player.getPlayerInstance()
           .getCharacter()
           .getDeck()

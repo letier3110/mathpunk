@@ -1,6 +1,10 @@
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dodge.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
-
-import '../interfaces/character.interface.dart';
+import 'package:mathpunk_cardgame/interfaces/character.interface.dart';
+import 'package:mathpunk_cardgame/storage/status.storage.dart';
 
 class BaseCharacter implements ICharacter {
   late String name;
@@ -8,17 +12,10 @@ class BaseCharacter implements ICharacter {
   late int health;
   @override
   late int maxHealth;
-  int block = 0;
-  int vulnerable = 0;
-  int weak = 0;
-  int strength = 0;
-  int strengthEmpower = 0;
-  int strengthCurse = 0;
+  List<Status> statuses = [];
+
   int timesReceivedDamageInRound = 0;
-  int dodgeChance = 0;
-  int precisionChance = maxPrecisionChance;
-  double mathMultiplierScore = 0;
-  int mathMultiplierTime = 0;
+  int timesPlayedCardsInRound = 0;
 
   BaseCharacter() : super() {
     health = 10;
@@ -26,62 +23,33 @@ class BaseCharacter implements ICharacter {
     name = '';
   }
 
-  statusUpdate() {
-    block = 0;
-    if (vulnerable >= 1) {
-      vulnerable -= 1;
+  void addStatus(Status status) {
+    List<Status> findStatus = statuses
+        .where((element) => element.runtimeType == status.runtimeType)
+        .toList();
+    if (findStatus.isNotEmpty) {
+      findStatus[0].addStack(status.stack);
+    } else {
+      statuses.add(status);
     }
   }
 
-  addBlock(int block) {
-    this.block += block;
-  }
-
-  addVulnerable(int vulnerable) {
-    this.vulnerable += vulnerable;
-  }
-
-  addWeak(int weak) {
-    this.weak += weak;
-  }
-
-  addStrength(int strength) {
-    this.strength += strength;
-  }
-
-  addStrengthCurse(int strengthCurse) {
-    this.strengthCurse += strengthCurse;
-  }
-
-  addStrengthEmpower(int strengthEmpower) {
-    this.strengthEmpower += strengthEmpower;
-  }
-
-  addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
-    this.timesReceivedDamageInRound += timesReceivedDamageInRound;
-  }
-
-  addDodgeChance(int dodgeChance) {
-    this.dodgeChance += dodgeChance;
-  }
-
-  addPrecisionChance(int precisionChance) {
-    this.precisionChance += precisionChance;
-  }
-
-  addMathMultiplierScore(double mathMultiplierScore) {
-    this.mathMultiplierScore += mathMultiplierScore;
-  }
-
-  addMathMultiplierTime(int mathMultiplierTime) {
-    this.mathMultiplierTime += mathMultiplierTime;
-  }
-
-  void resetRoundStatuses() {
-    timesReceivedDamageInRound = 0;
+  void setStatus(Status status) {
+    List<Status> findStatus = statuses
+        .where((element) => element.runtimeType == status.runtimeType)
+        .toList();
+    if (findStatus.isNotEmpty) {
+      findStatus[0].setStack(status.stack);
+    } else {
+      statuses.add(status);
+    }
   }
 
   recieveDamage(int damage) {
+    int dodgeChance = castStatusToInt(statuses, DodgeStatus);
+    int vulnerable = castStatusToInt(statuses, VulnerableStatus);
+    int block = castStatusToInt(statuses, BlockStatus);
+
     if (getProbability(dodgeChance)) {
       return;
     }
@@ -138,31 +106,34 @@ class BaseCharacter implements ICharacter {
     this.maxHealth = maxHealth;
   }
 
-  getDodgeChance() {
-    return dodgeChance;
+  List<Status> getStatuses() => statuses;
+
+  void resetRoundStatuses() {
+    timesReceivedDamageInRound = 0;
+    timesPlayedCardsInRound = 0;
+    statuses = [];
   }
 
-  getPrecisionChance() {
-    return precisionChance;
+  addTimesReceivedDamageInRound(int timesReceivedDamageInRound) {
+    this.timesReceivedDamageInRound += timesReceivedDamageInRound;
+  }
+
+  addTimesPlayedCardsInRound(int timesPlayedCardsInRound) {
+    this.timesPlayedCardsInRound += timesPlayedCardsInRound;
   }
 
   factory BaseCharacter.fromJson(dynamic json) {
     BaseCharacter character = BaseCharacter();
     character.setHealth(json['health'] as int);
     character.setMaxHealth(json['maxHealth'] as int);
-    character.addBlock(json['block'] as int);
-    character.addVulnerable(json['vulnerable'] as int);
-    character.addWeak(json['weak'] as int);
-    character.addStrength(json['strength'] as int);
-    character.addStrengthCurse(json['strengthCurse'] as int);
-    character.addStrengthEmpower(json['strengthEmpower'] as int);
     character.addTimesReceivedDamageInRound(
         json['timesReceivedDamageInRound'] as int);
-    character.addDodgeChance(json['dodgeChance'] as int);
-    character.addPrecisionChance(json['precisionChance'] as int);
-    character.addMathMultiplierScore(json['mathMultiplierScore'] as double);
-    character.addMathMultiplierTime(json['mathMultiplierTime'] as int);
+    character
+        .addTimesPlayedCardsInRound(json['timesPlayedCardsInRound'] as int);
 
+    character.statuses.addAll((json['statuses'] as List<Status>)
+        .map((e) => statusFromJson(e))
+        .toList());
     return character;
   }
 
@@ -170,16 +141,8 @@ class BaseCharacter implements ICharacter {
         'name': name,
         'health': health,
         'maxHealth': maxHealth,
-        'block': block,
-        'vulnerable': vulnerable,
-        'weak': weak,
-        'strength': strength,
-        'strengthCurse': strengthCurse,
-        'strengthEmpower': strengthEmpower,
         'timesReceivedDamageInRound': timesReceivedDamageInRound,
-        'dodgeChance': dodgeChance,
-        'precisionChance': precisionChance,
-        'mathMultiplierScore': mathMultiplierScore,
-        'mathMultiplierTime': mathMultiplierTime,
+        'timesPlayedCardsInRound': timesPlayedCardsInRound,
+        'statuses': statuses.map((e) => statusToJson(e)).toList()
       };
 }

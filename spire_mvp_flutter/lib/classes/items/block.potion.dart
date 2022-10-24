@@ -1,6 +1,7 @@
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../player/player_character/player_character.dart';
@@ -31,6 +32,9 @@ class BlockPotion extends ConsumableItem {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localBlock = block;
-    character.addBlock(localBlock);
+
+    BlockStatus bs = BlockStatus();
+    bs.addStack(localBlock.toDouble());
+    character.addStatus(bs);
   }
 }

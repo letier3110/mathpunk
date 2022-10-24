@@ -1,5 +1,16 @@
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/dexterity_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_curse.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
 import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
@@ -77,16 +88,49 @@ class PlayerCharacter extends BaseCharacter {
         i += 1;
       }
     }
-    block = 0;
-    strength -= strengthCurse;
-    strengthCurse = 0;
-    strength += strengthEmpower;
+    BlockStatus block = BlockStatus();
+    setStatus(block);
+
+    List<Status> statuses = getStatuses();
+    int weak = castStatusToInt(statuses, WeakStatus);
+    int vulnerable = castStatusToInt(statuses, VulnerableStatus);
+
     if (vulnerable > 0) {
-      vulnerable -= 1;
+      VulnerableStatus vs = VulnerableStatus();
+      vs.addStack(-1);
+      addStatus(vs);
     }
     if (weak > 0) {
-      weak -= 1;
+      WeakStatus ws = WeakStatus();
+      ws.addStack(-1);
+      addStatus(ws);
     }
+    int strengthCurse = castStatusToInt(statuses, StrengthCurseStatus);
+    int strengthEmpower = castStatusToInt(statuses, StrengthEmpowerStatus);
+    StrengthStatus ss = StrengthStatus();
+    ss.addStack(-strengthCurse.toDouble());
+    ss.addStack(strengthEmpower.toDouble());
+    addStatus(ss);
+
+    int dexterityCurse = castStatusToInt(statuses, DexterityCurseStatus);
+    int dexterityEmpower = castStatusToInt(statuses, DexterityEmpowerStatus);
+    DexterityStatus ds = DexterityStatus();
+    ds.addStack(-dexterityCurse.toDouble());
+    ds.addStack(dexterityEmpower.toDouble());
+    addStatus(ds);
+
+    StrengthCurseStatus scs = StrengthCurseStatus();
+    setStatus(scs);
+
+    DexterityCurseStatus dcs = DexterityCurseStatus();
+    setStatus(dcs);
+
+    StrengthEmpowerStatus ses = StrengthEmpowerStatus();
+    setStatus(ses);
+
+    DexterityEmpowerStatus des = DexterityEmpowerStatus();
+    setStatus(des);
+
     startTurn();
   }
 

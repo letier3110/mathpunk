@@ -17,6 +17,11 @@ class RingOfSnake extends Relic {
     return relic.runtimeType == RingOfSnake;
   }
 
+  @override
+  String getAssetImage() {
+    return 'assets/relics/ring_of_snake.png';
+  }
+
   factory RingOfSnake.fromJson(dynamic json) {
     return RingOfSnake(
       relicName: json['name'] as String,

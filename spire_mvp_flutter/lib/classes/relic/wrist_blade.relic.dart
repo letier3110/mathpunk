@@ -1,7 +1,5 @@
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
-int count = 3;
-
 class WristBlade extends Relic {
   WristBlade(
       {relicName = 'Wrist Blade',
@@ -20,6 +18,11 @@ class WristBlade extends Relic {
       relicName: json['name'] as String,
       relicDescription: json['description'] as String,
     );
+  }
+
+  @override
+  String getAssetImage() {
+    return 'assets/relics/wrist_blade.png';
   }
 
   @override

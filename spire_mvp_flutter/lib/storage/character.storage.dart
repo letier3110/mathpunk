@@ -23,19 +23,11 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   int jsonHealth = json['health'] as int;
   int jsonMaxHealth = json['maxHealth'] as int;
-  int jsonBlock = json['block'] as int;
-  int jsonVulnerable = json['vulnerable'] as int;
-
-  int jsonWeak = json['weak'] as int;
-  int jsonStrength = json['strength'] as int;
-  int jsonStrengthCurse = json['strengthCurse'] as int;
-  int jsonStrengthEmpower = json['strengthEmpower'] as int;
 
   int jsonTimesReceivedDamageInRound =
       json['timesReceivedDamageInRound'] as int;
 
-  int jsonDodgeChance = json['dodgeChance'] as int;
-  int jsonPrecisionChance = json['precisionChance'] as int;
+  int jsonTimesPlayedCardsInRound = json['timesPlayedCardsInRound'] as int;
 
   int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
 
@@ -72,18 +64,10 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
 
   character.setHealth(jsonHealth);
   character.setMaxHealth(jsonMaxHealth);
-  character.addBlock(jsonBlock);
-  character.addVulnerable(jsonVulnerable);
-
-  character.addWeak(jsonWeak);
-  character.addStrength(jsonStrength);
-  character.addStrengthCurse(jsonStrengthCurse);
-  character.addStrengthEmpower(jsonStrengthEmpower);
 
   character.addTimesReceivedDamageInRound(jsonTimesReceivedDamageInRound);
+  character.addTimesPlayedCardsInRound(jsonTimesPlayedCardsInRound);
 
-  character.addDodgeChance(jsonDodgeChance);
-  character.addPrecisionChance(jsonPrecisionChance);
   character.addCardsPlayedInRound(jsonCardsPlayedInRound);
 
   return character;

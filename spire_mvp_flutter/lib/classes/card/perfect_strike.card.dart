@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/perfect_strike.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 
@@ -10,19 +14,23 @@ import '../../enums/card_type.enum.dart';
 import '../player/player.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class PerfectStrikeCard extends PlayableCard {
+  int damage = 6;
+  int damageAddition = 3;
+
   PerfectStrikeCard(
       {cardName = 'Perfect Strike',
       cardDescription =
           'Deal 6 damage. Deals an additional 2(3) damage for ALL of your cards containing "Strike".',
-      cardMana = 2})
+      cardMana = 2,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: PerfectStrikeUpgradeCard());
   @override
   StatelessWidget getCardDescription() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
@@ -34,17 +42,17 @@ class PerfectStrikeCard extends PlayableCard {
     int bonusDamage = 0;
     for (PlayableCard card in drawPile) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     for (PlayableCard card in hand) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     for (PlayableCard card in discardPile) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     int finalDamage = localDamage + bonusDamage;
@@ -66,22 +74,41 @@ class PerfectStrikeCard extends PlayableCard {
           ])),
           HighlightDescriptionText(
               text:
-                  'Deals an additional 2 damage for ALL of your cards containing "Strike".'),
+                  'Deals an additional $damageAddition damage for ALL of your cards containing "Strike".'),
         ],
       ),
     );
   }
 
   @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
+  }
+
+  @override
   bool isCardBoosted() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    return character.mathMultiplierScore > 0;
+    List<Status> statuses = character.getStatuses();
+    double mathMultiplierScore =
+        castStatusToDouble(statuses, MathMultiplierScoreStatus);
+    return mathMultiplierScore > 0;
   }
 
   @override
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    int localDamage = calculateDamage(damage: damage);
+    character.addCardsPlayedInRound(1);
+    int localDamage = calculateDamage(
+      damage: damage,
+      precision: precision,
+    );
     Deck deck = character.getDeck();
     List<PlayableCard> drawPile = deck.getDrawPile();
     List<PlayableCard> hand = deck.getHand();
@@ -89,17 +116,17 @@ class PerfectStrikeCard extends PlayableCard {
     int bonusDamage = 0;
     for (PlayableCard card in drawPile) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     for (PlayableCard card in hand) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     for (PlayableCard card in discardPile) {
       if (card.name.contains('Strike')) {
-        bonusDamage += 2;
+        bonusDamage += damageAddition;
       }
     }
     int finalDamage = localDamage + bonusDamage;

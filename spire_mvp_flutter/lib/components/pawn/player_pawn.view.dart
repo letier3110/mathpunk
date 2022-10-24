@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
@@ -17,7 +20,9 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
 
-    var block = gameState.playerCharacter?.block ?? 0;
+    List<Status> statuses = gameState.playerCharacter?.getStatuses() ?? [];
+    int block = castStatusToInt(statuses, BlockStatus);
+
     var hp = gameState.playerCharacter?.health ?? 0;
     var maxhp = gameState.playerCharacter?.maxHealth ?? 0;
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;

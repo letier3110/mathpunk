@@ -7,16 +7,16 @@ import '../base_character.dart';
 import '../../enums/card_type.enum.dart';
 import 'playable_card.dart';
 
-int damage = 6;
-
 class NormalityCard extends PlayableCard {
   NormalityCard(
       {cardName = 'Normality',
       cardDescription =
           'Unplayable.You cannot play more than 3 cards this turn.',
-      cardMana = 1})
+      cardMana = 1,
+      cardTemporary = false})
       : super(
             cardName: cardName,
+            cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,

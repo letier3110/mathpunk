@@ -35,10 +35,13 @@ class RelicViewView extends State<RelicView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              width: 48,
+              height: 48,
               padding: const EdgeInsets.only(bottom: 8),
-              child: const Icon(
-                Icons.sports_mma,
-                color: Colors.greenAccent,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(widget.relic.getAssetImage()),
+                    fit: BoxFit.fill),
               ),
             ),
             Text(

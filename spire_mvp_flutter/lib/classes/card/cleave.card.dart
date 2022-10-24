@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -9,19 +12,22 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-int damage = 8;
-
 class CleaveCard extends PlayableCard {
-  CleaveCard({
-    cardName = 'Cleave',
-    cardDescription = 'Deal 8(11) damage to ALL enemies.',
-    cardMana = 1,
-  }) : super(
+  int damage = 8;
+
+  CleaveCard(
+      {cardName = 'Cleave',
+      cardDescription = 'Deal 8(11) damage to ALL enemies.',
+      cardMana = 1,
+      cardTemporary = false})
+      : super(
             cardName: cardName,
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardUpgrageLink: CleaveCard(),
+            cardTemporary: cardTemporary);
 
   @override
   StatelessWidget getCardDescription() {
@@ -50,13 +56,31 @@ class CleaveCard extends PlayableCard {
   @override
   bool isCardBoosted() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    return character.mathMultiplierScore > 0;
+    List<Status> statuses = character.getStatuses();
+    double mathMultiplierScore =
+        castStatusToDouble(statuses, MathMultiplierScoreStatus);
+    return mathMultiplierScore > 0;
+  }
+
+  @override
+  int getMana() {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    List<Status> statuses = character.getStatuses();
+
+    bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
+
+    if (isBishopStatus && mana == 1) return 0;
+
+    return mana;
   }
 
   @override
   play(List<BaseCharacter> target) {
+    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+    character.addCardsPlayedInRound(1);
     for (var t in target) {
-      t.recieveDamage(calculateDamage(damage: damage, mana: mana));
+      t.recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
     }
   }
 }

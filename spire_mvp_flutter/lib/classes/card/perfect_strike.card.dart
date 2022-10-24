@@ -105,7 +105,10 @@ class PerfectStrikeCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
-    int localDamage = calculateDamage(damage: damage);
+    int localDamage = calculateDamage(
+      damage: damage,
+      precision: precision,
+    );
     Deck deck = character.getDeck();
     List<PlayableCard> drawPile = deck.getDrawPile();
     List<PlayableCard> hand = deck.getHand();

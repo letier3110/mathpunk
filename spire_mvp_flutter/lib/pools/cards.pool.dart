@@ -18,7 +18,6 @@ import 'package:mathpunk_cardgame/classes/card/defend.card.dart';
 import 'package:mathpunk_cardgame/classes/card/defend.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/flex.card.dart';
-import 'package:mathpunk_cardgame/classes/card/flex.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/headbutt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/headbutt.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/heavy_blade.card.dart';

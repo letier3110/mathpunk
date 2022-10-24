@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/clock_cover.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
+import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
 
@@ -11,47 +14,52 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-class StrikeUpgradeCard extends PlayableCard {
-  int damage = 9;
+class ClockCoverCard extends PlayableCard {
+  int block = 3;
 
-  StrikeUpgradeCard(
-      {cardName = 'Strike+',
-      cardDescription = 'Deal 5 damage.',
-      cardMana = 1,
+  ClockCoverCard(
+      {cardName = 'Cloak Cover',
+      cardDescription = '0 mana, 80% precision, 3 Block',
+      cardMana = 0,
       cardTemporary = false})
       : super(
             cardName: cardName,
             cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
-
-  @override
-  StatelessWidget getCardName() {
-    return Text(
-      name,
-      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
-    );
-  }
+            cardTargetType: TargetEnum.allTargets,
+            cardType: CardType.skill,
+            cardUpgrageLink: CloakCoverUpgradeCard(),
+            cardPrecision: 80);
 
   @override
   StatelessWidget getCardDescription() {
-    int finalDamage = predictDamage(damage: damage, mana: mana);
+    int finalBlock = predictBlock(block: block, mana: mana);
+    int finalPrecision = predictPrecision(precision: precision);
     return Container(
       child: Column(
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            const TextSpan(text: 'Receive '),
             TextSpan(
-                text: finalDamage.toString(),
+                text: finalBlock.toString(),
                 style: TextStyle(
-                    color: finalDamage > damage
+                    color: finalBlock > block
                         ? Colors.greenAccent
-                        : finalDamage < damage
+                        : finalBlock < block
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            const TextSpan(text: ' Block. Precision '),
+            TextSpan(
+                text: finalPrecision.toString(),
+                style: TextStyle(
+                    color: finalPrecision > precision
+                        ? Colors.greenAccent
+                        : finalPrecision < precision
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: '%.'),
           ])),
         ],
       ),
@@ -83,9 +91,10 @@ class StrikeUpgradeCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
-    if (target.length == 1) {
-      target[0].recieveDamage(
-          calculateDamage(damage: damage, precision: precision, mana: mana));
-    }
+    BlockStatus bs = BlockStatus();
+
+    int finalBlock = predictBlock(block: block, mana: mana);
+    bs.addStack(finalBlock.toDouble());
+    character.addStatus(bs);
   }
 }

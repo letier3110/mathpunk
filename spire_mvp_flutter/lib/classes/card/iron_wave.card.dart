@@ -85,7 +85,8 @@ class IronWaveCard extends PlayableCard {
     character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       int localBlock = block;
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0].recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
 
       BlockStatus bs = BlockStatus();
       bs.addStack(localBlock.toDouble());

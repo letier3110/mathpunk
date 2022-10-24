@@ -78,8 +78,10 @@ class TwinStrikeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
-      target[0].recieveDamage(calculateDamage(damage: damage, mana: mana));
+      target[0].recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
+      target[0].recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
     }
   }
 }

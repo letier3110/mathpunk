@@ -19,14 +19,17 @@ const minDodgeChance = 0;
 Color getUpgradedCardColor() => Colors.greenAccent;
 
 int calculateDamage(
-    {required int damage, int mana = 2, int strengthModifier = 1}) {
+    {required int damage,
+    int precision = maxPrecisionChance,
+    int mana = 2,
+    int strengthModifier = 1}) {
   PlayerCharacter character = Player.getPlayerInstance().getCharacter();
 
   List<Status> statuses = character.getStatuses();
   int precisionChance = castStatusToInt(statuses, PrecisionStatus);
   int mathMultiplierTime = castStatusToInt(statuses, MathMultiplierTimeStatus);
 
-  if (getProbability(precisionChance)) {
+  if (getProbability(precisionChance + precision)) {
     return 0;
   }
   int predictedDamage = predictDamage(
@@ -74,8 +77,26 @@ int predictDamage(
   return localDamage;
 }
 
-int calculateBlock({required int block, int mana = 2}) {
-  return predictBlock(block: block, mana: mana);
+int predictPrecision({int precision = maxPrecisionChance}) {
+  PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+
+  List<Status> statuses = character.getStatuses();
+  int precisionChance = castStatusToInt(statuses, PrecisionStatus);
+  return precisionChance + precision;
+}
+
+int calculateBlock(
+    {required int block, int precision = maxPrecisionChance, int mana = 2}) {
+  PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+
+  List<Status> statuses = character.getStatuses();
+  int precisionChance = castStatusToInt(statuses, PrecisionStatus);
+
+  if (getProbability(precisionChance + precision)) {
+    return 0;
+  }
+  int predictedBlock = predictBlock(block: block, mana: mana);
+  return predictBlock(block: predictedBlock, mana: mana);
 }
 
 int predictBlock({required int block, int mana = 2}) {

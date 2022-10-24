@@ -92,7 +92,8 @@ class ThunderclapUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     for (var t in target) {
-      t.recieveDamage(calculateDamage(damage: damage, mana: mana));
+      t.recieveDamage(
+          calculateDamage(damage: damage, precision: precision, mana: mana));
       int localVulnerable = vulnerable;
       VulnerableStatus vs = VulnerableStatus();
       vs.addStack(localVulnerable.toDouble());

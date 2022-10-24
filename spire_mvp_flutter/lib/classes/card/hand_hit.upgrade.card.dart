@@ -11,20 +11,21 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-class StrikeUpgradeCard extends PlayableCard {
-  int damage = 9;
+class HandHitUpgradeCard extends PlayableCard {
+  int damage = 2;
 
-  StrikeUpgradeCard(
-      {cardName = 'Strike+',
-      cardDescription = 'Deal 5 damage.',
-      cardMana = 1,
+  HandHitUpgradeCard(
+      {cardName = 'Hand Hit+',
+      cardDescription = '0 mana, 70% precision, 2 damage',
+      cardMana = 0,
       cardTemporary = false})
       : super(
             cardName: cardName,
             cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
+            cardType: CardType.attack,
+            cardPrecision: 70);
 
   @override
   StatelessWidget getCardName() {
@@ -37,6 +38,7 @@ class StrikeUpgradeCard extends PlayableCard {
   @override
   StatelessWidget getCardDescription() {
     int finalDamage = predictDamage(damage: damage, mana: mana);
+    int finalPrecision = predictPrecision(precision: precision);
     return Container(
       child: Column(
         children: [
@@ -51,7 +53,16 @@ class StrikeUpgradeCard extends PlayableCard {
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            const TextSpan(text: ' damage. Precision '),
+            TextSpan(
+                text: finalPrecision.toString(),
+                style: TextStyle(
+                    color: finalPrecision > precision
+                        ? Colors.greenAccent
+                        : finalPrecision < precision
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: '%.'),
           ])),
         ],
       ),

@@ -58,7 +58,8 @@ class BodySlamUpgradeCard extends PlayableCard {
     if (target.length == 1) {
       List<Status> statuses = character.getStatuses();
       int block = castStatusToInt(statuses, BlockStatus);
-      target[0].recieveDamage(calculateDamage(damage: block, mana: mana));
+      target[0].recieveDamage(
+          calculateDamage(damage: block, precision: precision, mana: mana));
     }
   }
 }

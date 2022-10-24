@@ -85,7 +85,10 @@ class HeavyBladeCard extends PlayableCard {
     character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].recieveDamage(calculateDamage(
-          damage: damage, mana: mana, strengthModifier: strengthModifier));
+          damage: damage,
+          precision: precision,
+          mana: mana,
+          strengthModifier: strengthModifier));
     }
   }
 }

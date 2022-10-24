@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/card/hand_hit.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -11,32 +12,27 @@ import '../../enums/card_type.enum.dart';
 import '../util.dart';
 import 'playable_card.dart';
 
-class StrikeUpgradeCard extends PlayableCard {
-  int damage = 9;
+class HandHitCard extends PlayableCard {
+  int damage = 2;
 
-  StrikeUpgradeCard(
-      {cardName = 'Strike+',
-      cardDescription = 'Deal 5 damage.',
-      cardMana = 1,
+  HandHitCard(
+      {cardName = 'Hand Hit',
+      cardDescription = '0 mana, 50% precision, 1 damage',
+      cardMana = 0,
       cardTemporary = false})
       : super(
             cardName: cardName,
             cardTemporary: cardTemporary,
             cardDescription: cardDescription,
             cardMana: cardMana,
-            cardType: CardType.attack);
-
-  @override
-  StatelessWidget getCardName() {
-    return Text(
-      name,
-      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
-    );
-  }
+            cardType: CardType.attack,
+            cardUpgrageLink: HandHitUpgradeCard(),
+            cardPrecision: 80);
 
   @override
   StatelessWidget getCardDescription() {
     int finalDamage = predictDamage(damage: damage, mana: mana);
+    int finalPrecision = predictPrecision(precision: precision);
     return Container(
       child: Column(
         children: [
@@ -51,7 +47,16 @@ class StrikeUpgradeCard extends PlayableCard {
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            const TextSpan(text: ' damage. Precision '),
+            TextSpan(
+                text: finalPrecision.toString(),
+                style: TextStyle(
+                    color: finalPrecision > precision
+                        ? Colors.greenAccent
+                        : finalPrecision < precision
+                            ? Colors.redAccent
+                            : Colors.white)),
+            const TextSpan(text: '%.'),
           ])),
         ],
       ),

@@ -41,7 +41,7 @@ class PlayableCard {
       cardPrecision = maxPrecisionChance,
       cardResource = ResourcesEnum.mana,
       cardUpgrageLink,
-      cardTemporary}) {
+      cardTemporary = false}) {
     ethereal = cardEthereal;
     exhausted = cardExhaused;
     name = cardName;

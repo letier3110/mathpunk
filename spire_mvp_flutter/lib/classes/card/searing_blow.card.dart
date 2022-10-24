@@ -93,7 +93,8 @@ class SearingBlow extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     int damage = baseDamage + damageIncrease;
-    int finalDamage = calculateDamage(damage: damage, mana: mana);
+    int finalDamage =
+        calculateDamage(damage: damage, precision: precision, mana: mana);
     if (target.length == 1) {
       target[0].recieveDamage(finalDamage);
     }

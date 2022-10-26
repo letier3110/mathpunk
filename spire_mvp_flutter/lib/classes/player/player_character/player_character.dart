@@ -24,6 +24,7 @@ class PlayerCharacter extends BaseCharacter {
   late Deck deck;
   late List<Relic> relics;
   late List<ConsumableItem> items;
+  late String description;
   late int mana = 0;
   late int manaPower = 3;
   late int drawPower = 3;
@@ -35,6 +36,8 @@ class PlayerCharacter extends BaseCharacter {
     relics = [];
     items = [];
     gold = playerGold;
+    description =
+        'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.';
   }
 
   attachDeck(Deck deck) {

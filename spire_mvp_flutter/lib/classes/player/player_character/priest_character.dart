@@ -15,7 +15,9 @@ class Priest extends PlayerCharacter {
     maxHealth = 75;
     manaPower = 100;
     mana = 100;
-    name = 'Priest';
+    name = 'Reality Enchanter';
+    description =
+        'A son of a noble house of math kingdom Noocracy.\nCalls to forces beyond the reality to shape his path.';
 
     relics = [ChessPyramid()];
 

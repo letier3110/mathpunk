@@ -117,9 +117,8 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                 ),
                                 SizedBox(
                                   width: width * 1 / 4,
-                                  child: const Text(
-                                    // gameStateState.playerCharacter!.description,
-                                    'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.',
+                                  child: Text(
+                                    gamestate.playerCharacter!.description,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontSize: 16,
@@ -202,12 +201,11 @@ ${e.description}
                       const Spacer(flex: 1),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children:
-                              [Barbarian(), Irrationalist(), Priest(), Enigma()]
-                                  .map((e) => CharacterCard(
-                                        character: e,
-                                      ))
-                                  .toList()),
+                          children: [Barbarian(), Priest()]
+                              .map((e) => CharacterCard(
+                                    character: e,
+                                  ))
+                              .toList()),
                       const Spacer(flex: 1),
                     ],
                   ))

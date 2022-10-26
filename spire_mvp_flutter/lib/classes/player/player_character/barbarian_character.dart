@@ -18,6 +18,8 @@ class Barbarian extends PlayerCharacter {
     relics = [BurningBloodRelic()];
 
     items = [CunningPotion(), BlockPotion()];
+    description =
+        'A mysterious and dumb barbarian from Southlands of Matri Valley.\nHe relies on his brute force and sharp sword.';
 
     final cards = [
       StrikeCard(),

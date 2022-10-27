@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:mathpunk_cardgame/classes/card/cloak_cover.card.dart';
 import 'package:mathpunk_cardgame/classes/card/hand_hit.card.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/double.math.card.dart';
@@ -41,5 +43,10 @@ class Priest extends PlayerCharacter {
   startTurn() {
     deck.draw(drawPower);
     // mana = manaPower;
+  }
+
+  @override
+  enterRoom() {
+    mana = max(mana, ((manaPower - mana) * 0.9).round());
   }
 }

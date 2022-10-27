@@ -29,7 +29,7 @@ int calculateDamage(
   int precisionChance = castStatusToInt(statuses, PrecisionStatus);
   int mathMultiplierTime = castStatusToInt(statuses, MathMultiplierTimeStatus);
 
-  if (getProbability(precisionChance + precision)) {
+  if (getProbability(precisionChance + precision) == false) {
     return 0;
   }
   int predictedDamage = predictDamage(
@@ -92,7 +92,7 @@ int calculateBlock(
   List<Status> statuses = character.getStatuses();
   int precisionChance = castStatusToInt(statuses, PrecisionStatus);
 
-  if (getProbability(precisionChance + precision)) {
+  if (getProbability(precisionChance + precision) == false) {
     return 0;
   }
   int predictedBlock = predictBlock(block: block, mana: mana);
@@ -109,7 +109,10 @@ int predictBlock({required int block, int mana = 2}) {
   return localBlock;
 }
 
-bool getProbability(int probability) => Random().nextInt(100) <= probability;
+bool getProbability(int probability) {
+  int rand = Random().nextInt(100);
+  return rand <= probability;
+}
 
 int castStatusToInt(List<Status> statuses, Type runtime) {
   List<Status> statusList =

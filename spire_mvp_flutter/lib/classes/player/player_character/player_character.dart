@@ -65,6 +65,10 @@ class PlayerCharacter extends BaseCharacter {
     mana = manaPower;
   }
 
+  enterRoom() {
+    mana = manaPower;
+  }
+
   attachItems(List<ConsumableItem> newItems) {
     items = newItems;
   }

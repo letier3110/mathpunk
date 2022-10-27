@@ -16,7 +16,7 @@ class ThrowStoneCard extends PlayableCard {
   int damage = 3;
 
   ThrowStoneCard(
-      {cardName = 'Throw Card',
+      {cardName = 'Throw Stone',
       cardDescription = '0 mana, 70% precision, 3 damage',
       cardMana = 0,
       cardTemporary = false})

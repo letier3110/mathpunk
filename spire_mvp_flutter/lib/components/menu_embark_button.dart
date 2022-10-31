@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
@@ -41,10 +42,10 @@ class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
                         image: AssetImage('assets/menu_bg_2.png'),
                         fit: BoxFit.fill),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Embark',
-                      style: TextStyle(fontSize: 22.0),
+                      AppLocalizations.of(context)!.embark,
+                      style: const TextStyle(fontSize: 22.0),
                     ),
                   ))),
         ],

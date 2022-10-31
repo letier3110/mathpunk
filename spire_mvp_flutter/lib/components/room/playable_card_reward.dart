@@ -79,7 +79,9 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               height: 110,
                               child: Column(
-                                children: [widget.card.getCardDescription()],
+                                children: [
+                                  widget.card.getCardDescription(context)
+                                ],
                               ),
                             ),
                           ],

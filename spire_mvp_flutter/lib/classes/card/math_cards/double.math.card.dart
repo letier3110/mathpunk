@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/double.upgrade.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
@@ -30,13 +31,23 @@ class DoubleMathCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Function. Doubles next value.'),
+          HighlightDescriptionText(
+              text:
+                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.doubleEffect}'),
         ],
       ),
+    );
+  }
+
+  @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.doubleCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
     );
   }
 

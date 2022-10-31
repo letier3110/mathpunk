@@ -1,3 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/mode_select_navigation_card.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
@@ -36,25 +38,25 @@ class _ModeSelectScreenState extends State<ModeSelectScreen> {
               height: height / 1.25,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   ModeSelectNavigationCard(
-                    heading: 'Standard',
+                    heading: AppLocalizations.of(context)!.standardModeName,
                     description:
-                        "Standard mode is the default mode. It is the most common mode for players.",
+                        AppLocalizations.of(context)!.standardModeDescription,
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.standard,
                   ),
                   ModeSelectNavigationCard(
-                    heading: 'Daily Climb',
+                    heading: AppLocalizations.of(context)!.dailyModeName,
                     description:
-                        "Daily Climb mode is a mode for players who want to climb more often.",
+                        AppLocalizations.of(context)!.dailyModeDescription,
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.daily,
                   ),
                   ModeSelectNavigationCard(
-                    heading: 'Custom',
+                    heading: AppLocalizations.of(context)!.customModeName,
                     description:
-                        "Custom mode is a mode for players who want to create their own climb.",
+                        AppLocalizations.of(context)!.customModeDescription,
                     screen: ScreenEnum.characterSelect,
                     gameType: GameTypeEnum.custom,
                     disabled: true,

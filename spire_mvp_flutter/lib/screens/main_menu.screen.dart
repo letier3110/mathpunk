@@ -1,3 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/components/create_profile.component.dart';
@@ -85,34 +87,55 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                           Consumer<GamestateController>(builder:
                               (gameStateContext, gameStateState, child) {
                             if (gameStateState.gameMap.isNotEmpty) {
-                              return const MainMenuItem(
-                                text: 'Continue Run',
+                              return MainMenuItem(
+                                text: Text(
+                                  AppLocalizations.of(context)!.continueRun,
+                                  style: const TextStyle(fontSize: 22.0),
+                                ),
                                 screen: ScreenEnum.game,
                               );
                             }
-                            return const MainMenuItem(
-                              text: 'Play',
+                            return MainMenuItem(
+                              text: Text(
+                                AppLocalizations.of(context)!.play,
+                                style: const TextStyle(fontSize: 22.0),
+                              ),
                               screen: ScreenEnum.modeSelect,
                             );
                           }),
-                          const MainMenuItem(
-                            text: 'Compedium',
+                          MainMenuItem(
+                            text: Text(
+                              AppLocalizations.of(context)!.compedium,
+                              style: const TextStyle(fontSize: 22.0),
+                            ),
                             screen: ScreenEnum.compedium,
                           ),
-                          const MainMenuItem(
-                            text: 'Statistics',
+                          MainMenuItem(
+                            text: Text(
+                              AppLocalizations.of(context)!.statistics,
+                              style: const TextStyle(fontSize: 22.0),
+                            ),
                             screen: ScreenEnum.statistics,
                           ),
-                          const MainMenuItem(
-                            text: 'Settings',
+                          MainMenuItem(
+                            text: Text(
+                              AppLocalizations.of(context)!.settings,
+                              style: const TextStyle(fontSize: 22.0),
+                            ),
                             screen: ScreenEnum.settings,
                           ),
-                          const MainMenuItem(
-                            text: 'Patch Notes',
+                          MainMenuItem(
+                            text: Text(
+                              AppLocalizations.of(context)!.patchNotes,
+                              style: const TextStyle(fontSize: 22.0),
+                            ),
                             screen: ScreenEnum.patchNotes,
                           ),
-                          const MainMenuItem(
-                            text: 'Quit',
+                          MainMenuItem(
+                            text: Text(
+                              AppLocalizations.of(context)!.quit,
+                              style: const TextStyle(fontSize: 22.0),
+                            ),
                             screen: ScreenEnum.quit,
                           ),
                         ]),

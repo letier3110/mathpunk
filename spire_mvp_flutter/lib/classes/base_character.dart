@@ -23,6 +23,8 @@ class BaseCharacter implements ICharacter {
     name = '';
   }
 
+  String getName() => name;
+
   void addStatus(Status status) {
     List<Status> findStatus = statuses
         .where((element) => element.runtimeType == status.runtimeType)

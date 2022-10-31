@@ -1,7 +1,8 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/enigma_character.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/irrationalist_character.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/priest_character.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/barbarian_character.dart';
 import 'package:mathpunk_cardgame/components/character_card.dart';
@@ -94,9 +95,8 @@ class _CharacterSelectState extends State<CharacterSelect> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  gamestate.playerCharacter!.name,
-                                  // '$height',
-                                  // '$width',
+                                  gamestate.playerCharacter!
+                                      .getNameTranslationKey(context),
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                       fontSize: 26,
@@ -118,9 +118,10 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                 SizedBox(
                                   width: width * 1 / 4,
                                   child: Text(
-                                    gamestate.playerCharacter!.description,
+                                    gamestate.playerCharacter!
+                                        .getDescriptionTranslationKey(context),
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
@@ -141,7 +142,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                                     SizedBox(
                                                       width: width / 9,
                                                       child: Text(
-                                                        '${e.name}: ',
+                                                        '${e.getNameTranslationKey(context)}: ',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style: const TextStyle(
@@ -156,7 +157,7 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                                       width: width / 6,
                                                       child: Text(
                                                         '''
-${e.description}
+${e.getDescriptionTranslationKey(context)}
 ''',
                                                         textAlign:
                                                             TextAlign.left,

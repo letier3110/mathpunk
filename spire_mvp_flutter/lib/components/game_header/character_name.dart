@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
@@ -41,7 +42,8 @@ class CharacterNameView extends State<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                gameState.playerCharacter?.name ?? 'no class',
+                gameState.playerCharacter!
+                    .getDescriptionTranslationKey(context),
                 // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(

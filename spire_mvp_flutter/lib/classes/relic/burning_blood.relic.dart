@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
@@ -11,6 +13,13 @@ class BurningBloodRelic extends Relic {
   void play() {
     Player.getPlayerInstance().getCharacter().heal(6);
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.burningBloodName;
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.burningBloodDescription;
 
   static bool isRelicBurningBlood(Relic relic) {
     return relic.runtimeType == BurningBloodRelic;

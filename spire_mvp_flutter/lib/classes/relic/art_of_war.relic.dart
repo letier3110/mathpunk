@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 class ArtOfWar extends Relic {
@@ -9,6 +11,13 @@ class ArtOfWar extends Relic {
 
   @override
   void play() {}
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.artOfWarName;
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.artOfWarDescription;
 
   static bool isRelicArtOfWar(Relic relic) {
     return relic.runtimeType == ArtOfWar;

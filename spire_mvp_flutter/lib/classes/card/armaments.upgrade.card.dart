@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -32,34 +32,37 @@ class ArmamentsUpgradeCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.armamentsCardName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int finalBlock = predictBlock(block: block, mana: mana);
     return Container(
       child: Column(
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Gain '),
+            TextSpan(text: AppLocalizations.of(context)!.gainStartDescription),
             TextSpan(
-                text: finalBlock.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealBlockNumber(finalBlock.toString()),
                 style: TextStyle(
                     color: finalBlock > block
                         ? Colors.greenAccent
                         : finalBlock < block
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' Block.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
           ])),
           HighlightDescriptionText(
-              text: 'Upgrade all cards in your hand for the rest of combat.'),
+              text: AppLocalizations.of(context)!
+                  .upgradeAllHandCardEffectDescription),
         ],
       ),
     );

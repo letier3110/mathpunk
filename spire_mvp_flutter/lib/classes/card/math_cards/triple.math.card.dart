@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/triple.upgrade.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
@@ -30,7 +31,15 @@ class TripleMathCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.tripleCardName,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [

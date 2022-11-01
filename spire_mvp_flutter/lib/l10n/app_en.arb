@@ -36,8 +36,120 @@
     "functionMechanic": "Function.",
     "doubleEffect": "Doubles next value.",
     "doubleCardName": "2x",
+    "doubleCardUpgradeName": "2x+",
+    "plusCardName": "f(+)",
+    "plusCardUpgradeName": "f(+)+",
+    "plusCardDescription": "Extending Function multiplier for another card.",
+    "quintupleCardName": "5x",
+    "quintupleCardUpgradeName": "5x+",
+    "quintipleDesription": "Quintuples next value.",
+    "tripleCardName": "3x",
+    "tripleCardUpgradeName": "3x+",
+    "tripleCardDescription": "Triples next value.",
+    "angerCardName": "Anger",
+    "angerCardUpgradeName": "Anger+",
+    "dealStartDescription": "Deal ",
+    "deal": "Deal",
+    "dealDamageNumber": "{damage}",
+    "@dealDamageNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "damageEffectDescriptionEnd": " damage.",
+    "copyCurrentCardToDiscardEffectDescription": "Add a copy of this card to your discard pile.",
+    "armamentsCardName": "Armaments",
+    "armamentsCardUpgradeName": "Armaments+",
+    "gainStartDescription": "Gain ",
+    "gain": "Gain",
+    "dealBlockNumber": "{block}",
+    "@dealBlockNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "block": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "blockEffectDescriptionEnd": " Block.",
+    "upgradeSingleHandCardEffectDescription": "Upgrade a card in your hand for the rest of combat.",
+    "upgradeAllHandCardEffectDescription": "Upgrade all cards in your hand for the rest of combat.",
+    "bashCardName": "Bash",
+    "bashCardUpgradeName": "Bash+",
+    "applyVulnerableEffectDescription": "Apply {vulnerable} Vulnerable.",
+    "@applyVulnerableEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "vulnerable": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "bloodForBloodCardName": "Blood for Blood",
+    "bloodForBloodCardUpgradeName": "Blood for Blood+",
+    "costLessForEachHpLooseEffectDescription": "Costs 1 less mana for each time you lose HP this combat.",
+    "bodySlamCardName": "Body Slam",
+    "bodySlamCardUpgradeName": "Body Slam+",
+    "dealDamageEqualToBlockEffectDescription": "Deal damage equal to your current Block.",
+    "clashCardName": "Clash",
+    "clashCardUpgradeName": "Clash+",
+    "canBePlayedIfOnlyAttackInHandEffectDescription": "Can only be played if every card in your hand is an Attack.",
+    "cleaveCardName": "Cleave",
+    "cleaveCardUpgradeName": "Cleave+",
+    "damageAoeEffectDescriptionEnd": " damage to ALL enemies.",
+    "cloakCoverCardName": "Cloak Cover",
+    "cloakCoverCardUpgradeName": "Cloak Cover+",
+    "receiveStartDescription": "Receive ",
+    "receive": "Receive",
+    "precisionStartDescription": "Precision ",
+    "precision": "Precision",
+    "dealPercentageNumber": "{percentage}",
+    "@dealPercentageNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "percentage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "percentageEffectDescriptionEnd": "%.",
+    "clotheslineCardName": "Clothesline",
+    "clotheslineCardUpgradeName": "Clothesline+",
+    "applyWeakEffectDescription": "Apply {weak} Weak.",
+    "@applyWeakEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "weak": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "defendCardName": "Defend",
+    "defendCardUpgradeName": "Defend+",
+    "applyBlockEffectDescription": "Gain {block} Block.",
+    "@applyBlockEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "block": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
     "settings": "Settings",
-
+    "settings": "Settings",
+    "settings": "Settings",
+    "settings": "Settings",
+    "settings": "Settings",
+    "settings": "Settings",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/perfect_strike.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -32,7 +33,7 @@ class PerfectStrikeCard extends PlayableCard {
             cardType: CardType.attack,
             cardUpgrageLink: PerfectStrikeUpgradeCard());
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localDamage = predictDamage(damage: damage);
     Deck deck = character.getDeck();

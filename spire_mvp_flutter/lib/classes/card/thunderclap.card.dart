@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/thunderclap.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -34,7 +35,7 @@ class ThunderclapCard extends PlayableCard {
             cardUpgrageLink: ThunderclapUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localVulnerable = vulnerable;
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(

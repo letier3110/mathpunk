@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/body_slam.upgrade.card.dart';
-import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -51,7 +50,7 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int damage = baseDamage + damageIncrease;
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(

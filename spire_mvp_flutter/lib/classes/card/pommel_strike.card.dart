@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/pommel_strike.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -31,7 +32,7 @@ class PommelStrikeCard extends PlayableCard {
             cardUpgrageLink: PommelStrikeUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localDraw = draw;
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(

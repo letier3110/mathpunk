@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/true_gift.upgrade.card.dart';
@@ -35,7 +36,7 @@ class TrueGiftCard extends PlayableCard {
             cardUpgrageLink: TrueGiftUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localBlock = block;
 
     return Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/clothes_line.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -31,8 +32,15 @@ class ClothesLineCard extends PlayableCard {
             cardType: CardType.attack,
             cardUpgrageLink: ClothesLineUpgradeCard());
 
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.clotheslineCardName,
+      style: TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localWeak = weak;
     int finalDamage = predictDamage(damage: damage, mana: mana);
 
@@ -41,18 +49,23 @@ class ClothesLineCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
-                            : Colors.white)),
-            const TextSpan(text: ' damage.')
+                            : Colors.white,
+                    fontSize: 14)),
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
-          HighlightDescriptionText(text: 'Apply $localWeak Weak.'),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .applyWeakEffectDescription(localWeak.toString())),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/flex.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -35,7 +36,7 @@ class FlexCard extends PlayableCard {
             cardUpgrageLink: FlexUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
 

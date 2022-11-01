@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/math_cards/plus.upgrade.math.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
@@ -29,12 +30,20 @@ class PlusMathCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.plusCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [
           HighlightDescriptionText(
-              text: 'Extending Function multiplier for another card.'),
+              text: AppLocalizations.of(context)!.plusCardDescription),
         ],
       ),
     );

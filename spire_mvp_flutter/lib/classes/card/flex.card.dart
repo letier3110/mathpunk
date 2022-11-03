@@ -36,6 +36,14 @@ class FlexCard extends PlayableCard {
             cardUpgrageLink: FlexUpgradeCard());
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.flexCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
@@ -43,10 +51,13 @@ class FlexCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localStrength Strength.'),
           HighlightDescriptionText(
-              text:
-                  'At the end of your turn, lose $localStrengthCurse Strength.'),
+              text: AppLocalizations.of(context)!
+                  .applyStrengthEffectDescription(localStrength.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .loseStrengthAtTheRoundEndEffectDescription(
+                      localStrengthCurse.toString())),
         ],
       ),
     );

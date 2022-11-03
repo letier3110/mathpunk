@@ -25,16 +25,27 @@ class DoubtCard extends PlayableCard {
             cardType: CardType.curse);
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.doubtCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   bool isCardPlayable() => false;
 
   @override
   StatelessWidget getCardDescription(BuildContext context) {
+    int localWeak = 1;
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Unplayable.'),
           HighlightDescriptionText(
-              text: 'At the end of your turn, gain 1 Weak.'),
+              text: AppLocalizations.of(context)!.unplayableMechanic),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .addWeakAtTheRoundEndEffectDescription(localWeak.toString())),
         ],
       ),
     );

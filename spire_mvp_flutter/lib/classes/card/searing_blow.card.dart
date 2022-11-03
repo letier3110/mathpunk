@@ -33,6 +33,16 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      damageIncrease > baseDamage
+          ? AppLocalizations.of(context)!.searingBlowCardUpgradeName
+          : AppLocalizations.of(context)!.searingBlowCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   bool isCardCanBeUpgraded() => true;
 
   @override
@@ -58,18 +68,22 @@ class SearingBlow extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
-          HighlightDescriptionText(text: 'Can be Upgraded any number of times.')
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .multipleUpgradeEffectDescription)
         ],
       ),
     );

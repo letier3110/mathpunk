@@ -34,9 +34,9 @@ class FlexUpgradeCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.flexCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
@@ -49,10 +49,13 @@ class FlexUpgradeCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localStrength Strength.'),
           HighlightDescriptionText(
-              text:
-                  'At the end of your turn, lose $localStrengthCurse Strength.'),
+              text: AppLocalizations.of(context)!
+                  .applyStrengthEffectDescription(localStrength.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .loseStrengthAtTheRoundEndEffectDescription(
+                      localStrengthCurse.toString())),
         ],
       ),
     );

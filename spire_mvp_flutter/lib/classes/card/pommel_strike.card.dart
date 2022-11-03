@@ -32,6 +32,14 @@ class PommelStrikeCard extends PlayableCard {
             cardUpgrageLink: PommelStrikeUpgradeCard());
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.pommelStrikeCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     int localDraw = draw;
     int finalDamage = predictDamage(damage: damage, mana: mana);
@@ -40,16 +48,18 @@ class PommelStrikeCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
           HighlightDescriptionText(text: 'Draw $localDraw card.'),
         ],

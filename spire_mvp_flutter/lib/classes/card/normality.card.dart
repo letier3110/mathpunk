@@ -27,13 +27,22 @@ class NormalityCard extends PlayableCard {
   bool isCardPlayable() => false;
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.normalityCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Unplayable.'),
           HighlightDescriptionText(
-              text: 'You cannot play more than 3 cards this turn.'),
+              text: AppLocalizations.of(context)!.unplayableMechanic),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!.normalityEffectDescription),
         ],
       ),
     );

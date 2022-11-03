@@ -34,6 +34,7 @@
     "wristBladeDescription": "Attacks that cost 0 deal 4 additional damage.",
     "embark": "Embark",
     "functionMechanic": "Function.",
+    "unplayableMechanic": "Unplayable.",
     "doubleEffect": "Doubles next value.",
     "doubleCardName": "2x",
     "doubleCardUpgradeName": "2x+",
@@ -144,12 +145,100 @@
         }
       }
     },
+    "doubtCardName": "Doubt",
+    "addWeakAtTheRoundEndEffectDescription": "At the end of your turn, gain {weak} Weak.",
+    "@addWeakAtTheRoundEndEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "weak": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "flexCardName": "Flex",
+    "flexCardUpgradeName": "Flex+",
+    "applyStrengthEffectDescription": "Gain {strength} Strength.",
+    "@applyStrengthEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "loseStrengthAtTheRoundEndEffectDescription": "At the end of your turn, gain {strength} Strength.",
+    "@loseStrengthAtTheRoundEndEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "handHitCardName": "Hand Hit",
+    "handHitCardUpgradeName": "Hand Hit+",
+    "headbuttCardName": "Headbutt",
+    "headbuttCardUpgradeName": "Headbutt+",
+    "placeCardFromDiscardToDrawEffectDescription": "Place a card from your discard pile on top of your draw pile.",
+    "heavyBladeCardName": "Heavy Blade",
+    "heavyBladeCardUpgradeName": "Heavy Blade+",
+    "strengthMultiplierEffectDescription": "Strength affects {card} {strength} times.",
+    "@strengthMultiplierEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Heavy Blade"
+        }
+      }
+    },
+    "ironWaveCardName": "Iron Wave",
+    "ironWaveCardUpgradeName": "Iron Wave+",
+    "normalityCardName": "Normality",
+    "normalityEffectDescription": "You cannot play more than 3 cards this turn.",
+    "perfectStrikeCardName": "Perfect Strike",
+    "perfectStrikeCardUpgradeName": "Perfect Strike+",
+    "perfectStrikeEffectDescription": "Deals an additional {damage} damage for ALL of your cards containing \"{card}\".",
+    "@perfectStrikeEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Strike"
+        }
+      }
+    },
+    "pommelStrikeCardName": "Pommel Strike",
+    "pommelStrikeCardUpgradeName": "Pommel Strike+",
+    "applyDrawEffectDescription": "Draw {draw} card.",
+    "@applyDrawEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "draw": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "searingBlowCardName": "Searing Blow",
+    "searingBlowCardUpgradeName": "Searing Blow+",
+    "multipleUpgradeEffectDescription": "Can be Upgraded any number of times.",
+    "strikeCardName": "Strike",
+    "strikeCardUpgradeName": "Strike+",
     "settings": "Settings",
-    "settings": "Settings",
-    "settings": "Settings",
-    "settings": "Settings",
-    "settings": "Settings",
-    "settings": "Settings",
+    "bloodForBloodCardName": "Blood for Blood",
+    "bloodForBloodCardUpgradeName": "Blood for Blood+",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     }

@@ -33,6 +33,14 @@ class IronWaveCard extends PlayableCard {
             cardUpgrageLink: IronWaveUpgradeCard());
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.ironWaveCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     int localBlock = block;
     int finalDamage = predictDamage(damage: damage, mana: mana);
@@ -40,20 +48,24 @@ class IronWaveCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .applyBlockEffectDescription(localBlock.toString())),
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
-          ]))
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
+          ])),
         ],
       ),
     );

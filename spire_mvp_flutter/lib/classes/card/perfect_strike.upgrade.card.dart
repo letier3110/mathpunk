@@ -32,9 +32,9 @@ class PerfectStrikeUpgradeCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.perfectStrikeCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
@@ -69,20 +69,23 @@ class PerfectStrikeUpgradeCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
           HighlightDescriptionText(
-              text:
-                  'Deals an additional $damageAddition damage for ALL of your cards containing "Strike".'),
+              text: AppLocalizations.of(context)!
+                  .perfectStrikeEffectDescription(damageAddition.toString(),
+                      AppLocalizations.of(context)!.strikeCardName)),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 
 class WristBlade extends Relic {
@@ -8,6 +10,13 @@ class WristBlade extends Relic {
 
   @override
   void play() {}
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.wristBladeName;
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.wristBladeDescription;
 
   static bool isRelicWristBlade(Relic relic) {
     return relic.runtimeType == WristBlade;

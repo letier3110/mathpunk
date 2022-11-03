@@ -41,7 +41,7 @@ class CharacterNameView extends State<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                gameState.playerCharacter?.name ?? 'no class',
+                gameState.playerCharacter!.getNameTranslationKey(context),
                 // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(

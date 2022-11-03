@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dodge.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
@@ -22,6 +23,11 @@ class BaseCharacter implements ICharacter {
     maxHealth = 10;
     name = '';
   }
+
+  String getName() => name;
+  String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  String getDescriptionTranslationKey(BuildContext context) =>
+      'realityEchanterDescription';
 
   void addStatus(Status status) {
     List<Status> findStatus = statuses

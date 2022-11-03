@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
@@ -19,6 +21,13 @@ class NinjaScroll extends Relic {
           .add(ShivCard());
     }
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.ninjaScrollName;
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.ninjaScrollDescription;
 
   static bool isRelicNinjaScroll(Relic relic) {
     return relic.runtimeType == NinjaScroll;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
@@ -26,13 +27,22 @@ class NormalityCard extends PlayableCard {
   bool isCardPlayable() => false;
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.normalityCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Unplayable.'),
           HighlightDescriptionText(
-              text: 'You cannot play more than 3 cards this turn.'),
+              text: AppLocalizations.of(context)!.unplayableMechanic),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!.normalityEffectDescription),
         ],
       ),
     );

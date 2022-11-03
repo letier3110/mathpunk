@@ -39,7 +39,7 @@ class CharacterItemsView extends State<CharacterItems> {
                           ),
                         ),
                         Text(
-                          e.name,
+                          e.getItemName(context),
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                               color: Colors.pinkAccent,

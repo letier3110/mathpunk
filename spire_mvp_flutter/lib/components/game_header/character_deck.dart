@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class CharacterDeck extends StatefulWidget {
@@ -36,11 +36,11 @@ class CharacterDeckView extends State<CharacterDeck> {
             padding: const EdgeInsets.all(8),
             width: 80,
             color: Colors.black,
-            child: const Center(
+            child: Center(
               child: Text(
-                'Deck',
+                AppLocalizations.of(context)!.deckText,
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w600),

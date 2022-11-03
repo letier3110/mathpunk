@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:mathpunk_cardgame/classes/card/cloak_cover.card.dart';
 import 'package:mathpunk_cardgame/classes/card/hand_hit.card.dart';
@@ -38,6 +40,14 @@ class Priest extends PlayerCharacter {
     ];
     deck = Deck(cards);
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.realityEchanterName;
+
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.realityEchanterDescription;
 
   @override
   startTurn() {

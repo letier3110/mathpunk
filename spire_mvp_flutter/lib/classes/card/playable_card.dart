@@ -69,14 +69,14 @@ class PlayableCard {
     return this;
   }
 
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
       name,
       style: const TextStyle(color: Colors.white, fontSize: 16),
     );
   }
 
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     return HighlightDescriptionText(text: description);
   }
 

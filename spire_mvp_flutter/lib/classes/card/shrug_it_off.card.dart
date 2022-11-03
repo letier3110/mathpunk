@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/shrug_it_off.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -33,14 +34,26 @@ class ShrugItOffCard extends PlayableCard {
             cardUpgrageLink: ShrugItOffUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
-    int localBlock = block;
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.shrugItOffCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
+    int localBlock = predictBlock(block: block, mana: mana);
     int localDraw = draw;
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
-          HighlightDescriptionText(text: 'Draw $localDraw card.')
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .applyBlockEffectDescription(localBlock.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .applyDrawEffectDescription(localDraw.toString()))
         ],
       ),
     );
@@ -62,7 +75,7 @@ class ShrugItOffCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
-    int localBlock = block;
+    int localBlock = predictBlock(block: block, mana: mana);
     int localDraw = draw;
 
     BlockStatus bs = BlockStatus();

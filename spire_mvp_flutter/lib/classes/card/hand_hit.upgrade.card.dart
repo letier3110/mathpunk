@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -28,15 +29,15 @@ class HandHitUpgradeCard extends PlayableCard {
             cardPrecision: 70);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.handHitCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int finalDamage = predictDamage(damage: damage, mana: mana);
     int finalPrecision = predictPrecision(precision: precision);
     return Container(
@@ -44,25 +45,32 @@ class HandHitUpgradeCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage. Precision '),
             TextSpan(
-                text: finalPrecision.toString(),
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd),
+            TextSpan(
+                text: AppLocalizations.of(context)!.precisionStartDescription),
+            TextSpan(
+                text: AppLocalizations.of(context)!
+                    .dealPercentageNumber(finalPrecision.toString()),
                 style: TextStyle(
                     color: finalPrecision > precision
                         ? Colors.greenAccent
                         : finalPrecision < precision
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: '%.'),
+            TextSpan(
+                text: AppLocalizations.of(context)!
+                    .percentageEffectDescriptionEnd),
           ])),
         ],
       ),

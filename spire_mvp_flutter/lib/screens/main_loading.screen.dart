@@ -1,3 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
@@ -34,9 +36,9 @@ class _MainLoadingScreenState extends State<MainLoadingScreen> {
           Center(
               child: Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 160.0),
-            child: const Text(
-              'Loading',
-              style: TextStyle(fontSize: 34, color: Colors.white),
+            child: Text(
+              AppLocalizations.of(context)!.loading,
+              style: const TextStyle(fontSize: 34, color: Colors.white),
             ),
           )),
         ],

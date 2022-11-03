@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/card/body_slam.upgrade.card.dart';
-import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -34,6 +33,18 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      damageIncrease > baseDamage
+          ? AppLocalizations.of(context)!.searingBlowCardUpgradeName
+          : AppLocalizations.of(context)!.searingBlowCardName,
+      style: damageIncrease > baseDamage
+          ? TextStyle(color: getUpgradedCardColor(), fontSize: 16)
+          : const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
   bool isCardCanBeUpgraded() => true;
 
   @override
@@ -51,7 +62,7 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int damage = baseDamage + damageIncrease;
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
@@ -59,18 +70,22 @@ class SearingBlow extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
-          HighlightDescriptionText(text: 'Can be Upgraded any number of times.')
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .multipleUpgradeEffectDescription)
         ],
       ),
     );

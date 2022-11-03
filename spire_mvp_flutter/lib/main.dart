@@ -1,5 +1,8 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
@@ -42,6 +45,17 @@ class MyApp extends StatelessWidget {
     }
     return MaterialApp(
       title: 'Mathpunk: card game',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English, no country code
+        Locale('pt', ''),
+        Locale('uk', ''),
+      ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

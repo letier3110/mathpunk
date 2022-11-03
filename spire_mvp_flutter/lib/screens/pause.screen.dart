@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
@@ -77,9 +78,10 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: const Center(
-                                child: Text('Return',
-                                    style: TextStyle(
+                              child: Center(
+                                child: Text(
+                                    AppLocalizations.of(context)!.returnText,
+                                    style: const TextStyle(
                                         fontSize: 40, color: Colors.white)),
                               ),
                             ),
@@ -94,9 +96,11 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: const Center(
-                                child: Text('Abandon Run',
-                                    style: TextStyle(
+                              child: Center(
+                                child: Text(
+                                    AppLocalizations.of(context)!
+                                        .abandonRunText,
+                                    style: const TextStyle(
                                         fontSize: 40, color: Colors.white)),
                               ),
                             ),
@@ -111,9 +115,11 @@ class _PauseScreenState extends State<PauseScreen> {
                                     fit: BoxFit.fill),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: const Center(
-                                child: Text('Save & quit',
-                                    style: TextStyle(
+                              child: Center(
+                                child: Text(
+                                    AppLocalizations.of(context)!
+                                        .saveAndExitText,
+                                    style: const TextStyle(
                                         fontSize: 40, color: Colors.white)),
                               ),
                             ),

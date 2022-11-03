@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class HeaderMap extends StatefulWidget {
@@ -33,18 +34,16 @@ class HeaderMapView extends State<HeaderMap> {
           width: 80,
           padding: const EdgeInsets.all(8),
           color: Colors.black,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Map',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600),
-                ),
-              ]),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text(
+              AppLocalizations.of(context)!.mapText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.w600),
+            ),
+          ]),
         ),
       ),
     );

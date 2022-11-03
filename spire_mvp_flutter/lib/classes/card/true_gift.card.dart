@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/true_gift.upgrade.card.dart';
@@ -35,15 +36,26 @@ class TrueGiftCard extends PlayableCard {
             cardUpgrageLink: TrueGiftUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
-    int localBlock = block;
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.trueGritCardName,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
+    int localBlock = predictBlock(block: block, mana: mana);
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           HighlightDescriptionText(
-              text: 'Exhaust a random card from your hand.'),
+              text: AppLocalizations.of(context)!
+                  .applyBlockEffectDescription(localBlock.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .exhaustRandomCardFromHandEffectDescription),
         ],
       ),
     );
@@ -65,7 +77,7 @@ class TrueGiftCard extends PlayableCard {
   play(List<BaseCharacter> target) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
-    int localBlock = block;
+    int localBlock = predictBlock(block: block, mana: mana);
 
     BlockStatus bs = BlockStatus();
     bs.addStack(localBlock.toDouble());

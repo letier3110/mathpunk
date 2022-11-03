@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/headbutt.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
@@ -35,7 +36,15 @@ class HeadbuttCard extends PlayableCard {
             cardUpgrageLink: HeadbuttUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.headbuttCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
@@ -43,21 +52,24 @@ class HeadbuttCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
-          const Text(
-              'Place a card from your discard pile on top of your draw pile.',
+          Text(
+              AppLocalizations.of(context)!
+                  .placeCardFromDiscardToDrawEffectDescription,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white)),
+              style: const TextStyle(color: Colors.white)),
         ],
       ),
     );

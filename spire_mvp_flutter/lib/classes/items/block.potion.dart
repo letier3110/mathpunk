@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
@@ -6,9 +9,8 @@ import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../player/player_character/player_character.dart';
 
-int block = 12;
-
 class BlockPotion extends ConsumableItem {
+  int block = 12;
   BlockPotion()
       : super(
             itemName: 'Block Potion',
@@ -17,10 +19,15 @@ class BlockPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
-  String getItemDescription() {
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.blockPotionName;
+
+  @override
+  String getItemDescription(BuildContext context) {
     int localBlock = block;
 
-    return 'Gain $localBlock Block.';
+    return AppLocalizations.of(context)!
+        .applyBlockEffectDescription(localBlock.toString());
   }
 
   @override

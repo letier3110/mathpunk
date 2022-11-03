@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -29,34 +30,37 @@ class ClashUpgradeCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.clashCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [
           HighlightDescriptionText(
-              text:
-                  'Can only be played if every card in your hand is an Attack.'),
+              text: AppLocalizations.of(context)!
+                  .canBePlayedIfOnlyAttackInHandEffectDescription),
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
-                            : Colors.white)),
-            const TextSpan(text: ' damage.')
+                            : Colors.white,
+                    fontSize: 14)),
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ]))
         ],
       ),

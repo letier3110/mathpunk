@@ -1,0 +1,374 @@
+{
+    "play": "Play",
+    "continueRun": "Continue Run",
+    "compedium": "Compedium",
+    "statistics": "Statistics",
+    "settings": "Settings",
+    "patchNotes": "Patch Notes",
+    "quit": "Quit",
+    "back": "Back",
+    "loading": "Loading",
+    "standardModeName": "Standard",
+    "standardModeDescription": "Standard mode is the default mode. It is the most common mode for players.",
+    "dailyModeName": "Daily Climb",
+    "dailyModeDescription": "Daily Climb mode is a mode for players who want to climb more often.",
+    "customModeName": "Custom",
+    "customModeDescription": "Custom mode is a mode for players who want to create their own climb.",
+    "realityEchanterName": "Reality Enchanter",
+    "realityEchanterDescription": "A son of a noble house of math kingdom Noocracy.\nCalls to forces beyond the reality to shape his path.",
+    "barbarianName": "Barbarian",
+    "barbarianDescription": "A mysterious and dumb barbarian from Southlands of Matri Valley.\nHe relies on his brute force and sharp sword.",
+    "artOfWarName": "Art of War",
+    "artOfWarDescription": "If you do not play any Attacks during your turn, gain an extra Energy next turn.",
+    "burningBloodName": "Burning Blood",
+    "burningBloodDescription": "At the end of combat, heal 6 HP.",
+    "chessPyramidName": "Chess pyramid",
+    "chessPyramidDescription": "Summon powerful chess piece to help you.",
+    "ninjaScrollName": "Ninja Scroll",
+    "ninjaScrollDescription": "Start each combat with 3 Shivs in hand.",
+    "ringOfTheSerpentName": "Ring of the Serpent",
+    "ringOfTheSerpentDescription": "At the start of your turn, draw 1 additional card.",
+    "ringOfTheSnakeName": "Ring of the Snake",
+    "ringOfTheSnakeDescription": "At the start of each combat, draw 2 additional cards.",
+    "wristBladeName": "Wrist Blade",
+    "wristBladeDescription": "Attacks that cost 0 deal 4 additional damage.",
+    "embark": "Embark",
+    "functionMechanic": "Function.",
+    "unplayableMechanic": "Unplayable.",
+    "exhaustMechanic": "Exhaust.",
+    "doubleEffect": "Doubles next value.",
+    "doubleCardName": "2x",
+    "doubleCardUpgradeName": "2x+",
+    "plusCardName": "f(+)",
+    "plusCardUpgradeName": "f(+)+",
+    "plusCardDescription": "Extending Function multiplier for another card.",
+    "quintupleCardName": "5x",
+    "quintupleCardUpgradeName": "5x+",
+    "quintipleDesription": "Quintuples next value.",
+    "tripleCardName": "3x",
+    "tripleCardUpgradeName": "3x+",
+    "tripleCardDescription": "Triples next value.",
+    "angerCardName": "Anger",
+    "angerCardUpgradeName": "Anger+",
+    "dealStartDescription": "Deal ",
+    "deal": "Deal",
+    "dealDamageNumber": "{damage}",
+    "@dealDamageNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "damageEffectDescriptionEnd": " damage.",
+    "damageTwiceEffectDescriptionEnd": " damage twice.",
+    "copyCurrentCardToDiscardEffectDescription": "Add a copy of this card to your discard pile.",
+    "armamentsCardName": "Armaments",
+    "armamentsCardUpgradeName": "Armaments+",
+    "gainStartDescription": "Gain ",
+    "gain": "Gain",
+    "dealBlockNumber": "{block}",
+    "@dealBlockNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "block": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "blockEffectDescriptionEnd": " Block.",
+    "upgradeSingleHandCardEffectDescription": "Upgrade a card in your hand for the rest of combat.",
+    "upgradeAllHandCardEffectDescription": "Upgrade all cards in your hand for the rest of combat.",
+    "bashCardName": "Bash",
+    "bashCardUpgradeName": "Bash+",
+    "applyVulnerableEffectDescription": "Apply {vulnerable} Vulnerable.",
+    "@applyVulnerableEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "vulnerable": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "bloodForBloodCardName": "Blood for Blood",
+    "bloodForBloodCardUpgradeName": "Blood for Blood+",
+    "costLessForEachHpLooseEffectDescription": "Costs 1 less mana for each time you lose HP this combat.",
+    "bodySlamCardName": "Body Slam",
+    "bodySlamCardUpgradeName": "Body Slam+",
+    "dealDamageEqualToBlockEffectDescription": "Deal damage equal to your current Block.",
+    "clashCardName": "Clash",
+    "clashCardUpgradeName": "Clash+",
+    "canBePlayedIfOnlyAttackInHandEffectDescription": "Can only be played if every card in your hand is an Attack.",
+    "cleaveCardName": "Cleave",
+    "cleaveCardUpgradeName": "Cleave+",
+    "damageAoeEffectDescriptionEnd": " damage to ALL enemies.",
+    "cloakCoverCardName": "Cloak Cover",
+    "cloakCoverCardUpgradeName": "Cloak Cover+",
+    "receiveStartDescription": "Receive ",
+    "receive": "Receive",
+    "precisionStartDescription": "Precision ",
+    "precision": "Precision",
+    "dealPercentageNumber": "{percentage}",
+    "@dealPercentageNumber": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "percentage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "percentageEffectDescriptionEnd": "%.",
+    "clotheslineCardName": "Clothesline",
+    "clotheslineCardUpgradeName": "Clothesline+",
+    "applyWeakEffectDescription": "Apply {weak} Weak.",
+    "@applyWeakEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "weak": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "defendCardName": "Defend",
+    "defendCardUpgradeName": "Defend+",
+    "applyBlockEffectDescription": "Gain {block} Block.",
+    "@applyBlockEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "block": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "doubtCardName": "Doubt",
+    "addWeakAtTheRoundEndEffectDescription": "At the end of your turn, gain {weak} Weak.",
+    "@addWeakAtTheRoundEndEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "weak": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "flexCardName": "Flex",
+    "flexCardUpgradeName": "Flex+",
+    "applyStrengthEffectDescription": "Gain {strength} Strength.",
+    "@applyStrengthEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "loseStrengthAtTheRoundEndEffectDescription": "At the end of your turn, gain {strength} Strength.",
+    "@loseStrengthAtTheRoundEndEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "handHitCardName": "Hand Hit",
+    "handHitCardUpgradeName": "Hand Hit+",
+    "headbuttCardName": "Headbutt",
+    "headbuttCardUpgradeName": "Headbutt+",
+    "placeCardFromDiscardToDrawEffectDescription": "Place a card from your discard pile on top of your draw pile.",
+    "heavyBladeCardName": "Heavy Blade",
+    "heavyBladeCardUpgradeName": "Heavy Blade+",
+    "strengthMultiplierEffectDescription": "Strength affects {card} {strength} times.",
+    "@strengthMultiplierEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "strength": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Heavy Blade"
+        }
+      }
+    },
+    "ironWaveCardName": "Iron Wave",
+    "ironWaveCardUpgradeName": "Iron Wave+",
+    "normalityCardName": "Normality",
+    "normalityEffectDescription": "You cannot play more than 3 cards this turn.",
+    "perfectStrikeCardName": "Perfect Strike",
+    "perfectStrikeCardUpgradeName": "Perfect Strike+",
+    "perfectStrikeEffectDescription": "Deals an additional {damage} damage for ALL of your cards containing \"{card}\".",
+    "@perfectStrikeEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Strike"
+        }
+      }
+    },
+    "pommelStrikeCardName": "Pommel Strike",
+    "pommelStrikeCardUpgradeName": "Pommel Strike+",
+    "applyDrawEffectDescription": "Draw {draw} card.",
+    "@applyDrawEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "draw": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "searingBlowCardName": "Searing Blow",
+    "searingBlowCardUpgradeName": "Searing Blow+",
+    "multipleUpgradeEffectDescription": "Can be Upgraded any number of times.",
+    "shivCardName": "Shiv",
+    "shivCardUpgradeName": "Shiv+",
+    "shrugItOffCardName": "Shrug it off",
+    "shrugItOffCardUpgradeName": "Shrug it off+",
+    "stickHitCardName": "Stick Hit",
+    "stickHitCardUpgradeName": "Stick Hit+",
+    "strikeCardName": "Strike",
+    "strikeCardUpgradeName": "Strike+",
+    "throwStoneCardName": "Throw Stone",
+    "throwStoneCardUpgradeName": "Throw Stone+",
+    "thunderclapCardName": "Thunderclap",
+    "thunderclapCardUpgradeName": "Thunderclap+",
+    "addWeakAndDealDamageEffectDescription": "Deal {damage} damage and apply {vulnerable} Vulnerable to ALL enemies.",
+    "@addWeakAndDealDamageEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        },
+        "vulnerable": {
+          "type": "String",
+          "example": "1"
+        }
+      }
+    },
+    "trueGritCardName": "True Grit",
+    "trueGritCardUpgradeName": "True Grit+",
+    "exhaustRandomCardFromHandEffectDescription": "Exhaust a random card from your hand.",
+    "twinStrikeCardName": "Twin Strike",
+    "twinStrikeCardUpgradeName": "Twin Strike+",
+    "warcryCardName": "Warcry",
+    "warcryCardUpgradeName": "Warcry+",
+    "goblinEnemy": "goblin",
+    "ogreEnemy": "ogre",
+    "orkEnemy": "ork",
+    "slimeEnemy": "slime",
+    "healPercentageOfMaxEffectDescription": "Heal for {healPercentage}% of your Max HP.",
+    "@healPercentageOfMaxEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "healPercentage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "addCardToHandEffectDescription": "Add {count} {card} to your hand.",
+    "@addCardToHandEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "count": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Shiv"
+        }
+      }
+    },
+    "applyEnergyEffectDescription": "Gain {energy} Energy.",
+    "@applyEnergyEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "energy": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "applyMaxHpEffectDescription": "Gain {maxHp} Max HP.",
+    "@applyMaxHpEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "maxHp": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "blockPotionName": "Block Potion",
+    "bloodPotionName": "Blood Potion",
+    "cunningPotionName": "Cunning Potion",
+    "energyPotionName": "Energy Potion",
+    "fearPotionName": "fear Potion",
+    "fruitJuicePotionName": "Fruit Juice",
+    "mapText": "Map",
+    "deckText": "Deck",
+    "pauseText": "Pause",
+    "chooseACardRewardText": "Choose a card",
+    "confirmText": "Confirm",
+    "discardText": "Discard",
+    "drawText": "Draw",
+    "endTurnText": "End Turn",
+    "endGameText": "Death...",
+    "newStartText": "Continue",
+    "rewardGoldText": "{gold} gold",
+    "@rewardGoldText": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "gold": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "rewardCardText": "Add card to your deck",
+    "shopkeeperText": "Shopkeeper",
+    "introWriteYourNameText": "Write your name",
+    "enterNameText": "Enter Name",
+    "enterNameHint": "Enter Your Name",
+    "createNameButtonText": "Create",
+    "leaveText": "Leave",
+    "proceedText": "Proceed",
+    "hpbarText": "HP: {currentHp} / {maxHp}",
+    "@hpbarText": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "currentHp": {
+          "type": "String",
+          "example": "6"
+        },
+        "maxHp": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "returnText": "Return",
+    "abandonRunText": "Abandon Run",
+    "saveAndExitText": "Save & quit",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    }
+}

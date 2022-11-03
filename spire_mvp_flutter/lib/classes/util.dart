@@ -1,9 +1,17 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
+import 'package:mathpunk_cardgame/classes/relic/art_of_war.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/chess_pyramid.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
+import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/wrist_blade.relic.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
@@ -12,6 +20,8 @@ import 'package:mathpunk_cardgame/classes/statuses/precision.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
+
+import 'player/player_character/priest_character.dart';
 
 const maxPrecisionChance = 100;
 const minDodgeChance = 0;

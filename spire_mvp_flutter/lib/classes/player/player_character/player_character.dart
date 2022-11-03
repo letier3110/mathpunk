@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
@@ -39,6 +40,11 @@ class PlayerCharacter extends BaseCharacter {
     description =
         'The remaining soldier of the Ironclads.\nSold his soul to harness demonice energies.';
   }
+
+  String getDescription() => description;
+  String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  String getDescriptionTranslationKey(BuildContext context) =>
+      'realityEchanterDescription';
 
   attachDeck(Deck deck) {
     this.deck = deck;

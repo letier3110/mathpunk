@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class EndturnView extends StatefulWidget {
@@ -34,11 +34,11 @@ class EndturnViewView extends State<EndturnView> {
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(color: Colors.white, width: 2)
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                'End Turn',
+                AppLocalizations.of(context)!.endTurnText,
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w600),

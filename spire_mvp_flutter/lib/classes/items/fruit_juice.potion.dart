@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-int maxHp = 10;
-
 class FruitJuicePotion extends ConsumableItem {
+  int maxHp = 10;
   FruitJuicePotion()
       : super(
             itemName: 'Fruit Juice',
@@ -14,10 +16,17 @@ class FruitJuicePotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
-  String getItemDescription() {
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.fruitJuicePotionName;
+
+  @override
+  String getItemDescription(BuildContext context) {
     int localMaxHp = maxHp;
 
-    return 'Gain $localMaxHp Max HP.';
+    String result = AppLocalizations.of(context)!
+        .applyMaxHpEffectDescription(localMaxHp.toString());
+
+    return result;
   }
 
   @override

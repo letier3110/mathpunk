@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -34,26 +35,37 @@ class ArmamentsCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.armamentsCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     int finalBlock = predictBlock(block: block, mana: mana);
     return Container(
       child: Column(
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Gain '),
+            TextSpan(text: AppLocalizations.of(context)!.gainStartDescription),
             TextSpan(
-                text: finalBlock.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealBlockNumber(finalBlock.toString()),
                 style: TextStyle(
                     color: finalBlock > block
                         ? Colors.greenAccent
                         : finalBlock < block
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' Block.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
           ])),
           HighlightDescriptionText(
-              text: 'Upgrade a card in your hand for the rest of combat.'),
+              text: AppLocalizations.of(context)!
+                  .upgradeSingleHandCardEffectDescription),
         ],
       ),
     );

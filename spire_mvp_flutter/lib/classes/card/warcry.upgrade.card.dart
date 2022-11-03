@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -34,24 +35,28 @@ class WarCryUpgradeCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.warcryCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     int localDraw = draw;
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Draw $localDraw cards.'),
           HighlightDescriptionText(
-              text: 'Place a card from your hand on top of your draw pile.'),
-          HighlightDescriptionText(text: 'Exhaust.')
+              text: AppLocalizations.of(context)!
+                  .applyDrawEffectDescription(localDraw.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .placeCardFromDiscardToDrawEffectDescription),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!.exhaustMechanic)
         ],
       ),
     );

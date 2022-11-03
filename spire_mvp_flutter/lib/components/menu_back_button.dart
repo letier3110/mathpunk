@@ -1,3 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../components/main_menu_item.dart';
@@ -28,7 +30,10 @@ class _MenuBackButtonState extends State<MenuBackButton> {
                 margin: const EdgeInsets.only(top: 120),
                 child: Column(children: [
                   MainMenuItem(
-                    text: 'Back',
+                    text: Text(
+                      AppLocalizations.of(context)!.back,
+                      style: const TextStyle(fontSize: 22.0),
+                    ),
                     screen: widget.backScreen ?? ScreenEnum.mainMenu,
                   ),
                 ]),

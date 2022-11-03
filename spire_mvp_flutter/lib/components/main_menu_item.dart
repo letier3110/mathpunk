@@ -7,7 +7,7 @@ import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import '../enums/screens.enum.dart';
 
 class MainMenuItem extends StatefulWidget {
-  final String text;
+  final Widget text;
   final ScreenEnum? screen;
 
   const MainMenuItem({required this.text, this.screen, Key? key})
@@ -50,10 +50,7 @@ class MainMenuItemState extends State<MainMenuItem> {
                 height: 50.0,
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text(
-                  widget.text,
-                  style: const TextStyle(fontSize: 22.0),
-                ),
+                child: widget.text,
               )
             ],
           )),

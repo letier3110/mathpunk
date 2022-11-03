@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/flex.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -35,17 +36,28 @@ class FlexCard extends PlayableCard {
             cardUpgrageLink: FlexUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.flexCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     int localStrength = strength;
     int localStrengthCurse = strengthCurse;
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localStrength Strength.'),
           HighlightDescriptionText(
-              text:
-                  'At the end of your turn, lose $localStrengthCurse Strength.'),
+              text: AppLocalizations.of(context)!
+                  .applyStrengthEffectDescription(localStrength.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .loseStrengthAtTheRoundEndEffectDescription(
+                      localStrengthCurse.toString())),
         ],
       ),
     );

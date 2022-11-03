@@ -1,7 +1,7 @@
 import 'dart:math';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
@@ -37,23 +37,26 @@ class TrueGiftUpgradeCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.trueGritCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
-    int localBlock = block;
+  StatelessWidget getCardDescription(BuildContext context) {
+    int localBlock = predictBlock(block: block, mana: mana);
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Gain $localBlock Block.'),
           HighlightDescriptionText(
-              text: 'Exhaust a selected card from your hand.'),
+              text: AppLocalizations.of(context)!
+                  .applyBlockEffectDescription(localBlock.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .exhaustRandomCardFromHandEffectDescription),
         ],
       ),
     );
@@ -87,7 +90,7 @@ class TrueGiftUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     if (step == 1) {
-      int localBlock = block;
+      int localBlock = predictBlock(block: block, mana: mana);
 
       BlockStatus bs = BlockStatus();
       bs.addStack(localBlock.toDouble());

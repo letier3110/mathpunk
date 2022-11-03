@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -30,17 +31,41 @@ class DefendUpgradeCard extends PlayableCard {
             cardTargetType: TargetEnum.allTargets);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.defendCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
-    var localBlock = block;
-    return HighlightDescriptionText(text: 'Gain $localBlock Block.');
+  StatelessWidget getCardDescription(BuildContext context) {
+    int finalBlock = predictBlock(block: block, mana: mana);
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(
+            children: [
+              TextSpan(
+                  text: AppLocalizations.of(context)!.gainStartDescription),
+              TextSpan(
+                  text: AppLocalizations.of(context)!
+                      .dealBlockNumber(finalBlock.toString()),
+                  style: TextStyle(
+                      color: finalBlock > block
+                          ? Colors.greenAccent
+                          : finalBlock < block
+                              ? Colors.redAccent
+                              : Colors.white,
+                      fontSize: 14)),
+              TextSpan(
+                  text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
+            ],
+          )),
+        ],
+      ),
+    );
   }
 
   @override

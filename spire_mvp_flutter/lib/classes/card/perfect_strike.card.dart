@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/perfect_strike.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -31,8 +32,17 @@ class PerfectStrikeCard extends PlayableCard {
             cardMana: cardMana,
             cardType: CardType.attack,
             cardUpgrageLink: PerfectStrikeUpgradeCard());
+
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.perfectStrikeCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localDamage = predictDamage(damage: damage);
     Deck deck = character.getDeck();
@@ -61,20 +71,23 @@ class PerfectStrikeCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage.')
+            TextSpan(
+                text: AppLocalizations.of(context)!.damageEffectDescriptionEnd)
           ])),
           HighlightDescriptionText(
-              text:
-                  'Deals an additional $damageAddition damage for ALL of your cards containing "Strike".'),
+              text: AppLocalizations.of(context)!
+                  .perfectStrikeEffectDescription(damageAddition.toString(),
+                      AppLocalizations.of(context)!.strikeCardName)),
         ],
       ),
     );

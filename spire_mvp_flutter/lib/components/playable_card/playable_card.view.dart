@@ -183,7 +183,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, cardWidth / 40, 0, 0),
-                              child: widget.card.getCardName(),
+                              child: widget.card.getCardName(context),
                             ),
                             Container(
                               height: calcHeightByWidth(cardWidth) * 0.3,
@@ -191,7 +191,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                   width / 35, 0, width / 35, 0),
                               child: Column(
                                 children: [
-                                  widget.card.getCardDescription(),
+                                  widget.card.getCardDescription(context),
                                 ],
                               ),
                             ),

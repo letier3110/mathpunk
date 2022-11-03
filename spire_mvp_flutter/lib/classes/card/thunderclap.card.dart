@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/thunderclap.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -6,6 +7,7 @@ import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
+import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -34,27 +36,24 @@ class ThunderclapCard extends PlayableCard {
             cardUpgrageLink: ThunderclapUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.thunderclapCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
     int localVulnerable = vulnerable;
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
       child: Column(
         children: [
-          RichText(
-              text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
-            TextSpan(
-                text: finalDamage.toString(),
-                style: TextStyle(
-                    color: finalDamage > damage
-                        ? Colors.greenAccent
-                        : finalDamage < damage
-                            ? Colors.redAccent
-                            : Colors.white)),
-            TextSpan(
-                text:
-                    ' damage and apply $localVulnerable Vulnerable to ALL enemies.')
-          ]))
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .addWeakAndDealDamageEffectDescription(
+                      finalDamage.toString(), localVulnerable.toString())),
         ],
       ),
     );

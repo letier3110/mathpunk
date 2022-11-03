@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
@@ -28,19 +29,21 @@ class QuintupleMathUpgradeCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.quintupleCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
 
   @override
-  StatelessWidget getCardDescription() {
+  StatelessWidget getCardDescription(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Function. Quintuples next value.'),
+          HighlightDescriptionText(
+              text:
+                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.quintipleDesription}'),
         ],
       ),
     );

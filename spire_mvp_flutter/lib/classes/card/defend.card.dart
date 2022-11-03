@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/defend.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -32,9 +33,41 @@ class DefendCard extends PlayableCard {
             cardUpgrageLink: DefendUpgradeCard());
 
   @override
-  StatelessWidget getCardDescription() {
-    var localBlock = block;
-    return HighlightDescriptionText(text: 'Gain $localBlock Block.');
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.defendCardName,
+      style: const TextStyle(color: Colors.white, fontSize: 16),
+    );
+  }
+
+  @override
+  StatelessWidget getCardDescription(BuildContext context) {
+    int finalBlock = predictBlock(block: block, mana: mana);
+    return Container(
+      child: Column(
+        children: [
+          RichText(
+              text: TextSpan(
+            children: [
+              TextSpan(
+                  text: AppLocalizations.of(context)!.gainStartDescription),
+              TextSpan(
+                  text: AppLocalizations.of(context)!
+                      .dealBlockNumber(finalBlock.toString()),
+                  style: TextStyle(
+                      color: finalBlock > block
+                          ? Colors.greenAccent
+                          : finalBlock < block
+                              ? Colors.redAccent
+                              : Colors.white,
+                      fontSize: 14)),
+              TextSpan(
+                  text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
+            ],
+          )),
+        ],
+      ),
+    );
   }
 
   @override

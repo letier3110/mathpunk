@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Relic {
   late String name;
   late String description;
@@ -6,6 +8,10 @@ class Relic {
     name = relicName;
     description = relicDescription;
   }
+
+  String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  String getDescriptionTranslationKey(BuildContext context) =>
+      'realityEchanterDescription';
 
   play() {
     // can be failed,

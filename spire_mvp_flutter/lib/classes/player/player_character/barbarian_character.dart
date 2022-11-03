@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
@@ -33,4 +35,12 @@ class Barbarian extends PlayerCharacter {
 
     deck = Deck(cards);
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.barbarianName;
+
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.barbarianDescription;
 }

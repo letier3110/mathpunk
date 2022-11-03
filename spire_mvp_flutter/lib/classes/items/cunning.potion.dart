@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
@@ -5,9 +8,8 @@ import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-int count = 3;
-
 class CunningPotion extends ConsumableItem {
+  int count = 3;
   CunningPotion()
       : super(
             itemName: 'Cunning Potion',
@@ -15,10 +17,18 @@ class CunningPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
-  String getItemDescription() {
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.cunningPotionName;
+
+  @override
+  String getItemDescription(BuildContext context) {
     int localCount = count;
 
-    return 'Add $localCount Shiv to your hand.';
+    String result = AppLocalizations.of(context)!
+        .addCardToHandEffectDescription(
+            localCount.toString(), AppLocalizations.of(context)!.shivCardName);
+
+    return result;
   }
 
   @override

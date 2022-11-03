@@ -35,6 +35,7 @@
     "embark": "Embark",
     "functionMechanic": "Function.",
     "unplayableMechanic": "Unplayable.",
+    "exhaustMechanic": "Exhaust.",
     "doubleEffect": "Doubles next value.",
     "doubleCardName": "2x",
     "doubleCardUpgradeName": "2x+",
@@ -62,6 +63,7 @@
       }
     },
     "damageEffectDescriptionEnd": " damage.",
+    "damageTwiceEffectDescriptionEnd": " damage twice.",
     "copyCurrentCardToDiscardEffectDescription": "Add a copy of this card to your discard pile.",
     "armamentsCardName": "Armaments",
     "armamentsCardUpgradeName": "Armaments+",
@@ -234,8 +236,39 @@
     "searingBlowCardName": "Searing Blow",
     "searingBlowCardUpgradeName": "Searing Blow+",
     "multipleUpgradeEffectDescription": "Can be Upgraded any number of times.",
+    "shivCardName": "Shiv",
+    "shivCardUpgradeName": "Shiv+",
+    "shrugItOffCardName": "Shrug it off",
+    "shrugItOffCardUpgradeName": "Shrug it off+",
+    "stickHitCardName": "Stick Hit",
+    "stickHitCardUpgradeName": "Stick Hit+",
     "strikeCardName": "Strike",
     "strikeCardUpgradeName": "Strike+",
+    "throwStoneCardName": "Throw Stone",
+    "throwStoneCardUpgradeName": "Throw Stone+",
+    "thunderclapCardName": "Thunderclap",
+    "thunderclapCardUpgradeName": "Thunderclap+",
+    "addWeakAndDealDamageEffectDescription": "Deal {damage} damage and apply {vulnerable} Vulnerable to ALL enemies.",
+    "@addWeakAndDealDamageEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "damage": {
+          "type": "String",
+          "example": "6"
+        },
+        "vulnerable": {
+          "type": "String",
+          "example": "1"
+        }
+      }
+    },
+    "trueGritCardName": "True Grit",
+    "trueGritCardUpgradeName": "True Grit+",
+    "exhaustRandomCardFromHandEffectDescription": "Exhaust a random card from your hand.",
+    "twinStrikeCardName": "Twin Strike",
+    "twinStrikeCardUpgradeName": "Twin Strike+",
+    "warcryCardName": "Warcry",
+    "warcryCardUpgradeName": "Warcry+",
     "settings": "Settings",
     "bloodForBloodCardName": "Blood for Blood",
     "bloodForBloodCardUpgradeName": "Blood for Blood+",

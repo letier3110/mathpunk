@@ -48,7 +48,7 @@ class HandHitUpgradeCard extends PlayableCard {
             TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
                 text: AppLocalizations.of(context)!
-                    .dealBlockNumber(finalDamage.toString()),
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent

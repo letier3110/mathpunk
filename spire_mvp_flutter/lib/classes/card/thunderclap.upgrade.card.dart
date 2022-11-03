@@ -6,6 +6,7 @@ import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
+import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -33,9 +34,9 @@ class ThunderclapUpgradeCard extends PlayableCard {
             cardType: CardType.attack);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.thunderclapCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
@@ -47,21 +48,10 @@ class ThunderclapUpgradeCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          RichText(
-              text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
-            TextSpan(
-                text: finalDamage.toString(),
-                style: TextStyle(
-                    color: finalDamage > damage
-                        ? Colors.greenAccent
-                        : finalDamage < damage
-                            ? Colors.redAccent
-                            : Colors.white)),
-            TextSpan(
-                text:
-                    ' damage and apply $localVulnerable Vulnerable to ALL enemies.')
-          ]))
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .addWeakAndDealDamageEffectDescription(
+                      finalDamage.toString(), localVulnerable.toString())),
         ],
       ),
     );

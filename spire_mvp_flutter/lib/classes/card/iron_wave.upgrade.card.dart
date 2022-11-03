@@ -40,7 +40,8 @@ class IronWaveUpgradeCard extends PlayableCard {
 
   @override
   StatelessWidget getCardDescription(BuildContext context) {
-    int localBlock = block;
+    int localBlock = predictBlock(block: block, mana: mana);
+    ;
     int finalDamage = predictDamage(damage: damage, mana: mana);
 
     return Container(
@@ -95,7 +96,7 @@ class IronWaveUpgradeCard extends PlayableCard {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      int localBlock = block;
+      int localBlock = predictBlock(block: block, mana: mana);
       target[0].recieveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));
 

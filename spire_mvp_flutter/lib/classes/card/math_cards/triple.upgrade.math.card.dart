@@ -43,7 +43,7 @@ class TripleMathUpgradeCard extends PlayableCard {
         children: [
           HighlightDescriptionText(
               text:
-                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.quintipleDesription}'),
+                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.tripleCardUpgradeName}'),
         ],
       ),
     );

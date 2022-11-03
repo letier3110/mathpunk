@@ -43,7 +43,9 @@ class TripleMathCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Function. Triples next value.'),
+          HighlightDescriptionText(
+              text:
+                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.tripleCardUpgradeName}'),
         ],
       ),
     );

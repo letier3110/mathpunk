@@ -38,7 +38,9 @@ class SearingBlow extends PlayableCard {
       damageIncrease > baseDamage
           ? AppLocalizations.of(context)!.searingBlowCardUpgradeName
           : AppLocalizations.of(context)!.searingBlowCardName,
-      style: const TextStyle(color: Colors.white, fontSize: 16),
+      style: damageIncrease > baseDamage
+          ? TextStyle(color: getUpgradedCardColor(), fontSize: 16)
+          : const TextStyle(color: Colors.white, fontSize: 16),
     );
   }
 

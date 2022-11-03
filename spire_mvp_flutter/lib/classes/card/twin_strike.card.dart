@@ -30,6 +30,14 @@ class TwinStrikeCard extends PlayableCard {
             cardUpgrageLink: TwinStrikeUpgradeCard());
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.twinStrikeCardName,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     int finalDamage = predictDamage(damage: damage, mana: mana);
     return Container(
@@ -37,16 +45,19 @@ class TwinStrikeCard extends PlayableCard {
         children: [
           RichText(
               text: TextSpan(children: [
-            const TextSpan(text: 'Deal '),
+            TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
             TextSpan(
-                text: finalDamage.toString(),
+                text: AppLocalizations.of(context)!
+                    .dealDamageNumber(finalDamage.toString()),
                 style: TextStyle(
                     color: finalDamage > damage
                         ? Colors.greenAccent
                         : finalDamage < damage
                             ? Colors.redAccent
                             : Colors.white)),
-            const TextSpan(text: ' damage twice.')
+            TextSpan(
+                text: AppLocalizations.of(context)!
+                    .damageTwiceEffectDescriptionEnd)
           ]))
         ],
       ),

@@ -37,16 +37,28 @@ class WarCryCard extends PlayableCard {
             cardUpgrageLink: WarCryUpgradeCard());
 
   @override
+  StatelessWidget getCardName(BuildContext context) {
+    return Text(
+      AppLocalizations.of(context)!.warcryCardName,
+      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
+    );
+  }
+
+  @override
   StatelessWidget getCardDescription(BuildContext context) {
     int localDraw = draw;
 
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Draw $localDraw card.'),
           HighlightDescriptionText(
-              text: 'Place a card from your hand on top of your draw pile.'),
-          HighlightDescriptionText(text: 'Exhaust.')
+              text: AppLocalizations.of(context)!
+                  .applyDrawEffectDescription(localDraw.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .placeCardFromDiscardToDrawEffectDescription),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!.exhaustMechanic)
         ],
       ),
     );

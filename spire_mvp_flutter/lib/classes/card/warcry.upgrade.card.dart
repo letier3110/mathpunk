@@ -35,9 +35,9 @@ class WarCryUpgradeCard extends PlayableCard {
             cardType: CardType.skill);
 
   @override
-  StatelessWidget getCardName() {
+  StatelessWidget getCardName(BuildContext context) {
     return Text(
-      name,
+      AppLocalizations.of(context)!.warcryCardUpgradeName,
       style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
     );
   }
@@ -49,10 +49,14 @@ class WarCryUpgradeCard extends PlayableCard {
     return Container(
       child: Column(
         children: [
-          HighlightDescriptionText(text: 'Draw $localDraw cards.'),
           HighlightDescriptionText(
-              text: 'Place a card from your hand on top of your draw pile.'),
-          HighlightDescriptionText(text: 'Exhaust.')
+              text: AppLocalizations.of(context)!
+                  .applyDrawEffectDescription(localDraw.toString())),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!
+                  .placeCardFromDiscardToDrawEffectDescription),
+          HighlightDescriptionText(
+              text: AppLocalizations.of(context)!.exhaustMechanic)
         ],
       ),
     );

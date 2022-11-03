@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
 class CreateProfileComponent extends StatefulWidget {
@@ -31,9 +32,9 @@ class CreateProfileComponentView extends State<CreateProfileComponent> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Write your name',
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                Text(
+                  AppLocalizations.of(context)!.introWriteYourNameText,
+                  style: const TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 // Container(
                 // margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
@@ -44,10 +45,10 @@ class CreateProfileComponentView extends State<CreateProfileComponent> {
                   },
                   // maxLength: 10,
                   style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Enter Name',
-                    hintText: 'Enter Your Name',
+                    labelText: AppLocalizations.of(context)!.enterNameText,
+                    hintText: AppLocalizations.of(context)!.enterNameHint,
                   ),
                 ),
                 // ),
@@ -58,7 +59,8 @@ class CreateProfileComponentView extends State<CreateProfileComponent> {
                   onPressed: onTapHandler,
                   // style: ElevatedButton.styleFrom(
                   //     surfaceTintColor: Colors.greenAccent),
-                  child: const Text("Create"),
+                  child:
+                      Text(AppLocalizations.of(context)!.createNameButtonText),
                 ),
                 // )
               ],

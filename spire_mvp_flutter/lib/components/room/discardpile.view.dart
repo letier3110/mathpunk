@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class DiscardPileView extends StatefulWidget {
@@ -38,11 +38,11 @@ class DiscardPileViewView extends State<DiscardPileView> {
             width: 100,
             height: 80,
             color: Colors.black,
-            child: const Center(
+            child: Center(
               child: Text(
-                'Discard',
+                AppLocalizations.of(context)!.discardText,
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w600),

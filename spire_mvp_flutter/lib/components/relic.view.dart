@@ -45,7 +45,7 @@ class RelicViewView extends State<RelicView> {
               ),
             ),
             Text(
-              widget.relic.name,
+              widget.relic.getNameTranslationKey(context),
               textAlign: TextAlign.left,
               style: const TextStyle(
                   color: Colors.greenAccent,

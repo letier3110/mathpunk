@@ -16,6 +16,10 @@ class BloodPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.bloodPotionName;
+
+  @override
   String getItemDescription(BuildContext context) {
     int localHealAmount = (healAmount * 100).floor();
     String result = AppLocalizations.of(context)!

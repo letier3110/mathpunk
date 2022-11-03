@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/reward.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
 class RewardView extends StatefulWidget {
@@ -67,7 +67,8 @@ class RewardViewView extends State<RewardView> {
                     //       fontWeight: FontWeight.w600),
                     // ),
                     Text(
-                      '$goldReward gold',
+                      AppLocalizations.of(context)!
+                          .rewardGoldText(goldReward.toString()),
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           color: Colors.white,
@@ -93,7 +94,7 @@ class RewardViewView extends State<RewardView> {
                 child: Row(
                   children: [
                     Text(
-                      widget.reward.item!.name,
+                      widget.reward.item!.getItemName(context),
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           color: Colors.white,
@@ -119,7 +120,7 @@ class RewardViewView extends State<RewardView> {
                 child: Row(
                   children: [
                     Text(
-                      widget.reward.relic!.name,
+                      widget.reward.relic!.getNameTranslationKey(context),
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           color: Colors.white,
@@ -143,11 +144,11 @@ class RewardViewView extends State<RewardView> {
                 height: 80,
                 margin: const EdgeInsets.only(bottom: 12),
                 child: Row(
-                  children: const [
+                  children: [
                     Text(
-                      'Add card to your deck',
+                      AppLocalizations.of(context)!.rewardCardText,
                       textAlign: TextAlign.left,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),

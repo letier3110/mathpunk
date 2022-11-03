@@ -317,7 +317,57 @@
         }
       }
     },
-    "settings": "Settings",
+    "blockPotionName": "Block Potion",
+    "bloodPotionName": "Blood Potion",
+    "cunningPotionName": "Cunning Potion",
+    "energyPotionName": "Energy Potion",
+    "fearPotionName": "fear Potion",
+    "fruitJuicePotionName": "Fruit Juice",
+    "mapText": "Map",
+    "deckText": "Deck",
+    "pauseText": "Pause",
+    "chooseACardRewardText": "Choose a card",
+    "confirmText": "Confirm",
+    "discardText": "Discard",
+    "drawText": "Draw",
+    "endTurnText": "End Turn",
+    "endGameText": "Death...",
+    "newStartText": "Continue",
+    "rewardGoldText": "{gold} gold",
+    "@rewardGoldText": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "gold": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "rewardCardText": "Add card to your deck",
+    "shopkeeperText": "Shopkeeper",
+    "introWriteYourNameText": "Write your name",
+    "enterNameText": "Enter Name",
+    "enterNameHint": "Enter Your Name",
+    "createNameButtonText": "Create",
+    "leaveText": "Leave",
+    "proceedText": "Proceed",
+    "hpbarText": "HP: {currentHp} / {maxHp}",
+    "@hpbarText": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "currentHp": {
+          "type": "String",
+          "example": "6"
+        },
+        "maxHp": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "returnText": "Return",
+    "abandonRunText": "Abandon Run",
+    "saveAndExitText": "Save & quit",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     }

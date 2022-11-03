@@ -16,6 +16,10 @@ class FearPotion extends ConsumableItem {
             itemTargetType: TargetEnum.singleTarget);
 
   @override
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.fearPotionName;
+
+  @override
   String getItemDescription(BuildContext context) {
     int localVulnerable = vulnerable;
 

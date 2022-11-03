@@ -16,6 +16,10 @@ class EnergyPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.energyPotionName;
+
+  @override
   String getItemDescription(BuildContext context) {
     int localEnergy = energy;
 

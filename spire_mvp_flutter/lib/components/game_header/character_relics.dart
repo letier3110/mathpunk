@@ -41,7 +41,7 @@ class CharacterRelicsView extends State<CharacterRelics> {
                           ),
                         ),
                         Text(
-                          e.name,
+                          e.getNameTranslationKey(context),
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                               color: Colors.greenAccent,

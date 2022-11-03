@@ -17,6 +17,10 @@ class CunningPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.cunningPotionName;
+
+  @override
   String getItemDescription(BuildContext context) {
     int localCount = count;
 

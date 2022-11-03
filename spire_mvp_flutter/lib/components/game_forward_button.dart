@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameForwardButton extends StatefulWidget {
   final Function goForward;
@@ -36,10 +37,10 @@ class _GameForwardButtonState extends State<GameForwardButton> {
                           width: 300,
                           height: 50,
                           color: Colors.white,
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Proceed',
-                              style: TextStyle(fontSize: 22),
+                              AppLocalizations.of(context)!.proceedText,
+                              style: const TextStyle(fontSize: 22),
                             ),
                           )),
                     ]),

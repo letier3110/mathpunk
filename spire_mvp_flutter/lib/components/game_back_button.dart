@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameBackButton extends StatefulWidget {
   final Function goBack;
@@ -44,9 +45,9 @@ class _GameBackButtonState extends State<GameBackButton> {
                                 height: 50.0,
                                 alignment: Alignment.centerLeft,
                                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                child: const Text(
-                                  'Leave',
-                                  style: TextStyle(fontSize: 22),
+                                child: Text(
+                                  AppLocalizations.of(context)!.leaveText,
+                                  style: const TextStyle(fontSize: 22),
                                 ),
                               ))
                         ],

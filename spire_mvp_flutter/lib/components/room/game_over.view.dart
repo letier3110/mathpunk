@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
@@ -35,11 +35,11 @@ class GameOverView extends State<GameOver> {
           padding: const EdgeInsets.all(8),
           height: 100,
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 400),
-          child: const Center(
+          child: Center(
             child: Text(
-              'Death...',
+              AppLocalizations.of(context)!.endGameText,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w600),
@@ -58,10 +58,10 @@ class GameOverView extends State<GameOver> {
                       borderRadius: BorderRadius.circular(50),
                       // border: Border.all(color: Colors.white, width: 2)
                     ),
-                    child: const Text(
-                      'Continue',
+                    child: Text(
+                      AppLocalizations.of(context)!.newStartText,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.w600),

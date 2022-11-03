@@ -1,5 +1,4 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +106,11 @@ class _CharacterSelectState extends State<CharacterSelect> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                   child: Text(
-                                    'HP: ${gamestate.playerCharacter!.health} / ${gamestate.playerCharacter!.maxHealth}',
+                                    AppLocalizations.of(context)!.hpbarText(
+                                        gamestate.playerCharacter!.health
+                                            .toString(),
+                                        gamestate.playerCharacter!.maxHealth
+                                            .toString()),
                                     textAlign: TextAlign.left,
                                     style: const TextStyle(
                                         fontSize: 16,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TraderPawnView extends StatefulWidget {
   final Function callback;
@@ -37,10 +38,10 @@ class TraderPawnViewView extends State<TraderPawnView> {
           child: Container(
             height: width / 3,
             margin: EdgeInsets.fromLTRB(0, height - 120, 0, 0),
-            child: const Text(
-              "Shopkeeper",
+            child: Text(
+              AppLocalizations.of(context)!.shopkeeperText,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w600),

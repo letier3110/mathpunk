@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
@@ -82,10 +83,10 @@ class CardToDrawView extends State<CardToDraw> {
                       borderRadius: BorderRadius.circular(50),
                       // border: Border.all(color: Colors.white, width: 2)
                     ),
-                    child: const Text(
-                      'Confirm',
+                    child: Text(
+                      AppLocalizations.of(context)!.confirmText,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.w600),

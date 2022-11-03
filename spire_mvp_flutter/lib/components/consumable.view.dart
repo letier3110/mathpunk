@@ -44,7 +44,7 @@ class ConsumableViewView extends State<ConsumableView> {
               ),
             ),
             Text(
-              widget.item.name,
+              widget.item.getItemName(context),
               textAlign: TextAlign.left,
               style: const TextStyle(
                   color: Colors.pinkAccent,

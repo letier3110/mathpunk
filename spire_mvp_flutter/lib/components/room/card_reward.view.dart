@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/room/playable_card_reward.dart';
 
@@ -36,10 +37,10 @@ class CardRewardView extends State<CardReward> {
               Container(
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.only(bottom: 32),
-                child: const Text(
-                  'Choose a card',
+                child: Text(
+                  AppLocalizations.of(context)!.chooseACardRewardText,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w600),
@@ -58,10 +59,10 @@ class CardRewardView extends State<CardReward> {
                 decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(20)),
-                child: const Text(
-                  'Choose a card',
+                child: Text(
+                  AppLocalizations.of(context)!.chooseACardRewardText,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w600),

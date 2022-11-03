@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
@@ -25,11 +26,11 @@ class HeaderPauseView extends State<HeaderPause> {
           padding: const EdgeInsets.all(8),
           width: 80,
           color: Colors.black,
-          child: const Center(
+          child: Center(
             child: Text(
-              'Pause',
+              AppLocalizations.of(context)!.pauseText,
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.w600),

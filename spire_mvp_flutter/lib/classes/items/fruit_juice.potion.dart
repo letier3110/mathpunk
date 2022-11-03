@@ -16,6 +16,10 @@ class FruitJuicePotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
+  String getItemName(BuildContext context) =>
+      AppLocalizations.of(context)!.fruitJuicePotionName;
+
+  @override
   String getItemDescription(BuildContext context) {
     int localMaxHp = maxHp;
 

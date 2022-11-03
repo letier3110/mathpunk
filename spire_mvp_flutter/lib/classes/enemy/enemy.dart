@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../base_character.dart';
 import '../moveset.dart';
 
@@ -11,6 +13,12 @@ class Enemy extends BaseCharacter {
     maxHealth = enemyMaxHealth;
     moveset = Moveset();
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      'realityEchanterDescription';
 
   makeMove() {
     if (health > 0) {

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
 import 'package:mathpunk_cardgame/classes/moveset.dart';
 import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
@@ -14,4 +16,11 @@ class EnemyOgre extends Enemy {
       Intension(intensionType: IntensionType.offense, intensionDamage: 6)
     ]);
   }
+
+  @override
+  String getNameTranslationKey(BuildContext context) =>
+      AppLocalizations.of(context)!.ogreEnemy;
+  @override
+  String getDescriptionTranslationKey(BuildContext context) =>
+      'realityEchanterDescription';
 }

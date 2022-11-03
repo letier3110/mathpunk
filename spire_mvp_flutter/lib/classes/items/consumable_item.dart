@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
@@ -19,7 +20,7 @@ class ConsumableItem {
     selectedCards = itemSelectedCards;
   }
 
-  String getItemName() {
+  String getItemName(BuildContext context) {
     return name;
   }
 
@@ -28,7 +29,7 @@ class ConsumableItem {
     throw UnimplementedError();
   }
 
-  String getItemDescription() {
+  String getItemDescription(BuildContext context) {
     return description;
   }
 

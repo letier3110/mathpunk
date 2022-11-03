@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-int vulnerable = 3;
-
 class FearPotion extends ConsumableItem {
+  int vulnerable = 3;
   FearPotion()
       : super(
             itemName: 'Fear Potion',
@@ -14,10 +16,14 @@ class FearPotion extends ConsumableItem {
             itemTargetType: TargetEnum.singleTarget);
 
   @override
-  String getItemDescription() {
+  String getItemDescription(BuildContext context) {
     int localVulnerable = vulnerable;
 
-    return 'Apply $localVulnerable Vulnerable.';
+    String result = AppLocalizations.of(context)!
+        .applyVulnerableEffectDescription(localVulnerable.toString());
+
+    return result;
+    // return 'Apply $localVulnerable Vulnerable.';
   }
 
   @override

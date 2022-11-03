@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-double healAmount = 0.2;
-
 class BloodPotion extends ConsumableItem {
+  double healAmount = 0.2;
   BloodPotion()
       : super(
             itemName: 'Blood Potion',
@@ -14,10 +16,12 @@ class BloodPotion extends ConsumableItem {
             itemTargetType: TargetEnum.allTargets);
 
   @override
-  String getItemDescription() {
+  String getItemDescription(BuildContext context) {
     int localHealAmount = (healAmount * 100).floor();
+    String result = AppLocalizations.of(context)!
+        .healPercentageOfMaxEffectDescription(localHealAmount.toString());
 
-    return 'Heal for $localHealAmount% of your Max HP.';
+    return result;
   }
 
   @override

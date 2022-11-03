@@ -269,9 +269,55 @@
     "twinStrikeCardUpgradeName": "Twin Strike+",
     "warcryCardName": "Warcry",
     "warcryCardUpgradeName": "Warcry+",
+    "goblinEnemy": "goblin",
+    "ogreEnemy": "ogre",
+    "orkEnemy": "ork",
+    "slimeEnemy": "slime",
+    "healPercentageOfMaxEffectDescription": "Heal for {healPercentage}% of your Max HP.",
+    "@healPercentageOfMaxEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "healPercentage": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "addCardToHandEffectDescription": "Add {count} {card} to your hand.",
+    "@addCardToHandEffectDescription": {
+      "description": "A message with a two parameters",
+      "placeholders": {
+        "count": {
+          "type": "String",
+          "example": "6"
+        },
+        "card": {
+          "type": "String",
+          "example": "Shiv"
+        }
+      }
+    },
+    "applyEnergyEffectDescription": "Gain {energy} Energy.",
+    "@applyEnergyEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "energy": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
+    "applyMaxHpEffectDescription": "Gain {maxHp} Max HP.",
+    "@applyMaxHpEffectDescription": {
+      "description": "A message with a single parameter",
+      "placeholders": {
+        "maxHp": {
+          "type": "String",
+          "example": "6"
+        }
+      }
+    },
     "settings": "Settings",
-    "bloodForBloodCardName": "Blood for Blood",
-    "bloodForBloodCardUpgradeName": "Blood for Blood+",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     }

@@ -7,6 +7,9 @@ class MathMultiplierScoreStatus extends Status {
             statusName: 'Multiplier',
             statusDescription: "Multiplies next attack.");
 
+  @override
+  bool isShowStatus() => false;
+
   factory MathMultiplierScoreStatus.fromJson(dynamic json) {
     return MathMultiplierScoreStatus();
   }

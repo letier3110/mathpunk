@@ -7,6 +7,9 @@ class VulnerableStatus extends Status {
             statusName: 'Vulnerable',
             statusDescription: "Target takes 50% more damage from attacks.");
 
+  @override
+  bool isStatusPositive() => false;
+
   factory VulnerableStatus.fromJson(dynamic json) {
     return VulnerableStatus();
   }

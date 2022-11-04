@@ -77,6 +77,45 @@ class HandHitCard extends PlayableCard {
         ],
       ),
     );
+    // TODO: replace description with highlighted middle part in next lines
+    // return Container(
+    //   child: Column(
+    //     children: [
+    //       RichText(
+    //           text: TextSpan(children: [
+    //         TextSpan(text: AppLocalizations.of(context)!.dealStartDescription),
+    //         TextSpan(
+    //             text: AppLocalizations.of(context)!
+    //                 .dealDamageNumber(finalDamage.toString()),
+    //             style: TextStyle(
+    //                 color: finalDamage > damage
+    //                     ? Colors.greenAccent
+    //                     : finalDamage < damage
+    //                         ? Colors.redAccent
+    //                         : Colors.white)),
+    //         TextSpan(
+    //             text: AppLocalizations.of(context)!.damageEffectDescriptionEnd),
+    //       ])),
+    //       HighlightDescriptionText(
+    //           text: AppLocalizations.of(context)!.precisionStartDescription),
+    //       RichText(
+    //           text: TextSpan(children: [
+    //         TextSpan(
+    //             text: AppLocalizations.of(context)!
+    //                 .dealPercentageNumber(finalPrecision.toString()),
+    //             style: TextStyle(
+    //                 color: finalPrecision > precision
+    //                     ? Colors.greenAccent
+    //                     : finalPrecision < precision
+    //                         ? Colors.redAccent
+    //                         : Colors.white)),
+    //         TextSpan(
+    //             text: AppLocalizations.of(context)!
+    //                 .percentageEffectDescriptionEnd),
+    //       ])),
+    //     ],
+    //   ),
+    // );
   }
 
   @override

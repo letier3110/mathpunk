@@ -7,6 +7,9 @@ class WeakStatus extends Status {
             statusName: 'Weak',
             statusDescription: "Target deals 25% less attack damage.");
 
+  @override
+  bool isStatusPositive() => false;
+
   factory WeakStatus.fromJson(dynamic json) {
     return WeakStatus();
   }

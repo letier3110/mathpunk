@@ -36,7 +36,7 @@ class ClockCoverCard extends PlayableCard {
   @override
   StatelessWidget getCardName(BuildContext context) {
     return Text(
-      AppLocalizations.of(context)!.cleaveCardName,
+      AppLocalizations.of(context)!.cloakCoverCardName,
       style: TextStyle(color: Colors.white, fontSize: 16),
     );
   }

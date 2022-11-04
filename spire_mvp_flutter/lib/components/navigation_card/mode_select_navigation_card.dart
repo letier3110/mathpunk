@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';

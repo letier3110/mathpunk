@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
 import 'package:mathpunk_cardgame/storage/gamestate.storage.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/storage/saves.storage.dart';
 
 GameStateStorage gameStorage = GameStateStorage();

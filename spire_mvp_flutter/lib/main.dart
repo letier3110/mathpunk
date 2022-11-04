@@ -1,10 +1,13 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mathpunk_cardgame/controllers/settings/settings.controller.dart';
+import 'package:mathpunk_cardgame/screens/main_settings.screen.dart';
 import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 import 'package:mathpunk_cardgame/screens/character_select.screen.dart';
 import 'package:mathpunk_cardgame/screens/game.screen.dart';
@@ -16,7 +19,24 @@ import './screens/main_menu.screen.dart';
 import './controllers/navigation.controller.dart';
 import './enums/screens.enum.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Must add this line.
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(800, 600),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+    await WindowManager.instance.setFullScreen(true);
+  });
+
   runApp(MultiProvider(
     providers: [
       ListenableProvider<NavigationController>(
@@ -24,6 +44,9 @@ void main() {
       ),
       ListenableProvider<SavesController>(
         create: (_) => SavesController(),
+      ),
+      ListenableProvider<SettingsController>(
+        create: (_) => SettingsController(),
       ),
       ListenableProvider<GamestateController>(
         create: (_) => GamestateController(),
@@ -80,6 +103,9 @@ List<Page> getPages(context) {
       break;
     case ScreenEnum.mainLoading:
       pageList.add(const MaterialPage(child: MainLoadingScreen()));
+      break;
+    case ScreenEnum.settings:
+      pageList.add(const MaterialPage(child: MainSettingsScreen()));
       break;
     case ScreenEnum.modeSelect:
       pageList.add(const MaterialPage(child: ModeSelectScreen()));

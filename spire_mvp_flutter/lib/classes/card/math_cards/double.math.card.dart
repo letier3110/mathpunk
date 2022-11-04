@@ -37,7 +37,7 @@ class DoubleMathCard extends PlayableCard {
         children: [
           HighlightDescriptionText(
               text:
-                  '${AppLocalizations.of(context)!.functionMechanic}${AppLocalizations.of(context)!.doubleEffect}'),
+                  '${AppLocalizations.of(context)!.functionMechanic}\n${AppLocalizations.of(context)!.doubleEffect}'),
         ],
       ),
     );

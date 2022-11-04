@@ -4,7 +4,7 @@ import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 
 const double hpBarHeight = 20;
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 
 class CharacterCard extends StatefulWidget {
   final PlayerCharacter character;

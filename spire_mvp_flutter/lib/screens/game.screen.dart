@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/components/game_header/game_header.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/screens/deck.screen.dart';
 import 'package:mathpunk_cardgame/screens/lore.screen.dart';
 import 'package:mathpunk_cardgame/screens/map.screen.dart';

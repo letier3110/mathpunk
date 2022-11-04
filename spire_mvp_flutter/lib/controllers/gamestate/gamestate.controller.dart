@@ -32,7 +32,7 @@ import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 import 'package:mathpunk_cardgame/pools/cards.pool.dart';
 import 'package:mathpunk_cardgame/pools/utils.dart';
 
-import '../classes/deck.dart';
+import '../../classes/deck.dart';
 
 enum HealPlayer {
   fullHeal,

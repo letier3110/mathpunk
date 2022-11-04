@@ -6,7 +6,7 @@ import 'package:mathpunk_cardgame/components/pawn/glow_effect.view.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
 import 'package:mathpunk_cardgame/utils/intension.util.dart';
 

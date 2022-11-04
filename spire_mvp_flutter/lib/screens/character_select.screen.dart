@@ -6,7 +6,7 @@ import 'package:mathpunk_cardgame/classes/player/player_character/priest_charact
 import 'package:mathpunk_cardgame/classes/player/player_character/barbarian_character.dart';
 import 'package:mathpunk_cardgame/components/character_card.dart';
 import 'package:mathpunk_cardgame/components/menu_embark_button.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/utils/character.util.dart';
 
 import '../components/menu_back_button.dart';

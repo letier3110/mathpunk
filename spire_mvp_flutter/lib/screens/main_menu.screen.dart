@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/components/create_profile.component.dart';
 // import 'package:mathpunk_cardgame/classes/card/cards_implementation.dart';
 // import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
 import '../components/main_menu_item.dart';

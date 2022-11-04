@@ -7,7 +7,7 @@ import 'package:mathpunk_cardgame/classes/sellable.dart';
 import 'package:mathpunk_cardgame/components/consumable.view.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
 import 'package:mathpunk_cardgame/components/relic.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 
 const double cardHeight = 300;
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 
 class HandView extends StatefulWidget {
   const HandView({Key? key}) : super(key: key);

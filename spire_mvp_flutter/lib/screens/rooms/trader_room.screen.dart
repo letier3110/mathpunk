@@ -6,7 +6,7 @@ import 'package:mathpunk_cardgame/components/game_back_button.dart';
 import 'package:mathpunk_cardgame/components/game_forward_button.dart';
 import 'package:mathpunk_cardgame/components/room/trader.view.dart';
 import 'package:mathpunk_cardgame/components/room/trader_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate/gamestate.controller.dart';
 
 class TraderRoomScreen extends StatefulWidget {
   final TradeRoom room;

@@ -35,6 +35,8 @@ class Status {
 
   bool isShowStatus() => stack > 0;
 
+  bool isShowStack() => true;
+
   void setStack(double stack) {
     this.stack = stack;
   }

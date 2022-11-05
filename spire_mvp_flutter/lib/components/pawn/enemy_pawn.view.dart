@@ -82,8 +82,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               gameState.selectingTarget!.mana <=
                   gameState.playerCharacter!.mana)
             FutureBuilder(
-              future:
-                  loadImage('assets/goblin.png', width ~/ 3.9, width ~/ 3.9),
+              future: loadImage('assets/goblin.png', width ~/ 3.9, width ~/ 5),
               builder: (BuildContext context, AsyncSnapshot<ui.Image> image) {
                 if (image.hasData) {
                   return GlowEffectPawn(image: image.data!); // image is ready
@@ -93,13 +92,24 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               },
             ),
           Container(
-            // padding: const EdgeInsets.all(8),
             margin: const EdgeInsets.fromLTRB(8, 8, 8, 72),
             height: width / 4,
             width: width / 4,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/goblin.png'), fit: BoxFit.cover),
+          ),
+          Container(
+            // padding: const EdgeInsets.all(8),
+            height: width / 5,
+            width: width / 4,
+            child: Center(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Image.asset(
+                  'assets/goblin.png',
+                  height: width / 5,
+                  width: width / 4,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
             ),
             // child: Center(
             //   child: Text(
@@ -140,7 +150,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                 right: 0,
                 child: SizedBox(
                   width: width / 4,
-                  height: 64,
+                  height: 64 + (width / 20),
                   child: Center(
                     child: GridView.count(
                       crossAxisCount: 8,
@@ -157,7 +167,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                 )),
           if (isPlayerAlive && _isShowTooltip && selectedStatus != null)
             Positioned(
-              bottom: 72,
+              bottom: 72 + (width / 20),
               left: 0,
               right: 0,
               child: Container(
@@ -181,7 +191,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
             ),
           if (isPlayerAlive)
             Positioned(
-                bottom: 64,
+                bottom: 64 + (width / 20),
                 left: 0,
                 right: 0,
                 child: Stack(

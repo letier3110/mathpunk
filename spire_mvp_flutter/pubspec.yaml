@@ -44,6 +44,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
   path_provider: ^2.0.11
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
@@ -126,3 +127,4 @@ flutter:
     - assets/
     - assets/cards/
     - assets/relics/
+    - assets/chess/

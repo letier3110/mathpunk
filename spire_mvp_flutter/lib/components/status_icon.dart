@@ -41,12 +41,15 @@ class StatusIconView extends State<StatusIcon> {
           color: widget.status.isStatusPositive() ? Colors.green : Colors.red,
           child: Center(
               child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.status.stack.toInt().toString(),
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600)),
+              if (widget.status.isShowStack())
+                Text(widget.status.stack.toInt().toString(),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),
               getStatusIcon(widget.status)
             ],
           )),

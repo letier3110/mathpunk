@@ -57,13 +57,24 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
         onTap: onTapHandler,
         child: Stack(children: [
           Container(
-            // padding: const EdgeInsets.all(8),
             margin: const EdgeInsets.fromLTRB(8, 8, 8, 72),
             height: width / 4,
             width: width / 4,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/hero.png'), fit: BoxFit.cover),
+          ),
+          Container(
+            // padding: const EdgeInsets.all(8),
+            height: width / 5,
+            width: width / 4,
+            child: Center(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Image.asset(
+                  'assets/hero.png',
+                  height: width / 5,
+                  width: width / 4,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
             ),
             // child: Center(
             //   child: Text(
@@ -83,7 +94,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                 right: 0,
                 child: SizedBox(
                   width: width / 4,
-                  height: 64,
+                  height: 64 + (width / 20),
                   child: Center(
                     child: GridView.count(
                       crossAxisCount: 8,
@@ -100,7 +111,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                 )),
           if (isPlayerAlive && _isShowTooltip && selectedStatus != null)
             Positioned(
-              bottom: 72,
+              bottom: 72 + (width / 20),
               left: 0,
               right: 0,
               child: Container(
@@ -124,7 +135,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
             ),
           if (isPlayerAlive)
             Positioned(
-                bottom: 64,
+                bottom: 64 + (width / 20),
                 left: 0,
                 right: 0,
                 child: Stack(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class HighlightText extends StatelessWidget {
   final String? text;
+  final TextAlign textAlign;
   final RegExp highlightRegex;
   final TextStyle highlightStyle;
   final TextStyle? nonHighlightStyle;
@@ -12,6 +13,7 @@ class HighlightText extends StatelessWidget {
     required this.highlightRegex,
     required this.highlightStyle,
     this.nonHighlightStyle,
+    this.textAlign = TextAlign.center,
   }) : super(key: key);
 
   @override
@@ -51,6 +53,7 @@ class HighlightText extends StatelessWidget {
         style: nonHighlightStyle ?? DefaultTextStyle.of(context).style,
         children: spans,
       ),
+      textAlign: textAlign,
     );
   }
 
@@ -72,7 +75,7 @@ class HighlightDescriptionText extends HighlightText {
           key: key,
           text: text,
           highlightRegex: RegExp(
-              r'Block|Strength|Weak|Vulnerable|Exhaust|Energy|Unplayable|Function|Upgrade|Precision'),
+              r'Block|Strength|Dexterity|Weak|Vulnerable|Exhaust|Energy|Unplayable|Function|Upgrade|Precision'),
           highlightStyle: TextStyle(
               color: Colors.yellow,
               fontWeight: FontWeight.bold,

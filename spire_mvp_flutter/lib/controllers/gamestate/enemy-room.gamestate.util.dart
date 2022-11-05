@@ -24,15 +24,15 @@ void enemyRoomEnter({
   required PlayerCharacter playerCharacter,
 }) {
   if (currentRoom.runtimeType == EnemyRoom) {
-    StrengthStatus ss = StrengthStatus();
-    ss.addStack(5);
-    DexterityStatus ds = DexterityStatus();
-    ds.addStack(5);
-    WeakStatus ws = WeakStatus();
-    ws.addStack(5);
-    playerCharacter.addStatus(ss);
-    playerCharacter.addStatus(ds);
-    playerCharacter.addStatus(ws);
+    // StrengthStatus ss = StrengthStatus();
+    // ss.addStack(5);
+    // DexterityStatus ds = DexterityStatus();
+    // ds.addStack(5);
+    // WeakStatus ws = WeakStatus();
+    // ws.addStack(5);
+    // playerCharacter.addStatus(ss);
+    // playerCharacter.addStatus(ds);
+    // playerCharacter.addStatus(ws);
     var deck = playerCharacter.getDeck();
     deck.initialLoadDrawPile();
 

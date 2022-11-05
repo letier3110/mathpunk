@@ -19,10 +19,11 @@ class Status {
     description = description;
   }
 
-  StatelessWidget getStatusName() {
+  StatelessWidget getStatusName(BuildContext context) {
     return Text(
       name,
-      style: const TextStyle(color: Colors.white, fontSize: 16),
+      style: const TextStyle(
+          color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 
@@ -30,12 +31,21 @@ class Status {
     this.stack += stack;
   }
 
+  bool isStatusPositive() => true;
+
+  bool isShowStatus() => stack > 0;
+
+  bool isShowStack() => true;
+
   void setStack(double stack) {
     this.stack = stack;
   }
 
-  StatelessWidget getStatusDescription() {
-    return HighlightDescriptionText(text: description);
+  StatelessWidget getStatusDescription(BuildContext context) {
+    return HighlightDescriptionText(
+      text: description,
+      fontSize: 14,
+    );
   }
 
   factory Status.fromJson(dynamic json) {

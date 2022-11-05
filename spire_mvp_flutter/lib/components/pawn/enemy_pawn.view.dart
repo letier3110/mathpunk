@@ -2,7 +2,9 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/pawn/glow_effect.view.dart';
+import 'package:mathpunk_cardgame/components/status_icon.dart';
 import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
@@ -27,9 +29,8 @@ Future<ui.Image> loadImage(String imagePath, int width, int height) async {
   return image;
 }
 
-const double hpBarHeight = 20;
-
 class EnemyPawnView extends StatefulWidget {
+  final double hpBarHeight = 20;
   final Enemy enemy;
   const EnemyPawnView({required this.enemy, Key? key}) : super(key: key);
 
@@ -38,6 +39,23 @@ class EnemyPawnView extends StatefulWidget {
 }
 
 class EnemyPawnViewView extends State<EnemyPawnView> {
+  bool _isShowTooltip = false;
+  Status? selectedStatus;
+
+  void _showTooltip(Status status) {
+    setState(() {
+      _isShowTooltip = true;
+      selectedStatus = status;
+    });
+  }
+
+  void _hideTooltip() {
+    setState(() {
+      _isShowTooltip = false;
+      selectedStatus = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
@@ -46,6 +64,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
     var maxhp = widget.enemy.getMaxHealth();
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    List<Status> statuses = widget.enemy.getStatuses();
 
     void onTapHandler() {
       gameState.selectTarget(widget.enemy);
@@ -54,7 +73,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
     double width = MediaQuery.of(context).size.width;
 
     return Positioned(
-      top: 100,
+      top: 60,
       right: width / 6,
       child: GestureDetector(
         onTap: onTapHandler,
@@ -63,8 +82,7 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               gameState.selectingTarget!.mana <=
                   gameState.playerCharacter!.mana)
             FutureBuilder(
-              future:
-                  loadImage('assets/goblin.png', width ~/ 3.9, width ~/ 3.9),
+              future: loadImage('assets/goblin.png', width ~/ 3.9, width ~/ 5),
               builder: (BuildContext context, AsyncSnapshot<ui.Image> image) {
                 if (image.hasData) {
                   return GlowEffectPawn(image: image.data!); // image is ready
@@ -74,12 +92,24 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
               },
             ),
           Container(
-            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.fromLTRB(8, 8, 8, 72),
             height: width / 4,
             width: width / 4,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/goblin.png'), fit: BoxFit.cover),
+          ),
+          Container(
+            // padding: const EdgeInsets.all(8),
+            height: width / 5,
+            width: width / 4,
+            child: Center(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Image.asset(
+                  'assets/goblin.png',
+                  height: width / 5,
+                  width: width / 4,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
             ),
             // child: Center(
             //   child: Text(
@@ -118,14 +148,61 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                 bottom: 0,
                 left: 0,
                 right: 0,
+                child: SizedBox(
+                  width: width / 4,
+                  height: 64 + (width / 20),
+                  child: Center(
+                    child: GridView.count(
+                      crossAxisCount: 8,
+                      children: statuses
+                          .where((element) => element.isShowStatus())
+                          .map((e) => StatusIcon(
+                                status: e,
+                                onEnter: (event) => _showTooltip(e),
+                                onExit: (event) => _hideTooltip(),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                )),
+          if (isPlayerAlive && _isShowTooltip && selectedStatus != null)
+            Positioned(
+              bottom: 72 + (width / 20),
+              left: 0,
+              right: 0,
+              child: Container(
+                width: width / 6,
+                height: width / 6,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/menu_bg_2.png'),
+                      fit: BoxFit.fill),
+                ),
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                  child: Column(children: [
+                    const Spacer(),
+                    selectedStatus!.getStatusName(context),
+                    selectedStatus!.getStatusDescription(context),
+                    const Spacer(),
+                  ]),
+                ),
+              ),
+            ),
+          if (isPlayerAlive)
+            Positioned(
+                bottom: 64 + (width / 20),
+                left: 0,
+                right: 0,
                 child: Stack(
                   children: [
                     Container(
                         padding: const EdgeInsets.all(2),
-                        height: hpBarHeight,
+                        height: widget.hpBarHeight,
                         decoration: BoxDecoration(
                           color: Colors.black,
-                          borderRadius: BorderRadius.circular(hpBarHeight),
+                          borderRadius:
+                              BorderRadius.circular(widget.hpBarHeight),
                           // border: Border.all(color: Colors.white, width: 2)
                         )),
                     Row(
@@ -134,31 +211,34 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
                           flex: ((hp / maxhp) * 100).toInt(),
                           child: Container(
                             padding: const EdgeInsets.all(2),
-                            height: hpBarHeight,
+                            height: widget.hpBarHeight,
                             decoration: BoxDecoration(
                               color: Colors.redAccent,
-                              borderRadius: BorderRadius.circular(hpBarHeight),
+                              borderRadius:
+                                  BorderRadius.circular(widget.hpBarHeight),
                               // border: Border.all(color: Colors.white, width: 2)
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: (((maxhp - hp) / maxhp) * 100).toInt(),
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            height: hpBarHeight,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(hpBarHeight),
-                              // border: Border.all(color: Colors.white, width: 2)
+                        if (hp != maxhp)
+                          Expanded(
+                            flex: (((maxhp - hp) / maxhp) * 100).toInt(),
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              height: widget.hpBarHeight,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius:
+                                    BorderRadius.circular(widget.hpBarHeight),
+                                // border: Border.all(color: Colors.white, width: 2)
+                              ),
                             ),
-                          ),
-                        )
+                          )
                       ],
                     ),
                     Container(
                       padding: const EdgeInsets.all(2),
-                      height: hpBarHeight,
+                      height: widget.hpBarHeight,
                       child: Center(
                         child: Text(
                           '$hp / $maxhp',

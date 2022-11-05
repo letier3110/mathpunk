@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
@@ -32,7 +30,6 @@ String getRoomName(Room room) {
 }
 
 Widget getRoomIcon(Room room) {
-  var id = room.id;
   switch (room.runtimeType) {
     case EnemyRoom:
       if (room.id.contains('boss')) {

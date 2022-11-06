@@ -30,6 +30,9 @@ class MathMultiplierScoreStatus extends Status {
   @override
   bool isShowStatus() => false;
 
+  @override
+  bool isShowStack() => false;
+
   factory MathMultiplierScoreStatus.fromJson(dynamic json) {
     return MathMultiplierScoreStatus();
   }

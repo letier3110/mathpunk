@@ -12,20 +12,6 @@ class CharacterDeck extends StatefulWidget {
 }
 
 class CharacterDeckView extends State<CharacterDeck> {
-  bool _hovered = false;
-
-  void onEnterHandler(PointerEnterEvent p) {
-    setState(() {
-      _hovered = true;
-    });
-  }
-
-  void onExitHandler(PointerExitEvent p) {
-    setState(() {
-      _hovered = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
@@ -44,59 +30,45 @@ class CharacterDeckView extends State<CharacterDeck> {
       top: 0,
       bottom: 0,
       right: 100,
-      child: MouseRegion(
-        onEnter: onEnterHandler,
-        onExit: onExitHandler,
-        child: Container(
-          decoration: _hovered
-              ? const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.green,
-                      blurRadius: 20.0,
-                      spreadRadius: 0.0,
-                    )
-                  ],
-                )
-              : const BoxDecoration(),
-          child: Stack(children: [
-            GestureDetector(
-              onTap: onTapHandler,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                width: 90,
-                color: Colors.black,
-                child: Center(
-                  child: Text(
-                    AppLocalizations.of(context)!.deckText,
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
-                  ),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/menu_bg_2.png'), fit: BoxFit.fill),
+        ),
+        child: Stack(children: [
+          GestureDetector(
+            onTap: onTapHandler,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              width: 90,
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.deckText,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
-            Positioned(
-                bottom: -12,
-                right: -12,
-                child: SizedBox(
-                  width: 40,
-                  height: 50,
-                  child: Center(
-                    child: Text(
-                      deckLength.toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ))
-          ]),
-        ),
+          ),
+          Positioned(
+              bottom: 6,
+              right: 6,
+              child: SizedBox(
+                width: 70,
+                height: 21,
+                child: Text(
+                  deckLength.toString(),
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ))
+        ]),
       ),
     );
   }

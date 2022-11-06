@@ -12,20 +12,6 @@ class HeaderPause extends StatefulWidget {
 }
 
 class HeaderPauseView extends State<HeaderPause> {
-  bool _hovered = false;
-
-  void onEnterHandler(PointerEnterEvent p) {
-    setState(() {
-      _hovered = true;
-    });
-  }
-
-  void onExitHandler(PointerExitEvent p) {
-    setState(() {
-      _hovered = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
@@ -34,39 +20,25 @@ class HeaderPauseView extends State<HeaderPause> {
       bottom: 0,
       right: 0,
       child: Container(
-        decoration: _hovered
-            ? const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.green,
-                    blurRadius: 20.0,
-                    spreadRadius: 0.0,
-                  )
-                ],
-              )
-            : const BoxDecoration(),
-        child: MouseRegion(
-          onEnter: onEnterHandler,
-          onExit: onExitHandler,
-          child: GestureDetector(
-            onTap: () => {
-              gameState.inPause
-                  ? gameState.exitPause()
-                  : gameState.enterPause(),
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              width: 90,
-              color: Colors.black,
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.pauseText,
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w600),
-                ),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/menu_bg_2.png'), fit: BoxFit.fill),
+        ),
+        child: GestureDetector(
+          onTap: () => {
+            gameState.inPause ? gameState.exitPause() : gameState.enterPause(),
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            width: 90,
+            child: Center(
+              child: Text(
+                AppLocalizations.of(context)!.pauseText,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),

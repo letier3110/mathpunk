@@ -12,20 +12,6 @@ class HeaderMap extends StatefulWidget {
 }
 
 class HeaderMapView extends State<HeaderMap> {
-  bool _hovered = false;
-
-  void onEnterHandler(PointerEnterEvent p) {
-    setState(() {
-      _hovered = true;
-    });
-  }
-
-  void onExitHandler(PointerExitEvent p) {
-    setState(() {
-      _hovered = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);
@@ -43,40 +29,27 @@ class HeaderMapView extends State<HeaderMap> {
       top: 0,
       bottom: 0,
       right: 200,
-      child: MouseRegion(
-        onEnter: onEnterHandler,
-        onExit: onExitHandler,
-        child: Container(
-          decoration: _hovered
-              ? const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.green,
-                      blurRadius: 20.0,
-                      spreadRadius: 0.0,
-                    )
-                  ],
-                )
-              : const BoxDecoration(),
-          child: GestureDetector(
-            onTap: onTapHandler,
-            child: Container(
-              width: 90,
-              padding: const EdgeInsets.all(8),
-              color: Colors.black,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.mapText,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ]),
-            ),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/menu_bg_2.png'), fit: BoxFit.fill),
+        ),
+        child: GestureDetector(
+          onTap: onTapHandler,
+          child: Container(
+            width: 90,
+            padding: const EdgeInsets.all(8),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                AppLocalizations.of(context)!.mapText,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600),
+              ),
+            ]),
           ),
         ),
       ),

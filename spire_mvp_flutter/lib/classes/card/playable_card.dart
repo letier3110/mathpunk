@@ -91,7 +91,7 @@ class PlayableCard {
               : currentMana > mana
                   ? Colors.redAccent
                   : Colors.white,
-          fontSize: 16),
+          fontSize: 14),
     );
   }
 

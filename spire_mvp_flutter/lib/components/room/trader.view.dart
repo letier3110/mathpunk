@@ -227,17 +227,25 @@ class TraderViewView extends State<TraderView> {
                               children: widget.room.relics
                                   .map((sellable) => SizedBox(
                                       width: width * 0.09,
-                                      child: Column(
-                                        children: [
-                                          if (sellable.inStock)
-                                            RelicView(
-                                              relic: sellable.relic,
-                                              onTap: () =>
-                                                  {onTapHandler(sellable)},
-                                            ),
-                                          if (sellable.inStock)
-                                            sellable.getCostDescription()
-                                        ],
+                                      child: Container(
+                                        margin: const EdgeInsets.all(4),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFF222222),
+                                            borderRadius:
+                                                BorderRadius.circular(4.0)),
+                                        child: Column(
+                                          children: [
+                                            if (sellable.inStock)
+                                              RelicView(
+                                                relic: sellable.relic,
+                                                onTap: () =>
+                                                    {onTapHandler(sellable)},
+                                              ),
+                                            if (sellable.inStock)
+                                              sellable.getCostDescription()
+                                          ],
+                                        ),
                                       )))
                                   .toList(),
                             ),
@@ -245,16 +253,24 @@ class TraderViewView extends State<TraderView> {
                               children: widget.room.items
                                   .map((sellable) => SizedBox(
                                       width: width * 0.09,
-                                      child: Column(
-                                        children: [
-                                          if (sellable.inStock)
-                                            ConsumableView(
-                                                item: sellable.item,
-                                                onTap: () =>
-                                                    {onTapHandler(sellable)}),
-                                          if (sellable.inStock)
-                                            sellable.getCostDescription()
-                                        ],
+                                      child: Container(
+                                        margin: const EdgeInsets.all(4),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFF222222),
+                                            borderRadius:
+                                                BorderRadius.circular(4.0)),
+                                        child: Column(
+                                          children: [
+                                            if (sellable.inStock)
+                                              ConsumableView(
+                                                  item: sellable.item,
+                                                  onTap: () =>
+                                                      {onTapHandler(sellable)}),
+                                            if (sellable.inStock)
+                                              sellable.getCostDescription()
+                                          ],
+                                        ),
                                       )))
                                   .toList(),
                             ),

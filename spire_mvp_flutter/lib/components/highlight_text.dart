@@ -70,7 +70,7 @@ class HighlightDescriptionText extends HighlightText {
   HighlightDescriptionText({
     Key? key,
     required String text,
-    double fontSize = 16,
+    double fontSize = 14,
   }) : super(
           key: key,
           text: text,
@@ -80,6 +80,6 @@ class HighlightDescriptionText extends HighlightText {
               color: Colors.yellow,
               fontWeight: FontWeight.bold,
               fontSize: fontSize),
-          nonHighlightStyle: const TextStyle(color: Colors.white, fontSize: 16),
+          nonHighlightStyle: TextStyle(color: Colors.white, fontSize: fontSize),
         );
 }

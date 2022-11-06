@@ -1,6 +1,8 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/components/room/chest.view.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mathpunk_cardgame/components/room/chest.view.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/components/room/card_reward.view.dart';
 import 'package:mathpunk_cardgame/components/room/card_to_draw.view.dart';
@@ -26,6 +28,31 @@ class EnemyRoomScreen extends StatefulWidget {
 }
 
 class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
+  final player = AudioPlayer();
+
+  void playBattleTheme() async {
+    await player.setSource(AssetSource('ambient/battle_2.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
+  }
+
+  void stopTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playBattleTheme();
+  }
+
+  @override
+  void dispose() {
+    stopTheme();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     GamestateController gameState = Provider.of<GamestateController>(context);

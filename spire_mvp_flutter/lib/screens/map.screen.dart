@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/room/room.dart';
 import 'package:mathpunk_cardgame/components/room_card.dart';
@@ -30,6 +31,31 @@ class RoomTuple {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  final player = AudioPlayer();
+
+  void playMapTheme() async {
+    await player.setSource(AssetSource('ambient/map.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
+  }
+
+  void stopTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playMapTheme();
+  }
+
+  @override
+  void dispose() {
+    stopTheme();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<RoomSlice> roomsCoords = [];

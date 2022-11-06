@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
+
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
 import 'package:mathpunk_cardgame/classes/deck.dart';
@@ -19,6 +21,30 @@ class MindBloomView extends StatefulWidget {
 
 class _MindBloomViewView extends State<MindBloomView> {
   bool canLeave = false;
+  final player = AudioPlayer();
+
+  void playMapTheme() async {
+    await player.setSource(AssetSource('ambient/event.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
+  }
+
+  void stopTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playMapTheme();
+  }
+
+  @override
+  void dispose() {
+    stopTheme();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +52,7 @@ class _MindBloomViewView extends State<MindBloomView> {
 
     void warTapHandler() {
       // "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
-      gameState.changeCurrentRoom(generateBossRoom());
+      gameState.changeCurrentRoom(generateBossRoom(room: widget.room));
     }
 
     void richTapHandler() {

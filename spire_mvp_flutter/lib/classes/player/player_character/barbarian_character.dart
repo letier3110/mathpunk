@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
+import 'package:mathpunk_cardgame/classes/card/defend.card.dart';
 import 'package:mathpunk_cardgame/classes/card/strike.card.dart';
 import 'package:mathpunk_cardgame/classes/items/block.potion.dart';
 import 'package:mathpunk_cardgame/classes/items/cunning.potion.dart';
@@ -28,6 +29,9 @@ class Barbarian extends PlayerCharacter {
       StrikeCard(),
       StrikeCard(),
       StrikeCard(),
+      DefendCard(),
+      DefendCard(),
+      DefendCard(),
       BloodForBloodCard(),
       AngerCard(),
       AngerUpgradeCard()

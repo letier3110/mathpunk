@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,43 +30,46 @@ class CharacterDeckView extends State<CharacterDeck> {
       top: 0,
       bottom: 0,
       right: 100,
-      child: Stack(children: [
-        GestureDetector(
-          onTap: onTapHandler,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            width: 80,
-            color: Colors.black,
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.deckText,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/menu_bg_2.png'), fit: BoxFit.fill),
         ),
-        Positioned(
-            bottom: -12,
-            right: -12,
-            child: SizedBox(
-              width: 40,
-              height: 50,
+        child: Stack(children: [
+          GestureDetector(
+            onTap: onTapHandler,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              width: 90,
               child: Center(
                 child: Text(
-                  deckLength.toString(),
-                  textAlign: TextAlign.center,
+                  AppLocalizations.of(context)!.deckText,
+                  textAlign: TextAlign.left,
                   style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ),
-            ))
-      ]),
+            ),
+          ),
+          Positioned(
+              bottom: 6,
+              right: 6,
+              child: SizedBox(
+                width: 70,
+                height: 21,
+                child: Text(
+                  deckLength.toString(),
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ))
+        ]),
+      ),
     );
   }
 }

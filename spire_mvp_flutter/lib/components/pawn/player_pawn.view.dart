@@ -111,12 +111,12 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
                 )),
           if (isPlayerAlive && _isShowTooltip && selectedStatus != null)
             Positioned(
-              bottom: 72 + (width / 20),
+              bottom: 120 + (width / 20),
               left: 0,
               right: 0,
               child: Container(
-                width: width / 6,
-                height: width / 6,
+                width: width / 7,
+                height: width / 7,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/menu_bg_2.png'),

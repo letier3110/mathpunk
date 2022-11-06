@@ -1,6 +1,6 @@
 ## Mathpunk
 
-Is a fictional setting for a world, where magic have a methematical origin
+Is a fictional setting for a world, where magic have a mathematical origin
 
 ### Inner lore navigation
 

@@ -24,7 +24,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   final player = AudioPlayer();
 
   void playMenuTheme() async {
-    await player.setSource(AssetSource('ambient/main_menu.mp3'));
+    await player.setSource(AssetSource('ambient/main_menu_2.mp3'));
     await player.setReleaseMode(ReleaseMode.loop);
     await player.resume();
   }

@@ -47,7 +47,7 @@ class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void traderPawnPress() {
       setState(() {

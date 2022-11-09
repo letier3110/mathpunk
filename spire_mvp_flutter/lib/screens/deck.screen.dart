@@ -15,7 +15,7 @@ class DeckScreen extends ConsumerStatefulWidget {
 class _DeckScreenState extends ConsumerState<DeckScreen> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final inDeck = ref.watch(gamestateProvider.select((value) => value.inDeck));
 
     void onCardTap(PlayableCard card) {
       // gameState.openLoreCard(card);
@@ -51,7 +51,7 @@ class _DeckScreenState extends ConsumerState<DeckScreen> {
                       child: GridView.count(
                         crossAxisCount: 4,
                         childAspectRatio: 20 / 31,
-                        children: gameState.inDeck
+                        children: inDeck
                             .map((e) => PlayableCardComponent(
                                 card: e,
                                 glow: false,

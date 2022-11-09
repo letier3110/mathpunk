@@ -14,7 +14,8 @@ class LoreScreen extends ConsumerStatefulWidget {
 class _LoreScreenState extends ConsumerState<LoreScreen> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final loreCard =
+        ref.watch(gamestateProvider.select((value) => value.loreCard));
 
     void onCardTap() {
       ref.watch(gamestateProvider.notifier).closeLoreCard();
@@ -40,7 +41,7 @@ class _LoreScreenState extends ConsumerState<LoreScreen> {
                             border: Border.all(
                                 color: Colors.deepOrangeAccent, width: 1)),
                         child: PlayableCardComponent(
-                          card: gameState.loreCard!,
+                          card: loreCard!,
                           glow: false,
                           animate: false,
                           onTap: onCardTap,

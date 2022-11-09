@@ -19,36 +19,43 @@ class GameScreen extends ConsumerStatefulWidget {
 class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-
-    bool inDeck = gameState.inDeck.isNotEmpty;
+    final gameMap =
+        ref.watch(gamestateProvider.select((value) => value.gameMap));
+    final currentRoom =
+        ref.watch(gamestateProvider.select((value) => value.currentRoom));
+    final inMap = ref.watch(gamestateProvider.select((value) => value.inMap));
+    final loreCard =
+        ref.watch(gamestateProvider.select((value) => value.loreCard));
+    final inPause =
+        ref.watch(gamestateProvider.select((value) => value.inPause));
+    final inDeck =
+        ref.watch(gamestateProvider.select((value) => value.inDeck)).isNotEmpty;
 
     return Scaffold(
       body: Stack(children: [
-        if ((gameState.inMap == true || gameState.currentRoom == null) &&
-            gameState.inDeck.isEmpty)
+        if ((inMap == true || currentRoom == null) && inDeck == false)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: MapScreen(
-              gameMap: gameState.gameMap,
+              gameMap: gameMap,
             ),
           ),
-        if (gameState.inMap == false && gameState.currentRoom != null)
+        if (inMap == false && currentRoom != null)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
-            child: getRoomComponent(gameState.currentRoom!),
+            child: getRoomComponent(currentRoom),
           ),
         if (inDeck)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: const DeckScreen(),
           ),
-        if (gameState.loreCard != null)
+        if (loreCard != null)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: const LoreScreen(),
           ),
-        if (gameState.inPause)
+        if (inPause)
           Container(
             margin: const EdgeInsets.fromLTRB(0, 96, 0, 0),
             child: const PauseScreen(),

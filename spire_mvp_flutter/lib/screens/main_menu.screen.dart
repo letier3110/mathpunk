@@ -61,7 +61,8 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     final saves = ref.watch(savesProvider);
-    final gameState = ref.watch(gamestateProvider);
+    final gameMapIsEmpty =
+        ref.watch(gamestateProvider.select((value) => value.gameMap.isEmpty));
 
     double width = MediaQuery.of(context).size.width;
 
@@ -109,7 +110,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                       Container(
                         padding: const EdgeInsets.all(20),
                         child: Column(children: [
-                          if (gameState.gameMap.isNotEmpty)
+                          if (gameMapIsEmpty == false)
                             MainMenuItem(
                               text: Text(
                                 AppLocalizations.of(context)!.continueRun,
@@ -117,7 +118,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
                               ),
                               screen: ScreenEnum.game,
                             ),
-                          if (gameState.gameMap.isEmpty)
+                          if (gameMapIsEmpty)
                             MainMenuItem(
                               text: Text(
                                 AppLocalizations.of(context)!.play,

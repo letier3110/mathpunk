@@ -56,15 +56,20 @@ class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final playerCharacter = ref.watch(playerCharacterProvider);
+    final isOpenedChest = ref.watch(
+        gamestateProvider.select((value) => value.isOpenedChest != null));
+    final selectingCardReward = ref
+        .watch(gamestateProvider.select((value) => value.selectingCardReward));
+    final selectingTarget =
+        ref.watch(gamestateProvider.select((value) => value.selectingTarget));
+    final isPlayerAlive =
+        ref.watch(playerCharacterProvider.select((value) => value!.health > 0));
+    final currentRoom =
+        ref.watch(gamestateProvider.select((value) => value.currentRoom));
+    final isNoEnemies = currentRoom!.enemies.isEmpty;
 
-    bool isPlayerAlive = playerCharacter!.health > 0;
-    bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
-    bool isSelectingCard = gameState.selectingTarget != null &&
-        gameState.selectingTarget!.targetType == TargetEnum.cardTarget;
-    bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
-    bool isOpenedChest = gameState.isOpenedChest != null;
+    bool isSelectingCard = selectingTarget != null &&
+        selectingTarget.targetType == TargetEnum.cardTarget;
 
     return Container(
         // color: const Color(0xFF222222),
@@ -85,7 +90,7 @@ class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
                 children: widget.room.rewards
                     .map((entry) => ChestView(reward: entry))
                     .toList()),
-          if (isOpenedChest && !isSelectingCardReward && isNoEnemies)
+          if (isOpenedChest && selectingCardReward.isEmpty && isNoEnemies)
             Stack(
                 children: widget.room.rewards
                     .asMap()
@@ -93,8 +98,8 @@ class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
                     .map((entry) => RewardsScreen(
                         rewardIndex: entry.key, reward: entry.value))
                     .toList()),
-          if (isSelectingCardReward)
-            CardReward(cards: gameState.selectingCardReward),
+          if (selectingCardReward.isNotEmpty)
+            CardReward(cards: selectingCardReward),
           if (isPlayerAlive && !isNoEnemies) const PlayerPawnView(),
           if (!isPlayerAlive) const GameOver(),
           if (isPlayerAlive && !isNoEnemies) const EndturnView(),
@@ -104,8 +109,8 @@ class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
           if (isPlayerAlive && !isNoEnemies) const DiscardPileView(),
           if (isSelectingCard)
             CardToDraw(
-                cards: gameState.selectingTarget!.getSelectableCards(),
-                currentCard: gameState.selectingTarget!)
+                cards: selectingTarget.getSelectableCards(),
+                currentCard: selectingTarget)
         ]));
   }
 }

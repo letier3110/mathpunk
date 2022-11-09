@@ -79,6 +79,11 @@ class GamestateNotifierInterface {
   int? selectingTargetCardId;
   Enemy? selectedTarget;
   String? playerName;
+
+  void updateRoom(Room room) {
+    currentRoom = room;
+    visitedRooms.add(room);
+  }
 }
 
 class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
@@ -419,14 +424,12 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.playerCharacter!.resetRoundStatuses();
     state.playerCharacter!.enterRoom();
     if (state.currentRoom == null) {
-      state.currentRoom = room;
-      state.visitedRooms.add(room);
+      state.updateRoom(room);
     } else if ((state.currentRoom != null &&
         state.currentRoom!.getCanLeaveRoom() &&
         // state.currentRoom!.enemies.isEmpty &&
         getNextAvailableRooms().contains(room))) {
-      state.currentRoom = room;
-      state.visitedRooms.add(room);
+      state.updateRoom(room);
     }
 
     state.isOpenedChest = null;

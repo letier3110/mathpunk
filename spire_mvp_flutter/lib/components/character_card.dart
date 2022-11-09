@@ -24,22 +24,21 @@ class CharacterCard extends ConsumerStatefulWidget {
 class CharacterCardView extends ConsumerState<CharacterCard> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final gameState = ref.watch(gamestateProvider.notifier);
+    // final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
     var isPcEqualsWidgetPc =
-        gameState.playerCharacter?.name == widget.character.name;
+        gameState.state.playerCharacter?.name == widget.character.name;
 
     void onTapHandler() {
       if (widget.disabled) {
         return;
       }
       if (isPcEqualsWidgetPc) {
-        ref.read(gamestateProvider.notifier).deselectPlayerCharacter();
+        gameState.deselectPlayerCharacter();
         return;
       }
-      ref
-          .read(gamestateProvider.notifier)
-          .selectPlayerCharacter(widget.character);
+      gameState.selectPlayerCharacter(widget.character);
       var player = Player();
       player.selectCharacter(widget.character);
     }

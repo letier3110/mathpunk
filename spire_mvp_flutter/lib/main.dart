@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/screens/character_select.screen.dart';
+import 'package:mathpunk_cardgame/screens/character_select/character_select.screen.dart';
 import 'package:mathpunk_cardgame/screens/game.screen.dart';
 import 'package:mathpunk_cardgame/screens/main_loading.screen.dart';
 import 'package:mathpunk_cardgame/screens/mode_select.screen.dart';

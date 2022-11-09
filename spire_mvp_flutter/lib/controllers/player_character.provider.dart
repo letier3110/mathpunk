@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathpunk_cardgame/classes/player/player.dart';
 
+import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 
 final playerCharacterProvider =

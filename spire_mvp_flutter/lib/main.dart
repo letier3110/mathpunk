@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathpunk_cardgame/screens/audio.screen.dart';
 
 import 'package:mathpunk_cardgame/screens/character_select/character_select.screen.dart';
 import 'package:mathpunk_cardgame/screens/game.screen.dart';
@@ -16,20 +17,6 @@ import 'controllers/navigation.provider.dart';
 import './enums/screens.enum.dart';
 
 void main() {
-  // runApp(MultiProvider(
-  //   providers: [
-  //     ListenableProvider<NavigationController>(
-  //       create: (_) => NavigationController(),
-  //     ),
-  //     ListenableProvider<SavesController>(
-  //       create: (_) => SavesController(),
-  //     ),
-  //     ListenableProvider<GamestateController>(
-  //       create: (_) => GamestateController(),
-  //     )
-  //   ],
-  //   child: const MyApp(),
-  // ));
   runApp(const ProviderScope(
     child: MyApp(),
   ));
@@ -47,28 +34,32 @@ class MyApp extends ConsumerWidget {
     }
 
     return MaterialApp(
-      title: 'Mathpunk: card game',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''), // English, no country code
-        Locale('pt', ''),
-        Locale('uk', ''),
-      ],
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Navigator(
-        pages: getPages(context, ref),
-        onPopPage: (route, result) {
-          return route.didPop(result);
-        },
-      ),
-    );
+        title: 'Mathpunk: card game',
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''), // English, no country code
+          Locale('pt', ''),
+          Locale('uk', ''),
+        ],
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Stack(
+          children: [
+            const AudioScreen(),
+            Navigator(
+              pages: getPages(context, ref),
+              onPopPage: (route, result) {
+                return route.didPop(result);
+              },
+            ),
+          ],
+        ));
   }
 }
 

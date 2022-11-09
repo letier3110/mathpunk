@@ -21,19 +21,6 @@ class MainMenuScreen extends ConsumerStatefulWidget {
 }
 
 class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
-  final player = AudioPlayer();
-
-  void playMenuTheme() async {
-    await player.setSource(AssetSource('ambient/main_menu_2.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopMenuTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -49,13 +36,6 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
     if (currentSaveSlot != null && gameMapIsEmpty) {
       savesNotifier.loadGame(gamestateNotifier);
     }
-    playMenuTheme();
-  }
-
-  @override
-  void dispose() {
-    stopMenuTheme();
-    super.dispose();
   }
 
   @override

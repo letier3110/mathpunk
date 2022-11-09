@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 
 class CharacterName extends ConsumerStatefulWidget {
@@ -14,7 +14,7 @@ class CharacterName extends ConsumerStatefulWidget {
 class CharacterNameView extends ConsumerState<CharacterName> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
     final saves = ref.watch(savesProvider);
 
     var playerName = saves.saveSlots[saves.currentSaveSlot ?? 0];
@@ -41,7 +41,7 @@ class CharacterNameView extends ConsumerState<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                gameState.playerCharacter!.getNameTranslationKey(context),
+                playerCharacter!.getNameTranslationKey(context),
                 // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(

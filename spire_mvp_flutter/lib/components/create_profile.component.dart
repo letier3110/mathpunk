@@ -17,7 +17,7 @@ class CreateProfileComponentView extends ConsumerState<CreateProfileComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final saves = ref.read(savesProvider.notifier);
+    final saves = ref.watch(savesProvider.notifier);
 
     void onTapHandler() {
       saves.createNewSlot(profileName);

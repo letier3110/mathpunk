@@ -14,7 +14,7 @@ class EndturnView extends ConsumerStatefulWidget {
 class EndturnViewView extends ConsumerState<EndturnView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.nextTurn();

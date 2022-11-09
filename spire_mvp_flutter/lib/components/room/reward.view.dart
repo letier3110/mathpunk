@@ -18,7 +18,7 @@ class RewardView extends ConsumerStatefulWidget {
 class RewardViewView extends ConsumerState<RewardView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void onGoldTapHandler() {
       gameState.pickReward(widget.rewardIndex, 'gold');

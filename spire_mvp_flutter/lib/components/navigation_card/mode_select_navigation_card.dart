@@ -27,8 +27,8 @@ class ModeSelectNavigationCard extends INavigationCard {
 
   @override
   navigate(BuildContext context, WidgetRef ref, ScreenEnum screen) {
-    final navigation = ref.read(navigationProvider.notifier);
-    final gameState = ref.read(gamestateProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
     if (!disabled) {
       navigation.changeScreen(screen);
       gameState.changeGameMode(gameType);

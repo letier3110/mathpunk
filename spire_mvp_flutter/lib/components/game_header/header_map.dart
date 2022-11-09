@@ -16,7 +16,7 @@ class HeaderMapView extends ConsumerState<HeaderMap> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameStateNotifier.exitPause();

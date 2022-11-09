@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CharacterGold extends ConsumerStatefulWidget {
   const CharacterGold({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class CharacterGold extends ConsumerStatefulWidget {
 class CharacterGoldView extends ConsumerState<CharacterGold> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var gold = gameState.playerCharacter?.gold ?? '0';
+    var gold = playerCharacter?.gold ?? '0';
 
     double width = MediaQuery.of(context).size.width;
 

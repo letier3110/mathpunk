@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CharacterRelics extends ConsumerStatefulWidget {
   const CharacterRelics({Key? key}) : super(key: key);
@@ -32,9 +32,9 @@ class CharacterRelicsView extends ConsumerState<CharacterRelics> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var relics = gameState.playerCharacter?.relics ?? [];
+    var relics = playerCharacter?.relics ?? [];
 
     return SizedBox(
       height: 360,

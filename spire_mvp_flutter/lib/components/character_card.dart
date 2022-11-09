@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CharacterCard extends ConsumerStatefulWidget {
   final PlayerCharacter character;
@@ -25,10 +26,9 @@ class CharacterCardView extends ConsumerState<CharacterCard> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider.notifier);
-    // final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var isPcEqualsWidgetPc =
-        gameState.state.playerCharacter?.name == widget.character.name;
+    var isPcEqualsWidgetPc = playerCharacter?.name == widget.character.name;
 
     void onTapHandler() {
       if (widget.disabled) {

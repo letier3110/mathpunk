@@ -22,7 +22,7 @@ class NavigationCard extends INavigationCard {
 
   @override
   navigate(BuildContext context, WidgetRef ref, ScreenEnum screen) {
-    final navigation = ref.read(navigationProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
     if (!disabled) {
       navigation.changeScreen(screen);
     }

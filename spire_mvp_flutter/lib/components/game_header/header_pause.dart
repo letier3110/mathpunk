@@ -15,7 +15,7 @@ class HeaderPauseView extends ConsumerState<HeaderPause> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
     return Positioned(
       top: 0,
       bottom: 0,

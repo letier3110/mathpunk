@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CurrentManaView extends ConsumerStatefulWidget {
   const CurrentManaView({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class CurrentManaView extends ConsumerStatefulWidget {
 class CurrentManaViewView extends ConsumerState<CurrentManaView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var mana = gameState.playerCharacter?.mana ?? '0';
+    final mana = playerCharacter?.mana ?? '0';
 
     void onTapHandler() {
       // TODO: implement drawpile tap handler

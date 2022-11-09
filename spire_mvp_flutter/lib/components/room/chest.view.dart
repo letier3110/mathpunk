@@ -17,7 +17,7 @@ class ChestView extends ConsumerStatefulWidget {
 class ChestViewView extends ConsumerState<ChestView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.selectChest(widget.reward);

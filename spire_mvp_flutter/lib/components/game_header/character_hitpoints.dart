@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CharacterHitpoints extends ConsumerStatefulWidget {
   const CharacterHitpoints({Key? key}) : super(key: key);
@@ -13,10 +13,10 @@ class CharacterHitpoints extends ConsumerStatefulWidget {
 class CharacterHitpointsView extends ConsumerState<CharacterHitpoints> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var hp = gameState.playerCharacter?.health ?? '0';
-    var maxhp = gameState.playerCharacter?.maxHealth ?? '0';
+    var hp = playerCharacter?.health ?? '0';
+    var maxhp = playerCharacter?.maxHealth ?? '0';
 
     double width = MediaQuery.of(context).size.width;
 

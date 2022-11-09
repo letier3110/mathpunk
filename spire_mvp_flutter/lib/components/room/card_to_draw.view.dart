@@ -22,7 +22,7 @@ class CardToDrawView extends ConsumerState<CardToDraw> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void onSubmitTapHandler() {
       gameState.setSelectedCards(choice);

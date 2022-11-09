@@ -10,6 +10,7 @@ import 'package:mathpunk_cardgame/components/status_icon.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
 import 'package:mathpunk_cardgame/utils/intension.util.dart';
 
@@ -60,15 +61,16 @@ class EnemyPawnViewView extends ConsumerState<EnemyPawnView> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
     var hp = widget.enemy.getHealth();
     var maxhp = widget.enemy.getMaxHealth();
 
-    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    bool isPlayerAlive = playerCharacter!.health > 0;
     List<Status> statuses = widget.enemy.getStatuses();
 
     void onTapHandler() {
-      ref.read(gamestateProvider.notifier).selectTarget(widget.enemy);
+      ref.watch(gamestateProvider.notifier).selectTarget(widget.enemy);
     }
 
     double width = MediaQuery.of(context).size.width;

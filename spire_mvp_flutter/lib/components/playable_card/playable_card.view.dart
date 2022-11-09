@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 const double defaultHeight = 300;
@@ -63,8 +64,10 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
+    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    int playerMana = gameState.playerCharacter!.mana;
+    int playerMana = playerCharacter!.mana;
 
     void onEnterHandler(PointerEnterEvent p) {
       if (widget.animate) {
@@ -95,24 +98,19 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
       }
       if (widget.card.targetType == TargetEnum.singleTarget) {
         if (cardId == gameState.selectingTargetCardId) {
-          ref.read(gamestateProvider.notifier).stopSelecting();
+          gameStateNotifier.stopSelecting();
           return;
         }
-        ref
-            .read(gamestateProvider.notifier)
-            .startSelecting(widget.card, cardId);
+        gameStateNotifier.startSelecting(widget.card, cardId);
         return;
       } else if (widget.card.targetType == TargetEnum.cardTarget) {
         // TODO: implement some random fuzzy logic to select a targe
         // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
-        ref
-            .read(gamestateProvider.notifier)
-            .startSelecting(widget.card, cardId);
+        gameStateNotifier.startSelecting(widget.card, cardId);
         return;
       } else {
-        ref
-            .read(gamestateProvider.notifier)
-            .playTheCard(widget.card, gameState.currentRoom!.enemies);
+        gameStateNotifier.playTheCard(
+            widget.card, gameState.currentRoom!.enemies);
         return;
       }
     }

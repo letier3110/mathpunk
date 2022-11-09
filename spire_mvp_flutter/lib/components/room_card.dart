@@ -18,7 +18,7 @@ class RoomCardView extends ConsumerState<RoomCard> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
 
     var isNextRoom =
         gameStateNotifier.getNextAvailableRooms().contains(widget.room);

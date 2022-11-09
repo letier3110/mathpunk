@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class CharacterItems extends ConsumerStatefulWidget {
   const CharacterItems({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class CharacterItems extends ConsumerStatefulWidget {
 class CharacterItemsView extends ConsumerState<CharacterItems> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    var items = gameState.playerCharacter?.items ?? [];
+    var items = playerCharacter?.items ?? [];
 
     return Container(
       padding: const EdgeInsets.all(8),

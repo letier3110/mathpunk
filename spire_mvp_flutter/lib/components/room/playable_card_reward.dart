@@ -18,7 +18,7 @@ class PlayableCardReward extends ConsumerStatefulWidget {
 class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.pickCardReward(widget.possibleRewards, widget.card);

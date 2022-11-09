@@ -22,7 +22,7 @@ class MainMenuItem extends ConsumerStatefulWidget {
 class MainMenuItemState extends ConsumerState<MainMenuItem> {
   @override
   Widget build(BuildContext context) {
-    final navigation = ref.read(navigationProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
 
     void onTapHandler() {
       if (widget.screen == ScreenEnum.quit) {

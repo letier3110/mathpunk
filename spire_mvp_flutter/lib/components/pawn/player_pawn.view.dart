@@ -5,7 +5,7 @@ import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/status_icon.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 
 class PlayerPawnView extends ConsumerStatefulWidget {
   final double hpBarHeight = 20;
@@ -35,14 +35,14 @@ class PlayerPawnViewView extends ConsumerState<PlayerPawnView> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    List<Status> statuses = gameState.playerCharacter?.getStatuses() ?? [];
+    List<Status> statuses = playerCharacter?.getStatuses() ?? [];
     int block = castStatusToInt(statuses, BlockStatus);
 
-    var hp = gameState.playerCharacter?.health ?? 0;
-    var maxhp = gameState.playerCharacter?.maxHealth ?? 0;
-    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    var hp = playerCharacter?.health ?? 0;
+    var maxhp = playerCharacter?.maxHealth ?? 0;
+    bool isPlayerAlive = playerCharacter!.health > 0;
 
     double width = MediaQuery.of(context).size.width;
 

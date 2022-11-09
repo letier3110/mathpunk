@@ -27,6 +27,7 @@ import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate/enemy-room.gamestate.util.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 import 'package:mathpunk_cardgame/pools/cards.pool.dart';
@@ -43,7 +44,8 @@ enum HealPlayer {
 
 final gamestateProvider =
     StateNotifierProvider<GamestateNotifier, GamestateNotifierInterface>((ref) {
-  return GamestateNotifier();
+  final playerCharacter = ref.watch(playerCharacterProvider);
+  return GamestateNotifier(playerCharacter: playerCharacter);
 });
 
 class GamestateNotifierInterface {
@@ -53,7 +55,6 @@ class GamestateNotifierInterface {
       this.inDeck = const [],
       this.loreCard,
       this.inPause = false,
-      this.playerCharacter,
       this.gameMap = const [],
       this.visitedRooms = const [],
       this.currentRoom,
@@ -69,7 +70,6 @@ class GamestateNotifierInterface {
   List<PlayableCard> inDeck = [];
   PlayableCard? loreCard;
   bool inPause = false;
-  PlayerCharacter? playerCharacter;
   List<List<Room>> gameMap = [];
   List<Room> visitedRooms = [];
   Room? currentRoom;
@@ -87,7 +87,10 @@ class GamestateNotifierInterface {
 }
 
 class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
-  GamestateNotifier() : super(GamestateNotifierInterface());
+  PlayerCharacter? playerCharacter;
+
+  GamestateNotifier({this.playerCharacter})
+      : super(GamestateNotifierInterface());
 
   void setPlayerName(String playerName) {
     state.playerName = playerName;
@@ -107,7 +110,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void stopPlaying() {
-    state.playerCharacter = null;
+    playerCharacter = null;
     state.currentRoom = null;
     state.gameMap = [];
     state.inPause = false;
@@ -115,11 +118,11 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void deselectPlayerCharacter() {
-    state.playerCharacter = null;
+    playerCharacter = null;
   }
 
   void selectPlayerCharacter(PlayerCharacter character) {
-    state.playerCharacter = character;
+    playerCharacter = character;
     Player player = Player();
     player.selectCharacter(character);
   }
@@ -139,31 +142,30 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.currentRoom = room;
     if (state.currentRoom.runtimeType == EnemyRoom) {
       enemyRoomEnter(
-          currentRoom: state.currentRoom!,
-          playerCharacter: state.playerCharacter!);
+          currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
     }
   }
 
   void givePlayerGold(int goldValue) {
-    if (state.playerCharacter == null) return;
-    state.playerCharacter!.gold += goldValue;
+    if (playerCharacter == null) return;
+    playerCharacter!.gold += goldValue;
   }
 
   void healPlayer(HealPlayer healType, double? percentageValue) {
-    if (state.playerCharacter == null) return;
+    if (playerCharacter == null) return;
     switch (healType) {
       case HealPlayer.fullHeal:
-        state.playerCharacter!.heal(state.playerCharacter!.getMaxHealth());
+        playerCharacter!.heal(playerCharacter!.getMaxHealth());
         break;
       case HealPlayer.percentageMaxHpHeal:
         double healValue =
-            (state.playerCharacter!.getMaxHealth() * (percentageValue ?? 1));
-        state.playerCharacter!.heal(healValue.toInt());
+            (playerCharacter!.getMaxHealth() * (percentageValue ?? 1));
+        playerCharacter!.heal(healValue.toInt());
         break;
       case HealPlayer.percentageCurrentHpHeal:
         double healValue =
-            (state.playerCharacter!.getHealth() * (percentageValue ?? 1));
-        state.playerCharacter!.heal(healValue.toInt());
+            (playerCharacter!.getHealth() * (percentageValue ?? 1));
+        playerCharacter!.heal(healValue.toInt());
         break;
       case HealPlayer.valueHeal:
         break;
@@ -176,16 +178,16 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   bool _checkIfCardPlayable(PlayableCard card) {
-    if (state.playerCharacter == null) return false;
+    if (playerCharacter == null) return false;
     if (state.currentRoom == null) return false;
-    if (state.playerCharacter!.mana < card.getMana()) return false;
+    if (playerCharacter!.mana < card.getMana()) return false;
     if (card.isCardPlayable() == false) return false;
-    if (state.playerCharacter!
+    if (playerCharacter!
         .getDeck()
         .getHand()
         .where((x) => x.runtimeType == NormalityCard)
         .isNotEmpty) {
-      if (state.playerCharacter!.cardsPlayedInRound >= 3) {
+      if (playerCharacter!.cardsPlayedInRound >= 3) {
         return false;
       }
     }
@@ -193,8 +195,8 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void buyItem(Sellable sellable) {
-    if (state.playerCharacter == null) return;
-    if (state.playerCharacter!.gold - sellable.getCost() < 0) {
+    if (playerCharacter == null) return;
+    if (playerCharacter!.gold - sellable.getCost() < 0) {
       return;
     }
 
@@ -203,38 +205,36 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
         // sellable = SellableRemoval(cost: jsonCost, inStock: jsonInStock);
         break;
       case 'SellableCard':
-        state.playerCharacter!
-            .getDeck()
-            .addToDeck((sellable as SellableCard).card);
+        playerCharacter!.getDeck().addToDeck((sellable as SellableCard).card);
         break;
       case 'SellableRelic':
-        state.playerCharacter!.addRelic((sellable as SellableRelic).relic);
+        playerCharacter!.addRelic((sellable as SellableRelic).relic);
         break;
       case 'SellableItem':
       default:
-        state.playerCharacter!.addItem((sellable as SellableItem).item);
+        playerCharacter!.addItem((sellable as SellableItem).item);
         break;
     }
 
     sellable.inStock = false;
-    state.playerCharacter!.gold -= sellable.getCost();
+    playerCharacter!.gold -= sellable.getCost();
   }
 
   void playTheCard(PlayableCard card, List<Enemy> targets) {
     if (!_checkIfCardPlayable(card)) {
       return;
     }
-    state.playerCharacter!.mana -= card.getMana();
-    state.playerCharacter!.addCardsPlayedInRound(1);
+    playerCharacter!.mana -= card.getMana();
+    playerCharacter!.addCardsPlayedInRound(1);
     card.play(targets);
 
     if (card.step == card.maxSteps) {
       if (card.exhausted) {
-        card.disposeToDiscard(state.playerCharacter!.deck.hand,
-            state.playerCharacter!.deck.exhaustPile);
+        card.disposeToDiscard(
+            playerCharacter!.deck.hand, playerCharacter!.deck.exhaustPile);
       } else {
-        card.disposeToDiscard(state.playerCharacter!.deck.hand,
-            state.playerCharacter!.deck.discardPile);
+        card.disposeToDiscard(
+            playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
       }
     }
 
@@ -262,7 +262,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
         state.currentRoom!.getCanLeaveRoom()) {
       // if (state.currentRoom!.enemies.isEmpty) {
       // if there are burning blood => add player hp
-      List<Relic> burningBlood = state.playerCharacter!.relics
+      List<Relic> burningBlood = playerCharacter!.relics
           .where((element) => BurningBloodRelic.isRelicBurningBlood(element))
           .toList();
       if (burningBlood.isNotEmpty) {
@@ -273,7 +273,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void endTheRoom() {
-    state.playerCharacter!.attachDeck(Deck(state.playerCharacter!.deck.cards));
+    playerCharacter!.attachDeck(Deck(playerCharacter!.deck.cards));
     // enterMap();
   }
 
@@ -282,8 +282,8 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void selectChest(Reward reward) {
-    if (state.playerCharacter == null) {
-      state.playerCharacter!.resetRoundStatuses();
+    if (playerCharacter == null) {
+      playerCharacter!.resetRoundStatuses();
     }
     state.isOpenedChest = reward;
   }
@@ -304,10 +304,10 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
 
   void pickCardReward(List<PlayableCard> cards, PlayableCard pickedCard) {
     if (state.currentRoom == null) return;
-    if (state.playerCharacter == null) return;
+    if (playerCharacter == null) return;
 
     try {
-      state.playerCharacter!.deck.addToDeck(pickedCard);
+      playerCharacter!.deck.addToDeck(pickedCard);
       int i = state.currentRoom!.rewards.indexWhere((element) =>
           element.cards.every((element) => cards.contains(element)));
       state.currentRoom!.rewards[i].cards = [];
@@ -318,8 +318,8 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
 
   void pickReward(int rewardIndex, String fieldType) {
     if (state.currentRoom == null) return;
-    if (state.playerCharacter == null) return;
-    // List<Status> statuses = state.playerCharacter!.getStatuses();
+    if (playerCharacter == null) return;
+    // List<Status> statuses = playerCharacter!.getStatuses();
     switch (fieldType) {
       case 'gold':
         int goldReward = state.currentRoom!.rewards[rewardIndex].gold ?? 0;
@@ -327,19 +327,19 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
         // if (isKingStatus) {
         //   goldReward = goldReward * 2;
         // }
-        state.playerCharacter!.gold += goldReward;
+        playerCharacter!.gold += goldReward;
         state.currentRoom!.rewards[rewardIndex].gold = null;
         break;
       case 'item':
         if (state.currentRoom!.rewards[rewardIndex].item != null) {
-          state.playerCharacter!.items
+          playerCharacter!.items
               .add(state.currentRoom!.rewards[rewardIndex].item!);
         }
         state.currentRoom!.rewards[rewardIndex].item = null;
         break;
       case 'relic':
         if (state.currentRoom!.rewards[rewardIndex].relic != null) {
-          state.playerCharacter!.relics
+          playerCharacter!.relics
               .add(state.currentRoom!.rewards[rewardIndex].relic!);
         }
         state.currentRoom!.rewards[rewardIndex].relic = null;
@@ -418,11 +418,11 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void enterRoom(Room room) {
-    if (state.playerCharacter == null) {
+    if (playerCharacter == null) {
       return;
     }
-    state.playerCharacter!.resetRoundStatuses();
-    state.playerCharacter!.enterRoom();
+    playerCharacter!.resetRoundStatuses();
+    playerCharacter!.enterRoom();
     if (state.currentRoom == null) {
       state.updateRoom(room);
     } else if ((state.currentRoom != null &&
@@ -435,27 +435,26 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.isOpenedChest = null;
     if (state.currentRoom.runtimeType == EnemyRoom) {
       enemyRoomEnter(
-          currentRoom: state.currentRoom!,
-          playerCharacter: state.playerCharacter!);
+          currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
     }
   }
 
   void nextTurn() {
-    if (state.playerCharacter == null) {
+    if (playerCharacter == null) {
       return;
     }
     if (state.currentRoom == null) {
       return;
     }
-    state.playerCharacter!.cardsPlayedInRound = 0;
-    if (state.playerCharacter!
+    playerCharacter!.cardsPlayedInRound = 0;
+    if (playerCharacter!
         .getDeck()
         .getHand()
         .where((x) => x.runtimeType == DoubtCard)
         .isNotEmpty) {
       WeakStatus ws = WeakStatus();
       ws.addStack(1);
-      state.playerCharacter!.addStatus(ws);
+      playerCharacter!.addStatus(ws);
     }
     for (var enemy in state.currentRoom!.getEnemies()) {
       enemy.makeMove();
@@ -503,20 +502,20 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       DexterityEmpowerStatus des = DexterityEmpowerStatus();
       enemy.setStatus(des);
     }
-    state.playerCharacter!.endTurn();
+    playerCharacter!.endTurn();
 
-    List<Status> statuses = state.playerCharacter!.getStatuses();
+    List<Status> statuses = playerCharacter!.getStatuses();
 
     bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
     if (isKnightStatus == true) {
-      state.playerCharacter!
+      playerCharacter!
           .getDeck()
           .getHand()
           .add(weightedRandomPick(poolAllCards).obj);
     }
 
     // if there are ring of snake => draw 1 cards at the start of round
-    List<Relic> ringOfSerpent = state.playerCharacter!.relics
+    List<Relic> ringOfSerpent = playerCharacter!.relics
         .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
         .toList();
     if (ringOfSerpent.isNotEmpty) {
@@ -530,7 +529,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.gameMode = savedInfo.gameMode;
     state.inMap = savedInfo.inMap;
     state.inPause = savedInfo.inPause;
-    state.playerCharacter = savedInfo.playerCharacter;
+    playerCharacter = savedInfo.playerCharacter;
     state.gameMap = savedInfo.gameMap;
     state.currentRoom = savedInfo.currentRoom;
     Player player = Player();
@@ -544,7 +543,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
             gameMode: state.gameMode,
             inMap: state.inMap,
             inPause: state.inPause,
-            playerCharacter: state.playerCharacter,
+            playerCharacter: playerCharacter,
             gameMap: state.gameMap,
             currentRoom: state.currentRoom,
             playerName: state.playerName ?? 'autosave')

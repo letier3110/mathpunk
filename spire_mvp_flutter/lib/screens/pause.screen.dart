@@ -17,9 +17,9 @@ class PauseScreen extends ConsumerStatefulWidget {
 class _PauseScreenState extends ConsumerState<PauseScreen> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
-    final navigation = ref.read(navigationProvider.notifier);
-    final saves = ref.read(savesProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
+    final saves = ref.watch(savesProvider.notifier);
 
     void onReturn() {
       gameState.exitPause();

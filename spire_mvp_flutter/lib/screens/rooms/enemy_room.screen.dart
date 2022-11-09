@@ -16,6 +16,7 @@ import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
 import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 class EnemyRoomScreen extends ConsumerStatefulWidget {
@@ -56,8 +57,9 @@ class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
   @override
   Widget build(BuildContext context) {
     final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    bool isPlayerAlive = playerCharacter!.health > 0;
     bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
     bool isSelectingCard = gameState.selectingTarget != null &&
         gameState.selectingTarget!.targetType == TargetEnum.cardTarget;

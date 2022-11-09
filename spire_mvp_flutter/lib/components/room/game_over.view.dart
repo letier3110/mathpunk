@@ -16,8 +16,8 @@ class GameOver extends ConsumerStatefulWidget {
 class GameOverView extends ConsumerState<GameOver> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
-    final navigation = ref.read(navigationProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
 
     void onTapHandler() {
       gameState.stopPlaying();

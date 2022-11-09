@@ -48,7 +48,7 @@ class _MindBloomViewView extends ConsumerState<MindBloomView> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final gameState = ref.watch(gamestateProvider.notifier);
 
     void warTapHandler() {
       // "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",

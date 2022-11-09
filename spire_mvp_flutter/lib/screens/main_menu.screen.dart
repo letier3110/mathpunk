@@ -38,14 +38,16 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   void initState() {
     super.initState();
 
-    final saves = ref.read(savesProvider);
+    final currentSaveSlot =
+        ref.read(savesProvider.select((value) => value.currentSaveSlot));
+    final savesNotifier = ref.read(savesProvider.notifier);
 
-    final gamestate = ref.read(gamestateProvider);
+    final gameMapIsEmpty =
+        ref.read(gamestateProvider.select((value) => value.gameMap.isEmpty));
+    final gamestateNotifier = ref.read(gamestateProvider.notifier);
 
-    if (saves.currentSaveSlot != null && gamestate.gameMap.isEmpty) {
-      ref
-          .read(savesProvider.notifier)
-          .loadGame(ref.read(gamestateProvider.notifier));
+    if (currentSaveSlot != null && gameMapIsEmpty) {
+      savesNotifier.loadGame(gamestateNotifier);
     }
     playMenuTheme();
   }
@@ -58,7 +60,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final saves = ref.read(savesProvider);
+    final saves = ref.watch(savesProvider);
     final gameState = ref.watch(gamestateProvider);
 
     double width = MediaQuery.of(context).size.width;

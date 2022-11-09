@@ -17,7 +17,7 @@ class _LoreScreenState extends ConsumerState<LoreScreen> {
     final gameState = ref.watch(gamestateProvider);
 
     void onCardTap() {
-      ref.read(gamestateProvider.notifier).closeLoreCard();
+      ref.watch(gamestateProvider.notifier).closeLoreCard();
     }
 
     return Stack(children: [

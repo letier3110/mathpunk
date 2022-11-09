@@ -16,7 +16,7 @@ import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
 import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 class EnemyRoomScreen extends ConsumerStatefulWidget {

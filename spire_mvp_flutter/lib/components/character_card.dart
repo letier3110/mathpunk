@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 class CharacterCard extends ConsumerStatefulWidget {
   final PlayerCharacter character;
@@ -25,8 +23,8 @@ class CharacterCard extends ConsumerStatefulWidget {
 class CharacterCardView extends ConsumerState<CharacterCard> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
     final playerCharacter = ref.watch(playerCharacterProvider);
+    final playerCharacterNotifier = ref.read(playerCharacterProvider.notifier);
 
     var isPcEqualsWidgetPc = playerCharacter?.name == widget.character.name;
 
@@ -35,12 +33,10 @@ class CharacterCardView extends ConsumerState<CharacterCard> {
         return;
       }
       if (isPcEqualsWidgetPc) {
-        gameState.deselectPlayerCharacter();
+        playerCharacterNotifier.deselectCharacter();
         return;
       }
-      gameState.selectPlayerCharacter(widget.character);
-      var player = Player();
-      player.selectCharacter(widget.character);
+      playerCharacterNotifier.selectCharacter(widget.character);
     }
 
     return GestureDetector(

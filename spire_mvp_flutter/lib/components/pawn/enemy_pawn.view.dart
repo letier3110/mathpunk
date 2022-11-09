@@ -10,7 +10,7 @@ import 'package:mathpunk_cardgame/components/status_icon.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
 import 'package:mathpunk_cardgame/utils/intension.util.dart';
 

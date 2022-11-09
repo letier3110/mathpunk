@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 class DiscardPileView extends ConsumerStatefulWidget {
   const DiscardPileView({Key? key}) : super(key: key);

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 class HandView extends ConsumerStatefulWidget {
   const HandView({Key? key}) : super(key: key);

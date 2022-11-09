@@ -27,7 +27,7 @@ import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate/enemy-room.gamestate.util.dart';
-import 'package:mathpunk_cardgame/controllers/playerCharacter.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 import 'package:mathpunk_cardgame/pools/cards.pool.dart';
@@ -115,16 +115,6 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.gameMap = [];
     state.inPause = false;
     state.inMap = false;
-  }
-
-  void deselectPlayerCharacter() {
-    playerCharacter = null;
-  }
-
-  void selectPlayerCharacter(PlayerCharacter character) {
-    playerCharacter = character;
-    Player player = Player();
-    player.selectCharacter(character);
   }
 
   void stopSelecting() {

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/classes/reward.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RewardView extends StatefulWidget {
+import 'package:mathpunk_cardgame/classes/reward.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class RewardView extends ConsumerStatefulWidget {
   final Reward reward;
   final int rewardIndex;
   const RewardView({required this.reward, required this.rewardIndex, Key? key})
       : super(key: key);
 
   @override
-  State<RewardView> createState() => RewardViewView();
+  ConsumerState<RewardView> createState() => RewardViewView();
 }
 
-class RewardViewView extends State<RewardView> {
+class RewardViewView extends ConsumerState<RewardView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onGoldTapHandler() {
       gameState.pickReward(widget.rewardIndex, 'gold');

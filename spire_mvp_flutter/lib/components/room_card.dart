@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/room/room.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/utils/room.util.dart';
 
-class RoomCard extends StatefulWidget {
+class RoomCard extends ConsumerStatefulWidget {
   final Room room;
 
   const RoomCard({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<RoomCard> createState() => RoomCardView();
+  ConsumerState<RoomCard> createState() => RoomCardView();
 }
 
-class RoomCardView extends State<RoomCard> {
+class RoomCardView extends ConsumerState<RoomCard> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
-    var isNextRoom = gameState.getNextAvailableRooms().contains(widget.room);
+    var isNextRoom =
+        gameStateNotifier.getNextAvailableRooms().contains(widget.room);
     Room? isVisited;
 
     try {
@@ -42,20 +44,20 @@ class RoomCardView extends State<RoomCard> {
 
     void onTapHandler() {
       if (!isInRoom && isNextRoom) {
-        gameState.enterRoom(widget.room);
+        gameStateNotifier.enterRoom(widget.room);
         return;
       }
       if (isInRoom) {
         if (gameState.currentRoom!.enemies.isEmpty &&
             gameState.currentRoom!.id != widget.room.id &&
             isNextRoom) {
-          gameState.enterRoom(widget.room);
-          gameState.exitMap();
+          gameStateNotifier.enterRoom(widget.room);
+          gameStateNotifier.exitMap();
           return;
         }
       }
       if (inCurrentRoom) {
-        gameState.exitMap();
+        gameStateNotifier.exitMap();
       }
     }
 

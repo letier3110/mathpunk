@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
-class GameOver extends StatefulWidget {
+class GameOver extends ConsumerStatefulWidget {
   const GameOver({Key? key}) : super(key: key);
 
   @override
-  State<GameOver> createState() => GameOverView();
+  ConsumerState<GameOver> createState() => GameOverView();
 }
 
-class GameOverView extends State<GameOver> {
+class GameOverView extends ConsumerState<GameOver> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
-
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
+    final navigation = ref.read(navigationProvider.notifier);
 
     void onTapHandler() {
       gameState.stopPlaying();

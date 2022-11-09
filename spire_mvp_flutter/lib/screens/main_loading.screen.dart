@@ -1,27 +1,25 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainLoadingScreen extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
+
+class MainLoadingScreen extends ConsumerStatefulWidget {
   const MainLoadingScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainLoadingScreen> createState() => _MainLoadingScreenState();
+  ConsumerState<MainLoadingScreen> createState() => _MainLoadingScreenState();
 }
 
-class _MainLoadingScreenState extends State<MainLoadingScreen> {
+class _MainLoadingScreenState extends ConsumerState<MainLoadingScreen> {
   @override
   void initState() {
     super.initState();
 
-    SavesController saves =
-        Provider.of<SavesController>(context, listen: false);
+    final saves = ref.read(savesProvider.notifier);
+    final navigation = ref.read(navigationProvider.notifier);
 
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
     saves.loadSavesMetadata(navigation);
   }
 

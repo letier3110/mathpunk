@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/room/playable_card_reward.dart';
+// import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-
-class CardReward extends StatefulWidget {
+class CardReward extends ConsumerStatefulWidget {
   final List<PlayableCard> cards;
   const CardReward({required this.cards, Key? key}) : super(key: key);
 
   @override
-  State<CardReward> createState() => CardRewardView();
+  ConsumerState<CardReward> createState() => CardRewardView();
 }
 
-class CardRewardView extends State<CardReward> {
+class CardRewardView extends ConsumerState<CardReward> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    // final gameState = ref.read(gamestateProvider.notifier);
 
-    void onSkipTapHandler() {
-      gameState.stopSelectingCardReward();
-    }
+    // void onSkipTapHandler() {
+    //   gameState.stopSelectingCardReward();
+    // }
 
     return Center(
       child: Row(

@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/components/game_header/game_header.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/screens/deck.screen.dart';
 import 'package:mathpunk_cardgame/screens/lore.screen.dart';
 import 'package:mathpunk_cardgame/screens/map.screen.dart';
 import 'package:mathpunk_cardgame/screens/pause.screen.dart';
 import 'package:mathpunk_cardgame/utils/room.util.dart';
 
-class GameScreen extends StatefulWidget {
+class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
 
   @override
-  State<GameScreen> createState() => _GameScreenState();
+  ConsumerState<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     bool inDeck = gameState.inDeck.isNotEmpty;
 

@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
 import '../playable_card/playable_card.view.dart';
 
-class CardToDraw extends StatefulWidget {
+class CardToDraw extends ConsumerStatefulWidget {
   final List<PlayableCard> cards;
   final PlayableCard currentCard;
   const CardToDraw({Key? key, required this.cards, required this.currentCard})
       : super(key: key);
 
   @override
-  State<CardToDraw> createState() => CardToDrawView();
+  ConsumerState<CardToDraw> createState() => CardToDrawView();
 }
 
-class CardToDrawView extends State<CardToDraw> {
+class CardToDrawView extends ConsumerState<CardToDraw> {
   List<PlayableCard> choice = [];
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onSubmitTapHandler() {
       gameState.setSelectedCards(choice);

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 
-class CharacterName extends StatefulWidget {
+class CharacterName extends ConsumerStatefulWidget {
   const CharacterName({Key? key}) : super(key: key);
 
   @override
-  State<CharacterName> createState() => CharacterNameView();
+  ConsumerState<CharacterName> createState() => CharacterNameView();
 }
 
-class CharacterNameView extends State<CharacterName> {
+class CharacterNameView extends ConsumerState<CharacterName> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-    SavesController saves = Provider.of<SavesController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final saves = ref.watch(savesProvider);
 
     var playerName = saves.saveSlots[saves.currentSaveSlot ?? 0];
 

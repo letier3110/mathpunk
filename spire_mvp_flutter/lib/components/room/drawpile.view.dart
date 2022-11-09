@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DrawPileView extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class DrawPileView extends ConsumerStatefulWidget {
   const DrawPileView({Key? key}) : super(key: key);
 
   @override
-  State<DrawPileView> createState() => DrawPileViewView();
+  ConsumerState<DrawPileView> createState() => DrawPileViewView();
 }
 
-class DrawPileViewView extends State<DrawPileView> {
+class DrawPileViewView extends ConsumerState<DrawPileView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
     var drawPileLength =
         (gameState.playerCharacter?.deck.drawPile ?? []).length;
 
     void onTapHandler() {
       if (gameState.inDeck.isEmpty) {
-        gameState.enterDeck(
+        gameStateNotifier.enterDeck(
             cards: gameState.playerCharacter?.deck.drawPile ?? []);
         return;
       }
-      gameState.exitDeck();
+      gameStateNotifier.exitDeck();
     }
 
     return Positioned(

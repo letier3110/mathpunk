@@ -1,6 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/room/chest.view.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
@@ -15,19 +15,19 @@ import 'package:mathpunk_cardgame/components/pawn/enemy_pawn.view.dart';
 import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
 import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-class EnemyRoomScreen extends StatefulWidget {
+class EnemyRoomScreen extends ConsumerStatefulWidget {
   final EnemyRoom room;
 
   const EnemyRoomScreen({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
+  ConsumerState<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
 }
 
-class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
+class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
   final player = AudioPlayer();
 
   void playBattleTheme() async {
@@ -55,7 +55,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     bool isPlayerAlive = gameState.playerCharacter!.health > 0;
     bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 
 class GameStateStorage {
@@ -17,7 +17,7 @@ class GameStateStorage {
     return File('$path/$fileName.bin');
   }
 
-  Future<int> loadProfile(GamestateController gameState, int profile) async {
+  Future<int> loadProfile(GamestateNotifier gameState, int profile) async {
     try {
       // final file = await _profileFile;
       var profileSaveName = 'save1';
@@ -43,8 +43,7 @@ class GameStateStorage {
     }
   }
 
-  Future<List<String>> readProfiles(
-      GamestateController gameState, int profile) async {
+  Future<List<String>> readProfiles(int profile) async {
     try {
       final save1 = await getFile('save1');
       final save2 = await getFile('save2');
@@ -71,7 +70,7 @@ class GameStateStorage {
     }
   }
 
-  Future<int> writeState(GamestateController gameState, int profile) async {
+  Future<int> writeState(GamestateNotifier gameState, int profile) async {
     var profileSaveName = 'save1';
     if (profile == 2) {
       profileSaveName = 'save2';

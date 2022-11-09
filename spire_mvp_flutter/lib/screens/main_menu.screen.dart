@@ -2,24 +2,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/components/create_profile.component.dart';
 // import 'package:mathpunk_cardgame/classes/card/cards_implementation.dart';
 // import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
 
-class MainMenuScreen extends StatefulWidget {
+class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainMenuScreen> createState() => _MainMenuScreenState();
+  ConsumerState<MainMenuScreen> createState() => _MainMenuScreenState();
 }
 
-class _MainMenuScreenState extends State<MainMenuScreen> {
+class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   final player = AudioPlayer();
 
   void playMenuTheme() async {
@@ -37,14 +38,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   void initState() {
     super.initState();
 
-    SavesController saves =
-        Provider.of<SavesController>(context, listen: false);
+    final saves = ref.read(savesProvider);
 
-    GamestateController gamestate =
-        Provider.of<GamestateController>(context, listen: false);
+    final gamestate = ref.read(gamestateProvider);
 
     if (saves.currentSaveSlot != null && gamestate.gameMap.isEmpty) {
-      saves.loadGame(gamestate);
+      ref
+          .read(savesProvider.notifier)
+          .loadGame(ref.read(gamestateProvider.notifier));
     }
     playMenuTheme();
   }
@@ -57,7 +58,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SavesController saves = Provider.of<SavesController>(context);
+    final saves = ref.read(savesProvider);
+    final gameState = ref.watch(gamestateProvider);
 
     double width = MediaQuery.of(context).size.width;
 
@@ -105,25 +107,22 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       Container(
                         padding: const EdgeInsets.all(20),
                         child: Column(children: [
-                          Consumer<GamestateController>(builder:
-                              (gameStateContext, gameStateState, child) {
-                            if (gameStateState.gameMap.isNotEmpty) {
-                              return MainMenuItem(
-                                text: Text(
-                                  AppLocalizations.of(context)!.continueRun,
-                                  style: const TextStyle(fontSize: 22.0),
-                                ),
-                                screen: ScreenEnum.game,
-                              );
-                            }
-                            return MainMenuItem(
+                          if (gameState.gameMap.isNotEmpty)
+                            MainMenuItem(
+                              text: Text(
+                                AppLocalizations.of(context)!.continueRun,
+                                style: const TextStyle(fontSize: 22.0),
+                              ),
+                              screen: ScreenEnum.game,
+                            ),
+                          if (gameState.gameMap.isEmpty)
+                            MainMenuItem(
                               text: Text(
                                 AppLocalizations.of(context)!.play,
                                 style: const TextStyle(fontSize: 22.0),
                               ),
                               screen: ScreenEnum.modeSelect,
-                            );
-                          }),
+                            ),
                           MainMenuItem(
                             text: Text(
                               AppLocalizations.of(context)!.compedium,

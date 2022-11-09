@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PlayableCardReward extends StatefulWidget {
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class PlayableCardReward extends ConsumerStatefulWidget {
   final PlayableCard card;
   final List<PlayableCard> possibleRewards;
   const PlayableCardReward(
@@ -11,14 +12,13 @@ class PlayableCardReward extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PlayableCardReward> createState() => PlayableCardRewardView();
+  ConsumerState<PlayableCardReward> createState() => PlayableCardRewardView();
 }
 
-class PlayableCardRewardView extends State<PlayableCardReward> {
+class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.pickCardReward(widget.possibleRewards, widget.card);

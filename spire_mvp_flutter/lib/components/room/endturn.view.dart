@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EndturnView extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class EndturnView extends ConsumerStatefulWidget {
   const EndturnView({Key? key}) : super(key: key);
 
   @override
-  State<EndturnView> createState() => EndturnViewView();
+  ConsumerState<EndturnView> createState() => EndturnViewView();
 }
 
-class EndturnViewView extends State<EndturnView> {
+class EndturnViewView extends ConsumerState<EndturnView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.nextTurn();

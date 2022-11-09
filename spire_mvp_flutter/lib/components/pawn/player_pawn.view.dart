@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/status_icon.dart';
-import 'package:provider/provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-
-class PlayerPawnView extends StatefulWidget {
+class PlayerPawnView extends ConsumerStatefulWidget {
   final double hpBarHeight = 20;
   const PlayerPawnView({Key? key}) : super(key: key);
 
   @override
-  State<PlayerPawnView> createState() => PlayerPawnViewView();
+  ConsumerState<PlayerPawnView> createState() => PlayerPawnViewView();
 }
 
-class PlayerPawnViewView extends State<PlayerPawnView> {
+class PlayerPawnViewView extends ConsumerState<PlayerPawnView> {
   bool _isShowTooltip = false;
   Status? selectedStatus;
 
@@ -35,7 +35,7 @@ class PlayerPawnViewView extends State<PlayerPawnView> {
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     List<Status> statuses = gameState.playerCharacter?.getStatuses() ?? [];
     int block = castStatusToInt(statuses, BlockStatus);

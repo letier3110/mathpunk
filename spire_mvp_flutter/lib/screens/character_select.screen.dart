@@ -1,22 +1,22 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/util.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/player/player_character/priest_character.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/barbarian_character.dart';
 import 'package:mathpunk_cardgame/components/character_card.dart';
 import 'package:mathpunk_cardgame/components/menu_embark_button.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/utils/character.util.dart';
 
 import '../components/menu_back_button.dart';
 import '../enums/screens.enum.dart';
 
-class CharacterSelect extends StatefulWidget {
+class CharacterSelect extends ConsumerStatefulWidget {
   const CharacterSelect({Key? key}) : super(key: key);
 
   @override
-  State<CharacterSelect> createState() => _CharacterSelectState();
+  ConsumerState<CharacterSelect> createState() => _CharacterSelectState();
 }
 
 AssetImage pickCharacterImage(bool disabled, String assetName) {
@@ -33,10 +33,10 @@ AssetImage pickDescriptionImage(bool disabled, String assetName) {
   return const AssetImage('assets/menu_bg_1.png');
 }
 
-class _CharacterSelectState extends State<CharacterSelect> {
+class _CharacterSelectState extends ConsumerState<CharacterSelect> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gamestate = Provider.of<GamestateController>(context);
+    final gamestate = ref.watch(gamestateProvider);
 
     var assetName = getCharacterAssetByName(gamestate.playerCharacter);
 

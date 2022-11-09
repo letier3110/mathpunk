@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/player/player.dart';
-
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-class CharacterCard extends StatefulWidget {
+class CharacterCard extends ConsumerStatefulWidget {
   final PlayerCharacter character;
   final bool disabled;
   final bool visible;
@@ -18,13 +18,13 @@ class CharacterCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<CharacterCard> createState() => CharacterCardView();
+  ConsumerState<CharacterCard> createState() => CharacterCardView();
 }
 
-class CharacterCardView extends State<CharacterCard> {
+class CharacterCardView extends ConsumerState<CharacterCard> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     var isPcEqualsWidgetPc =
         gameState.playerCharacter?.name == widget.character.name;
@@ -34,10 +34,12 @@ class CharacterCardView extends State<CharacterCard> {
         return;
       }
       if (isPcEqualsWidgetPc) {
-        gameState.deselectPlayerCharacter();
+        ref.read(gamestateProvider.notifier).deselectPlayerCharacter();
         return;
       }
-      gameState.selectPlayerCharacter(widget.character);
+      ref
+          .read(gamestateProvider.notifier)
+          .selectPlayerCharacter(widget.character);
       var player = Player();
       player.selectCharacter(widget.character);
     }

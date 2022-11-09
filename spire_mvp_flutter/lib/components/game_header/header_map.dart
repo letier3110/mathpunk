@@ -1,27 +1,29 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
-class HeaderMap extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class HeaderMap extends ConsumerStatefulWidget {
   const HeaderMap({Key? key}) : super(key: key);
 
   @override
-  State<HeaderMap> createState() => HeaderMapView();
+  ConsumerState<HeaderMap> createState() => HeaderMapView();
 }
 
-class HeaderMapView extends State<HeaderMap> {
+class HeaderMapView extends ConsumerState<HeaderMap> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
     void onTapHandler() {
-      gameState.exitPause();
+      gameStateNotifier.exitPause();
       if (gameState.inMap == true) {
-        gameState.exitMap();
+        gameStateNotifier.exitMap();
       } else {
-        gameState.enterMap();
+        gameStateNotifier.enterMap();
       }
     }
 

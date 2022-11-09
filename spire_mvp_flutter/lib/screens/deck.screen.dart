@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-class DeckScreen extends StatefulWidget {
+class DeckScreen extends ConsumerStatefulWidget {
   const DeckScreen({Key? key}) : super(key: key);
 
   @override
-  State<DeckScreen> createState() => _DeckScreenState();
+  ConsumerState<DeckScreen> createState() => _DeckScreenState();
 }
 
-class _DeckScreenState extends State<DeckScreen> {
+class _DeckScreenState extends ConsumerState<DeckScreen> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     void onCardTap(PlayableCard card) {
       // gameState.openLoreCard(card);

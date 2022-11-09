@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
-import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
-import '../controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
+import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
 class SavesStorage {
   Future<String> get _localPath async {
@@ -20,16 +20,16 @@ class SavesStorage {
   }
 
   Future<int> loadSaves(
-      SavesController saves, NavigationController navigation) async {
+      SavesNotifier saves, NavigationNotifier navigation) async {
     try {
       final saveFile = await getFile();
       final contents = await saveFile.readAsString();
 
       dynamic saveSlots = jsonDecode(contents);
 
-      SavesController savesController = saves.fromJson(saveSlots);
+      saves.fromJson(saveSlots);
 
-      saves.loading = false;
+      saves.setLoading(false);
 
       // if save exist
 
@@ -38,13 +38,13 @@ class SavesStorage {
       return 1;
     } catch (e) {
       // if save not exist
-      saves.loading = false;
+      saves.setLoading(false);
       navigation.changeScreen(ScreenEnum.mainMenu);
       return 0;
     }
   }
 
-  Future<int> writeSaves(SavesController saves) async {
+  Future<int> writeSaves(SavesNotifier saves) async {
     final save = await getFile();
 
     try {

@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/screens/character_select.screen.dart';
 import 'package:mathpunk_cardgame/screens/game.screen.dart';
 import 'package:mathpunk_cardgame/screens/main_loading.screen.dart';
@@ -13,36 +12,40 @@ import 'package:mathpunk_cardgame/screens/mode_select.screen.dart';
 import 'package:window_size/window_size.dart';
 
 import './screens/main_menu.screen.dart';
-import './controllers/navigation.controller.dart';
+import 'controllers/navigation.provider.dart';
 import './enums/screens.enum.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ListenableProvider<NavigationController>(
-        create: (_) => NavigationController(),
-      ),
-      ListenableProvider<SavesController>(
-        create: (_) => SavesController(),
-      ),
-      ListenableProvider<GamestateController>(
-        create: (_) => GamestateController(),
-      )
-    ],
-    child: const MyApp(),
+  // runApp(MultiProvider(
+  //   providers: [
+  //     ListenableProvider<NavigationController>(
+  //       create: (_) => NavigationController(),
+  //     ),
+  //     ListenableProvider<SavesController>(
+  //       create: (_) => SavesController(),
+  //     ),
+  //     ListenableProvider<GamestateController>(
+  //       create: (_) => GamestateController(),
+  //     )
+  //   ],
+  //   child: const MyApp(),
+  // ));
+  runApp(const ProviderScope(
+    child: MyApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     if (defaultTargetPlatform == TargetPlatform.linux ||
         defaultTargetPlatform == TargetPlatform.macOS ||
         defaultTargetPlatform == TargetPlatform.windows) {
       setWindowTitle("Mathpunk: card game");
     }
+
     return MaterialApp(
       title: 'Mathpunk: card game',
       localizationsDelegates: const [
@@ -60,7 +63,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Navigator(
-        pages: getPages(context),
+        pages: getPages(context, ref),
         onPopPage: (route, result) {
           return route.didPop(result);
         },
@@ -69,12 +72,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-List<Page> getPages(context) {
-  NavigationController navigation = Provider.of<NavigationController>(context);
+List<Page> getPages(context, WidgetRef ref) {
+  final ScreenEnum navigationScreen = ref.watch(navigationProvider);
 
   List<Page> pageList = [];
 
-  switch (navigation.screen) {
+  switch (navigationScreen) {
     case ScreenEnum.mainMenu:
       pageList.add(const MaterialPage(child: MainMenuScreen()));
       break;

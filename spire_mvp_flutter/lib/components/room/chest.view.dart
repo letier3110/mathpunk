@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/reward.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
 const double hpBarHeight = 20;
 
-class ChestView extends StatefulWidget {
+class ChestView extends ConsumerStatefulWidget {
   final Reward reward;
   const ChestView({required this.reward, Key? key}) : super(key: key);
 
   @override
-  State<ChestView> createState() => ChestViewView();
+  ConsumerState<ChestView> createState() => ChestViewView();
 }
 
-class ChestViewView extends State<ChestView> {
+class ChestViewView extends ConsumerState<ChestView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onTapHandler() {
       gameState.selectChest(widget.reward);

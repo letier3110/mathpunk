@@ -2,10 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 const double defaultHeight = 300;
@@ -13,7 +14,7 @@ const double defaultWidth = 200;
 
 const wavecolor = Color.fromARGB(119, 179, 223, 46);
 
-class PlayableCardComponent extends StatefulWidget {
+class PlayableCardComponent extends ConsumerStatefulWidget {
   final PlayableCard card;
   final bool glow;
   final bool animate;
@@ -31,12 +32,13 @@ class PlayableCardComponent extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PlayableCardComponent> createState() => PlayableCardComponentView();
+  ConsumerState<PlayableCardComponent> createState() =>
+      PlayableCardComponentView();
 }
 
 var rng = Random();
 
-class PlayableCardComponentView extends State<PlayableCardComponent>
+class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
@@ -60,7 +62,7 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     int playerMana = gameState.playerCharacter!.mana;
 
@@ -93,18 +95,24 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       }
       if (widget.card.targetType == TargetEnum.singleTarget) {
         if (cardId == gameState.selectingTargetCardId) {
-          gameState.stopSelecting();
+          ref.read(gamestateProvider.notifier).stopSelecting();
           return;
         }
-        gameState.startSelecting(widget.card, cardId);
+        ref
+            .read(gamestateProvider.notifier)
+            .startSelecting(widget.card, cardId);
         return;
       } else if (widget.card.targetType == TargetEnum.cardTarget) {
         // TODO: implement some random fuzzy logic to select a targe
         // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
-        gameState.startSelecting(widget.card, cardId);
+        ref
+            .read(gamestateProvider.notifier)
+            .startSelecting(widget.card, cardId);
         return;
       } else {
-        gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
+        ref
+            .read(gamestateProvider.notifier)
+            .playTheCard(widget.card, gameState.currentRoom!.enemies);
         return;
       }
     }

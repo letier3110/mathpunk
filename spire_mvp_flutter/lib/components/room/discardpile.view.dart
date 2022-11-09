@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
-class DiscardPileView extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class DiscardPileView extends ConsumerStatefulWidget {
   const DiscardPileView({Key? key}) : super(key: key);
 
   @override
-  State<DiscardPileView> createState() => DiscardPileViewView();
+  ConsumerState<DiscardPileView> createState() => DiscardPileViewView();
 }
 
-class DiscardPileViewView extends State<DiscardPileView> {
+class DiscardPileViewView extends ConsumerState<DiscardPileView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
     var discardPileLength =
         (gameState.playerCharacter?.deck.discardPile ?? []).length;
 
     void onTapHandler() {
       if (gameState.inDeck.isEmpty) {
-        gameState.enterDeck(
+        gameStateNotifier.enterDeck(
             cards: gameState.playerCharacter?.deck.discardPile ?? []);
         return;
       }
-      gameState.exitDeck();
+      gameStateNotifier.exitDeck();
     }
 
     return Positioned(

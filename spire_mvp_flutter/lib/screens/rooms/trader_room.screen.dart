@@ -1,24 +1,24 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/components/game_back_button.dart';
 import 'package:mathpunk_cardgame/components/game_forward_button.dart';
 import 'package:mathpunk_cardgame/components/room/trader.view.dart';
 import 'package:mathpunk_cardgame/components/room/trader_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-class TraderRoomScreen extends StatefulWidget {
+class TraderRoomScreen extends ConsumerStatefulWidget {
   final TradeRoom room;
 
   const TraderRoomScreen({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<TraderRoomScreen> createState() => _TraderRoomScreenState();
+  ConsumerState<TraderRoomScreen> createState() => _TraderRoomScreenState();
 }
 
-class _TraderRoomScreenState extends State<TraderRoomScreen> {
+class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
   bool inTradeMenu = false;
   final player = AudioPlayer();
 
@@ -47,8 +47,7 @@ class _TraderRoomScreenState extends State<TraderRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void traderPawnPress() {
       setState(() {

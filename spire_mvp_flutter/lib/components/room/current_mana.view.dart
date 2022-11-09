@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
-class CurrentManaView extends StatefulWidget {
+class CurrentManaView extends ConsumerStatefulWidget {
   const CurrentManaView({Key? key}) : super(key: key);
 
   @override
-  State<CurrentManaView> createState() => CurrentManaViewView();
+  ConsumerState<CurrentManaView> createState() => CurrentManaViewView();
 }
 
-class CurrentManaViewView extends State<CurrentManaView> {
+class CurrentManaViewView extends ConsumerState<CurrentManaView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     var mana = gameState.playerCharacter?.mana ?? '0';
 

@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
-class PauseScreen extends StatefulWidget {
+class PauseScreen extends ConsumerStatefulWidget {
   const PauseScreen({Key? key}) : super(key: key);
 
   @override
-  State<PauseScreen> createState() => _PauseScreenState();
+  ConsumerState<PauseScreen> createState() => _PauseScreenState();
 }
 
-class _PauseScreenState extends State<PauseScreen> {
+class _PauseScreenState extends ConsumerState<PauseScreen> {
   @override
   Widget build(BuildContext context) {
-    SavesController saves =
-        Provider.of<SavesController>(context, listen: false);
-
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
+    final navigation = ref.read(navigationProvider.notifier);
+    final saves = ref.read(savesProvider.notifier);
 
     void onReturn() {
       gameState.exitPause();

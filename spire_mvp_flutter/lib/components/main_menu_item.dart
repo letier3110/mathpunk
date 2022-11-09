@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 
 import '../enums/screens.enum.dart';
 
-class MainMenuItem extends StatefulWidget {
+class MainMenuItem extends ConsumerStatefulWidget {
   final Widget text;
   final ScreenEnum? screen;
 
@@ -19,11 +19,10 @@ class MainMenuItem extends StatefulWidget {
   }
 }
 
-class MainMenuItemState extends State<MainMenuItem> {
+class MainMenuItemState extends ConsumerState<MainMenuItem> {
   @override
   Widget build(BuildContext context) {
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    final navigation = ref.read(navigationProvider.notifier);
 
     void onTapHandler() {
       if (widget.screen == ScreenEnum.quit) {

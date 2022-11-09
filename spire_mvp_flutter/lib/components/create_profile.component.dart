@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
 
-class CreateProfileComponent extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
+
+class CreateProfileComponent extends ConsumerStatefulWidget {
   const CreateProfileComponent({Key? key}) : super(key: key);
 
   @override
-  State<CreateProfileComponent> createState() => CreateProfileComponentView();
+  ConsumerState<CreateProfileComponent> createState() =>
+      CreateProfileComponentView();
 }
 
-class CreateProfileComponentView extends State<CreateProfileComponent> {
+class CreateProfileComponentView extends ConsumerState<CreateProfileComponent> {
   String profileName = '';
 
   @override
   Widget build(BuildContext context) {
-    SavesController saves =
-        Provider.of<SavesController>(context, listen: false);
+    final saves = ref.read(savesProvider.notifier);
 
     void onTapHandler() {
       saves.createNewSlot(profileName);

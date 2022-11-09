@@ -1,29 +1,31 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
 
-class CharacterDeck extends StatefulWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+class CharacterDeck extends ConsumerStatefulWidget {
   const CharacterDeck({Key? key}) : super(key: key);
 
   @override
-  State<CharacterDeck> createState() => CharacterDeckView();
+  ConsumerState<CharacterDeck> createState() => CharacterDeckView();
 }
 
-class CharacterDeckView extends State<CharacterDeck> {
+class CharacterDeckView extends ConsumerState<CharacterDeck> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
 
     var deckLength = (gameState.playerCharacter?.deck.cards ?? []).length;
 
     void onTapHandler() {
       if (gameState.inDeck.isEmpty) {
-        gameState.enterDeck(cards: gameState.playerCharacter?.deck.cards ?? []);
+        ref
+            .read(gamestateProvider.notifier)
+            .enterDeck(cards: gameState.playerCharacter?.deck.cards ?? []);
         return;
       }
-      gameState.exitDeck();
+      ref.read(gamestateProvider.notifier).exitDeck();
     }
 
     return Positioned(

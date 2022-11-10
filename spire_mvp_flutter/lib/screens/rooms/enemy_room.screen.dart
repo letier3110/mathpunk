@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,31 +28,6 @@ class EnemyRoomScreen extends ConsumerStatefulWidget {
 }
 
 class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
-  final player = AudioPlayer();
-
-  void playBattleTheme() async {
-    await player.setSource(AssetSource('ambient/battle_2.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    playBattleTheme();
-  }
-
-  @override
-  void dispose() {
-    stopTheme();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final isOpenedChest = ref.watch(

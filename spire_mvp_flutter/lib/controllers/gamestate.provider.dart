@@ -82,7 +82,7 @@ class GamestateNotifierInterface {
 
   void updateRoom(Room room) {
     currentRoom = room;
-    visitedRooms.add(room);
+    visitedRooms = [...visitedRooms, room];
   }
 }
 
@@ -92,21 +92,44 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   GamestateNotifier({this.playerCharacter})
       : super(GamestateNotifierInterface());
 
+  void updateState() {
+    state = GamestateNotifierInterface(
+      gameMode: state.gameMode,
+      inMap: state.inMap,
+      inDeck: state.inDeck,
+      loreCard: state.loreCard,
+      inPause: state.inPause,
+      gameMap: state.gameMap,
+      visitedRooms: state.visitedRooms,
+      currentRoom: state.currentRoom,
+      selectedTarget: state.selectedTarget,
+      selectingCardReward: state.selectingCardReward,
+      isOpenedChest: state.isOpenedChest,
+      selectingTargetCardId: state.selectingTargetCardId,
+      selectingTarget: state.selectingTarget,
+      playerName: state.playerName,
+    );
+  }
+
   void setPlayerName(String playerName) {
     state.playerName = playerName;
+    updateState();
   }
 
   void setSelectedCards(List<PlayableCard> selectedCards) {
     if (state.selectingTarget == null) return;
     state.selectingTarget!.setSelectedCards(selectedCards);
+    updateState();
   }
 
   void exitGameMode() {
     state.gameMode = null;
+    updateState();
   }
 
   void changeGameMode(GameTypeEnum newGameMode) {
     state.gameMode = newGameMode;
+    updateState();
   }
 
   void stopPlaying() {
@@ -115,16 +138,19 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     state.gameMap = [];
     state.inPause = false;
     state.inMap = false;
+    updateState();
   }
 
   void stopSelecting() {
     state.selectingTarget = null;
     state.selectingTargetCardId = null;
+    updateState();
   }
 
   void startSelecting(PlayableCard card, int cardId) {
     state.selectingTarget = card;
     state.selectingTargetCardId = cardId;
+    updateState();
   }
 
   void changeCurrentRoom(Room room) {
@@ -134,11 +160,13 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       enemyRoomEnter(
           currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
     }
+    updateState();
   }
 
   void givePlayerGold(int goldValue) {
     if (playerCharacter == null) return;
     playerCharacter!.gold += goldValue;
+    updateState();
   }
 
   void healPlayer(HealPlayer healType, double? percentageValue) {
@@ -160,11 +188,13 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       case HealPlayer.valueHeal:
         break;
     }
+    updateState();
   }
 
   void selectTarget(Enemy target) {
     if (state.selectingTarget == null) return;
     playTheCard(state.selectingTarget!, [target]);
+    updateState();
   }
 
   bool _checkIfCardPlayable(PlayableCard card) {
@@ -260,11 +290,13 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       }
       endTheRoom();
     }
+    updateState();
   }
 
   void endTheRoom() {
     playerCharacter!.attachDeck(Deck(playerCharacter!.deck.cards));
     // enterMap();
+    updateState();
   }
 
   void startGame() {
@@ -276,14 +308,17 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       playerCharacter!.resetRoundStatuses();
     }
     state.isOpenedChest = reward;
+    updateState();
   }
 
   void stopSelectingChest() {
     state.isOpenedChest = null;
+    updateState();
   }
 
   void selectCardReward(List<PlayableCard> cards) {
     state.selectingCardReward = cards;
+    updateState();
   }
 
   void stopSelectingCardReward() {
@@ -355,26 +390,32 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
         enterMap();
       }
     }
+    updateState();
   }
 
   void _generateMap() {
     state.gameMap = generateMap();
+    updateState();
   }
 
   void enterPause() {
     state.inPause = true;
+    updateState();
   }
 
   void exitPause() {
     state.inPause = false;
+    updateState();
   }
 
   void enterMap() {
     state.inMap = true;
+    updateState();
   }
 
   void exitMap() {
     state.inMap = false;
+    updateState();
   }
 
   void enterDeck({List<PlayableCard> cards = const []}) {
@@ -382,23 +423,28 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       return;
     }
     state.inDeck = cards;
+    updateState();
   }
 
   void exitDeck() {
     state.inDeck = [];
+    updateState();
   }
 
   void openLoreCard(PlayableCard card) {
     state.loreCard = card;
+    updateState();
   }
 
   void closeLoreCard() {
     state.loreCard = null;
+    updateState();
   }
 
   void visitTrader() {
     if (state.currentRoom == null) return;
     (state.currentRoom! as TradeRoom).visitedTrader = true;
+    updateState();
   }
 
   List<Room> getNextAvailableRooms() {
@@ -427,6 +473,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       enemyRoomEnter(
           currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
     }
+    updateState();
   }
 
   void nextTurn() {
@@ -511,6 +558,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     if (ringOfSerpent.isNotEmpty) {
       ringOfSerpent[0].play();
     }
+    updateState();
   }
 
   getCurrentRoom() => state.currentRoom;

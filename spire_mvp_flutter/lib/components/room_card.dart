@@ -17,30 +17,33 @@ class RoomCard extends ConsumerStatefulWidget {
 class RoomCardView extends ConsumerState<RoomCard> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
+    final currentRoom =
+        ref.watch(gamestateProvider.select((value) => value.currentRoom));
+    final visitedRooms =
+        ref.watch(gamestateProvider.select((value) => value.visitedRooms));
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
 
     var isNextRoom =
         gameStateNotifier.getNextAvailableRooms().contains(widget.room);
     Room? isVisited;
 
     try {
-      isVisited = gameState.visitedRooms
+      isVisited = visitedRooms
           .firstWhere((element) => Room.isEqual(element, widget.room));
     } catch (e) {
       // ignore: avoid_print
       print(e);
     }
 
-    var isInRoom = gameState.currentRoom != null;
+    var isInRoom = currentRoom != null;
 
     var isAvailable = (!isInRoom && isNextRoom) ||
         (isInRoom &&
-            gameState.currentRoom!.enemies.isEmpty &&
-            gameState.currentRoom!.id != widget.room.id &&
+            currentRoom.enemies.isEmpty &&
+            currentRoom.id != widget.room.id &&
             isNextRoom);
 
-    var inCurrentRoom = gameState.currentRoom?.id == widget.room.id;
+    var inCurrentRoom = currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
       if (!isInRoom && isNextRoom) {
@@ -48,8 +51,8 @@ class RoomCardView extends ConsumerState<RoomCard> {
         return;
       }
       if (isInRoom) {
-        if (gameState.currentRoom!.enemies.isEmpty &&
-            gameState.currentRoom!.id != widget.room.id &&
+        if (currentRoom.enemies.isEmpty &&
+            currentRoom.id != widget.room.id &&
             isNextRoom) {
           gameStateNotifier.enterRoom(widget.room);
           gameStateNotifier.exitMap();

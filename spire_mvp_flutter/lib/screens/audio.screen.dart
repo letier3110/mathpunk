@@ -1,8 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
+import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
+import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
@@ -13,8 +16,11 @@ class AudioScreen extends ConsumerStatefulWidget {
   ConsumerState<AudioScreen> createState() => _AudioScreenState();
 }
 
+enum AudioState { mainMenu, battle, map, mindBloom, trader }
+
 class _AudioScreenState extends ConsumerState<AudioScreen> {
   final player = AudioPlayer();
+  AudioState? audioState;
 
   void setSourceBattle() async {
     await player.setSource(AssetSource('ambient/battle_4.mp3'));
@@ -26,68 +32,143 @@ class _AudioScreenState extends ConsumerState<AudioScreen> {
     await player.setReleaseMode(ReleaseMode.loop);
   }
 
+  void setSourceMap() async {
+    await player.setSource(AssetSource('ambient/map_3.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+  }
+
   void playMenuTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
     await player.stop();
-    setSourceMainMenu();
+    await player.setSource(AssetSource('ambient/main_menu_2.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
     await player.resume();
   }
 
   void playBattleTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
     await player.stop();
-    setSourceBattle();
+    await player.setSource(AssetSource('ambient/battle_4.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
     await player.resume();
   }
 
-  void stopMenuTheme() async {
+  void playMapTheme() async {
     await player.setReleaseMode(ReleaseMode.stop);
     await player.stop();
+    await player.setSource(AssetSource('ambient/map_3.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
   }
 
-  // @override
-  // void didUpdateWidget(covariant AudioScreen widget) {
-  //   final currentScreen = ref.read(navigationProvider);
-  //   // final gameMode =
-  //   //     ref.read(gamestateProvider.select((value) => value.gameMode));
+  void playMindBloomTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
+    await player.setSource(AssetSource('ambient/event.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
+  }
 
-  //   if (currentScreen == ScreenEnum.mainMenu ||
-  //       currentScreen == ScreenEnum.modeSelect) {
-  //     playMenuTheme();
-  //   }
-  //   if (currentScreen == ScreenEnum.characterSelect) {
-  //     playBattleTheme();
-  //   }
-  //   super.didUpdateWidget(widget);
-  // }
+  void playTraderTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
+    await player.setSource(AssetSource('ambient/trade.mp3'));
+    await player.setReleaseMode(ReleaseMode.loop);
+    await player.resume();
+  }
 
-  // @override
-  // void didUpdateWidget(covariant AudioScreen oldWidget) {
-  //   // TODO: implement didUpdateWidget
-  //   super.didUpdateWidget(oldWidget);
-  // }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
+  void stopPlayingTheme() async {
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.stop();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    stopMenuTheme();
+    stopPlayingTheme();
     super.dispose();
+  }
+
+  void setMainMenu() {
+    setState(() {
+      if (audioState != AudioState.mainMenu) {
+        audioState = AudioState.mainMenu;
+        playMenuTheme();
+      }
+    });
+  }
+
+  void setBattle() {
+    setState(() {
+      if (audioState != AudioState.battle) {
+        audioState = AudioState.battle;
+        playBattleTheme();
+      }
+    });
+  }
+
+  void setMap() {
+    setState(() {
+      if (audioState != AudioState.map) {
+        audioState = AudioState.map;
+        playMapTheme();
+      }
+    });
+  }
+
+  void setMindBloom() {
+    setState(() {
+      if (audioState != AudioState.mindBloom) {
+        audioState = AudioState.mindBloom;
+        playMindBloomTheme();
+      }
+    });
+  }
+
+  void setTrader() {
+    setState(() {
+      if (audioState != AudioState.trader) {
+        audioState = AudioState.trader;
+        playTraderTheme();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final currentScreen = ref.watch(navigationProvider);
+    final inMap = ref.watch(gamestateProvider.select((value) => value.inMap));
+
+    final currentRoom =
+        ref.watch(gamestateProvider.select((value) => value.currentRoom));
 
     if (currentScreen == ScreenEnum.mainMenu ||
         currentScreen == ScreenEnum.modeSelect) {
-      playMenuTheme();
+      setMainMenu();
     }
-    // final gameMode =
-    //     ref.read(gamestateProvider.select((value) => value.gameMode));
+    if (currentScreen == ScreenEnum.game &&
+        ((currentRoom == null) ||
+            (inMap &&
+                currentRoom.runtimeType == EnemyRoom &&
+                currentRoom.enemies.isEmpty))) {
+      setMap();
+    }
+    if (currentScreen == ScreenEnum.game &&
+        currentRoom != null &&
+        currentRoom.runtimeType == EnemyRoom &&
+        currentRoom.enemies.isNotEmpty) {
+      setBattle();
+    }
+    if (currentScreen == ScreenEnum.game &&
+        currentRoom != null &&
+        currentRoom.runtimeType == TradeRoom) {
+      setTrader();
+    }
+    if (currentScreen == ScreenEnum.game &&
+        currentRoom != null &&
+        currentRoom.runtimeType == MindBloomEventRoom) {
+      setMindBloom();
+    }
     return const SizedBox.shrink();
   }
 }

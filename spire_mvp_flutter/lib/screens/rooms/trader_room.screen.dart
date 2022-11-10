@@ -22,29 +22,6 @@ class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
   bool inTradeMenu = false;
   final player = AudioPlayer();
 
-  void playMapTheme() async {
-    await player.setSource(AssetSource('ambient/trade.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    playMapTheme();
-  }
-
-  @override
-  void dispose() {
-    stopTheme();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final gameState = ref.read(gamestateProvider.notifier);

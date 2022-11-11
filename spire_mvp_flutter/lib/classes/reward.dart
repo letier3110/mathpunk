@@ -31,7 +31,7 @@ class Reward {
         json['item'] == null ? null : consumableItemFromJson(json['item']);
     List<PlayableCard> jsonCards =
         (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
-    int? jsonGold = json['gold'] as int?;
+    int? jsonGold = int.parse(json['gold']);
 
     Reward jsonReward = Reward(
         rewardRelic: jsonRelic,

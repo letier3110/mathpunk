@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
+import 'package:mathpunk_cardgame/enums/supported_locale.enum.dart';
 import 'package:mathpunk_cardgame/screens/audio.screen.dart';
 
 import 'package:mathpunk_cardgame/screens/character_select/character_select.screen.dart';
 import 'package:mathpunk_cardgame/screens/game.screen.dart';
 import 'package:mathpunk_cardgame/screens/main_loading.screen.dart';
 import 'package:mathpunk_cardgame/screens/mode_select.screen.dart';
+import 'package:mathpunk_cardgame/screens/settings/settings.screen.dart';
+import 'package:mathpunk_cardgame/screens/settings/settings.util.dart';
 import 'package:window_size/window_size.dart';
 
 import './screens/main_menu.screen.dart';
@@ -33,6 +37,9 @@ class MyApp extends ConsumerWidget {
       setWindowTitle("Mathpunk: card game");
     }
 
+    final selectedLocale =
+        ref.watch(settingsProvider.select((value) => value.selectedLocale));
+
     return MaterialApp(
         title: 'Mathpunk: card game',
         localizationsDelegates: const [
@@ -41,11 +48,8 @@ class MyApp extends ConsumerWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en', ''), // English, no country code
-          Locale('pt', ''),
-          Locale('uk', ''),
-        ],
+        supportedLocales: supportedLocales,
+        locale: getLocaleFromSupportedLocaleEnum(selectedLocale),
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -80,6 +84,9 @@ List<Page> getPages(context, WidgetRef ref) {
       break;
     case ScreenEnum.characterSelect:
       pageList.add(const MaterialPage(child: CharacterSelect()));
+      break;
+    case ScreenEnum.settings:
+      pageList.add(const MaterialPage(child: SettingsScreen()));
       break;
     case ScreenEnum.game:
       pageList.add(const MaterialPage(child: GameScreen()));

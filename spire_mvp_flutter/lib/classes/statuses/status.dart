@@ -51,7 +51,7 @@ class Status {
   factory Status.fromJson(dynamic json) {
     return Status(
       statusName: json['name'] as String,
-      statusStack: json['stack'] as double,
+      statusStack: double.parse(json['stack']),
       statusDescription: json['description'] as String,
     );
   }

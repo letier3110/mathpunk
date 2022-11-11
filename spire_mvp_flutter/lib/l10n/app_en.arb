@@ -406,6 +406,9 @@
     "vulnerableStatusDescription": "Receives 50% more damage from attacks.",
     "weakStatusName": "Weak",
     "weakStatusDescription": "Deals 25% less attack damage.",
+    "enLocaleText": "English",
+    "ptLocaleText": "Português",
+    "ukLocaleText": "Українська",
     "@helloWorld": {
       "description": "The conventional newborn programmer greeting"
     }

@@ -29,8 +29,8 @@ class Intension {
   }
 
   factory Intension.fromJson(dynamic json) {
-    int jsonDamage = json['baseDamage'] as int;
-    int jsonCount = json['count'] as int;
+    int jsonDamage = int.parse(json['baseDamage']);
+    int jsonCount = int.parse(json['count']);
     IntensionType jsonType = decodeIntensionTypeFromJson(json['type']);
 
     Intension jsonIntension = Intension(

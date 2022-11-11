@@ -186,17 +186,17 @@ class PlayerCharacter extends BaseCharacter {
   factory PlayerCharacter.fromJson(dynamic json) {
     PlayerCharacter character =
         (BaseCharacter.fromJson(json)) as PlayerCharacter;
-    character.setMana(json['mana'] as int);
-    character.setManaPower(json['manaPower'] as int);
-    character.setDrawPower(json['drawPower'] as int);
-    character.setGold(json['gold'] as int);
+    character.setMana(int.parse(json['mana']));
+    character.setManaPower(int.parse(json['manaPower']));
+    character.setDrawPower(int.parse(json['drawPower']));
+    character.setGold(int.parse(json['gold']));
     character.setDeck(Deck.fromJson(json['deck']));
     character.setRelics(
         (json['relics'] as List).map((e) => relicFromJson(e)).toList());
     character.setItems(
         (json['items'] as List).map((e) => consumableItemFromJson(e)).toList());
 
-    character.addCardsPlayedInRound(json['cardsPlayedInRound'] as int);
+    character.addCardsPlayedInRound(int.parse(json['cardsPlayedInRound']));
 
     return character;
   }

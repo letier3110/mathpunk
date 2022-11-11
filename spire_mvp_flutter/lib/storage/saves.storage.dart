@@ -14,7 +14,7 @@ class SavesStorage {
     return directory.path;
   }
 
-  Future<File> getFile() async {
+  Future<File> _getFile() async {
     final path = await _localPath;
     return File('$path/saves.bin');
   }
@@ -22,7 +22,7 @@ class SavesStorage {
   Future<int> loadSaves(
       SavesNotifier saves, NavigationNotifier navigation) async {
     try {
-      final saveFile = await getFile();
+      final saveFile = await _getFile();
       final contents = await saveFile.readAsString();
 
       dynamic saveSlots = jsonDecode(contents);
@@ -45,7 +45,7 @@ class SavesStorage {
   }
 
   Future<int> writeSaves(SavesNotifier saves) async {
-    final save = await getFile();
+    final save = await _getFile();
 
     try {
       save.writeAsString(jsonEncode(saves.toJson()));

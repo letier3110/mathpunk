@@ -33,11 +33,19 @@ class SavesNotifier extends StateNotifier<SavesInterface> {
   }
 
   void selectSaveSlot(int slot) {
-    state.currentSaveSlot = slot;
+    // state.currentSaveSlot = slot;
+    state = SavesInterface(
+        currentSaveSlot: slot,
+        saveSlots: state.saveSlots,
+        loading: state.loading);
   }
 
   void setLoading(bool loading) {
-    state.loading = loading;
+    // state.loading = loading;
+    state = SavesInterface(
+        currentSaveSlot: state.currentSaveSlot,
+        saveSlots: state.saveSlots,
+        loading: loading);
   }
 
   void loadSavesMetadata(NavigationNotifier navigation) {
@@ -45,12 +53,18 @@ class SavesNotifier extends StateNotifier<SavesInterface> {
   }
 
   void setSaveSlots(List<String> saveSlots) {
-    state.saveSlots = saveSlots;
+    // state.saveSlots = saveSlots;
+    state = SavesInterface(
+        currentSaveSlot: state.currentSaveSlot,
+        saveSlots: saveSlots,
+        loading: state.loading);
   }
 
   void createNewSlot(String slot) {
-    state.currentSaveSlot = state.saveSlots.length;
-    state.saveSlots.add(slot);
+    state = SavesInterface(
+        currentSaveSlot: state.saveSlots.length,
+        saveSlots: [...state.saveSlots, slot],
+        loading: state.loading);
 
     state._storage.writeSaves(this);
   }
@@ -69,7 +83,7 @@ class SavesNotifier extends StateNotifier<SavesInterface> {
   }
 
   SavesNotifier fromJson(dynamic json) {
-    state.currentSaveSlot = json["currentSaveSlot"] as int;
+    state.currentSaveSlot = int.parse(json["currentSaveSlot"]);
     state.saveSlots =
         (json['saveSlots'] as List).map((e) => e.toString()).toList();
     return this;

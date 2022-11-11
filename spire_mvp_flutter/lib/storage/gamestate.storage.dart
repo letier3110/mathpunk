@@ -12,7 +12,7 @@ class GameStateStorage {
     return directory.path;
   }
 
-  Future<File> getFile(String fileName) async {
+  Future<File> _getFile(String fileName) async {
     final path = await _localPath;
     return File('$path/$fileName.bin');
   }
@@ -26,7 +26,7 @@ class GameStateStorage {
       } else if (profile == 3) {
         profileSaveName = 'save3';
       }
-      final saveFile = await getFile(profileSaveName);
+      final saveFile = await _getFile(profileSaveName);
 
       // Read the file
       final contents = await saveFile.readAsString();
@@ -45,9 +45,9 @@ class GameStateStorage {
 
   Future<List<String>> readProfiles(int profile) async {
     try {
-      final save1 = await getFile('save1');
-      final save2 = await getFile('save2');
-      final save3 = await getFile('save3');
+      final save1 = await _getFile('save1');
+      final save2 = await _getFile('save2');
+      final save3 = await _getFile('save3');
 
       final contents1 = await save1.readAsString();
       final contents2 = await save2.readAsString();
@@ -77,7 +77,7 @@ class GameStateStorage {
     } else if (profile == 3) {
       profileSaveName = 'save3';
     }
-    final save = await getFile(profileSaveName);
+    final save = await _getFile(profileSaveName);
 
     try {
       final jsonState = gameState.toJson();

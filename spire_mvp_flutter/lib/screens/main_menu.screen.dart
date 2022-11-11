@@ -1,5 +1,4 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +8,9 @@ import 'package:mathpunk_cardgame/components/create_profile.component.dart';
 // import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
+import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
+import 'package:mathpunk_cardgame/storage/saves.storage.dart';
+import 'package:mathpunk_cardgame/storage/settings.storage.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
@@ -28,11 +30,14 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
     final currentSaveSlot =
         ref.read(savesProvider.select((value) => value.currentSaveSlot));
     final savesNotifier = ref.read(savesProvider.notifier);
+    final settingsNotifier = ref.read(settingsProvider.notifier);
 
     final gameMapIsEmpty =
         ref.read(gamestateProvider.select((value) => value.gameMap.isEmpty));
     final gamestateNotifier = ref.read(gamestateProvider.notifier);
 
+    SettingsStorage settingsStorage = SettingsStorage();
+    settingsStorage.loadSettings(settingsNotifier);
     if (currentSaveSlot != null && gameMapIsEmpty) {
       savesNotifier.loadGame(gamestateNotifier);
     }

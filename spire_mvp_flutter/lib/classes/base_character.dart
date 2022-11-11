@@ -130,12 +130,12 @@ class BaseCharacter implements ICharacter {
 
   factory BaseCharacter.fromJson(dynamic json) {
     BaseCharacter character = BaseCharacter();
-    character.setHealth(json['health'] as int);
-    character.setMaxHealth(json['maxHealth'] as int);
+    character.setHealth(int.parse(json['health']));
+    character.setMaxHealth(int.parse(json['maxHealth']));
     character.addTimesReceivedDamageInRound(
-        json['timesReceivedDamageInRound'] as int);
+        int.parse(json['timesReceivedDamageInRound']));
     character
-        .addTimesPlayedCardsInRound(json['timesPlayedCardsInRound'] as int);
+        .addTimesPlayedCardsInRound(int.parse(json['timesPlayedCardsInRound']));
 
     character.statuses.addAll((json['statuses'] as List<Status>)
         .map((e) => statusFromJson(e))

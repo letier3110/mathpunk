@@ -22,7 +22,7 @@ class Sellable {
 
   factory Sellable.fromJson(dynamic json) {
     return Sellable(
-        cost: json['cost'] as int, inStock: json['inStock'] as bool);
+        cost: int.parse(json['cost']), inStock: json['inStock'] as bool);
   }
 
   Map toJson() => {
@@ -149,7 +149,7 @@ class SellableItem implements Sellable {
 
 Sellable sellableFromJson(dynamic json) {
   String jsonRuntime = json['_runtime'] as String;
-  int jsonCost = json['cost'] as int;
+  int jsonCost = int.parse(json['cost']);
   bool jsonInStock = json['inStock'] as bool;
 
   Sellable sellable;

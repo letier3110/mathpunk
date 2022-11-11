@@ -7,6 +7,7 @@ import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
+import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
 class AudioScreen extends ConsumerStatefulWidget {
@@ -137,13 +138,21 @@ class _AudioScreenState extends ConsumerState<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     final currentScreen = ref.watch(navigationProvider);
+    // final audioVolume =
+    //     ref.watch(settingsProvider.select((value) => value.audioAmbientVolume));
+    final audioVolume =
+        ref.watch(settingsProvider.select((value) => value.audioAmbientVolume));
     final inMap = ref.watch(gamestateProvider.select((value) => value.inMap));
+
+    player.setVolume(audioVolume);
 
     final currentRoom =
         ref.watch(gamestateProvider.select((value) => value.currentRoom));
 
     if (currentScreen == ScreenEnum.mainMenu ||
-        currentScreen == ScreenEnum.modeSelect) {
+        currentScreen == ScreenEnum.modeSelect ||
+        currentScreen == ScreenEnum.characterSelect ||
+        currentScreen == ScreenEnum.settings) {
       setMainMenu();
     }
     if (currentScreen == ScreenEnum.game &&

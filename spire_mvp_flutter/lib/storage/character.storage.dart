@@ -16,20 +16,20 @@ PlayerCharacter playerCharacterFromJson(dynamic json) {
       (json['relics'] as List).map((e) => relicFromJson(e)).toList();
   List<ConsumableItem> jsonItem =
       (json['items'] as List).map((e) => consumableItemFromJson(e)).toList();
-  int jsonMana = json['mana'] as int;
-  int jsonManaPower = json['manaPower'] as int;
-  int jsonDrawPower = json['drawPower'] as int;
-  int jsonGold = json['gold'] as int;
+  int jsonMana = int.parse(json['mana']);
+  int jsonManaPower = int.parse(json['manaPower']);
+  int jsonDrawPower = int.parse(json['drawPower']);
+  int jsonGold = int.parse(json['gold']);
 
-  int jsonHealth = json['health'] as int;
-  int jsonMaxHealth = json['maxHealth'] as int;
+  int jsonHealth = int.parse(json['health']);
+  int jsonMaxHealth = int.parse(json['maxHealth']);
 
   int jsonTimesReceivedDamageInRound =
-      json['timesReceivedDamageInRound'] as int;
+      int.parse(json['timesReceivedDamageInRound']);
 
-  int jsonTimesPlayedCardsInRound = json['timesPlayedCardsInRound'] as int;
+  int jsonTimesPlayedCardsInRound = int.parse(json['timesPlayedCardsInRound']);
 
-  int jsonCardsPlayedInRound = json['cardsPlayedInRound'] as int;
+  int jsonCardsPlayedInRound = int.parse(json['cardsPlayedInRound']);
 
   String jsonRuntime = json['_runtime'] as String;
 

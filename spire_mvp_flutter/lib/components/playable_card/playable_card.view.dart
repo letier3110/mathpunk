@@ -189,7 +189,7 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, cardWidth / 36, 0, 0),
-                              child: widget.card.getCardName(context),
+                              child: widget.card.getCardName(),
                             ),
                             Container(
                               height: calcHeightByWidth(cardWidth) * 0.3,
@@ -197,7 +197,7 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
                                   width / 40, 0, width / 40, 0),
                               child: Column(
                                 children: [
-                                  widget.card.getCardDescription(context),
+                                  widget.card.getCardDescription(),
                                 ],
                               ),
                             ),

@@ -1,7 +1,7 @@
 import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
-import 'package:mathpunk_cardgame/classes/card/armaments.card.dart';
-import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_upgrade_card/anger.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_card/armaments.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/bash.card.dart';
 import 'package:mathpunk_cardgame/classes/card/bash.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';

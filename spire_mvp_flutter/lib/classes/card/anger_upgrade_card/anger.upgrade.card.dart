@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/base_character.dart';
-
-import 'package:mathpunk_cardgame/classes/card/anger_upgrade_card/anger.upgrade.card.dart';
-import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.description.dart';
-import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.name.dart';
-import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.stats.dart';
-import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_upgrade_card/anger_upgrade_card.description.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_upgrade_card/anger_upgrade_card.name.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments_upgrade_card.stats.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
-import 'package:mathpunk_cardgame/classes/util.dart';
-import 'package:mathpunk_cardgame/enums/card_type.enum.dart';
 import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
-class AngerCard extends PlayableCard {
-  AngerCard(
-      {cardName = 'Anger',
-      cardDescription = 'Deal 6 damage.',
+import '../../base_character.dart';
+
+import '../../../enums/card_type.enum.dart';
+import '../../util.dart';
+import '../playable_card.dart';
+
+class AngerUpgradeCard extends PlayableCard {
+  AngerUpgradeCard(
+      {cardName = 'Anger+',
+      cardDescription = 'Deal 9 damage.',
       cardMana = 1,
       cardTemporary = false})
       : super(
@@ -26,26 +26,28 @@ class AngerCard extends PlayableCard {
             cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardUpgrageLink: AngerUpgradeCard(),
             cardTemporary: cardTemporary);
 
   @override
   StatefulWidget getCardName() {
-    return const AngerCardName();
+    return const AngerUpgradeCardName();
   }
 
   @override
   StatefulWidget getCardDescription() {
-    return const AngerCardDescription();
+    return const AngerUpgradeCardDescription();
   }
 
   @override
   int getMana() {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     List<Status> statuses = character.getStatuses();
+
     bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
-    if (isBishopStatus && AngerCardStats.mana == 1) return 0;
-    return AngerCardStats.mana;
+
+    if (isBishopStatus && ArmamentsUpgradeCardStats.mana == 1) return 0;
+
+    return ArmamentsUpgradeCardStats.mana;
   }
 
   @override
@@ -62,9 +64,9 @@ class AngerCard extends PlayableCard {
     if (target.length == 1) {
       target[0].receiveDamage(calculateDamage(
           character: playerCharacter.getCharacter(),
-          damage: AngerCardStats.damage,
+          damage: ArmamentsUpgradeCardStats.block,
           precision: precision,
-          mana: AngerCardStats.mana));
+          mana: ArmamentsUpgradeCardStats.mana));
     }
     playerCharacter.addCardToDiscardPile(this);
   }

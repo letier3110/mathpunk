@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments_upgrade_card.description.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments_upgrade_card.name.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments_upgrade_card.stats.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -9,15 +12,13 @@ import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
-import '../base_character.dart';
+import '../../base_character.dart';
 
-import '../../enums/card_type.enum.dart';
-import '../util.dart';
-import 'playable_card.dart';
+import '../../../enums/card_type.enum.dart';
+import '../../util.dart';
+import '../playable_card.dart';
 
 class ArmamentsUpgradeCard extends PlayableCard {
-  int block = 5;
-
   ArmamentsUpgradeCard(
       {cardName = 'Armaments+',
       cardDescription =
@@ -33,40 +34,13 @@ class ArmamentsUpgradeCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardName(BuildContext context) {
-    return Text(
-      AppLocalizations.of(context)!.armamentsCardName,
-      style: TextStyle(color: getUpgradedCardColor(), fontSize: 16),
-    );
+  StatefulWidget getCardName() {
+    return const ArmamentsUpgradeCardName();
   }
 
   @override
-  StatelessWidget getCardDescription(BuildContext context) {
-    int finalBlock = predictBlock(block: block, mana: mana);
-    return Container(
-      child: Column(
-        children: [
-          RichText(
-              text: TextSpan(children: [
-            TextSpan(text: AppLocalizations.of(context)!.gainStartDescription),
-            TextSpan(
-                text: AppLocalizations.of(context)!
-                    .dealBlockNumber(finalBlock.toString()),
-                style: TextStyle(
-                    color: finalBlock > block
-                        ? Colors.greenAccent
-                        : finalBlock < block
-                            ? Colors.redAccent
-                            : Colors.white)),
-            TextSpan(
-                text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
-          ])),
-          HighlightDescriptionText(
-              text: AppLocalizations.of(context)!
-                  .upgradeAllHandCardEffectDescription),
-        ],
-      ),
-    );
+  StatefulWidget getCardDescription() {
+    return const ArmamentsUpgradeCardDescription();
   }
 
   @override
@@ -76,14 +50,17 @@ class ArmamentsUpgradeCard extends PlayableCard {
 
     bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
 
-    if (isBishopStatus && mana == 1) return 0;
+    if (isBishopStatus && ArmamentsUpgradeCardStats.mana == 1) return 0;
 
-    return mana;
+    return ArmamentsUpgradeCardStats.mana;
   }
 
   @override
   play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    int finalBlock = calculateBlock(block: block, mana: mana);
+    int finalBlock = calculateBlock(
+        character: playerCharacter.getCharacter(),
+        block: ArmamentsUpgradeCardStats.block,
+        mana: ArmamentsUpgradeCardStats.mana);
     BlockStatus bs = BlockStatus();
     bs.addStack(finalBlock.toDouble());
     playerCharacter.addStatus(bs);

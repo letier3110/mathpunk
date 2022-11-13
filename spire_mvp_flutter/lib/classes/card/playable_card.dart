@@ -72,11 +72,11 @@ class PlayableCard {
     return this;
   }
 
-  StatefulWidget getCardName(BuildContext context) {
+  StatefulWidget getCardName() {
     return const AngerCardName();
   }
 
-  StatefulWidget getCardDescription(BuildContext context) {
+  StatefulWidget getCardDescription() {
     return const AngerCardDescription();
   }
 

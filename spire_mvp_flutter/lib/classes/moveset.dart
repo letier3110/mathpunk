@@ -1,10 +1,7 @@
-import 'package:mathpunk_cardgame/classes/base_character.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
-import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../enums/intension_type.enum.dart';
 import 'intension.dart';
-import 'player/player.dart';
 
 class Moveset {
   List<Intension> moves = [];

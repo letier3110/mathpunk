@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../base_character.dart';
 import '../moveset.dart';

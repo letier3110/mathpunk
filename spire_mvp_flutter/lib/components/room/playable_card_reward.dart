@@ -79,9 +79,7 @@ class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               height: 110,
                               child: Column(
-                                children: [
-                                  widget.card.getCardDescription(context)
-                                ],
+                                children: [widget.card.getCardDescription()],
                               ),
                             ),
                           ],

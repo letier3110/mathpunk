@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
@@ -30,6 +31,7 @@ import 'package:mathpunk_cardgame/controllers/gamestate/enemy-room.gamestate.uti
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 import 'package:mathpunk_cardgame/pools/cards.pool.dart';
 import 'package:mathpunk_cardgame/pools/utils.dart';
 

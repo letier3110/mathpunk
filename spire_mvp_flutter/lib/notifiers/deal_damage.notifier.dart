@@ -5,8 +5,22 @@ import 'package:mathpunk_cardgame/classes/player/player_character/player_charact
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/storage/character.storage.dart';
 
-class PlayerCharacterNotifier extends StateNotifier<PlayerCharacter?> {
-  PlayerCharacterNotifier() : super(null);
+final dealDamageCardEffectProvider =
+    StreamProvider.autoDispose<int>((ref) async* {
+  // Open the connection
+  final channel = IOWebSocketChannel.connect('ws://echo.websocket.org');
+
+  // Close the connection when the stream is destroyed
+  ref.onDispose(() => channel.sink.close());
+
+  // Parse the value received and emit a Message instance
+  await for (final value in channel.stream) {
+    yield value.toString();
+  }
+});
+
+class DealDamageCardEffectNotifier extends StreamProvider<int> {
+  DealDamageCardEffectNotifier() : super(0);
 
   void deselectCharacter() {
     state = null;

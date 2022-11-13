@@ -6,6 +6,7 @@ import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class EnergyPotion extends ConsumableItem {
   int energy = 2;
@@ -36,8 +37,7 @@ class EnergyPotion extends ConsumableItem {
 
   @override
   play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localEnergy = energy;
-    character.addMana(localEnergy);
+    playerCharacter.addMana(localEnergy);
   }
 }

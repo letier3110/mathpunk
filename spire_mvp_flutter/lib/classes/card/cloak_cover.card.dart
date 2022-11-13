@@ -105,7 +105,7 @@ class ClockCoverCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     BlockStatus bs = BlockStatus();

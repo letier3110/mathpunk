@@ -49,5 +49,5 @@ class NormalityCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {}
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {}
 }

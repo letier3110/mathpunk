@@ -36,7 +36,7 @@ class FearPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     if (target.length == 1) {
       int localVulnerable = vulnerable;
 

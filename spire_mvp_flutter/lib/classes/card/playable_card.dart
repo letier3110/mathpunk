@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/resources/resources.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../../components/highlight_text.dart';
@@ -132,7 +133,7 @@ class PlayableCard {
 
   bool isCardPlayable() => true;
 
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     // can be failed,
     // because of not correctly loaded from memory state or wrongly casted.
     // PlayableCard class in not used directly, only as Generic Type

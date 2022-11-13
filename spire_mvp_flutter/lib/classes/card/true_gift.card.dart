@@ -74,7 +74,7 @@ class TrueGiftCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     int localBlock = predictBlock(block: block, mana: mana);

@@ -7,6 +7,7 @@ import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -100,15 +101,14 @@ class ArmamentsCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+    playerCharacter.addCardsPlayedInRound(1);
     if (selectedCards.isNotEmpty) {
       int finalBlock = calculateBlock(block: block, mana: mana);
 
       BlockStatus bs = BlockStatus();
       bs.addStack(finalBlock.toDouble());
-      character.addStatus(bs);
+      playerCharacter.addStatus(bs);
       List<PlayableCard> hand = character.deck.getHand();
 
       PlayableCard upgradedCard = selectedCards[0].upgradeCard();

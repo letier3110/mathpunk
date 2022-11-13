@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
@@ -7,6 +8,7 @@ import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 import '../base_character.dart';
 
@@ -89,13 +91,12 @@ class AngerCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+    playerCharacter.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      target[0].recieveDamage(
+      target[0].receiveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));
     }
-    character.getDeck().addToDiscardPile(this);
+    playerCharacter.addCardToDiscardPile(this);
   }
 }

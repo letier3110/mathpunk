@@ -108,12 +108,12 @@ class HeadbuttCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     if (step == 1) {
       if (target.length == 1) {
-        target[0].recieveDamage(
+        target[0].receiveDamage(
             calculateDamage(damage: damage, precision: precision, mana: mana));
         step++;
         targetType = TargetEnum.cardTarget;

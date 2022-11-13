@@ -81,11 +81,11 @@ class ThunderclapCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     for (var t in target) {
-      t.recieveDamage(
+      t.receiveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));
       int localVulnerable = vulnerable;
       VulnerableStatus vs = VulnerableStatus();

@@ -47,7 +47,7 @@ class ConsumableItem {
     throw UnimplementedError();
   }
 
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     // can be failed,
     // because of not correctly loaded from memory state or wrongly casted.
     // PlayableCard class in not used directly, only as Generic Type

@@ -113,7 +113,7 @@ class PerfectStrikeUpgradeCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     int localDamage = calculateDamage(
@@ -142,7 +142,7 @@ class PerfectStrikeUpgradeCard extends PlayableCard {
     }
     int finalDamage = localDamage + bonusDamage;
     if (target.length == 1) {
-      target[0].recieveDamage(finalDamage);
+      target[0].receiveDamage(finalDamage);
     }
   }
 }

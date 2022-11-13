@@ -51,7 +51,7 @@ class BaseCharacter implements ICharacter {
     }
   }
 
-  recieveDamage(int damage) {
+  receiveDamage(int damage) {
     int dodgeChance = castStatusToInt(statuses, DodgeStatus);
     int vulnerable = castStatusToInt(statuses, VulnerableStatus);
     int block = castStatusToInt(statuses, BlockStatus);

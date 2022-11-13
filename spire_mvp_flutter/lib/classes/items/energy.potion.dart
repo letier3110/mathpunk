@@ -35,7 +35,7 @@ class EnergyPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localEnergy = energy;
     character.addMana(localEnergy);

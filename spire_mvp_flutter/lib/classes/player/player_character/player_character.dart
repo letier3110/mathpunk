@@ -42,7 +42,9 @@ class PlayerCharacter extends BaseCharacter {
   }
 
   String getDescription() => description;
+  @override
   String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  @override
   String getDescriptionTranslationKey(BuildContext context) =>
       'realityEchanterDescription';
 
@@ -85,11 +87,6 @@ class PlayerCharacter extends BaseCharacter {
 
   addItem(ConsumableItem item) {
     items.add(item);
-  }
-
-  playCard(PlayableCard card, List<Enemy> targets) {
-    card.play(targets);
-    card.disposeToDiscard(deck.hand, deck.discardPile);
   }
 
   endTurn() {

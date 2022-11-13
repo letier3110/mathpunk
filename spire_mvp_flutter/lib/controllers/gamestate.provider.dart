@@ -45,7 +45,7 @@ enum HealPlayer {
 final gamestateProvider =
     StateNotifierProvider<GamestateNotifier, GamestateNotifierInterface>((ref) {
   final playerCharacter = ref.watch(playerCharacterProvider);
-  return GamestateNotifier(playerCharacter: playerCharacter);
+  return GamestateNotifier(ref: ref, playerCharacter: playerCharacter);
 });
 
 class GamestateNotifierInterface {
@@ -88,8 +88,9 @@ class GamestateNotifierInterface {
 
 class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   PlayerCharacter? playerCharacter;
+  final Ref ref;
 
-  GamestateNotifier({this.playerCharacter})
+  GamestateNotifier({this.playerCharacter, required this.ref})
       : super(GamestateNotifierInterface());
 
   void updateState() {
@@ -165,30 +166,30 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
 
   void givePlayerGold(int goldValue) {
     if (playerCharacter == null) return;
-    playerCharacter!.gold += goldValue;
-    updateState();
+    _getPlayerCharacterNotifier().addGold(goldValue);
   }
 
   void healPlayer(HealPlayer healType, double? percentageValue) {
     if (playerCharacter == null) return;
     switch (healType) {
       case HealPlayer.fullHeal:
-        playerCharacter!.heal(playerCharacter!.getMaxHealth());
+        ref
+            .read(playerCharacterProvider.notifier)
+            .heal(playerCharacter!.getMaxHealth());
         break;
       case HealPlayer.percentageMaxHpHeal:
         double healValue =
             (playerCharacter!.getMaxHealth() * (percentageValue ?? 1));
-        playerCharacter!.heal(healValue.toInt());
+        _getPlayerCharacterNotifier().heal(healValue.toInt());
         break;
       case HealPlayer.percentageCurrentHpHeal:
         double healValue =
             (playerCharacter!.getHealth() * (percentageValue ?? 1));
-        playerCharacter!.heal(healValue.toInt());
+        _getPlayerCharacterNotifier().heal(healValue.toInt());
         break;
       case HealPlayer.valueHeal:
         break;
     }
-    updateState();
   }
 
   void selectTarget(Enemy target) {
@@ -246,7 +247,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     }
     playerCharacter!.mana -= card.getMana();
     playerCharacter!.addCardsPlayedInRound(1);
-    card.play(targets);
+    card.play(targets, _getPlayerCharacterNotifier());
 
     if (card.step == card.maxSteps) {
       if (card.exhausted) {
@@ -494,7 +495,7 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       playerCharacter!.addStatus(ws);
     }
     for (var enemy in state.currentRoom!.getEnemies()) {
-      enemy.makeMove();
+      enemy.makeMove(_getPlayerCharacterNotifier());
 
       BlockStatus block = BlockStatus();
       enemy.setStatus(block);
@@ -562,6 +563,10 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   getCurrentRoom() => state.currentRoom;
+
+  PlayerCharacterNotifier _getPlayerCharacterNotifier() {
+    return ref.read(playerCharacterProvider.notifier);
+  }
 
   void fromJson(GameStateInterface savedInfo) {
     state.gameMode = savedInfo.gameMode;

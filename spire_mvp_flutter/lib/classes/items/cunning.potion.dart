@@ -37,7 +37,7 @@ class CunningPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     int localCount = count;
     for (var i = 0; i < localCount; i++) {

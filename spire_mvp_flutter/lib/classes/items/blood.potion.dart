@@ -34,7 +34,7 @@ class BloodPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     double localHealAmount = healAmount;
     character.heal((character.maxHealth * localHealAmount).floor());

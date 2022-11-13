@@ -16,7 +16,6 @@ import 'package:mathpunk_cardgame/classes/statuses/precision.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/queen.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
-import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 
 void enemyRoomEnter({

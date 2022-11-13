@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/classes/sellable.dart';
 import 'package:mathpunk_cardgame/components/consumable.view.dart';

@@ -1,4 +1,4 @@
-import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/armaments.card.dart';
 import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';

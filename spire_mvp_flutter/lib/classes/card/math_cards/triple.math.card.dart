@@ -14,6 +14,7 @@ import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/card_type.enum.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class TripleMathCard extends PlayableCard {
   TripleMathCard(
@@ -68,20 +69,19 @@ class TripleMathCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
-    List<Status> statuses = character.getStatuses();
+    playerCharacter.addCardsPlayedInRound(1);
+    List<Status> statuses = playerCharacter.getStatuses();
     int mathMultiplierTime =
         castStatusToInt(statuses, MathMultiplierTimeStatus);
 
     MathMultiplierScoreStatus mss = MathMultiplierScoreStatus();
     mss.addStack(3);
-    character.addStatus(mss);
+    playerCharacter.addStatus(mss);
 
     if (mathMultiplierTime == 0) {
       MathMultiplierTimeStatus mts = MathMultiplierTimeStatus();
       mts.addStack(1);
-      character.addStatus(mts);
+      playerCharacter.addStatus(mts);
     }
   }
 }

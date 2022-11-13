@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mathpunk_cardgame/classes/resources/resources.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.description.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.name.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
-import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/enums/resources.enum.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
+import 'package:mathpunk_cardgame/storage/playable_card.storage.dart';
 
-import '../../components/highlight_text.dart';
 import '../base_character.dart';
 
 import '../../enums/card_type.enum.dart';
@@ -70,15 +72,12 @@ class PlayableCard {
     return this;
   }
 
-  StatelessWidget getCardName(BuildContext context) {
-    return Text(
-      name,
-      style: const TextStyle(color: Colors.white, fontSize: 16),
-    );
+  StatefulWidget getCardName(BuildContext context) {
+    return const AngerCardName();
   }
 
-  StatelessWidget getCardDescription(BuildContext context) {
-    return HighlightDescriptionText(text: description);
+  StatefulWidget getCardDescription(BuildContext context) {
+    return const AngerCardDescription();
   }
 
   StatelessWidget getCardMana() {
@@ -156,7 +155,11 @@ class PlayableCard {
         cardTargetType: decodeTargetEnumFromJson(json['targetType']),
         cardUpgrageLink: card == null
             ? null
-            : PlayableCard.fromJson(json['upgradeCardLink']));
+            : PlayableCard.fromJson(json['upgradeCardLink']),
+        cardResource: decodeResourcesFromJson(json['resourceType']),
+        cardSelectedCards: (json['selectedCards'] as List)
+            .map((e) => playableCardFromJson(json))
+            .toList());
   }
 
   Map toJson() => {
@@ -171,6 +174,8 @@ class PlayableCard {
         'temporary': temporary,
         'type': type.toString(),
         'targetType': targetType.toString(),
+        'resourceType': resourceType.toString(),
+        'selectedCards': selectedCards.map((e) => e.toJson()).toList(),
         'upgradeCardLink':
             upgradeCardLink == null ? null : upgradeCardLink!.toJson(),
       };

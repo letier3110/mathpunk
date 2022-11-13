@@ -8,7 +8,7 @@ import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
-import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../base_character.dart';
 
@@ -95,8 +95,7 @@ class BashCard extends PlayableCard {
 
   @override
   play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+    playerCharacter.addCardsPlayedInRound(1);
     if (target.length == 1) {
       target[0].receiveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));

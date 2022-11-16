@@ -71,13 +71,7 @@ class BashUpgradeCard extends PlayableCard {
   }
 
   @override
-  bool isCardBoosted() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    List<Status> statuses = character.getStatuses();
-    double mathMultiplierScore =
-        castStatusToDouble(statuses, MathMultiplierScoreStatus);
-    return mathMultiplierScore > 0;
-  }
+  bool isCardBoosted() => true;
 
   @override
   int getMana() {

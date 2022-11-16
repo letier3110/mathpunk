@@ -9,6 +9,7 @@ import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 import '../base_character.dart';
@@ -21,19 +22,19 @@ class TrueGiftCard extends PlayableCard {
   int block = 7;
 
   TrueGiftCard(
-      {cardName = 'True Grit',
-      cardDescription =
-          'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
+      {
+      //   cardName = 'True Grit',
+      // cardDescription =
+      //     'Gain 7(9) Block. Exhaust a random(not random) card from your hand.',
       cardMana = 1,
       cardTemporary = false})
       : super(
-            cardName: cardName,
             cardTemporary: cardTemporary,
-            cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
             cardType: CardType.skill,
-            cardUpgrageLink: TrueGiftUpgradeCard());
+            cardUpgrageLink: TrueGiftUpgradeCard(),
+            cardEffect: []);
 
   @override
   StatelessWidget getCardName(BuildContext context) {
@@ -73,19 +74,19 @@ class TrueGiftCard extends PlayableCard {
     return mana;
   }
 
-  @override
-  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
-    int localBlock = predictBlock(block: block, mana: mana);
+  // @override
+  // play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+  //   PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  //   character.addCardsPlayedInRound(1);
+  //   int localBlock = predictBlock(block: block, mana: mana);
 
-    BlockStatus bs = BlockStatus();
-    bs.addStack(localBlock.toDouble());
-    character.addStatus(bs);
+  //   BlockStatus bs = BlockStatus();
+  //   bs.addStack(localBlock.toDouble());
+  //   character.addStatus(bs);
 
-    List<PlayableCard> hand = character.getDeck().getHand();
-    int cardIndex = Random().nextInt(hand.length - 1);
-    hand[cardIndex].exhausted = true;
-    hand[cardIndex].disposeToDiscard(hand, character.getDeck().exhaustPile);
-  }
+  //   List<PlayableCard> hand = character.getDeck().getHand();
+  //   int cardIndex = Random().nextInt(hand.length - 1);
+  //   hand[cardIndex].exhausted = true;
+  //   hand[cardIndex].currentState = CardState.inDiscardPile;
+  // }
 }

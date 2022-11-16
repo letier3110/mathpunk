@@ -15,18 +15,13 @@ import 'playable_card.dart';
 class StickHitUpgradeCard extends PlayableCard {
   int damage = 3;
 
-  StickHitUpgradeCard(
-      {cardName = 'Stick Hit+',
-      cardDescription = '0 mana, 90% precision, 3 damage',
-      cardMana = 0,
-      cardTemporary = false})
+  StickHitUpgradeCard({cardMana = 0, cardTemporary = false})
       : super(
-            cardName: cardName,
             cardTemporary: cardTemporary,
-            cardDescription: cardDescription,
             cardMana: cardMana,
             cardType: CardType.attack,
-            cardPrecision: 90);
+            cardPrecision: 90,
+            cardEffect: []);
 
   @override
   StatelessWidget getCardName(BuildContext context) {
@@ -90,13 +85,7 @@ class StickHitUpgradeCard extends PlayableCard {
   }
 
   @override
-  bool isCardBoosted() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    List<Status> statuses = character.getStatuses();
-    double mathMultiplierScore =
-        castStatusToDouble(statuses, MathMultiplierScoreStatus);
-    return mathMultiplierScore > 0;
-  }
+  bool isCardBoosted() => true;
 
   @override
   play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {

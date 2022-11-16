@@ -119,12 +119,6 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     updateState();
   }
 
-  void setSelectedCards(List<PlayableCard> selectedCards) {
-    if (state.selectingTarget == null) return;
-    state.selectingTarget!.setSelectedCards(selectedCards);
-    updateState();
-  }
-
   void exitGameMode() {
     state.gameMode = null;
     updateState();
@@ -243,23 +237,23 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     playerCharacter!.gold -= sellable.getCost();
   }
 
-  void playTheCard(PlayableCard card, List<Enemy> targets) {
+  void playTheCard(PlayableCard card) {
     if (!_checkIfCardPlayable(card)) {
       return;
     }
     playerCharacter!.mana -= card.getMana();
     playerCharacter!.addCardsPlayedInRound(1);
-    card.play(targets, _getPlayerCharacterNotifier());
+    // card.play(targets, _getPlayerCharacterNotifier());
 
-    if (card.step == card.maxSteps) {
-      if (card.exhausted) {
-        card.disposeToDiscard(
-            playerCharacter!.deck.hand, playerCharacter!.deck.exhaustPile);
-      } else {
-        card.disposeToDiscard(
-            playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
-      }
-    }
+    // if (card.step == card.maxSteps) {
+    //   if (card.exhausted) {
+    //     card.disposeToDiscard(
+    //         playerCharacter!.deck.hand, playerCharacter!.deck.exhaustPile);
+    //   } else {
+    //     card.disposeToDiscard(
+    //         playerCharacter!.deck.hand, playerCharacter!.deck.discardPile);
+    //   }
+    // }
 
     if (state.selectedTarget != null) {
       if (state.selectingTarget!.step == state.selectingTarget!.maxSteps) {

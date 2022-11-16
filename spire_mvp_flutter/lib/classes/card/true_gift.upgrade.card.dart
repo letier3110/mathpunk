@@ -21,20 +21,20 @@ class TrueGiftUpgradeCard extends PlayableCard {
   int maxSelectableCards = 1;
 
   TrueGiftUpgradeCard(
-      {cardName = 'True Grit+',
-      cardDescription =
-          'Gain 7(9) Block. Exhaust a selected card from your hand.',
+      {
+      //   cardName = 'True Grit+',
+      // cardDescription =
+      //     'Gain 7(9) Block. Exhaust a selected card from your hand.',
       cardMana = 1,
       cardTemporary = false})
       : super(
-            cardName: cardName,
             cardTemporary: cardTemporary,
             cardSteps: 1,
             cardMaxSteps: 3,
-            cardDescription: cardDescription,
             cardMana: cardMana,
             cardTargetType: TargetEnum.allTargets,
-            cardType: CardType.skill);
+            cardType: CardType.skill,
+            cardEffect: []);
 
   @override
   StatelessWidget getCardName(BuildContext context) {
@@ -85,32 +85,32 @@ class TrueGiftUpgradeCard extends PlayableCard {
     return localMaxSelectableCards;
   }
 
-  @override
-  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
-    if (step == 1) {
-      int localBlock = predictBlock(block: block, mana: mana);
+  // @override
+  // play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+  //   PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  //   character.addCardsPlayedInRound(1);
+  //   if (step == 1) {
+  //     int localBlock = predictBlock(block: block, mana: mana);
 
-      BlockStatus bs = BlockStatus();
-      bs.addStack(localBlock.toDouble());
-      character.addStatus(bs);
+  //     BlockStatus bs = BlockStatus();
+  //     bs.addStack(localBlock.toDouble());
+  //     character.addStatus(bs);
 
-      step++;
-      targetType = TargetEnum.cardTarget;
-    } else {
-      if (selectedCards.isNotEmpty) {
-        List<PlayableCard> hand = character.getDeck().getHand();
-        // List<PlayableCard> discardPile = deck.getHand();
-        // List<PlayableCard> drawPile = deck.getDrawPile();
+  //     step++;
+  //     targetType = TargetEnum.cardTarget;
+  //   } else {
+  //     if (selectedCards.isNotEmpty) {
+  //       List<PlayableCard> hand = character.getDeck().getHand();
+  //       // List<PlayableCard> discardPile = deck.getHand();
+  //       // List<PlayableCard> drawPile = deck.getDrawPile();
 
-        selectedCards[0].exhausted = true;
-        selectedCards[0]
-            .disposeToDiscard(hand, character.getDeck().exhaustPile);
-        setSelectedCards([]);
-      }
-      targetType = TargetEnum.allTargets;
-      step = 1;
-    }
-  }
+  //       selectedCards[0].exhausted = true;
+  //       selectedCards[0]
+  //           .disposeToDiscard(hand, character.getDeck().exhaustPile);
+  //       setSelectedCards([]);
+  //     }
+  //     targetType = TargetEnum.allTargets;
+  //     step = 1;
+  //   }
+  // }
 }

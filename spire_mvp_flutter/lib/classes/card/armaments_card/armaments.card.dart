@@ -93,3 +93,9 @@ class ArmamentsCard extends PlayableCard {
     }
   }
 }
+
+
+// // click card
+// apply 5 block to player
+// select card from hand
+// upgrade selected card

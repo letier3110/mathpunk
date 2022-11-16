@@ -3,6 +3,7 @@ import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
+import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/storage/character.storage.dart';
 
 class PlayerCharacterNotifier extends StateNotifier<PlayerCharacter?> {
@@ -59,7 +60,7 @@ class PlayerCharacterNotifier extends StateNotifier<PlayerCharacter?> {
   }
 
   void addCardToDiscardPile(PlayableCard card) {
-    state!.getDeck().addToDiscardPile(card);
+    card.currentState = CardState.inDiscardPile;
     _updateState();
   }
 

@@ -12,6 +12,7 @@ import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart'
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
 import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
@@ -90,14 +91,14 @@ class PlayerCharacter extends BaseCharacter {
   }
 
   endTurn() {
-    var hand = deck.hand;
-    var i = 0;
-    while (i < hand.length) {
-      var b = hand[i].disposeToDiscard(deck.hand, deck.discardPile);
-      if (!b) {
-        i += 1;
-      }
-    }
+    deck.cards
+        .where((element) =>
+            element.currentState == CardState.inHand && !element.ethereal)
+        .map<PlayableCard>(_transfromPlayableCardStateDiscard);
+    deck.cards
+        .where((element) =>
+            element.currentState == CardState.inHand && element.ethereal)
+        .map(_transfromPlayableCardStateEmpty);
     BlockStatus block = BlockStatus();
     setStatus(block);
 
@@ -210,4 +211,14 @@ class PlayerCharacter extends BaseCharacter {
         'gold': gold,
         'cardsPlayedInRound': cardsPlayedInRound
       };
+}
+
+PlayableCard _transfromPlayableCardStateDiscard(PlayableCard card) {
+  card.currentState = CardState.inDiscardPile;
+  return card;
+}
+
+PlayableCard _transfromPlayableCardStateEmpty(PlayableCard card) {
+  card.currentState = CardState.empty;
+  return card;
 }

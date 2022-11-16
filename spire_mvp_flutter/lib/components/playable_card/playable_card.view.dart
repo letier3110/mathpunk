@@ -146,7 +146,8 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
                     width: cardWidth,
                   )),
                 ),
-              if (widget.glow && widget.card.isCardBoosted())
+              // if (widget.glow || widget.card.isCardBoosted())
+              if (widget.glow)
                 Center(
                   child: GlowEffectCard(
                       waveColor: wavecolor,

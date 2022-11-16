@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.description.dart';
 import 'package:mathpunk_cardgame/classes/card/anger_card/anger_card.name.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
@@ -132,7 +133,8 @@ class PlayableCard {
 
   bool isCardPlayable() => true;
 
-  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+  Stream play(
+      List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     // can be failed,
     // because of not correctly loaded from memory state or wrongly casted.
     // PlayableCard class in not used directly, only as Generic Type

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 
@@ -57,15 +59,78 @@ class AngerCard extends PlayableCard {
     return mathMultiplierScore > 0;
   }
 
+  // @override
+  // play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+  //   // dispatch(dealDamageAction(target, damage));
+  //   // dispatch(addCardToDiscardPile(target, damage));
+
+  //   // await dealDamageStream
+  //   // await dealDamageStream
+  //   // await dealDamageStream
+  //   // await dealDamageStream
+
+  //   if (target.length == 1) {
+  //     target[0].receiveDamage(calculateDamage(
+  //         character: playerCharacter.getCharacter(),
+  //         damage: AngerCardStats.damage,
+  //         precision: precision,
+  //         mana: AngerCardStats.mana));
+  //   }
+  //   playerCharacter.addCardToDiscardPile(this);
+  // }
+
   @override
-  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-    if (target.length == 1) {
-      target[0].receiveDamage(calculateDamage(
-          character: playerCharacter.getCharacter(),
-          damage: AngerCardStats.damage,
-          precision: precision,
-          mana: AngerCardStats.mana));
+  Stream<void> play(
+      List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+    late StreamController<int> controller;
+    Timer? timer;
+
+    void tick(_) {
+      if (target.length == 1) {
+        target[0].receiveDamage(calculateDamage(
+            character: playerCharacter.getCharacter(),
+            damage: AngerCardStats.damage,
+            precision: precision,
+            mana: AngerCardStats.mana));
+      }
+      playerCharacter.addCardToDiscardPile(this);
+      timer?.cancel();
+      controller.close();
     }
-    playerCharacter.addCardToDiscardPile(this);
+
+    void startTimer() {
+      timer = Timer.periodic(Duration.zero, tick);
+    }
+
+    void stopTimer() {
+      timer?.cancel();
+      timer = null;
+    }
+
+    controller = StreamController(
+        onListen: startTimer,
+        onPause: stopTimer,
+        onResume: startTimer,
+        onCancel: stopTimer);
+
+    return controller.stream;
   }
 }
+
+// // NOTE: This implementation is FLAWED!
+// // It starts before it has subscribers, and it doesn't implement pause.
+// Stream<int> timedCounter(Duration interval, [int? maxCount]) {
+//   var controller = StreamController<int>();
+//   int counter = 0;
+//   void tick(Timer timer) {
+//     counter++;
+//     controller.add(counter); // Ask stream to send counter values as event.
+//     if (maxCount != null && counter >= maxCount) {
+//       timer.cancel();
+//       controller.close(); // Ask stream to shut down and tell listeners.
+//     }
+//   }
+
+//   Timer.periodic(interval, tick); // BAD: Starts before it has subscribers.
+//   return controller.stream;
+// }

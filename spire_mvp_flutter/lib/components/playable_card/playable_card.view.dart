@@ -9,6 +9,7 @@ import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/utils/card.util.dart';
 
 const double defaultHeight = 300;
 const double defaultWidth = 200;
@@ -63,11 +64,9 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    int playerMana = playerCharacter!.mana;
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final playerMana =
+        ref.watch(playerCharacterProvider.select((value) => value!.mana));
 
     void onEnterHandler(PointerEnterEvent p) {
       if (widget.animate) {
@@ -89,30 +88,33 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
       if (widget.disabled) {
         return;
       }
-      if (!widget.card.isCardPlayable()) {
-        return;
-      }
       if (widget.onTap != null) {
         widget.onTap!();
         return;
       }
-      if (widget.card.targetType == TargetEnum.singleTarget) {
-        if (cardId == gameState.selectingTargetCardId) {
-          gameStateNotifier.stopSelecting();
-          return;
-        }
-        gameStateNotifier.startSelecting(widget.card, cardId);
-        return;
-      } else if (widget.card.targetType == TargetEnum.cardTarget) {
-        // TODO: implement some random fuzzy logic to select a targe
-        // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
-        gameStateNotifier.startSelecting(widget.card, cardId);
-        return;
-      } else {
-        gameStateNotifier.playTheCard(
-            widget.card, gameState.currentRoom!.enemies);
-        return;
-      }
+      // if (!widget.card.isCardPlayable()) {
+      //   return;
+      // }
+      if (isCardPlayable(widget.card, playerMana))
+        gameStateNotifier.playTheCard(widget.card);
+
+      // if (widget.card.targetType == TargetEnum.singleTarget) {
+      //   if (cardId == gameState.selectingTargetCardId) {
+      //     gameStateNotifier.stopSelecting();
+      //     return;
+      //   }
+      //   gameStateNotifier.startSelecting(widget.card, cardId);
+      //   return;
+      // } else if (widget.card.targetType == TargetEnum.cardTarget) {
+      //   // TODO: implement some random fuzzy logic to select a targe
+      //   // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
+      //   gameStateNotifier.startSelecting(widget.card, cardId);
+      //   return;
+      // } else {
+      //   gameStateNotifier.playTheCard(
+      //       widget.card, gameState.currentRoom!.enemies);
+      //   return;
+      // }
     }
 
     double width = MediaQuery.of(context).size.width;
@@ -126,18 +128,12 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
         child: Container(
           height: cardWidth + 8,
           width: cardWidth + 8,
-          margin: EdgeInsets.fromLTRB(
-              4,
-              4,
-              4,
-              gameState.selectingTargetCardId == cardId
-                  ? cardWidth * 1
-                  : animation.value),
+          margin: EdgeInsets.fromLTRB(4, 4, 4, animation.value),
           child: Center(
             child: Stack(children: [
               if ((widget.disabled == false &&
                       playerMana >= widget.card.getMana() &&
-                      widget.card.isCardPlayable()) &&
+                      isCardPlayable(widget.card, playerMana)) &&
                   widget.glow)
                 Center(
                   child: GlowEffectCard(
@@ -190,7 +186,7 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, cardWidth / 36, 0, 0),
-                              child: widget.card.getCardName(),
+                              child: widget.card.getCardName(context),
                             ),
                             Container(
                               height: calcHeightByWidth(cardWidth) * 0.3,
@@ -205,7 +201,7 @@ class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
                           ],
                         ),
                       ),
-                      if (widget.card.isCardPlayable())
+                      if (isCardPlayable(widget.card, playerMana))
                         Positioned(
                           top: 8,
                           left: cardWidth / 24,

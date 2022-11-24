@@ -35,27 +35,7 @@ class AngerCard extends PlayableCard {
   }
 
   @override
-  int getMana() {
-    // List<Status> statuses = character.getStatuses();
-    // bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
-    // if (isBishopStatus && AngerCardStats.mana == 1) return 0;
-    return AngerCardStats.mana;
-  }
-
-  @override
   bool isCardBoosted() => true;
-
-  // @override
-  // play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
-  //   if (target.length == 1) {
-  //     target[0].receiveDamage(calculateDamage(
-  //         character: playerCharacter.getCharacter(),
-  //         damage: AngerCardStats.damage,
-  //         precision: precision,
-  //         mana: AngerCardStats.mana));
-  //   }
-  //   playerCharacter.addCardToDiscardPile(this);
-  // }
 }
 
 // // click card

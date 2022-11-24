@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
@@ -29,6 +31,7 @@ import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate/enemy-room.gamestate.util.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
@@ -194,23 +197,6 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     updateState();
   }
 
-  bool _checkIfCardPlayable(PlayableCard card) {
-    if (playerCharacter == null) return false;
-    if (state.currentRoom == null) return false;
-    if (playerCharacter!.mana < card.getMana()) return false;
-    if (card.isCardPlayable() == false) return false;
-    if (playerCharacter!
-        .getDeck()
-        .getHand()
-        .where((x) => x.runtimeType == NormalityCard)
-        .isNotEmpty) {
-      if (playerCharacter!.cardsPlayedInRound >= 3) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   void buyItem(Sellable sellable) {
     if (playerCharacter == null) return;
     if (playerCharacter!.gold - sellable.getCost() < 0) {
@@ -238,11 +224,19 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
   }
 
   void playTheCard(PlayableCard card) {
-    if (!_checkIfCardPlayable(card)) {
-      return;
-    }
-    playerCharacter!.mana -= card.getMana();
-    playerCharacter!.addCardsPlayedInRound(1);
+    // TODO: MAKE SEPARATE EFFECT
+    // playerCharacter!.mana -= card.getMana();
+
+    // TODO: MAKE SEPARATE EFFECT
+    // playerCharacter!.addCardsPlayedInRound(1);
+
+    // TODO: add stream controller for card effects
+    // https://dart.dev/articles/libraries/creating-streams
+    // card.currentState = CardState.playingEffects;
+    // Timer(Duration(milliseconds: 4), () {
+
+    // });
+
     // card.play(targets, _getPlayerCharacterNotifier());
 
     // if (card.step == card.maxSteps) {

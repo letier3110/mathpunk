@@ -120,7 +120,7 @@ class PlayableCard {
         cardEthereal: json['ethereal'] as bool,
         cardPrecision: int.parse(json['precision']),
         cardTemporary: json['temporary'] as bool,
-        cardCurrentEffectId: json['currentEffectId'] as int,
+        cardCurrentEffectId: json['currentEffectId'] as int?,
         cardType: decodeCardTypeFromJson(json['type']),
         cardTargetType: decodeTargetEnumFromJson(json['targetType']),
         cardUpgrageLink: card == null
@@ -156,6 +156,7 @@ class PlayableCard {
       };
 }
 
+// TODO: instruction below for card effects play
 // gamestate.playTheCard(card)
 // => set state card.currentState = CardState.playingEffects
 // => start timer with card.effects.map(x => x.isUserInteractionRequired ? break : x.playEffect()); 

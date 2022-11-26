@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
@@ -138,16 +140,13 @@ class _AudioScreenState extends ConsumerState<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     final currentScreen = ref.watch(navigationProvider);
-    // final audioVolume =
-    //     ref.watch(settingsProvider.select((value) => value.audioAmbientVolume));
     final audioVolume =
         ref.watch(settingsProvider.select((value) => value.audioAmbientVolume));
-    final inMap = ref.watch(gamestateProvider.select((value) => value.inMap));
+    final inMap = ref.watch(inMapProvider);
 
     player.setVolume(audioVolume);
 
-    final currentRoom =
-        ref.watch(gamestateProvider.select((value) => value.currentRoom));
+    final currentRoom = ref.watch(currentRoomProvider);
 
     if (currentScreen == ScreenEnum.mainMenu ||
         currentScreen == ScreenEnum.modeSelect ||

@@ -13,9 +13,8 @@ class CharacterItems extends ConsumerStatefulWidget {
 class CharacterItemsView extends ConsumerState<CharacterItems> {
   @override
   Widget build(BuildContext context) {
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    var items = playerCharacter?.items ?? [];
+    final items = ref
+        .watch(playerCharacterProvider.select((value) => value?.items ?? []));
 
     return Container(
       padding: const EdgeInsets.all(8),

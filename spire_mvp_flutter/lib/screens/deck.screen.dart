@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_lore_card.provider.dart';
 
 class DeckScreen extends ConsumerStatefulWidget {
   const DeckScreen({Key? key}) : super(key: key);
@@ -15,10 +17,10 @@ class DeckScreen extends ConsumerStatefulWidget {
 class _DeckScreenState extends ConsumerState<DeckScreen> {
   @override
   Widget build(BuildContext context) {
-    final inDeck = ref.watch(gamestateProvider.select((value) => value.inDeck));
+    final inDeck = ref.watch(inDeckProvider);
 
     void onCardTap(PlayableCard card) {
-      // gameState.openLoreCard(card);
+      ref.read(isLoreCardProvider.notifier).openLoreCard(card);
     }
 
     double width = MediaQuery.of(context).size.width;

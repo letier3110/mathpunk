@@ -17,12 +17,6 @@ class CardReward extends ConsumerStatefulWidget {
 class CardRewardView extends ConsumerState<CardReward> {
   @override
   Widget build(BuildContext context) {
-    // final gameState = ref.read(gamestateProvider.notifier);
-
-    // void onSkipTapHandler() {
-    //   gameState.stopSelectingCardReward();
-    // }
-
     return Center(
       child: Row(
         children: [

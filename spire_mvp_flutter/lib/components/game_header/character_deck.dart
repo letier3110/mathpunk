@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 class CharacterDeck extends ConsumerStatefulWidget {
@@ -15,19 +15,16 @@ class CharacterDeck extends ConsumerStatefulWidget {
 class CharacterDeckView extends ConsumerState<CharacterDeck> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    var deckLength = (playerCharacter?.deck.cards ?? []).length;
+    final inDeck = ref.watch(inDeckProvider);
+    final deckCards = ref.watch(
+        playerCharacterProvider.select((value) => (value?.deck.cards ?? [])));
 
     void onTapHandler() {
-      if (gameState.inDeck.isEmpty) {
-        ref
-            .watch(gamestateProvider.notifier)
-            .enterDeck(cards: playerCharacter?.deck.cards ?? []);
+      if (inDeck.isEmpty) {
+        ref.read(inDeckProvider.notifier).enterDeck(cards: deckCards);
         return;
       }
-      ref.watch(gamestateProvider.notifier).exitDeck();
+      ref.read(inDeckProvider.notifier).exitDeck();
     }
 
     return Positioned(
@@ -64,7 +61,7 @@ class CharacterDeckView extends ConsumerState<CharacterDeck> {
                 width: 70,
                 height: 21,
                 child: Text(
-                  deckLength.toString(),
+                  deckCards.length.toString(),
                   textAlign: TextAlign.end,
                   style: const TextStyle(
                       color: Colors.white,

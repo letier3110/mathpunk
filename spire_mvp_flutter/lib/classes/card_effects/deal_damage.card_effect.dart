@@ -13,7 +13,10 @@ class DealDamageCardEffect extends CardEffect {
   int damage = 6;
   int mana = 1;
   DealDamageCardEffect({this.damage = 6, this.mana = 1})
-      : super(state: CardState.dealingDamage, isShown: true);
+      : super(
+            state: CardState.dealingDamage,
+            isShown: true,
+            duration: const Duration(seconds: 1));
 
   @override
   StatefulWidget getCardEffectDescription() {

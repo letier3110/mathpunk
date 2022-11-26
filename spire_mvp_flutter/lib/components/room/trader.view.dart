@@ -23,7 +23,7 @@ class TraderView extends ConsumerStatefulWidget {
 class TraderViewView extends ConsumerState<TraderView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onTapHandler(Sellable sellable) {
       gameState.buyItem(sellable);

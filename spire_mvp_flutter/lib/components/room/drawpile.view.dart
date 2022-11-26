@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 class DrawPileView extends ConsumerStatefulWidget {
@@ -15,19 +16,18 @@ class DrawPileView extends ConsumerStatefulWidget {
 class DrawPileViewView extends ConsumerState<DrawPileView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
-    final playerCharacter = ref.watch(playerCharacterProvider);
+    final inDeck = ref.watch(inDeckProvider);
+    final drawPile = ref.watch(
+        playerCharacterProvider.select((value) => value?.deck.drawPile ?? []));
 
-    var drawPileLength = (playerCharacter?.deck.drawPile ?? []).length;
+    final drawPileLength = drawPile.length;
 
     void onTapHandler() {
-      if (gameState.inDeck.isEmpty) {
-        gameStateNotifier.enterDeck(
-            cards: playerCharacter?.deck.drawPile ?? []);
+      if (inDeck.isEmpty) {
+        ref.read(inDeckProvider.notifier).enterDeck(cards: drawPile);
         return;
       }
-      gameStateNotifier.exitDeck();
+      ref.read(inDeckProvider.notifier).exitDeck();
     }
 
     return Positioned(

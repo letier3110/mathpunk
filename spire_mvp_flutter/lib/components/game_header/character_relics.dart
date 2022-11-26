@@ -32,9 +32,8 @@ class CharacterRelicsView extends ConsumerState<CharacterRelics> {
 
   @override
   Widget build(BuildContext context) {
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    var relics = playerCharacter?.relics ?? [];
+    final relics = ref
+        .watch(playerCharacterProvider.select((value) => value?.relics ?? []));
 
     return SizedBox(
       height: 360,

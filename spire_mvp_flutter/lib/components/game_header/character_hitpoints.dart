@@ -13,10 +13,10 @@ class CharacterHitpoints extends ConsumerStatefulWidget {
 class CharacterHitpointsView extends ConsumerState<CharacterHitpoints> {
   @override
   Widget build(BuildContext context) {
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    var hp = playerCharacter?.health ?? '0';
-    var maxhp = playerCharacter?.maxHealth ?? '0';
+    final hp = ref
+        .watch(playerCharacterProvider.select((value) => value?.health ?? '0'));
+    final maxhp = ref.watch(
+        playerCharacterProvider.select((value) => value?.maxHealth ?? '0'));
 
     double width = MediaQuery.of(context).size.width;
 

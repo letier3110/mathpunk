@@ -14,7 +14,8 @@ class CharacterName extends ConsumerStatefulWidget {
 class CharacterNameView extends ConsumerState<CharacterName> {
   @override
   Widget build(BuildContext context) {
-    final playerCharacter = ref.watch(playerCharacterProvider);
+    final characterName = ref.watch(playerCharacterProvider
+        .select((value) => value!.getNameTranslationKey(context)));
     final saves = ref.watch(savesProvider);
 
     var playerName = saves.saveSlots[saves.currentSaveSlot ?? 0];
@@ -41,7 +42,7 @@ class CharacterNameView extends ConsumerState<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                playerCharacter!.getNameTranslationKey(context),
+                characterName,
                 // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(

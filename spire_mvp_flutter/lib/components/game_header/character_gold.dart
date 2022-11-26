@@ -13,9 +13,8 @@ class CharacterGold extends ConsumerStatefulWidget {
 class CharacterGoldView extends ConsumerState<CharacterGold> {
   @override
   Widget build(BuildContext context) {
-    final playerCharacter = ref.watch(playerCharacterProvider);
-
-    var gold = playerCharacter?.gold ?? '0';
+    final gold = ref
+        .watch(playerCharacterProvider.select((value) => value?.gold ?? '0'));
 
     double width = MediaQuery.of(context).size.width;
 

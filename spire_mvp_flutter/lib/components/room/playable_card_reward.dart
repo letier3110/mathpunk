@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/reward.part.provider.dart';
 
 class PlayableCardReward extends ConsumerStatefulWidget {
   final PlayableCard card;
@@ -18,10 +19,10 @@ class PlayableCardReward extends ConsumerStatefulWidget {
 class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
-
     void onTapHandler() {
-      gameState.pickCardReward(widget.possibleRewards, widget.card);
+      ref
+          .read(rewardPartProvider.notifier)
+          .pickCardReward(widget.possibleRewards, widget.card);
     }
 
     return GestureDetector(
@@ -70,11 +71,7 @@ class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              widget.card.name,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
+                            widget.card.getCardName(context),
                             Container(
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               height: 110,

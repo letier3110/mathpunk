@@ -1,21 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
-import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
-import 'package:mathpunk_cardgame/classes/game_map.dart';
-import 'package:mathpunk_cardgame/classes/player/player.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/relic/burning_blood.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
-import 'package:mathpunk_cardgame/classes/reward.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
 import 'package:mathpunk_cardgame/classes/room/room.dart';
-import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/classes/sellable.dart';
 import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
@@ -29,177 +20,41 @@ import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart'
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate/enemy-room.gamestate.util.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/enter_enemy_room.part.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamemap.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_pause.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_opened_chest.provider.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
-import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
-import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
-import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
+import 'package:mathpunk_cardgame/controllers/update_room.part.provider.dart';
 import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 import 'package:mathpunk_cardgame/pools/cards.pool.dart';
 import 'package:mathpunk_cardgame/pools/utils.dart';
 
 import '../classes/deck.dart';
 
-enum HealPlayer {
-  fullHeal,
-  percentageMaxHpHeal,
-  percentageCurrentHpHeal,
-  valueHeal
-}
-
-final gamestateProvider =
-    StateNotifierProvider<GamestateNotifier, GamestateNotifierInterface>((ref) {
-  final playerCharacter = ref.watch(playerCharacterProvider);
-  return GamestateNotifier(ref: ref, playerCharacter: playerCharacter);
+final gamestateProvider = StateNotifierProvider<GamestateNotifier, void>((ref) {
+  return GamestateNotifier(ref: ref);
 });
 
-class GamestateNotifierInterface {
-  GamestateNotifierInterface(
-      {this.gameMode,
-      this.inMap = false,
-      this.inDeck = const [],
-      this.loreCard,
-      this.inPause = false,
-      this.gameMap = const [],
-      this.visitedRooms = const [],
-      this.currentRoom,
-      this.selectedTarget,
-      this.selectingCardReward = const [],
-      this.isOpenedChest,
-      this.selectingTargetCardId,
-      this.selectingTarget,
-      this.playerName});
-
-  GameTypeEnum? gameMode;
-  bool inMap = false;
-  List<PlayableCard> inDeck = [];
-  PlayableCard? loreCard;
-  bool inPause = false;
-  List<List<Room>> gameMap = [];
-  List<Room> visitedRooms = [];
-  Room? currentRoom;
-  PlayableCard? selectingTarget;
-  List<PlayableCard> selectingCardReward = [];
-  Reward? isOpenedChest;
-  int? selectingTargetCardId;
-  Enemy? selectedTarget;
-  String? playerName;
-
-  void updateRoom(Room room) {
-    currentRoom = room;
-    visitedRooms = [...visitedRooms, room];
-  }
-}
-
-class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
-  PlayerCharacter? playerCharacter;
+class GamestateNotifier extends StateNotifier<void> {
   final Ref ref;
 
-  GamestateNotifier({this.playerCharacter, required this.ref})
-      : super(GamestateNotifierInterface());
-
-  void updateState() {
-    state = GamestateNotifierInterface(
-      gameMode: state.gameMode,
-      inMap: state.inMap,
-      inDeck: state.inDeck,
-      loreCard: state.loreCard,
-      inPause: state.inPause,
-      gameMap: state.gameMap,
-      visitedRooms: state.visitedRooms,
-      currentRoom: state.currentRoom,
-      selectedTarget: state.selectedTarget,
-      selectingCardReward: state.selectingCardReward,
-      isOpenedChest: state.isOpenedChest,
-      selectingTargetCardId: state.selectingTargetCardId,
-      selectingTarget: state.selectingTarget,
-      playerName: state.playerName,
-    );
-  }
-
-  void setPlayerName(String playerName) {
-    state.playerName = playerName;
-    updateState();
-  }
-
-  void exitGameMode() {
-    state.gameMode = null;
-    updateState();
-  }
-
-  void changeGameMode(GameTypeEnum newGameMode) {
-    state.gameMode = newGameMode;
-    updateState();
-  }
+  GamestateNotifier({required this.ref}) : super([]);
 
   void stopPlaying() {
-    playerCharacter = null;
-    state.currentRoom = null;
-    state.gameMap = [];
-    state.inPause = false;
-    state.inMap = false;
-    updateState();
-  }
-
-  void stopSelecting() {
-    state.selectingTarget = null;
-    state.selectingTargetCardId = null;
-    updateState();
-  }
-
-  void startSelecting(PlayableCard card, int cardId) {
-    state.selectingTarget = card;
-    state.selectingTargetCardId = cardId;
-    updateState();
-  }
-
-  void changeCurrentRoom(Room room) {
-    if (state.currentRoom == null) return;
-    state.currentRoom = room;
-    if (state.currentRoom.runtimeType == EnemyRoom) {
-      enemyRoomEnter(
-          currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
-    }
-    updateState();
-  }
-
-  void givePlayerGold(int goldValue) {
-    if (playerCharacter == null) return;
-    _getPlayerCharacterNotifier().addGold(goldValue);
-  }
-
-  void healPlayer(HealPlayer healType, double? percentageValue) {
-    if (playerCharacter == null) return;
-    switch (healType) {
-      case HealPlayer.fullHeal:
-        ref
-            .read(playerCharacterProvider.notifier)
-            .heal(playerCharacter!.getMaxHealth());
-        break;
-      case HealPlayer.percentageMaxHpHeal:
-        double healValue =
-            (playerCharacter!.getMaxHealth() * (percentageValue ?? 1));
-        _getPlayerCharacterNotifier().heal(healValue.toInt());
-        break;
-      case HealPlayer.percentageCurrentHpHeal:
-        double healValue =
-            (playerCharacter!.getHealth() * (percentageValue ?? 1));
-        _getPlayerCharacterNotifier().heal(healValue.toInt());
-        break;
-      case HealPlayer.valueHeal:
-        break;
-    }
-  }
-
-  void selectTarget(Enemy target) {
-    if (state.selectingTarget == null) return;
-    playTheCard(state.selectingTarget!, [target]);
-    updateState();
+    ref.read(playerCharacterProvider.notifier).deselectCharacter();
+    ref.read(currentRoomProvider.notifier).disposeRoom();
+    ref.read(gamemapProvider.notifier).clearMap();
+    ref.read(inPauseProvider.notifier).exitPause();
+    ref.read(inMapProvider.notifier).exitMap();
   }
 
   void buyItem(Sellable sellable) {
+    final playerCharacter = ref.read(playerCharacterProvider);
     if (playerCharacter == null) return;
-    if (playerCharacter!.gold - sellable.getCost() < 0) {
+    if (playerCharacter.gold - sellable.getCost() < 0) {
       return;
     }
 
@@ -208,33 +63,34 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
         // sellable = SellableRemoval(cost: jsonCost, inStock: jsonInStock);
         break;
       case 'SellableCard':
-        playerCharacter!.getDeck().addToDeck((sellable as SellableCard).card);
+        playerCharacter.getDeck().addToDeck((sellable as SellableCard).card);
         break;
       case 'SellableRelic':
-        playerCharacter!.addRelic((sellable as SellableRelic).relic);
+        playerCharacter.addRelic((sellable as SellableRelic).relic);
         break;
       case 'SellableItem':
       default:
-        playerCharacter!.addItem((sellable as SellableItem).item);
+        playerCharacter.addItem((sellable as SellableItem).item);
         break;
     }
 
     sellable.inStock = false;
-    playerCharacter!.gold -= sellable.getCost();
+    playerCharacter.gold -= sellable.getCost();
   }
 
   void playTheCard(PlayableCard card) {
-    // TODO: MAKE SEPARATE EFFECT
-    // playerCharacter!.mana -= card.getMana();
+    final currentRoom = ref.read(currentRoomProvider);
+    final playerCharacter = ref.read(playerCharacterProvider);
+    // TODO: do this flow in cardEffectProvider because of stream listener updates is related only to its own state
 
-    // TODO: MAKE SEPARATE EFFECT
-    // playerCharacter!.addCardsPlayedInRound(1);
+    // var counterStream = timedCounter(card.effects);
 
-    // TODO: add stream controller for card effects
-    // https://dart.dev/articles/libraries/creating-streams
-    // card.currentState = CardState.playingEffects;
-    // Timer(Duration(milliseconds: 4), () {
-
+    // state.cardEffectSubscription = counterStream.listen((int counter) {
+    //   if (card.effects[counter].isUserInteractionRequired) {
+    //     state.cardEffectSubscription.pause();
+    //     return;
+    //   }
+    //   card.effects[counter].playEffect(card, ref);
     // });
 
     // card.play(targets, _getPlayerCharacterNotifier());
@@ -249,28 +105,30 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
     //   }
     // }
 
-    if (state.selectedTarget != null) {
-      if (state.selectingTarget!.step == state.selectingTarget!.maxSteps) {
-        state.selectingTargetCardId = null;
-        state.selectingTarget = null;
-      } else {
-        state.selectingTarget!.step = 1;
-      }
-    } else {
-      state.selectingTarget = null;
-      state.selectingTargetCardId = null;
-    }
+    // if (state.selectedTarget != null) {
+    //   if (state.selectingTarget!.step == state.selectingTarget!.maxSteps) {
+    //     state.selectingTargetCardId = null;
+    //     state.selectingTarget = null;
+    //   } else {
+    //     state.selectingTarget!.step = 1;
+    //   }
+    // } else {
+    //   state.selectingTarget = null;
+    //   state.selectingTargetCardId = null;
+    // }
 
-    var i = 0;
-    while (i < targets.length) {
-      if (targets[i].health <= 0) {
-        state.currentRoom!.enemies.remove(targets[i]);
-      }
-      i++;
-    }
+    currentRoom!.enemies =
+        currentRoom.enemies.where((element) => element.health > 0).toList();
 
-    if (state.currentRoom!.enemies.isEmpty &&
-        state.currentRoom!.getCanLeaveRoom()) {
+    // var i = 0;
+    // while (i < targets.length) {
+    //   if (targets[i].health <= 0) {
+    //     state.currentRoom!.enemies.remove(targets[i]);
+    //   }
+    //   i++;
+    // }
+
+    if (currentRoom.enemies.isEmpty && currentRoom.getCanLeaveRoom()) {
       // if (state.currentRoom!.enemies.isEmpty) {
       // if there are burning blood => add player hp
       List<Relic> burningBlood = playerCharacter!.relics
@@ -281,210 +139,70 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       }
       endTheRoom();
     }
-    updateState();
   }
 
   void endTheRoom() {
-    playerCharacter!.attachDeck(Deck(playerCharacter!.deck.cards));
+    final playerCharacter = ref.read(playerCharacterProvider);
+    playerCharacter!.attachDeck(Deck(playerCharacter.deck.cards));
     // enterMap();
-    updateState();
   }
 
   void startGame() {
-    _generateMap();
-  }
-
-  void selectChest(Reward reward) {
-    if (playerCharacter == null) {
-      playerCharacter!.resetRoundStatuses();
-    }
-    state.isOpenedChest = reward;
-    updateState();
-  }
-
-  void stopSelectingChest() {
-    state.isOpenedChest = null;
-    updateState();
-  }
-
-  void selectCardReward(List<PlayableCard> cards) {
-    state.selectingCardReward = cards;
-    updateState();
-  }
-
-  void stopSelectingCardReward() {
-    state.selectingCardReward = [];
-
-    checkIfEveryRewardGet();
-  }
-
-  void pickCardReward(List<PlayableCard> cards, PlayableCard pickedCard) {
-    if (state.currentRoom == null) return;
-    if (playerCharacter == null) return;
-
-    try {
-      playerCharacter!.deck.addToDeck(pickedCard);
-      int i = state.currentRoom!.rewards.indexWhere((element) =>
-          element.cards.every((element) => cards.contains(element)));
-      state.currentRoom!.rewards[i].cards = [];
-    } catch (e) {}
-
-    stopSelectingCardReward();
-  }
-
-  void pickReward(int rewardIndex, String fieldType) {
-    if (state.currentRoom == null) return;
-    if (playerCharacter == null) return;
-    // List<Status> statuses = playerCharacter!.getStatuses();
-    switch (fieldType) {
-      case 'gold':
-        int goldReward = state.currentRoom!.rewards[rewardIndex].gold ?? 0;
-        // bool isKingStatus = castStatusToBool(statuses, KingStatus);
-        // if (isKingStatus) {
-        //   goldReward = goldReward * 2;
-        // }
-        playerCharacter!.gold += goldReward;
-        state.currentRoom!.rewards[rewardIndex].gold = null;
-        break;
-      case 'item':
-        if (state.currentRoom!.rewards[rewardIndex].item != null) {
-          playerCharacter!.items
-              .add(state.currentRoom!.rewards[rewardIndex].item!);
-        }
-        state.currentRoom!.rewards[rewardIndex].item = null;
-        break;
-      case 'relic':
-        if (state.currentRoom!.rewards[rewardIndex].relic != null) {
-          playerCharacter!.relics
-              .add(state.currentRoom!.rewards[rewardIndex].relic!);
-        }
-        state.currentRoom!.rewards[rewardIndex].relic = null;
-        break;
-      // case 'cards':
-      //   if (selectedCard != null) {
-      //     playerCharacter!.deck.addToDeck(selectedCard);
-      //   }
-      //   currentRoom!.rewards[rewardIndex].cards = [];
-      //   break;
-    }
-
-    checkIfEveryRewardGet();
-  }
-
-  void checkIfEveryRewardGet() {
-    if (state.currentRoom != null) {
-      if (state.currentRoom!.rewards.every((element) =>
-          element.cards.isEmpty &&
-          element.gold == null &&
-          element.item == null &&
-          element.relic == null)) {
-        enterMap();
-      }
-    }
-    updateState();
-  }
-
-  void _generateMap() {
-    state.gameMap = generateMap();
-    updateState();
-  }
-
-  void enterPause() {
-    state.inPause = true;
-    updateState();
-  }
-
-  void exitPause() {
-    state.inPause = false;
-    updateState();
-  }
-
-  void enterMap() {
-    state.inMap = true;
-    updateState();
-  }
-
-  void exitMap() {
-    state.inMap = false;
-    updateState();
-  }
-
-  void enterDeck({List<PlayableCard> cards = const []}) {
-    if (cards.isEmpty) {
-      return;
-    }
-    state.inDeck = cards;
-    updateState();
-  }
-
-  void exitDeck() {
-    state.inDeck = [];
-    updateState();
-  }
-
-  void openLoreCard(PlayableCard card) {
-    state.loreCard = card;
-    updateState();
-  }
-
-  void closeLoreCard() {
-    state.loreCard = null;
-    updateState();
-  }
-
-  void visitTrader() {
-    if (state.currentRoom == null) return;
-    (state.currentRoom! as TradeRoom).visitedTrader = true;
-    updateState();
+    ref.read(gamemapProvider.notifier).prepareGameMap();
   }
 
   List<Room> getNextAvailableRooms() {
-    if (state.gameMap.isEmpty) return [];
-    if (state.currentRoom == null) return state.gameMap[0];
-    return state.currentRoom!.nextRooms;
+    final currentRoom = ref.read(currentRoomProvider);
+    final gameMap = ref.read(gamemapProvider);
+    // final gameMap = ref.read(currentRoomProvider);
+    if (gameMap.isEmpty) return [];
+    if (currentRoom == null) return gameMap[0];
+    return currentRoom.nextRooms;
   }
 
   void enterRoom(Room room) {
+    final currentRoom = ref.read(currentRoomProvider);
+    final playerCharacter = ref.read(playerCharacterProvider);
     if (playerCharacter == null) {
       return;
     }
-    playerCharacter!.resetRoundStatuses();
-    playerCharacter!.enterRoom();
-    if (state.currentRoom == null) {
-      state.updateRoom(room);
-    } else if ((state.currentRoom != null &&
-        state.currentRoom!.getCanLeaveRoom() &&
-        // state.currentRoom!.enemies.isEmpty &&
+    playerCharacter.resetRoundStatuses();
+    playerCharacter.enterRoom();
+    if (currentRoom == null) {
+      ref.read(updateRoomPartProvider.notifier).updateRoom(room);
+    } else if ((currentRoom != null &&
+        currentRoom.getCanLeaveRoom() &&
+        currentRoom.enemies.isEmpty &&
         getNextAvailableRooms().contains(room))) {
-      state.updateRoom(room);
+      ref.read(updateRoomPartProvider.notifier).updateRoom(room);
     }
-
-    state.isOpenedChest = null;
-    if (state.currentRoom.runtimeType == EnemyRoom) {
-      enemyRoomEnter(
-          currentRoom: state.currentRoom!, playerCharacter: playerCharacter!);
+    ref.read(isOpenedChestProvider.notifier).stopSelectingChest();
+    if (currentRoom.runtimeType == EnemyRoom) {
+      ref.read(eneterEnemyRoomPartProvider.notifier).enemyRoomEnter();
     }
-    updateState();
   }
 
   void nextTurn() {
+    final currentRoom = ref.read(currentRoomProvider);
+    final playerCharacter = ref.read(playerCharacterProvider);
+
     if (playerCharacter == null) {
       return;
     }
-    if (state.currentRoom == null) {
+    if (currentRoom == null) {
       return;
     }
-    playerCharacter!.cardsPlayedInRound = 0;
-    if (playerCharacter!
+    playerCharacter.cardsPlayedInRound = 0;
+    if (playerCharacter
         .getDeck()
         .getHand()
         .where((x) => x.runtimeType == DoubtCard)
         .isNotEmpty) {
       WeakStatus ws = WeakStatus();
       ws.addStack(1);
-      playerCharacter!.addStatus(ws);
+      playerCharacter.addStatus(ws);
     }
-    for (var enemy in state.currentRoom!.getEnemies()) {
+    for (var enemy in currentRoom.getEnemies()) {
       enemy.makeMove(_getPlayerCharacterNotifier());
 
       BlockStatus block = BlockStatus();
@@ -530,56 +248,28 @@ class GamestateNotifier extends StateNotifier<GamestateNotifierInterface> {
       DexterityEmpowerStatus des = DexterityEmpowerStatus();
       enemy.setStatus(des);
     }
-    playerCharacter!.endTurn();
+    playerCharacter.endTurn();
 
-    List<Status> statuses = playerCharacter!.getStatuses();
+    List<Status> statuses = playerCharacter.getStatuses();
 
     bool isKnightStatus = castStatusToBool(statuses, KnightStatus);
     if (isKnightStatus == true) {
-      playerCharacter!
+      playerCharacter
           .getDeck()
           .getHand()
           .add(weightedRandomPick(poolAllCards).obj);
     }
 
     // if there are ring of snake => draw 1 cards at the start of round
-    List<Relic> ringOfSerpent = playerCharacter!.relics
+    List<Relic> ringOfSerpent = playerCharacter.relics
         .where((element) => RingOfSerpent.isRelicRingOfSerpent(element))
         .toList();
     if (ringOfSerpent.isNotEmpty) {
       ringOfSerpent[0].play();
     }
-    updateState();
   }
-
-  getCurrentRoom() => state.currentRoom;
 
   PlayerCharacterNotifier _getPlayerCharacterNotifier() {
     return ref.read(playerCharacterProvider.notifier);
-  }
-
-  void fromJson(GameStateInterface savedInfo) {
-    state.gameMode = savedInfo.gameMode;
-    state.inMap = savedInfo.inMap;
-    state.inPause = savedInfo.inPause;
-    playerCharacter = savedInfo.playerCharacter;
-    state.gameMap = savedInfo.gameMap;
-    state.currentRoom = savedInfo.currentRoom;
-    Player player = Player();
-    if (savedInfo.playerCharacter != null) {
-      player.selectCharacter(savedInfo.playerCharacter!);
-    }
-  }
-
-  Map toJson() {
-    return GameStateInterface(
-            gameMode: state.gameMode,
-            inMap: state.inMap,
-            inPause: state.inPause,
-            playerCharacter: playerCharacter,
-            gameMap: state.gameMap,
-            currentRoom: state.currentRoom,
-            playerName: state.playerName ?? 'autosave')
-        .toJson();
   }
 }

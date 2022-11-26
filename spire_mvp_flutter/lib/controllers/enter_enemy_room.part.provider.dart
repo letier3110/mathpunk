@@ -1,14 +1,14 @@
 import 'dart:math';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/shiv.card.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/relic/chess_pyramid.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ninja_scroll.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_serpent.relic.dart';
 import 'package:mathpunk_cardgame/classes/relic/ring_of_snake.relic.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
-import 'package:mathpunk_cardgame/classes/room/room.dart';
 import 'package:mathpunk_cardgame/classes/statuses/dexterity.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/knight.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/pawn.status.dart';
@@ -17,12 +17,24 @@ import 'package:mathpunk_cardgame/classes/statuses/queen.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/strength.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-void enemyRoomEnter({
-  required Room currentRoom,
-  required PlayerCharacter playerCharacter,
-}) {
-  if (currentRoom.runtimeType == EnemyRoom) {
+final eneterEnemyRoomPartProvider =
+    StateNotifierProvider<EnterEnemyRoomPartProvider, void>((ref) {
+  return EnterEnemyRoomPartProvider(ref: ref);
+});
+
+class EnterEnemyRoomPartProvider extends StateNotifier<void> {
+  Ref ref;
+  EnterEnemyRoomPartProvider({required this.ref}) : super([]);
+
+  void enemyRoomEnter() {
+    final currentRoom = ref.read(currentRoomProvider);
+    final playerCharacter = ref.read(playerCharacterProvider);
+    if (currentRoom.runtimeType != EnemyRoom) {
+      return;
+    }
     // StrengthStatus ss = StrengthStatus();
     // ss.addStack(5);
     // DexterityStatus ds = DexterityStatus();
@@ -32,7 +44,7 @@ void enemyRoomEnter({
     // playerCharacter.addStatus(ss);
     // playerCharacter.addStatus(ds);
     // playerCharacter.addStatus(ws);
-    var deck = playerCharacter.getDeck();
+    var deck = playerCharacter!.getDeck();
     deck.initialLoadDrawPile();
 
     List<Relic> chessPyramid = playerCharacter.relics
@@ -104,7 +116,7 @@ void enemyRoomEnter({
     // this.currentRoom.getEnemies().forEach(enemy => {
     //   enemy.moveset.getNextMove();
     // }
-    for (var enemy in currentRoom.getEnemies()) {
+    for (var enemy in currentRoom!.getEnemies()) {
       enemy.initMove();
     }
     // TODO: init battle

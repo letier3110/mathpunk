@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/create_profile.component.dart';
-// import 'package:mathpunk_cardgame/classes/card/cards_implementation.dart';
-// import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamemap.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
-import 'package:mathpunk_cardgame/storage/saves.storage.dart';
 import 'package:mathpunk_cardgame/storage/settings.storage.dart';
 
 import '../components/main_menu_item.dart';
@@ -33,7 +31,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
     final settingsNotifier = ref.read(settingsProvider.notifier);
 
     final gameMapIsEmpty =
-        ref.read(gamestateProvider.select((value) => value.gameMap.isEmpty));
+        ref.read(gamemapProvider.select((value) => value.isEmpty));
     final gamestateNotifier = ref.read(gamestateProvider.notifier);
 
     SettingsStorage settingsStorage = SettingsStorage();
@@ -47,7 +45,7 @@ class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   Widget build(BuildContext context) {
     final saves = ref.watch(savesProvider);
     final gameMapIsEmpty =
-        ref.watch(gamestateProvider.select((value) => value.gameMap.isEmpty));
+        ref.read(gamemapProvider.select((value) => value.isEmpty));
 
     double width = MediaQuery.of(context).size.width;
 

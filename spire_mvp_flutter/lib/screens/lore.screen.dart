@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_lore_card.provider.dart';
 
 class LoreScreen extends ConsumerStatefulWidget {
   const LoreScreen({Key? key}) : super(key: key);
@@ -14,11 +14,10 @@ class LoreScreen extends ConsumerStatefulWidget {
 class _LoreScreenState extends ConsumerState<LoreScreen> {
   @override
   Widget build(BuildContext context) {
-    final loreCard =
-        ref.watch(gamestateProvider.select((value) => value.loreCard));
+    final loreCard = ref.watch(isLoreCardProvider);
 
     void onCardTap() {
-      ref.watch(gamestateProvider.notifier).closeLoreCard();
+      ref.read(isLoreCardProvider.notifier).closeLoreCard();
     }
 
     return Stack(children: [

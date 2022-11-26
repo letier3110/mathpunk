@@ -10,12 +10,12 @@ class CardEffect {
       this.isShown = false,
       this.isUserInteractionRequired = false,
       this.id = 0,
-      this.duration = 0});
+      this.duration = const Duration(milliseconds: 0)});
   CardState state;
   bool isShown = false;
   bool isUserInteractionRequired = false;
   int id = 0;
-  int duration;
+  Duration duration;
 
   void setId(int id) {
     this.id = id;

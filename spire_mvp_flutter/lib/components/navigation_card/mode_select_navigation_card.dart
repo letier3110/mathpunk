@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/gamemode.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
@@ -27,11 +28,11 @@ class ModeSelectNavigationCard extends INavigationCard {
 
   @override
   navigate(BuildContext context, WidgetRef ref, ScreenEnum screen) {
-    final navigation = ref.watch(navigationProvider.notifier);
-    final gameState = ref.watch(gamestateProvider.notifier);
+    final navigationNotifier = ref.read(navigationProvider.notifier);
+    final gamemodeNotifier = ref.read(gamemodeProvider.notifier);
     if (!disabled) {
-      navigation.changeScreen(screen);
-      gameState.changeGameMode(gameType);
+      navigationNotifier.changeScreen(screen);
+      gamemodeNotifier.changeGameMode(gameType);
     }
   }
 

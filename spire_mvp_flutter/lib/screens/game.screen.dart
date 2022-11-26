@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/game_header/game_header.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamemap.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_pause.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_lore_card.provider.dart';
 import 'package:mathpunk_cardgame/screens/deck.screen.dart';
 import 'package:mathpunk_cardgame/screens/lore.screen.dart';
 import 'package:mathpunk_cardgame/screens/map.screen.dart';
@@ -19,17 +25,13 @@ class GameScreen extends ConsumerStatefulWidget {
 class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    final gameMap =
-        ref.watch(gamestateProvider.select((value) => value.gameMap));
-    final currentRoom =
-        ref.watch(gamestateProvider.select((value) => value.currentRoom));
-    final inMap = ref.watch(gamestateProvider.select((value) => value.inMap));
-    final loreCard =
-        ref.watch(gamestateProvider.select((value) => value.loreCard));
-    final inPause =
-        ref.watch(gamestateProvider.select((value) => value.inPause));
+    final gameMap = ref.watch(gamemapProvider);
+    final currentRoom = ref.watch(currentRoomProvider);
+    final inMap = ref.watch(inMapProvider);
+    final loreCard = ref.watch(isLoreCardProvider);
+    final inPause = ref.watch(inPauseProvider);
     final inDeck =
-        ref.watch(gamestateProvider.select((value) => value.inDeck)).isNotEmpty;
+        ref.watch(inDeckProvider.select((value) => value.isNotEmpty));
 
     return Scaffold(
       body: Stack(children: [

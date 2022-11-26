@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/reward.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/reward.part.provider.dart';
 
 class RewardView extends ConsumerStatefulWidget {
   final Reward reward;
@@ -18,22 +18,23 @@ class RewardView extends ConsumerStatefulWidget {
 class RewardViewView extends ConsumerState<RewardView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
+    // final gameState = ref.watch(gamestateProvider.notifier);
+    final rewardController = ref.watch(rewardPartProvider.notifier);
 
     void onGoldTapHandler() {
-      gameState.pickReward(widget.rewardIndex, 'gold');
+      rewardController.pickReward(widget.rewardIndex, 'gold');
     }
 
     void onItemTapHandler() {
-      gameState.pickReward(widget.rewardIndex, 'item');
+      rewardController.pickReward(widget.rewardIndex, 'item');
     }
 
     void onRelicTapHandler() {
-      gameState.pickReward(widget.rewardIndex, 'relic');
+      rewardController.pickReward(widget.rewardIndex, 'relic');
     }
 
     void onCardTapHandler() {
-      gameState.selectCardReward(widget.reward.cards);
+      rewardController.selectCardReward(widget.reward.cards);
     }
 
     int goldReward = widget.reward.gold ?? 0;

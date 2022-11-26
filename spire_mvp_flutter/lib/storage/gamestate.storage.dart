@@ -35,7 +35,8 @@ class GameStateStorage {
 
       GameStateInterface state = GameStateInterface.fromJson(jsonState);
 
-      gameState.fromJson(state);
+      // gameState.fromJson(state);
+      // TODO: replace with new states fromJson
 
       return 1;
     } catch (e) {
@@ -80,9 +81,11 @@ class GameStateStorage {
     final save = await _getFile(profileSaveName);
 
     try {
-      final jsonState = gameState.toJson();
-      final contents = jsonEncode(jsonState);
-      await save.writeAsString(contents);
+      // final jsonState = gameState.toJson();
+      // final contents = jsonEncode(jsonState);
+      // await save.writeAsString(contents);
+
+      // TODO: replace with new states fromJson
 
       return 1;
     } catch (e) {

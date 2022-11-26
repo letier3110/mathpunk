@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_pause.provider.dart';
 import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
@@ -22,7 +23,7 @@ class _PauseScreenState extends ConsumerState<PauseScreen> {
     final saves = ref.watch(savesProvider.notifier);
 
     void onReturn() {
-      gameState.exitPause();
+      ref.read(inPauseProvider.notifier).exitPause();
     }
 
     void onAbortRun() {
@@ -32,7 +33,7 @@ class _PauseScreenState extends ConsumerState<PauseScreen> {
     }
 
     void onSaveExit() {
-      gameState.exitPause();
+      ref.read(inPauseProvider.notifier).exitPause();
       saves.saveGame(gameState);
       navigation.changeScreen(ScreenEnum.mainMenu);
       // TODO: persist state

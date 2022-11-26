@@ -7,7 +7,8 @@ import 'package:mathpunk_cardgame/components/game_back_button.dart';
 import 'package:mathpunk_cardgame/components/game_forward_button.dart';
 import 'package:mathpunk_cardgame/components/room/trader.view.dart';
 import 'package:mathpunk_cardgame/components/room/trader_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
 
 class TraderRoomScreen extends ConsumerStatefulWidget {
   final TradeRoom room;
@@ -24,13 +25,14 @@ class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.read(gamestateProvider.notifier);
+    final inGameMapProvider = ref.read(inMapProvider.notifier);
+    final currentRoomNotifier = ref.read(currentRoomProvider.notifier);
 
     void traderPawnPress() {
       setState(() {
         inTradeMenu = true;
       });
-      gameState.visitTrader();
+      currentRoomNotifier.visitTrader();
     }
 
     void back() {
@@ -40,7 +42,7 @@ class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
     }
 
     void proceedHandler() {
-      gameState.enterMap();
+      inGameMapProvider.enterMap();
     }
 
     return Container(

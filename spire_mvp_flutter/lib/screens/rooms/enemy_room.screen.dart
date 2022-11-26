@@ -14,8 +14,11 @@ import 'package:mathpunk_cardgame/components/pawn/enemy_pawn.view.dart';
 import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
 import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_opened_chest.provider.dart';
 import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/controllers/selecting_card_reward.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
 class EnemyRoomScreen extends ConsumerStatefulWidget {
@@ -30,20 +33,18 @@ class EnemyRoomScreen extends ConsumerStatefulWidget {
 class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
   @override
   Widget build(BuildContext context) {
-    final isOpenedChest = ref.watch(
-        gamestateProvider.select((value) => value.isOpenedChest != null));
-    final selectingCardReward = ref
-        .watch(gamestateProvider.select((value) => value.selectingCardReward));
-    final selectingTarget =
-        ref.watch(gamestateProvider.select((value) => value.selectingTarget));
+    final isOpenedChest =
+        ref.watch(isOpenedChestProvider.select((value) => value != null));
+    final selectingCardReward = ref.watch(selectingCardRewardProvider);
+    // final selectingTarget =
+    //     ref.watch(gamestateProvider.select((value) => value.selectingTarget));
     final isPlayerAlive =
         ref.watch(playerCharacterProvider.select((value) => value!.health > 0));
-    final currentRoom =
-        ref.watch(gamestateProvider.select((value) => value.currentRoom));
+    final currentRoom = ref.watch(currentRoomProvider);
     final isNoEnemies = currentRoom!.enemies.isEmpty;
 
-    bool isSelectingCard = selectingTarget != null &&
-        selectingTarget.targetType == TargetEnum.cardTarget;
+    // bool isSelectingCard = selectingTarget != null &&
+    //     selectingTarget.targetType == TargetEnum.cardTarget;
 
     return Container(
         // color: const Color(0xFF222222),

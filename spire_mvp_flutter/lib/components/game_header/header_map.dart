@@ -1,9 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_pause.provider.dart';
 
 class HeaderMap extends ConsumerStatefulWidget {
   const HeaderMap({Key? key}) : super(key: key);
@@ -15,15 +15,14 @@ class HeaderMap extends ConsumerStatefulWidget {
 class HeaderMapView extends ConsumerState<HeaderMap> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider);
-    final gameStateNotifier = ref.watch(gamestateProvider.notifier);
+    final inMap = ref.watch(inMapProvider);
 
     void onTapHandler() {
-      gameStateNotifier.exitPause();
-      if (gameState.inMap == true) {
-        gameStateNotifier.exitMap();
+      ref.read(inPauseProvider.notifier).exitPause();
+      if (inMap == true) {
+        ref.read(inMapProvider.notifier).exitMap();
       } else {
-        gameStateNotifier.enterMap();
+        ref.read(inMapProvider.notifier).enterMap();
       }
     }
 

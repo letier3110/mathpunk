@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/reward.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_opened_chest.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
 const double hpBarHeight = 20;
 
@@ -17,10 +18,12 @@ class ChestView extends ConsumerStatefulWidget {
 class ChestViewView extends ConsumerState<ChestView> {
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
     void onTapHandler() {
-      gameState.selectChest(widget.reward);
+      ref
+          .read(isOpenedChestProvider.notifier)
+          .selectChest(playerCharacter, widget.reward);
     }
 
     double width = MediaQuery.of(context).size.width;

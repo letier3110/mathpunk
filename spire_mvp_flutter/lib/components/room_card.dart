@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/room/room.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/visited_rooms.provider.dart';
 import 'package:mathpunk_cardgame/utils/room.util.dart';
 
 class RoomCard extends ConsumerStatefulWidget {
@@ -17,11 +20,10 @@ class RoomCard extends ConsumerStatefulWidget {
 class RoomCardView extends ConsumerState<RoomCard> {
   @override
   Widget build(BuildContext context) {
-    final currentRoom =
-        ref.watch(gamestateProvider.select((value) => value.currentRoom));
-    final visitedRooms =
-        ref.watch(gamestateProvider.select((value) => value.visitedRooms));
+    final currentRoom = ref.watch(currentRoomProvider);
+    final visitedRooms = ref.watch(visitedRoomsProvider);
     final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final inMapNotifier = ref.read(inMapProvider.notifier);
 
     var isNextRoom =
         gameStateNotifier.getNextAvailableRooms().contains(widget.room);
@@ -55,12 +57,12 @@ class RoomCardView extends ConsumerState<RoomCard> {
             currentRoom.id != widget.room.id &&
             isNextRoom) {
           gameStateNotifier.enterRoom(widget.room);
-          gameStateNotifier.exitMap();
+          inMapNotifier.exitMap();
           return;
         }
       }
       if (inCurrentRoom) {
-        gameStateNotifier.exitMap();
+        inMapNotifier.exitMap();
       }
     }
 

@@ -6,6 +6,13 @@ import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/storage/character.storage.dart';
 
+enum HealPlayer {
+  fullHeal,
+  percentageMaxHpHeal,
+  percentageCurrentHpHeal,
+  valueHeal
+}
+
 class PlayerCharacterNotifier extends StateNotifier<PlayerCharacter?> {
   PlayerCharacterNotifier() : super(null);
 
@@ -47,6 +54,25 @@ class PlayerCharacterNotifier extends StateNotifier<PlayerCharacter?> {
   void healMaxPercentage(double percentage) {
     state!.heal((state!.maxHealth * percentage).floor());
     _updateState();
+  }
+
+  void healPlayer(HealPlayer healType, double? percentageValue) {
+    if (state == null) return;
+    switch (healType) {
+      case HealPlayer.fullHeal:
+        heal(state!.getMaxHealth());
+        break;
+      case HealPlayer.percentageMaxHpHeal:
+        double healValue = (state!.getMaxHealth() * (percentageValue ?? 1));
+        heal(healValue.toInt());
+        break;
+      case HealPlayer.percentageCurrentHpHeal:
+        double healValue = (state!.getHealth() * (percentageValue ?? 1));
+        heal(healValue.toInt());
+        break;
+      case HealPlayer.valueHeal:
+        break;
+    }
   }
 
   void addCardsPlayedInRound(int cardsPlayedInRound) {

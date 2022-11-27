@@ -1,26 +1,24 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 
 import '../enums/screens.enum.dart';
 
-class MenuEmbarkButton extends StatefulWidget {
+class MenuEmbarkButton extends ConsumerStatefulWidget {
   const MenuEmbarkButton({Key? key}) : super(key: key);
 
   @override
-  State<MenuEmbarkButton> createState() => _MenuEmbarkButtonState();
+  ConsumerState<MenuEmbarkButton> createState() => _MenuEmbarkButtonState();
 }
 
-class _MenuEmbarkButtonState extends State<MenuEmbarkButton> {
+class _MenuEmbarkButtonState extends ConsumerState<MenuEmbarkButton> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
-
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+    final gameState = ref.watch(gamestateProvider.notifier);
+    final navigation = ref.watch(navigationProvider.notifier);
 
     return Positioned(
       bottom: 0,

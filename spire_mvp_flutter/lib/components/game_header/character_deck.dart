@@ -1,29 +1,30 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CharacterDeck extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+
+class CharacterDeck extends ConsumerStatefulWidget {
   const CharacterDeck({Key? key}) : super(key: key);
 
   @override
-  State<CharacterDeck> createState() => CharacterDeckView();
+  ConsumerState<CharacterDeck> createState() => CharacterDeckView();
 }
 
-class CharacterDeckView extends State<CharacterDeck> {
+class CharacterDeckView extends ConsumerState<CharacterDeck> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    var deckLength = (gameState.playerCharacter?.deck.cards ?? []).length;
+    final inDeck = ref.watch(inDeckProvider);
+    final deckCards = ref.watch(
+        playerCharacterProvider.select((value) => (value?.deck.cards ?? [])));
 
     void onTapHandler() {
-      if (gameState.inDeck.isEmpty) {
-        gameState.enterDeck(cards: gameState.playerCharacter?.deck.cards ?? []);
+      if (inDeck.isEmpty) {
+        ref.read(inDeckProvider.notifier).enterDeck(cards: deckCards);
         return;
       }
-      gameState.exitDeck();
+      ref.read(inDeckProvider.notifier).exitDeck();
     }
 
     return Positioned(
@@ -60,7 +61,7 @@ class CharacterDeckView extends State<CharacterDeck> {
                 width: 70,
                 height: 21,
                 child: Text(
-                  deckLength.toString(),
+                  deckCards.length.toString(),
                   textAlign: TextAlign.end,
                   style: const TextStyle(
                       color: Colors.white,

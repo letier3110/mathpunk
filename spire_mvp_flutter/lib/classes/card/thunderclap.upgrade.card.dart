@@ -70,20 +70,14 @@ class ThunderclapUpgradeCard extends PlayableCard {
   }
 
   @override
-  bool isCardBoosted() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    List<Status> statuses = character.getStatuses();
-    double mathMultiplierScore =
-        castStatusToDouble(statuses, MathMultiplierScoreStatus);
-    return mathMultiplierScore > 0;
-  }
+  bool isCardBoosted() => true;
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     for (var t in target) {
-      t.recieveDamage(
+      t.receiveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));
       int localVulnerable = vulnerable;
       VulnerableStatus vs = VulnerableStatus();

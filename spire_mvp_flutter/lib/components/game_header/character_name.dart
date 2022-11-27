@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
 
-class CharacterName extends StatefulWidget {
+class CharacterName extends ConsumerStatefulWidget {
   const CharacterName({Key? key}) : super(key: key);
 
   @override
-  State<CharacterName> createState() => CharacterNameView();
+  ConsumerState<CharacterName> createState() => CharacterNameView();
 }
 
-class CharacterNameView extends State<CharacterName> {
+class CharacterNameView extends ConsumerState<CharacterName> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-    SavesController saves = Provider.of<SavesController>(context);
+    final characterName = ref.watch(playerCharacterProvider
+        .select((value) => value!.getNameTranslationKey(context)));
+    final saves = ref.watch(savesProvider);
 
     var playerName = saves.saveSlots[saves.currentSaveSlot ?? 0];
 
@@ -41,7 +42,7 @@ class CharacterNameView extends State<CharacterName> {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(
-                gameState.playerCharacter!.getNameTranslationKey(context),
+                characterName,
                 // '$width',
                 textAlign: TextAlign.left,
                 style: const TextStyle(

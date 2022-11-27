@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_upgrade_card/anger.upgrade.card.dart';
 import 'package:mathpunk_cardgame/classes/card/blood_for_blood.card.dart';
 import 'package:mathpunk_cardgame/classes/card/defend.card.dart';
 import 'package:mathpunk_cardgame/classes/card/strike.card.dart';

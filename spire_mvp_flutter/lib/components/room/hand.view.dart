@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-
-class HandView extends StatefulWidget {
+class HandView extends ConsumerStatefulWidget {
   const HandView({Key? key}) : super(key: key);
 
   @override
-  State<HandView> createState() => HandViewView();
+  ConsumerState<HandView> createState() => HandViewView();
 }
 
-class HandViewView extends State<HandView> {
+class HandViewView extends ConsumerState<HandView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
-    List<PlayableCard> hand = gameState.playerCharacter!.deck.hand;
+    List<PlayableCard> hand = playerCharacter!.deck.hand;
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;

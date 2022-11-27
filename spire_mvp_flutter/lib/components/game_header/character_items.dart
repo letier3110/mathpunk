@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-class CharacterItems extends StatefulWidget {
+class CharacterItems extends ConsumerStatefulWidget {
   const CharacterItems({Key? key}) : super(key: key);
 
   @override
-  State<CharacterItems> createState() => CharacterItemsView();
+  ConsumerState<CharacterItems> createState() => CharacterItemsView();
 }
 
-class CharacterItemsView extends State<CharacterItems> {
+class CharacterItemsView extends ConsumerState<CharacterItems> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    var items = gameState.playerCharacter?.items ?? [];
+    final items = ref
+        .watch(playerCharacterProvider.select((value) => value?.items ?? []));
 
     return Container(
       padding: const EdgeInsets.all(8),

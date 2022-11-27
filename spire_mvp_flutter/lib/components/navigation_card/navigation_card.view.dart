@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 
@@ -9,13 +10,13 @@ AssetImage pickImage(bool disabled) {
   return const AssetImage('assets/mode_bg.png');
 }
 
-class NavigationCardView extends State<INavigationCard> {
+class NavigationCardView extends ConsumerState<INavigationCard> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
       child: GestureDetector(
-        onTap: () => widget.navigate(context, widget.screen),
+        onTap: () => widget.navigate(context, ref, widget.screen),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

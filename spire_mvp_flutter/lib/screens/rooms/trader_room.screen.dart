@@ -1,60 +1,38 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/components/game_back_button.dart';
 import 'package:mathpunk_cardgame/components/game_forward_button.dart';
 import 'package:mathpunk_cardgame/components/room/trader.view.dart';
 import 'package:mathpunk_cardgame/components/room/trader_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
 
-class TraderRoomScreen extends StatefulWidget {
+class TraderRoomScreen extends ConsumerStatefulWidget {
   final TradeRoom room;
 
   const TraderRoomScreen({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<TraderRoomScreen> createState() => _TraderRoomScreenState();
+  ConsumerState<TraderRoomScreen> createState() => _TraderRoomScreenState();
 }
 
-class _TraderRoomScreenState extends State<TraderRoomScreen> {
+class _TraderRoomScreenState extends ConsumerState<TraderRoomScreen> {
   bool inTradeMenu = false;
   final player = AudioPlayer();
 
-  void playMapTheme() async {
-    await player.setSource(AssetSource('ambient/trade.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    playMapTheme();
-  }
-
-  @override
-  void dispose() {
-    stopTheme();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final inGameMapProvider = ref.read(inMapProvider.notifier);
+    final currentRoomNotifier = ref.read(currentRoomProvider.notifier);
 
     void traderPawnPress() {
       setState(() {
         inTradeMenu = true;
       });
-      gameState.visitTrader();
+      currentRoomNotifier.visitTrader();
     }
 
     void back() {
@@ -64,7 +42,7 @@ class _TraderRoomScreenState extends State<TraderRoomScreen> {
     }
 
     void proceedHandler() {
-      gameState.enterMap();
+      inGameMapProvider.enterMap();
     }
 
     return Container(

@@ -12,6 +12,7 @@ import 'package:mathpunk_cardgame/classes/util.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/card_type.enum.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class PlusMathUpgradeCard extends PlayableCard {
   PlusMathUpgradeCard(
@@ -63,11 +64,10 @@ class PlusMathUpgradeCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+    playerCharacter.addCardsPlayedInRound(1);
     MathMultiplierTimeStatus mts = MathMultiplierTimeStatus();
     mts.addStack(2);
-    character.addStatus(mts);
+    playerCharacter.addStatus(mts);
   }
 }

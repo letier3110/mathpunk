@@ -1,8 +1,7 @@
-import 'package:mathpunk_cardgame/classes/base_character.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../enums/intension_type.enum.dart';
 import 'intension.dart';
-import 'player/player.dart';
 
 class Moveset {
   List<Intension> moves = [];
@@ -28,17 +27,15 @@ class Moveset {
     currentMove = currentMove;
   }
 
-  executeMove(BaseCharacter character) {
+  executeMove(PlayerCharacterNotifier playerCharacrerNotifier) {
     if (currentMove?.type == IntensionType.offense) {
-      var player = Player.getPlayerInstance();
-      var character = player.getCharacter();
       double localDamage = currentMove!.baseDamage.toDouble();
       // localDamage += character.strength;
       // if (character.weak > 1) {
       //   localDamage = localDamage * 0.75;
       // }
       for (var i = 0; i < currentMove!.count; i++) {
-        character.recieveDamage(localDamage.floor());
+        playerCharacrerNotifier.receiveDamage(localDamage.floor());
       }
     }
   }

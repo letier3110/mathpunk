@@ -12,6 +12,7 @@ import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart'
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/enums/card_state.enum.dart';
 import 'package:mathpunk_cardgame/storage/consumable_item.storage.dart';
 import 'package:mathpunk_cardgame/storage/relic.storage.dart';
 
@@ -42,7 +43,9 @@ class PlayerCharacter extends BaseCharacter {
   }
 
   String getDescription() => description;
+  @override
   String getNameTranslationKey(BuildContext context) => 'realityEchanterName';
+  @override
   String getDescriptionTranslationKey(BuildContext context) =>
       'realityEchanterDescription';
 
@@ -87,20 +90,15 @@ class PlayerCharacter extends BaseCharacter {
     items.add(item);
   }
 
-  playCard(PlayableCard card, List<Enemy> targets) {
-    card.play(targets);
-    card.disposeToDiscard(deck.hand, deck.discardPile);
-  }
-
   endTurn() {
-    var hand = deck.hand;
-    var i = 0;
-    while (i < hand.length) {
-      var b = hand[i].disposeToDiscard(deck.hand, deck.discardPile);
-      if (!b) {
-        i += 1;
-      }
-    }
+    deck.cards
+        .where((element) =>
+            element.currentState == CardState.inHand && !element.ethereal)
+        .map<PlayableCard>(_transfromPlayableCardStateDiscard);
+    deck.cards
+        .where((element) =>
+            element.currentState == CardState.inHand && element.ethereal)
+        .map(_transfromPlayableCardStateEmpty);
     BlockStatus block = BlockStatus();
     setStatus(block);
 
@@ -186,17 +184,17 @@ class PlayerCharacter extends BaseCharacter {
   factory PlayerCharacter.fromJson(dynamic json) {
     PlayerCharacter character =
         (BaseCharacter.fromJson(json)) as PlayerCharacter;
-    character.setMana(json['mana'] as int);
-    character.setManaPower(json['manaPower'] as int);
-    character.setDrawPower(json['drawPower'] as int);
-    character.setGold(json['gold'] as int);
+    character.setMana(int.parse(json['mana']));
+    character.setManaPower(int.parse(json['manaPower']));
+    character.setDrawPower(int.parse(json['drawPower']));
+    character.setGold(int.parse(json['gold']));
     character.setDeck(Deck.fromJson(json['deck']));
     character.setRelics(
         (json['relics'] as List).map((e) => relicFromJson(e)).toList());
     character.setItems(
         (json['items'] as List).map((e) => consumableItemFromJson(e)).toList());
 
-    character.addCardsPlayedInRound(json['cardsPlayedInRound'] as int);
+    character.addCardsPlayedInRound(int.parse(json['cardsPlayedInRound']));
 
     return character;
   }
@@ -213,4 +211,14 @@ class PlayerCharacter extends BaseCharacter {
         'gold': gold,
         'cardsPlayedInRound': cardsPlayedInRound
       };
+}
+
+PlayableCard _transfromPlayableCardStateDiscard(PlayableCard card) {
+  card.currentState = CardState.inDiscardPile;
+  return card;
+}
+
+PlayableCard _transfromPlayableCardStateEmpty(PlayableCard card) {
+  card.currentState = CardState.empty;
+  return card;
 }

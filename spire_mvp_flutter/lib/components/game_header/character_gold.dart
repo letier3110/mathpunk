@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-class CharacterGold extends StatefulWidget {
+class CharacterGold extends ConsumerStatefulWidget {
   const CharacterGold({Key? key}) : super(key: key);
 
   @override
-  State<CharacterGold> createState() => CharacterGoldView();
+  ConsumerState<CharacterGold> createState() => CharacterGoldView();
 }
 
-class CharacterGoldView extends State<CharacterGold> {
+class CharacterGoldView extends ConsumerState<CharacterGold> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    var gold = gameState.playerCharacter?.gold ?? '0';
+    final gold = ref
+        .watch(playerCharacterProvider.select((value) => value?.gold ?? '0'));
 
     double width = MediaQuery.of(context).size.width;
 

@@ -1,4 +1,4 @@
-import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/card/bash.card.dart';
 import 'package:mathpunk_cardgame/classes/card/perfect_strike.card.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';

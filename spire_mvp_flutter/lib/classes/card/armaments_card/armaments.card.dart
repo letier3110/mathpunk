@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mathpunk_cardgame/classes/card/armaments.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_card/armaments_card.stats.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_upgrade_card/armaments.upgrade.card.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_card/armaments_card.description.dart';
+import 'package:mathpunk_cardgame/classes/card/armaments_card/armaments_card.name.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/classes/statuses/bishop.status.dart';
@@ -8,17 +11,15 @@ import 'package:mathpunk_cardgame/classes/statuses/block.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
-import '../base_character.dart';
+import '../../base_character.dart';
 
-import '../../enums/card_type.enum.dart';
-import '../util.dart';
-import 'playable_card.dart';
+import '../../../enums/card_type.enum.dart';
+import '../../util.dart';
+import '../playable_card.dart';
 
 class ArmamentsCard extends PlayableCard {
-  int block = 5;
-  int maxSelectableCards = 1;
-
   ArmamentsCard(
       {cardName = 'Armaments',
       cardDescription =
@@ -35,40 +36,13 @@ class ArmamentsCard extends PlayableCard {
             cardTemporary: cardTemporary);
 
   @override
-  StatelessWidget getCardName(BuildContext context) {
-    return Text(
-      AppLocalizations.of(context)!.armamentsCardName,
-      style: const TextStyle(color: Colors.white, fontSize: 16),
-    );
+  StatefulWidget getCardName() {
+    return const ArmamentsCardName();
   }
 
   @override
-  StatelessWidget getCardDescription(BuildContext context) {
-    int finalBlock = predictBlock(block: block, mana: mana);
-    return Container(
-      child: Column(
-        children: [
-          RichText(
-              text: TextSpan(children: [
-            TextSpan(text: AppLocalizations.of(context)!.gainStartDescription),
-            TextSpan(
-                text: AppLocalizations.of(context)!
-                    .dealBlockNumber(finalBlock.toString()),
-                style: TextStyle(
-                    color: finalBlock > block
-                        ? Colors.greenAccent
-                        : finalBlock < block
-                            ? Colors.redAccent
-                            : Colors.white)),
-            TextSpan(
-                text: AppLocalizations.of(context)!.blockEffectDescriptionEnd)
-          ])),
-          HighlightDescriptionText(
-              text: AppLocalizations.of(context)!
-                  .upgradeSingleHandCardEffectDescription),
-        ],
-      ),
-    );
+  StatefulWidget getCardDescription() {
+    return const ArmamentsCardDescription();
   }
 
   @override
@@ -78,9 +52,9 @@ class ArmamentsCard extends PlayableCard {
 
     bool isBishopStatus = castStatusToBool(statuses, BishopStatus);
 
-    if (isBishopStatus && mana == 1) return 0;
+    if (isBishopStatus && ArmamentsCardStats.mana == 1) return 0;
 
-    return mana;
+    return ArmamentsCardStats.mana;
   }
 
   @override
@@ -95,26 +69,33 @@ class ArmamentsCard extends PlayableCard {
 
   @override
   int getMaxSelectableCards() {
-    int localMaxSelectableCards = maxSelectableCards;
+    int localMaxSelectableCards = ArmamentsCardStats.maxSelectableCards;
     return localMaxSelectableCards;
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     if (selectedCards.isNotEmpty) {
-      int finalBlock = calculateBlock(block: block, mana: mana);
+      int finalBlock = calculateBlock(
+          character: playerCharacter.getCharacter(),
+          block: ArmamentsCardStats.block,
+          mana: ArmamentsCardStats.mana);
 
       BlockStatus bs = BlockStatus();
       bs.addStack(finalBlock.toDouble());
-      character.addStatus(bs);
-      List<PlayableCard> hand = character.deck.getHand();
+      playerCharacter.addStatus(bs);
 
       PlayableCard upgradedCard = selectedCards[0].upgradeCard();
-      hand.insert(0, upgradedCard);
-      hand.remove(selectedCards[0]);
+      playerCharacter.insertNewCardInHandAndRemoveOther(
+          upgradedCard, selectedCards[0]);
+
       setSelectedCards([]);
     }
   }
 }
+
+
+// // click card
+// apply 5 block to player
+// select card from hand
+// upgrade selected card

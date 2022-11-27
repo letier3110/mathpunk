@@ -6,6 +6,7 @@ import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class BloodPotion extends ConsumableItem {
   double healAmount = 0.2;
@@ -34,9 +35,8 @@ class BloodPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     double localHealAmount = healAmount;
-    character.heal((character.maxHealth * localHealAmount).floor());
+    playerCharacter.healMaxPercentage(localHealAmount);
   }
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 import 'package:mathpunk_cardgame/interfaces/gamestate.interface.dart';
 
 class GameStateStorage {
@@ -12,12 +12,12 @@ class GameStateStorage {
     return directory.path;
   }
 
-  Future<File> getFile(String fileName) async {
+  Future<File> _getFile(String fileName) async {
     final path = await _localPath;
     return File('$path/$fileName.bin');
   }
 
-  Future<int> loadProfile(GamestateController gameState, int profile) async {
+  Future<int> loadProfile(GamestateNotifier gameState, int profile) async {
     try {
       // final file = await _profileFile;
       var profileSaveName = 'save1';
@@ -26,7 +26,7 @@ class GameStateStorage {
       } else if (profile == 3) {
         profileSaveName = 'save3';
       }
-      final saveFile = await getFile(profileSaveName);
+      final saveFile = await _getFile(profileSaveName);
 
       // Read the file
       final contents = await saveFile.readAsString();
@@ -35,7 +35,8 @@ class GameStateStorage {
 
       GameStateInterface state = GameStateInterface.fromJson(jsonState);
 
-      gameState.fromJson(state);
+      // gameState.fromJson(state);
+      // TODO: replace with new states fromJson
 
       return 1;
     } catch (e) {
@@ -43,12 +44,11 @@ class GameStateStorage {
     }
   }
 
-  Future<List<String>> readProfiles(
-      GamestateController gameState, int profile) async {
+  Future<List<String>> readProfiles(int profile) async {
     try {
-      final save1 = await getFile('save1');
-      final save2 = await getFile('save2');
-      final save3 = await getFile('save3');
+      final save1 = await _getFile('save1');
+      final save2 = await _getFile('save2');
+      final save3 = await _getFile('save3');
 
       final contents1 = await save1.readAsString();
       final contents2 = await save2.readAsString();
@@ -71,19 +71,21 @@ class GameStateStorage {
     }
   }
 
-  Future<int> writeState(GamestateController gameState, int profile) async {
+  Future<int> writeState(GamestateNotifier gameState, int profile) async {
     var profileSaveName = 'save1';
     if (profile == 2) {
       profileSaveName = 'save2';
     } else if (profile == 3) {
       profileSaveName = 'save3';
     }
-    final save = await getFile(profileSaveName);
+    final save = await _getFile(profileSaveName);
 
     try {
-      final jsonState = gameState.toJson();
-      final contents = jsonEncode(jsonState);
-      await save.writeAsString(contents);
+      // final jsonState = gameState.toJson();
+      // final contents = jsonEncode(jsonState);
+      // await save.writeAsString(contents);
+
+      // TODO: replace with new states fromJson
 
       return 1;
     } catch (e) {

@@ -2,13 +2,15 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/components/pawn/glow_effect.view.dart';
 import 'package:mathpunk_cardgame/components/status_icon.dart';
-import 'package:provider/provider.dart';
 import 'package:mathpunk_cardgame/classes/enemy/enemy.dart';
 import 'package:mathpunk_cardgame/classes/intension.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/intension_type.enum.dart';
 import 'package:mathpunk_cardgame/utils/intension.util.dart';
 
@@ -29,16 +31,16 @@ Future<ui.Image> loadImage(String imagePath, int width, int height) async {
   return image;
 }
 
-class EnemyPawnView extends StatefulWidget {
+class EnemyPawnView extends ConsumerStatefulWidget {
   final double hpBarHeight = 20;
   final Enemy enemy;
   const EnemyPawnView({required this.enemy, Key? key}) : super(key: key);
 
   @override
-  State<EnemyPawnView> createState() => EnemyPawnViewView();
+  ConsumerState<EnemyPawnView> createState() => EnemyPawnViewView();
 }
 
-class EnemyPawnViewView extends State<EnemyPawnView> {
+class EnemyPawnViewView extends ConsumerState<EnemyPawnView> {
   bool _isShowTooltip = false;
   Status? selectedStatus;
 
@@ -58,16 +60,17 @@ class EnemyPawnViewView extends State<EnemyPawnView> {
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final gameState = ref.watch(gamestateProvider);
+    final playerCharacter = ref.watch(playerCharacterProvider);
 
     var hp = widget.enemy.getHealth();
     var maxhp = widget.enemy.getMaxHealth();
 
-    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
+    bool isPlayerAlive = playerCharacter!.health > 0;
     List<Status> statuses = widget.enemy.getStatuses();
 
     void onTapHandler() {
-      gameState.selectTarget(widget.enemy);
+      ref.watch(gamestateProvider.notifier).selectTarget(widget.enemy);
     }
 
     double width = MediaQuery.of(context).size.width;

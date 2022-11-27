@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class ConsumableItem {
   late String name;
@@ -47,7 +48,7 @@ class ConsumableItem {
     throw UnimplementedError();
   }
 
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     // can be failed,
     // because of not correctly loaded from memory state or wrongly casted.
     // PlayableCard class in not used directly, only as Generic Type

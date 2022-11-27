@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/classes/card/anger.card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:mathpunk_cardgame/classes/card/anger_card/anger.card.dart';
 import 'package:mathpunk_cardgame/classes/room/trade_room.dart';
 import 'package:mathpunk_cardgame/classes/sellable.dart';
 import 'package:mathpunk_cardgame/components/consumable.view.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
 import 'package:mathpunk_cardgame/components/relic.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
 
 const double cardHeight = 300;
 
 // View of rewards
-class TraderView extends StatefulWidget {
+class TraderView extends ConsumerStatefulWidget {
   final TradeRoom room;
   const TraderView({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<TraderView> createState() => TraderViewView();
+  ConsumerState<TraderView> createState() => TraderViewView();
 }
 
-class TraderViewView extends State<TraderView> {
+class TraderViewView extends ConsumerState<TraderView> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameState = ref.read(gamestateProvider.notifier);
 
     void onTapHandler(Sellable sellable) {
       gameState.buyItem(sellable);

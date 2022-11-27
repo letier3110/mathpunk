@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../base_character.dart';
 import '../moveset.dart';
@@ -20,9 +21,9 @@ class Enemy extends BaseCharacter {
   String getDescriptionTranslationKey(BuildContext context) =>
       'realityEchanterDescription';
 
-  makeMove() {
+  makeMove(PlayerCharacterNotifier playerCharacterNotifier) {
     if (health > 0) {
-      moveset.executeMove(this);
+      moveset.executeMove(playerCharacterNotifier);
     }
     moveset.getNextMove();
   }

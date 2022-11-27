@@ -1,63 +1,51 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/components/create_profile.component.dart';
-// import 'package:mathpunk_cardgame/classes/card/cards_implementation.dart';
-// import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/saves.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamemap.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/saves.provider.dart';
+import 'package:mathpunk_cardgame/controllers/settings.provider.dart';
+import 'package:mathpunk_cardgame/storage/settings.storage.dart';
 
 import '../components/main_menu_item.dart';
 import '../enums/screens.enum.dart';
 
-class MainMenuScreen extends StatefulWidget {
+class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainMenuScreen> createState() => _MainMenuScreenState();
+  ConsumerState<MainMenuScreen> createState() => _MainMenuScreenState();
 }
 
-class _MainMenuScreenState extends State<MainMenuScreen> {
-  final player = AudioPlayer();
-
-  void playMenuTheme() async {
-    await player.setSource(AssetSource('ambient/main_menu.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopMenuTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
+class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
   @override
   void initState() {
     super.initState();
 
-    SavesController saves =
-        Provider.of<SavesController>(context, listen: false);
+    final currentSaveSlot =
+        ref.read(savesProvider.select((value) => value.currentSaveSlot));
+    final savesNotifier = ref.read(savesProvider.notifier);
+    final settingsNotifier = ref.read(settingsProvider.notifier);
 
-    GamestateController gamestate =
-        Provider.of<GamestateController>(context, listen: false);
+    final gameMapIsEmpty =
+        ref.read(gamemapProvider.select((value) => value.isEmpty));
+    final gamestateNotifier = ref.read(gamestateProvider.notifier);
 
-    if (saves.currentSaveSlot != null && gamestate.gameMap.isEmpty) {
-      saves.loadGame(gamestate);
+    SettingsStorage settingsStorage = SettingsStorage();
+    settingsStorage.loadSettings(settingsNotifier);
+    if (currentSaveSlot != null && gameMapIsEmpty) {
+      savesNotifier.loadGame(gamestateNotifier);
     }
-    playMenuTheme();
-  }
-
-  @override
-  void dispose() {
-    stopMenuTheme();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    SavesController saves = Provider.of<SavesController>(context);
+    final saves = ref.watch(savesProvider);
+    final gameMapIsEmpty =
+        ref.read(gamemapProvider.select((value) => value.isEmpty));
 
     double width = MediaQuery.of(context).size.width;
 
@@ -105,25 +93,22 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       Container(
                         padding: const EdgeInsets.all(20),
                         child: Column(children: [
-                          Consumer<GamestateController>(builder:
-                              (gameStateContext, gameStateState, child) {
-                            if (gameStateState.gameMap.isNotEmpty) {
-                              return MainMenuItem(
-                                text: Text(
-                                  AppLocalizations.of(context)!.continueRun,
-                                  style: const TextStyle(fontSize: 22.0),
-                                ),
-                                screen: ScreenEnum.game,
-                              );
-                            }
-                            return MainMenuItem(
+                          if (gameMapIsEmpty == false)
+                            MainMenuItem(
+                              text: Text(
+                                AppLocalizations.of(context)!.continueRun,
+                                style: const TextStyle(fontSize: 22.0),
+                              ),
+                              screen: ScreenEnum.game,
+                            ),
+                          if (gameMapIsEmpty)
+                            MainMenuItem(
                               text: Text(
                                 AppLocalizations.of(context)!.play,
                                 style: const TextStyle(fontSize: 22.0),
                               ),
                               screen: ScreenEnum.modeSelect,
-                            );
-                          }),
+                            ),
                           MainMenuItem(
                             text: Text(
                               AppLocalizations.of(context)!.compedium,

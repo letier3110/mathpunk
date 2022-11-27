@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.interface.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamemode.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/enums/game_type.enum.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
@@ -25,17 +27,15 @@ class ModeSelectNavigationCard extends INavigationCard {
             key: key);
 
   @override
-  navigate(BuildContext context, ScreenEnum screen) {
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
+  navigate(BuildContext context, WidgetRef ref, ScreenEnum screen) {
+    final navigationNotifier = ref.read(navigationProvider.notifier);
+    final gamemodeNotifier = ref.read(gamemodeProvider.notifier);
     if (!disabled) {
-      navigation.changeScreen(screen);
-      gameState.changeGameMode(gameType);
+      navigationNotifier.changeScreen(screen);
+      gamemodeNotifier.changeGameMode(gameType);
     }
   }
 
   @override
-  State<INavigationCard> createState() => NavigationCardView();
+  ConsumerState<INavigationCard> createState() => NavigationCardView();
 }

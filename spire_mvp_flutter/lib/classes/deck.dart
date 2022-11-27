@@ -49,17 +49,8 @@ class Deck {
     discardPile = [];
   }
 
-  void addToDiscardPile(PlayableCard card) {
-    discardPile.add(card);
-  }
-
   addToDeck(PlayableCard newCard) {
     cards.add(newCard);
-  }
-
-  playCard(PlayableCard card) {
-    hand.remove(card);
-    discardPile.add(card);
   }
 
   draw(int n) {
@@ -106,7 +97,7 @@ class Deck {
   }
 
   factory Deck.fromJson(dynamic json) {
-    List<PlayableCard> playCards =
+    List<PlayableCard> deckCards =
         (json['cards'] as List).map((e) => playableCardFromJson(e)).toList();
     List<PlayableCard> exhaustPile = (json['exhaustPile'] as List)
         .map((e) => playableCardFromJson(e))
@@ -118,7 +109,7 @@ class Deck {
     List<PlayableCard> discardCards = (json['discardPile'] as List)
         .map((e) => playableCardFromJson(e))
         .toList();
-    Deck deck = Deck(playCards);
+    Deck deck = Deck(deckCards);
     deck.setExhausPile(exhaustPile);
     deck.setDrawPile(drawCards);
     deck.setHand(handCards);

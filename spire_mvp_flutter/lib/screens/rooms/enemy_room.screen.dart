@@ -1,6 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/components/room/chest.view.dart';
 import 'package:mathpunk_cardgame/classes/room/enemy_room.dart';
@@ -15,54 +14,37 @@ import 'package:mathpunk_cardgame/components/pawn/enemy_pawn.view.dart';
 import 'package:mathpunk_cardgame/components/room/game_over.view.dart';
 import 'package:mathpunk_cardgame/components/room/hand.view.dart';
 import 'package:mathpunk_cardgame/components/pawn/player_pawn.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_opened_chest.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/controllers/selecting_card_reward.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
 
-class EnemyRoomScreen extends StatefulWidget {
+class EnemyRoomScreen extends ConsumerStatefulWidget {
   final EnemyRoom room;
 
   const EnemyRoomScreen({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
+  ConsumerState<EnemyRoomScreen> createState() => _EnemyRoomScreenState();
 }
 
-class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
-  final player = AudioPlayer();
-
-  void playBattleTheme() async {
-    await player.setSource(AssetSource('ambient/battle_2.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    playBattleTheme();
-  }
-
-  @override
-  void dispose() {
-    stopTheme();
-    super.dispose();
-  }
-
+class _EnemyRoomScreenState extends ConsumerState<EnemyRoomScreen> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final isOpenedChest =
+        ref.watch(isOpenedChestProvider.select((value) => value != null));
+    final selectingCardReward = ref.watch(selectingCardRewardProvider);
+    // final selectingTarget =
+    //     ref.watch(gamestateProvider.select((value) => value.selectingTarget));
+    final isPlayerAlive =
+        ref.watch(playerCharacterProvider.select((value) => value!.health > 0));
+    final currentRoom = ref.watch(currentRoomProvider);
+    final isNoEnemies = currentRoom!.enemies.isEmpty;
 
-    bool isPlayerAlive = gameState.playerCharacter!.health > 0;
-    bool isNoEnemies = gameState.currentRoom!.enemies.isEmpty;
-    bool isSelectingCard = gameState.selectingTarget != null &&
-        gameState.selectingTarget!.targetType == TargetEnum.cardTarget;
-    bool isSelectingCardReward = gameState.selectingCardReward.isNotEmpty;
-    bool isOpenedChest = gameState.isOpenedChest != null;
+    // bool isSelectingCard = selectingTarget != null &&
+    //     selectingTarget.targetType == TargetEnum.cardTarget;
 
     return Container(
         // color: const Color(0xFF222222),
@@ -83,7 +65,7 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
                 children: widget.room.rewards
                     .map((entry) => ChestView(reward: entry))
                     .toList()),
-          if (isOpenedChest && !isSelectingCardReward && isNoEnemies)
+          if (isOpenedChest && selectingCardReward.isEmpty && isNoEnemies)
             Stack(
                 children: widget.room.rewards
                     .asMap()
@@ -91,8 +73,8 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
                     .map((entry) => RewardsScreen(
                         rewardIndex: entry.key, reward: entry.value))
                     .toList()),
-          if (isSelectingCardReward)
-            CardReward(cards: gameState.selectingCardReward),
+          if (selectingCardReward.isNotEmpty)
+            CardReward(cards: selectingCardReward),
           if (isPlayerAlive && !isNoEnemies) const PlayerPawnView(),
           if (!isPlayerAlive) const GameOver(),
           if (isPlayerAlive && !isNoEnemies) const EndturnView(),
@@ -102,8 +84,8 @@ class _EnemyRoomScreenState extends State<EnemyRoomScreen> {
           if (isPlayerAlive && !isNoEnemies) const DiscardPileView(),
           if (isSelectingCard)
             CardToDraw(
-                cards: gameState.selectingTarget!.getSelectableCards(),
-                currentCard: gameState.selectingTarget!)
+                cards: selectingTarget.getSelectableCards(),
+                currentCard: selectingTarget)
         ]));
   }
 }

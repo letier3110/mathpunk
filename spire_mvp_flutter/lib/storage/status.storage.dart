@@ -21,7 +21,7 @@ import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import '../classes/statuses/bishop.status.dart';
 
 Status statusFromJson(dynamic json) {
-  double jsonStatusStack = json['stack'] as double;
+  double jsonStatusStack = double.parse(json['stack']);
 
   String jsonRuntime = json['_runtime'] as String;
 

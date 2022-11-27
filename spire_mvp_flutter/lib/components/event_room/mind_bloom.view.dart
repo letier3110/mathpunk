@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/doubt.card.dart';
 import 'package:mathpunk_cardgame/classes/card/normality.card.dart';
@@ -8,56 +7,38 @@ import 'package:mathpunk_cardgame/classes/deck.dart';
 import 'package:mathpunk_cardgame/classes/game_map.dart';
 import 'package:mathpunk_cardgame/classes/player/player.dart';
 import 'package:mathpunk_cardgame/classes/room/event_room/mind_bloom.event.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
-class MindBloomView extends StatefulWidget {
+class MindBloomView extends ConsumerStatefulWidget {
   final MindBloomEventRoom room;
 
   const MindBloomView({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<MindBloomView> createState() => _MindBloomViewView();
+  ConsumerState<MindBloomView> createState() => _MindBloomViewView();
 }
 
-class _MindBloomViewView extends State<MindBloomView> {
+class _MindBloomViewView extends ConsumerState<MindBloomView> {
   bool canLeave = false;
-  final player = AudioPlayer();
-
-  void playMapTheme() async {
-    await player.setSource(AssetSource('ambient/event.mp3'));
-    await player.setReleaseMode(ReleaseMode.loop);
-    await player.resume();
-  }
-
-  void stopTheme() async {
-    await player.setReleaseMode(ReleaseMode.stop);
-    await player.stop();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    playMapTheme();
-  }
-
-  @override
-  void dispose() {
-    stopTheme();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final inGameMapProvider = ref.read(inMapProvider.notifier);
+    final currentRoomNotifier = ref.read(currentRoomProvider.notifier);
+    final playerCharacterNotifier = ref.read(playerCharacterProvider.notifier);
 
     void warTapHandler() {
       // "[I am War] Fight a Boss from Act 1. Obtain a Rare Relic, normal rewards and 50 (25) gold.",
-      gameState.changeCurrentRoom(generateBossRoom(room: widget.room));
+      currentRoomNotifier
+          .changeCurrentRoom(generateBossRoom(room: widget.room));
     }
 
     void richTapHandler() {
       // "[I am Rich] Gain 999 gold. Become Cursed - 2 Normalities.",
-      gameState.givePlayerGold(999);
+      playerCharacterNotifier.addGold(999);
       Deck deck = Player.getPlayerInstance().getCharacter().getDeck();
       deck.addToDeck(NormalityCard());
       deck.addToDeck(NormalityCard());
@@ -70,7 +51,7 @@ class _MindBloomViewView extends State<MindBloomView> {
 
     void onHealthyTap() {
       // "[I am Healthy] Heal to full HP. Become Cursed - Doubt.",
-      gameState.healPlayer(HealPlayer.fullHeal, 0);
+      playerCharacterNotifier.healPlayer(HealPlayer.fullHeal, 0);
       Player.getPlayerInstance()
           .getCharacter()
           .getDeck()
@@ -83,7 +64,7 @@ class _MindBloomViewView extends State<MindBloomView> {
     }
 
     void onLeaveRoomTap() {
-      gameState.enterMap();
+      inGameMapProvider.enterMap();
     }
 
     double width = MediaQuery.of(context).size.width;

@@ -53,13 +53,7 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
-  bool isCardBoosted() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    List<Status> statuses = character.getStatuses();
-    double mathMultiplierScore =
-        castStatusToDouble(statuses, MathMultiplierScoreStatus);
-    return mathMultiplierScore > 0;
-  }
+  bool isCardBoosted() => true;
 
   @override
   StatelessWidget getCardDescription(BuildContext context) {
@@ -104,14 +98,14 @@ class SearingBlow extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     int damage = baseDamage + damageIncrease;
     int finalDamage =
         calculateDamage(damage: damage, precision: precision, mana: mana);
     if (target.length == 1) {
-      target[0].recieveDamage(finalDamage);
+      target[0].receiveDamage(finalDamage);
     }
   }
 }

@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/playable_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_deck.provider.dart';
+import 'package:mathpunk_cardgame/controllers/is_lore_card.provider.dart';
 
-class DeckScreen extends StatefulWidget {
+class DeckScreen extends ConsumerStatefulWidget {
   const DeckScreen({Key? key}) : super(key: key);
 
   @override
-  State<DeckScreen> createState() => _DeckScreenState();
+  ConsumerState<DeckScreen> createState() => _DeckScreenState();
 }
 
-class _DeckScreenState extends State<DeckScreen> {
+class _DeckScreenState extends ConsumerState<DeckScreen> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final inDeck = ref.watch(inDeckProvider);
 
     void onCardTap(PlayableCard card) {
-      // gameState.openLoreCard(card);
+      ref.read(isLoreCardProvider.notifier).openLoreCard(card);
     }
 
     double width = MediaQuery.of(context).size.width;
@@ -50,7 +53,7 @@ class _DeckScreenState extends State<DeckScreen> {
                       child: GridView.count(
                         crossAxisCount: 4,
                         childAspectRatio: 20 / 31,
-                        children: gameState.inDeck
+                        children: inDeck
                             .map((e) => PlayableCardComponent(
                                 card: e,
                                 glow: false,

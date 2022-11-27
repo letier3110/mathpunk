@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PlayableCardReward extends StatefulWidget {
+import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/reward.part.provider.dart';
+
+class PlayableCardReward extends ConsumerStatefulWidget {
   final PlayableCard card;
   final List<PlayableCard> possibleRewards;
   const PlayableCardReward(
@@ -11,17 +13,16 @@ class PlayableCardReward extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PlayableCardReward> createState() => PlayableCardRewardView();
+  ConsumerState<PlayableCardReward> createState() => PlayableCardRewardView();
 }
 
-class PlayableCardRewardView extends State<PlayableCardReward> {
+class PlayableCardRewardView extends ConsumerState<PlayableCardReward> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState =
-        Provider.of<GamestateController>(context, listen: false);
-
     void onTapHandler() {
-      gameState.pickCardReward(widget.possibleRewards, widget.card);
+      ref
+          .read(rewardPartProvider.notifier)
+          .pickCardReward(widget.possibleRewards, widget.card);
     }
 
     return GestureDetector(
@@ -70,18 +71,12 @@ class PlayableCardRewardView extends State<PlayableCardReward> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              widget.card.name,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
+                            widget.card.getCardName(context),
                             Container(
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               height: 110,
                               child: Column(
-                                children: [
-                                  widget.card.getCardDescription(context)
-                                ],
+                                children: [widget.card.getCardDescription()],
                               ),
                             ),
                           ],

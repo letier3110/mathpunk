@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-class CharacterHitpoints extends StatefulWidget {
+class CharacterHitpoints extends ConsumerStatefulWidget {
   const CharacterHitpoints({Key? key}) : super(key: key);
 
   @override
-  State<CharacterHitpoints> createState() => CharacterHitpointsView();
+  ConsumerState<CharacterHitpoints> createState() => CharacterHitpointsView();
 }
 
-class CharacterHitpointsView extends State<CharacterHitpoints> {
+class CharacterHitpointsView extends ConsumerState<CharacterHitpoints> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    var hp = gameState.playerCharacter?.health ?? '0';
-    var maxhp = gameState.playerCharacter?.maxHealth ?? '0';
+    final hp = ref
+        .watch(playerCharacterProvider.select((value) => value?.health ?? '0'));
+    final maxhp = ref.watch(
+        playerCharacterProvider.select((value) => value?.maxHealth ?? '0'));
 
     double width = MediaQuery.of(context).size.width;
 

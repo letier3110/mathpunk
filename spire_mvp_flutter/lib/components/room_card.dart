@@ -1,61 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/room/room.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/in_map.provider.dart';
+import 'package:mathpunk_cardgame/controllers/visited_rooms.provider.dart';
 import 'package:mathpunk_cardgame/utils/room.util.dart';
 
-class RoomCard extends StatefulWidget {
+class RoomCard extends ConsumerStatefulWidget {
   final Room room;
 
   const RoomCard({required this.room, Key? key}) : super(key: key);
 
   @override
-  State<RoomCard> createState() => RoomCardView();
+  ConsumerState<RoomCard> createState() => RoomCardView();
 }
 
-class RoomCardView extends State<RoomCard> {
+class RoomCardView extends ConsumerState<RoomCard> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final currentRoom = ref.watch(currentRoomProvider);
+    final visitedRooms = ref.watch(visitedRoomsProvider);
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final inMapNotifier = ref.read(inMapProvider.notifier);
 
-    var isNextRoom = gameState.getNextAvailableRooms().contains(widget.room);
+    var isNextRoom =
+        gameStateNotifier.getNextAvailableRooms().contains(widget.room);
     Room? isVisited;
 
     try {
-      isVisited = gameState.visitedRooms
+      isVisited = visitedRooms
           .firstWhere((element) => Room.isEqual(element, widget.room));
     } catch (e) {
       // ignore: avoid_print
       print(e);
     }
 
-    var isInRoom = gameState.currentRoom != null;
+    var isInRoom = currentRoom != null;
 
     var isAvailable = (!isInRoom && isNextRoom) ||
         (isInRoom &&
-            gameState.currentRoom!.enemies.isEmpty &&
-            gameState.currentRoom!.id != widget.room.id &&
+            currentRoom.enemies.isEmpty &&
+            currentRoom.id != widget.room.id &&
             isNextRoom);
 
-    var inCurrentRoom = gameState.currentRoom?.id == widget.room.id;
+    var inCurrentRoom = currentRoom?.id == widget.room.id;
 
     void onTapHandler() {
       if (!isInRoom && isNextRoom) {
-        gameState.enterRoom(widget.room);
+        gameStateNotifier.enterRoom(widget.room);
         return;
       }
       if (isInRoom) {
-        if (gameState.currentRoom!.enemies.isEmpty &&
-            gameState.currentRoom!.id != widget.room.id &&
+        if (currentRoom.enemies.isEmpty &&
+            currentRoom.id != widget.room.id &&
             isNextRoom) {
-          gameState.enterRoom(widget.room);
-          gameState.exitMap();
+          gameStateNotifier.enterRoom(widget.room);
+          inMapNotifier.exitMap();
           return;
         }
       }
       if (inCurrentRoom) {
-        gameState.exitMap();
+        inMapNotifier.exitMap();
       }
     }
 

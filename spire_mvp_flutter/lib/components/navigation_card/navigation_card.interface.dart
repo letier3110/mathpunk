@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathpunk_cardgame/components/navigation_card/navigation_card.view.dart';
-import 'package:mathpunk_cardgame/controllers/navigation.controller.dart';
+import 'package:mathpunk_cardgame/controllers/navigation.provider.dart';
 import 'package:mathpunk_cardgame/enums/screens.enum.dart';
 
-class INavigationCard extends StatefulWidget {
+class INavigationCard extends ConsumerStatefulWidget {
   final String heading;
   final String description;
   final bool disabled;
@@ -18,14 +18,13 @@ class INavigationCard extends StatefulWidget {
       Key? key})
       : super(key: key);
 
-  navigate(BuildContext context, ScreenEnum screen) {
-    NavigationController navigation =
-        Provider.of<NavigationController>(context, listen: false);
+  navigate(BuildContext context, WidgetRef ref, ScreenEnum screen) {
+    final navigation = ref.watch(navigationProvider.notifier);
     if (!disabled) {
       navigation.changeScreen(screen);
     }
   }
 
   @override
-  State<INavigationCard> createState() => NavigationCardView();
+  ConsumerState<INavigationCard> createState() => NavigationCardView();
 }

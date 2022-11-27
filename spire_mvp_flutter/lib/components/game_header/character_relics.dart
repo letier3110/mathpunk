@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/relic/relic.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
-import 'package:provider/provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
-
-class CharacterRelics extends StatefulWidget {
+class CharacterRelics extends ConsumerStatefulWidget {
   const CharacterRelics({Key? key}) : super(key: key);
 
   @override
-  State<CharacterRelics> createState() => CharacterRelicsView();
+  ConsumerState<CharacterRelics> createState() => CharacterRelicsView();
 }
 
-class CharacterRelicsView extends State<CharacterRelics> {
+class CharacterRelicsView extends ConsumerState<CharacterRelics> {
   bool _isShowTooltip = false;
   Relic? selectedRelic;
 
@@ -32,9 +32,8 @@ class CharacterRelicsView extends State<CharacterRelics> {
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    var relics = gameState.playerCharacter?.relics ?? [];
+    final relics = ref
+        .watch(playerCharacterProvider.select((value) => value?.relics ?? []));
 
     return SizedBox(
       height: 360,

@@ -27,12 +27,7 @@ class GlowEffectPawnView extends State<GlowEffectPawn>
     controller = AnimationController(
         duration: const Duration(milliseconds: 1600), vsync: this);
     animation = Tween<double>(begin: minAnimationValue, end: maxAnimationValue)
-        .animate(controller)
-      ..addListener(() {
-        setState(() {
-          // The state that has changed here is the animation object’s value.
-        });
-      });
+        .animate(controller);
     controller.repeat();
   }
 

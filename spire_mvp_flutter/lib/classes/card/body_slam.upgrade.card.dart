@@ -54,13 +54,13 @@ class BodySlamUpgradeCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     PlayerCharacter character = Player.getPlayerInstance().getCharacter();
     character.addCardsPlayedInRound(1);
     if (target.length == 1) {
       List<Status> statuses = character.getStatuses();
       int block = castStatusToInt(statuses, BlockStatus);
-      target[0].recieveDamage(
+      target[0].receiveDamage(
           calculateDamage(damage: block, precision: precision, mana: mana));
     }
   }

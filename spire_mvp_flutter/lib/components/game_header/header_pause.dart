@@ -1,20 +1,20 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HeaderPause extends StatefulWidget {
+import 'package:mathpunk_cardgame/controllers/in_pause.provider.dart';
+
+class HeaderPause extends ConsumerStatefulWidget {
   const HeaderPause({Key? key}) : super(key: key);
 
   @override
-  State<HeaderPause> createState() => HeaderPauseView();
+  ConsumerState<HeaderPause> createState() => HeaderPauseView();
 }
 
-class HeaderPauseView extends State<HeaderPause> {
+class HeaderPauseView extends ConsumerState<HeaderPause> {
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
+    final inPause = ref.watch(inPauseProvider);
     return Positioned(
       top: 0,
       bottom: 0,
@@ -26,7 +26,9 @@ class HeaderPauseView extends State<HeaderPause> {
         ),
         child: GestureDetector(
           onTap: () => {
-            gameState.inPause ? gameState.exitPause() : gameState.enterPause(),
+            inPause
+                ? ref.read(inPauseProvider.notifier).exitPause()
+                : ref.read(inPauseProvider.notifier).enterPause(),
           },
           child: Container(
             padding: const EdgeInsets.all(8),

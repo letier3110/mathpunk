@@ -5,6 +5,7 @@ import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class FearPotion extends ConsumableItem {
   int vulnerable = 3;
@@ -36,7 +37,7 @@ class FearPotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     if (target.length == 1) {
       int localVulnerable = vulnerable;
 

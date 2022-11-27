@@ -2,18 +2,21 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
 import 'package:mathpunk_cardgame/components/playable_card/glow_effect.view.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.controller.dart';
+import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/controllers/player_character.provider.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/utils/card.util.dart';
 
 const double defaultHeight = 300;
 const double defaultWidth = 200;
 
 const wavecolor = Color.fromARGB(119, 179, 223, 46);
 
-class PlayableCardComponent extends StatefulWidget {
+class PlayableCardComponent extends ConsumerStatefulWidget {
   final PlayableCard card;
   final bool glow;
   final bool animate;
@@ -31,12 +34,13 @@ class PlayableCardComponent extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PlayableCardComponent> createState() => PlayableCardComponentView();
+  ConsumerState<PlayableCardComponent> createState() =>
+      PlayableCardComponentView();
 }
 
 var rng = Random();
 
-class PlayableCardComponentView extends State<PlayableCardComponent>
+class PlayableCardComponentView extends ConsumerState<PlayableCardComponent>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
@@ -60,9 +64,9 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
 
   @override
   Widget build(BuildContext context) {
-    GamestateController gameState = Provider.of<GamestateController>(context);
-
-    int playerMana = gameState.playerCharacter!.mana;
+    final gameStateNotifier = ref.read(gamestateProvider.notifier);
+    final playerMana =
+        ref.watch(playerCharacterProvider.select((value) => value!.mana));
 
     void onEnterHandler(PointerEnterEvent p) {
       if (widget.animate) {
@@ -84,29 +88,33 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
       if (widget.disabled) {
         return;
       }
-      if (!widget.card.isCardPlayable()) {
-        return;
-      }
       if (widget.onTap != null) {
         widget.onTap!();
         return;
       }
-      if (widget.card.targetType == TargetEnum.singleTarget) {
-        if (cardId == gameState.selectingTargetCardId) {
-          gameState.stopSelecting();
-          return;
-        }
-        gameState.startSelecting(widget.card, cardId);
-        return;
-      } else if (widget.card.targetType == TargetEnum.cardTarget) {
-        // TODO: implement some random fuzzy logic to select a targe
-        // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
-        gameState.startSelecting(widget.card, cardId);
-        return;
-      } else {
-        gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
-        return;
-      }
+      // if (!widget.card.isCardPlayable()) {
+      //   return;
+      // }
+      if (isCardPlayable(widget.card, playerMana))
+        gameStateNotifier.playTheCard(widget.card);
+
+      // if (widget.card.targetType == TargetEnum.singleTarget) {
+      //   if (cardId == gameState.selectingTargetCardId) {
+      //     gameStateNotifier.stopSelecting();
+      //     return;
+      //   }
+      //   gameStateNotifier.startSelecting(widget.card, cardId);
+      //   return;
+      // } else if (widget.card.targetType == TargetEnum.cardTarget) {
+      //   // TODO: implement some random fuzzy logic to select a targe
+      //   // gameState.playTheCard(widget.card, gameState.currentRoom!.enemies);
+      //   gameStateNotifier.startSelecting(widget.card, cardId);
+      //   return;
+      // } else {
+      //   gameStateNotifier.playTheCard(
+      //       widget.card, gameState.currentRoom!.enemies);
+      //   return;
+      // }
     }
 
     double width = MediaQuery.of(context).size.width;
@@ -120,18 +128,12 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
         child: Container(
           height: cardWidth + 8,
           width: cardWidth + 8,
-          margin: EdgeInsets.fromLTRB(
-              4,
-              4,
-              4,
-              gameState.selectingTargetCardId == cardId
-                  ? cardWidth * 1
-                  : animation.value),
+          margin: EdgeInsets.fromLTRB(4, 4, 4, animation.value),
           child: Center(
             child: Stack(children: [
               if ((widget.disabled == false &&
                       playerMana >= widget.card.getMana() &&
-                      widget.card.isCardPlayable()) &&
+                      isCardPlayable(widget.card, playerMana)) &&
                   widget.glow)
                 Center(
                   child: GlowEffectCard(
@@ -140,7 +142,8 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                     width: cardWidth,
                   )),
                 ),
-              if (widget.glow && widget.card.isCardBoosted())
+              // if (widget.glow || widget.card.isCardBoosted())
+              if (widget.glow)
                 Center(
                   child: GlowEffectCard(
                       waveColor: wavecolor,
@@ -191,14 +194,14 @@ class PlayableCardComponentView extends State<PlayableCardComponent>
                                   width / 40, 0, width / 40, 0),
                               child: Column(
                                 children: [
-                                  widget.card.getCardDescription(context),
+                                  widget.card.getCardDescription(),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      if (widget.card.isCardPlayable())
+                      if (isCardPlayable(widget.card, playerMana))
                         Positioned(
                           top: 8,
                           left: cardWidth / 24,

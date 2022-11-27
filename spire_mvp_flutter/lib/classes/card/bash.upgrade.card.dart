@@ -7,6 +7,7 @@ import 'package:mathpunk_cardgame/classes/statuses/math_multiplier_score.status.
 import 'package:mathpunk_cardgame/classes/statuses/status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/components/highlight_text.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 import '../base_character.dart';
 
@@ -70,13 +71,7 @@ class BashUpgradeCard extends PlayableCard {
   }
 
   @override
-  bool isCardBoosted() {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    List<Status> statuses = character.getStatuses();
-    double mathMultiplierScore =
-        castStatusToDouble(statuses, MathMultiplierScoreStatus);
-    return mathMultiplierScore > 0;
-  }
+  bool isCardBoosted() => true;
 
   @override
   int getMana() {
@@ -91,11 +86,10 @@ class BashUpgradeCard extends PlayableCard {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
-    character.addCardsPlayedInRound(1);
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
+    playerCharacter.addCardsPlayedInRound(1);
     if (target.length == 1) {
-      target[0].recieveDamage(
+      target[0].receiveDamage(
           calculateDamage(damage: damage, precision: precision, mana: mana));
       int localVulnerable = vulnerable;
       VulnerableStatus vs = VulnerableStatus();

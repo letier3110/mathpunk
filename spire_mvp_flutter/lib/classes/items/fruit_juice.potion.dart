@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:mathpunk_cardgame/classes/base_character.dart';
 import 'package:mathpunk_cardgame/classes/items/consumable_item.dart';
-import 'package:mathpunk_cardgame/classes/player/player.dart';
-import 'package:mathpunk_cardgame/classes/player/player_character/player_character.dart';
 import 'package:mathpunk_cardgame/enums/target.enum.dart';
+import 'package:mathpunk_cardgame/notifiers/player_character.notifier.dart';
 
 class FruitJuicePotion extends ConsumableItem {
   int maxHp = 10;
@@ -35,10 +34,8 @@ class FruitJuicePotion extends ConsumableItem {
   }
 
   @override
-  play(List<BaseCharacter> target) {
-    PlayerCharacter character = Player.getPlayerInstance().getCharacter();
+  play(List<BaseCharacter> target, PlayerCharacterNotifier playerCharacter) {
     int localMaxHp = maxHp;
-    character.setMaxHealth(character.maxHealth + localMaxHp);
-    character.heal(character.health + localMaxHp);
+    playerCharacter.addMaxHp(localMaxHp);
   }
 }

@@ -3,7 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:mathpunk_cardgame/classes/card/playable_card.dart';
-import 'package:mathpunk_cardgame/controllers/gamestate.provider.dart';
+import 'package:mathpunk_cardgame/classes/card_effects/select_card.card_effect.dart';
+import 'package:mathpunk_cardgame/controllers/card_effect.provider.dart';
+import 'package:mathpunk_cardgame/controllers/current_card.provider.dart';
+import 'package:mathpunk_cardgame/controllers/current_card_effect.provider.dart';
 
 import '../playable_card/playable_card.view.dart';
 
@@ -22,11 +25,19 @@ class CardToDrawView extends ConsumerState<CardToDraw> {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = ref.watch(gamestateProvider.notifier);
-
+    final cardEffect = ref.watch(currentCardProvider
+        .select((value) => value!.effects[value.currentEffectId]));
     void onSubmitTapHandler() {
-      gameState.setSelectedCards(choice);
-      gameState.playTheCard(widget.currentCard, []);
+      if (cardEffect == null ||
+          cardEffect.runtimeType != SelectCardCardEffect) {
+        return;
+      }
+      // gameState.setSelectedCards(choice);
+      // gameState.playTheCard(widget.currentCard, []);
+      ref.read(cardEffectProvider.notifier).playTheEffect(card);
+      // ref.read(currentCardEffectProvider)
+      (cardEffect as SelectCardCardEffect).selectCard(choice);
+      // ref.read(gamestateProvider.notifier).checkEnemies();
     }
 
     void onTapHandler(PlayableCard tapCard) {

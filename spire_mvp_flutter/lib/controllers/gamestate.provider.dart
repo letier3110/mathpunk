@@ -20,6 +20,7 @@ import 'package:mathpunk_cardgame/classes/statuses/strength_empower.status.dart'
 import 'package:mathpunk_cardgame/classes/statuses/vulnerable.status.dart';
 import 'package:mathpunk_cardgame/classes/statuses/weak.status.dart';
 import 'package:mathpunk_cardgame/classes/util.dart';
+import 'package:mathpunk_cardgame/controllers/card_effect.provider.dart';
 import 'package:mathpunk_cardgame/controllers/current_room.provider.dart';
 import 'package:mathpunk_cardgame/controllers/enter_enemy_room.part.provider.dart';
 import 'package:mathpunk_cardgame/controllers/gamemap.provider.dart';
@@ -79,8 +80,8 @@ class GamestateNotifier extends StateNotifier<void> {
   }
 
   void playTheCard(PlayableCard card) {
-    final currentRoom = ref.read(currentRoomProvider);
-    final playerCharacter = ref.read(playerCharacterProvider);
+    ref.read(cardEffectProvider.notifier).playTheCard(card);
+
     // TODO: do this flow in cardEffectProvider because of stream listener updates is related only to its own state
 
     // var counterStream = timedCounter(card.effects);
@@ -116,17 +117,14 @@ class GamestateNotifier extends StateNotifier<void> {
     //   state.selectingTarget = null;
     //   state.selectingTargetCardId = null;
     // }
+    checkEnemies();
+  }
 
+  void checkEnemies() {
+    final currentRoom = ref.read(currentRoomProvider);
+    final playerCharacter = ref.read(playerCharacterProvider);
     currentRoom!.enemies =
         currentRoom.enemies.where((element) => element.health > 0).toList();
-
-    // var i = 0;
-    // while (i < targets.length) {
-    //   if (targets[i].health <= 0) {
-    //     state.currentRoom!.enemies.remove(targets[i]);
-    //   }
-    //   i++;
-    // }
 
     if (currentRoom.enemies.isEmpty && currentRoom.getCanLeaveRoom()) {
       // if (state.currentRoom!.enemies.isEmpty) {
